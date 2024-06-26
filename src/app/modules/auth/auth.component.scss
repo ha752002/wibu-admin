@@ -1,0 +1,19 @@
+:host {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../assets/img/background_auth.jpg");
+}
+
+.container {
+  position: absolute;
+  width: 500px;
+  height: 741px;
+  z-index: 99;
+  background: transparent;
+  border: 1px solid var(--white);
+}
