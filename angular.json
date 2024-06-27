@@ -39,7 +39,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/globals.scss",
+              "src/variables.scss",
+              "src/themes/theme.less"
             ],
             "scripts": []
           },
@@ -98,7 +100,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/themes/styles.scss"
             ],
             "scripts": []
           }
