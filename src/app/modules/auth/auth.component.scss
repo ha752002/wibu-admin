@@ -4,16 +4,18 @@
   display: flex;
   position: relative;
   background-size: cover;
-  justify-content: center;
   align-items: center;
-  background-image: url("../../../assets/img/background_auth.jpg");
+  background-image: url("../../../assets/img/back_auth.png");
 }
 
 .container {
   position: absolute;
-  width: 500px;
-  height: 741px;
+  width: 538px;
+  aspect-ratio: 0.7;
   z-index: 99;
-  background: transparent;
+  left: 16%;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 40px;
+  padding: 40px;
   border: 1px solid var(--white);
 }

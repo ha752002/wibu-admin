@@ -1,0 +1,134 @@
+
+.title-wrapper {
+  color: var(--black);
+
+  .title-welcome {
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    span {
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      color: var(--primary);
+    }
+  }
+
+  .title-no-account {
+    color: var(--text-gray14);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    p:nth-child(1) {
+      &:hover {
+        span {
+          text-decoration: underline;
+          text-underline-position: under;
+          cursor: pointer;
+        }
+      }
+    }
+
+    p:nth-child(2) {
+      &:hover {
+        text-decoration: underline;
+        text-underline-position: under;
+        cursor: pointer;
+      }
+    }
+
+    p:nth-child(2) {
+      color: var(--primary-hover);
+    }
+  }
+}
+
+.title-main {
+  color: var(--black);
+  font-size: 54px;
+  font-style: normal;
+  margin-top: -29px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.contact-wrapper {
+  div:nth-child(1) {
+    width: 50%;
+  }
+
+  div:nth-child(2) {
+    width: 50%;
+  }
+}
+
+.form-control-wrapper {
+  margin-top: 50px;
+
+  .form-control {
+
+    label {
+      color: var(--black);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    input {
+      width: 100%;
+      border-radius: 9px;
+      height: 57px;
+      flex-shrink: 0;
+
+      ::placeholder {
+        color: var(--text-gray14);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+      }
+    }
+  }
+}
+
+.forgot {
+  width: 100%;
+  margin-top: 12px;
+
+  p {
+    color: var(--blue12);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-position: under;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.btn-sign {
+  margin-top: 63px;
+
+  button {
+    height: 54px;
+    padding: 15px 92px;
+    border-radius: 10px;
+    background: var(--pink14);
+    color: var(--white);
+  }
+
+  .ant-btn:focus, .ant-btn:hover {
+    border-color: var(--primary-hover);
+    color: var(--primary-hover);
+  }
+}

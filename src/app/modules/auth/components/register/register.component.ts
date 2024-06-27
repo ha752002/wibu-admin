@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
+  constructor(
+    private _router: Router
+  ) {
+  }
+
+  handleClickSignIn() {
+    this._router.navigate(['/auth/signIn'])
+  }
 }

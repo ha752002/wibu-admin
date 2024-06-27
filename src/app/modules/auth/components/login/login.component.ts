@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  constructor(
+    private _router: Router
+  ) {
+  }
+
+
+  handleClickSignUp() {
+    console.log(1)
+    this._router.navigate(['auth/signUp']);
+  }
 }

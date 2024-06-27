@@ -33,6 +33,9 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
+              "src/assets/icon",
+              "src/assets/img",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -41,7 +44,8 @@
             "styles": [
               "src/globals.scss",
               "src/variables.scss",
-              "src/themes/theme.less"
+              "src/themes/theme.less",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
           },

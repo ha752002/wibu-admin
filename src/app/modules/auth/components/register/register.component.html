@@ -1,1 +1,42 @@
-<p>register works!</p>
+<div class="container">
+  <div class="title-wrapper d-flex flex-dir-row justify-content-between">
+    <p class="title-welcome">Welcome to <span>WIBU</span></p>
+    <div class="title-no-account d-flex flex-dir-column">
+      <p><span>Have an Account</span> ?</p>
+      <p (click)="handleClickSignIn()">Sign up</p>
+    </div>
+  </div>
+  <p class="title-main">Sign up</p>
+
+  <!--  Form control-->
+  <div class="form-control-wrapper d-flex flex-dir-column gap-38 justify-content-between">
+    <div class="form-control d-flex flex-dir-column  gap-12">
+      <label>Enter your username or email address</label>
+      <input nz-input placeholder="Username or email address"/>
+    </div>
+
+    <div class="contact-wrapper d-flex flex-dir-row gap-18 full-width">
+      <div class="form-control d-flex flex-dir-column  gap-12">
+        <label>User name</label>
+        <input nz-input placeholder="User name"/>
+      </div>
+
+      <div class="form-control d-flex flex-dir-column  gap-12">
+        <label>Contact Number</label>
+        <input nz-input placeholder="Contact Number"/>
+      </div>
+    </div>
+
+    <div class="form-control d-flex flex-dir-column gap-12">
+      <label>Enter your Password</label>
+      <input nz-input placeholder="Password"/>
+    </div>
+  </div>
+
+  <div class="btn-sign d-flex justify-content-end">
+    <button nz-button>Sign Up</button>
+  </div>
+
+
+</div>
+
