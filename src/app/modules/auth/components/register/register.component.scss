@@ -49,9 +49,8 @@
 
 .title-main {
   color: var(--black);
-  font-size: 54px;
+  font-size: 42px;
   font-style: normal;
-  margin-top: -29px;
   font-weight: 500;
   line-height: normal;
 }
@@ -67,7 +66,7 @@
 }
 
 .form-control-wrapper {
-  margin-top: 50px;
+  margin-top: 40px;
 
   .form-control {
 
@@ -82,7 +81,7 @@
     input {
       width: 100%;
       border-radius: 9px;
-      height: 57px;
+      padding: 13px 10px;
       flex-shrink: 0;
 
       ::placeholder {
@@ -96,29 +95,9 @@
   }
 }
 
-.forgot {
-  width: 100%;
-  margin-top: 12px;
-
-  p {
-    color: var(--blue12);
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
-    &:hover {
-      text-decoration: underline;
-      text-underline-position: under;
-      cursor: pointer;
-    }
-  }
-}
-
-
 .btn-sign {
-  margin-top: 63px;
-
+  margin-top: 22px;
+  
   button {
     height: 54px;
     padding: 15px 92px;

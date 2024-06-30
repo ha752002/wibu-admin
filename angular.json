@@ -44,8 +44,7 @@
             "styles": [
               "src/globals.scss",
               "src/variables.scss",
-              "src/themes/theme.less",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+              "src/themes/theme.less"
             ],
             "scripts": []
           },

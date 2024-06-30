@@ -15,7 +15,6 @@ export class LoginComponent {
 
 
   handleClickSignUp() {
-    console.log(1)
     this._router.navigate(['auth/signUp']);
   }
 }

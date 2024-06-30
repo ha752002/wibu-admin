@@ -1,31 +1,31 @@
-<div class="container">
+<div class="container d-flex flex-dir-column">
   <div class="title-wrapper d-flex flex-dir-row justify-content-between">
-    <p class="title-welcome">Welcome to <span>WIBU</span></p>
-    <div class="title-no-account d-flex flex-dir-column">
-      <p><span>No Account</span> ?</p>
-      <p (click)="handleClickSignUp()">Sign in</p>
+    <div>
+      <p class="title-welcome">Welcome to <span>WIBU</span></p>
+      <p class="title-main">Sign in</p>
     </div>
-  </div>
-  <p class="title-main">Sign in</p>
+    <div class="title-no-account d-flex flex-dir-column gap-8">
+      <p><span>No Account</span> ?</p>
+      <p (click)="handleClickSignUp()">Sign up</p>
+      <!--  social-->
+      <div class="social-wrapper d-flex justify-content-between gap-2">
+        <button class="google" nz-button>
+          <img alt="google-img" src="/assets/icon/google.svg">
+        </button>
 
-  <!--  social-->
-  <div class="social-wrapper d-flex justify-content-between">
-    <button class="google d-flex justify-content-center align-items-center" nz-button>
-      <img alt="google-img" src="/assets/icon/google.svg">
-      Sign in with Google
-    </button>
+        <button class="facebook" nz-button>
+          <img alt="fb-img" src="/assets/icon/Facebook.svg">
+        </button>
 
-    <button class="facebook" nz-button>
-      <img alt="fb-img" src="/assets/icon/Facebook.svg">
-    </button>
-
-    <button class="apple" nz-button>
-      <img alt="apple-img" src="/assets/icon/apple.svg">
-    </button>
+        <button class="apple" nz-button>
+          <img alt="apple-img" src="/assets/icon/apple.svg">
+        </button>
+      </div>
+    </div>
   </div>
 
   <!--  Form control-->
-  <div class="form-control-wrapper d-flex flex-dir-column gap-38">
+  <div class="form-control-wrapper d-flex flex-dir-column gap-20">
     <div class="form-control d-flex flex-dir-column  gap-12">
       <label>Enter your username or email address</label>
       <input nz-input placeholder="Username or email address"/>

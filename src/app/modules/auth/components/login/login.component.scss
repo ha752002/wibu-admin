@@ -50,48 +50,41 @@
 
 .title-main {
   color: var(--black);
-  font-size: 54px;
+  font-size: 42px;
   font-style: normal;
-  margin-top: -29px;
   font-weight: 500;
   line-height: normal;
 }
 
 .social-wrapper {
-  margin-top: 43px;
+  button {
+    justify-content: center;
 
-  .google {
-    width: 298px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: 9px;
-    background: var(--blue11);
-    color: var(--blue12);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
-    img {
-      margin-right: 22px;
+    &:hover {
     }
   }
 
+  .ant-btn {
+    padding: 0;
+  }
+
+  .google,
   .facebook,
   .apple {
-    width: 60px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 55px;
+    aspect-ratio: 1;
     flex-shrink: 0;
     border-radius: 9px;
-    background: var(--white1);
+
+    img {
+      width: 16px;
+    }
   }
 }
 
 .form-control-wrapper {
-  margin-top: 50px;
+  margin-top: 40px;
 
   .form-control {
 
@@ -106,7 +99,7 @@
     input {
       width: 100%;
       border-radius: 9px;
-      height: 57px;
+      padding: 13px 10px;
       flex-shrink: 0;
 
       ::placeholder {
@@ -122,7 +115,7 @@
 
 .forgot {
   width: 100%;
-  margin-top: 12px;
+  margin-top: 10px;
 
   p {
     color: var(--blue12);
@@ -141,7 +134,7 @@
 
 
 .btn-sign {
-  margin-top: 44px;
+  margin-top: 10px;
 
   button {
     height: 54px;

@@ -1,15 +1,18 @@
 <div class="container">
   <div class="title-wrapper d-flex flex-dir-row justify-content-between">
-    <p class="title-welcome">Welcome to <span>WIBU</span></p>
+    <div>
+      <p class="title-welcome">Welcome to <span>WIBU</span></p>
+      <p class="title-main">Sign Up</p>
+    </div>
+
     <div class="title-no-account d-flex flex-dir-column">
       <p><span>Have an Account</span> ?</p>
-      <p (click)="handleClickSignIn()">Sign up</p>
+      <p (click)="handleClickSignIn()">Sign in</p>
     </div>
   </div>
-  <p class="title-main">Sign up</p>
 
   <!--  Form control-->
-  <div class="form-control-wrapper d-flex flex-dir-column gap-38 justify-content-between">
+  <div class="form-control-wrapper d-flex flex-dir-column gap-20 justify-content-between">
     <div class="form-control d-flex flex-dir-column  gap-12">
       <label>Enter your username or email address</label>
       <input nz-input placeholder="Username or email address"/>
