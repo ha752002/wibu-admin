@@ -1,0 +1,44 @@
+.menu {
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    margin: 0;
+
+    .menu-item-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+:host::ng-deep {
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-submenu-selected, .ant-menu-item:active, .ant-menu-submenu-title:active {
+    background-color: var(--route-active);
+    color: var(--primary);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  .ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-expand-icon, .ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow {
+    color: var(--primary);
+  }
+
+  .ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active, .ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-light .ant-menu-submenu-active, .ant-menu-light .ant-menu-submenu-title:hover {
+    color: var(--primary);
+  }
+
+  .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+    border-right-color: var(--primary);
+  }
+
+  .ant-menu-item .ant-menu-item-icon + span, .ant-menu-submenu-title .ant-menu-item-icon + span, .ant-menu-item .anticon + span, .ant-menu-submenu-title .anticon + span {
+    margin-left: 0;
+  }
+
+  .ant-menu-inline.ant-menu-root .ant-menu-item, .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
+    gap: 8px;
+  }
+}

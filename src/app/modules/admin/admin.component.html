@@ -1,1 +1,28 @@
-<p>admin works!</p>
+<nz-layout>
+  <nz-header>
+    <div class="flex-dir-row d-flex align-items-center">
+      <div class="logo-admin-wrapper eyes-logo">
+        <img alt="logo-admin" src="assets/img/eyes.png">
+      </div>
+      <div class="logo-admin-wrapper">
+        <img alt="logo-admin" src="assets/img/manga4.png">
+      </div>
+      <div class="logo-admin-wrapper totoro-img d-flex align-items-center">
+        <img alt="logo-admin" src="assets/img/totoro-and-friends.png">
+      </div>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <!--    sider-bar-->
+    <nz-sider>
+      <app-left-sidebar></app-left-sidebar>
+    </nz-sider>
+
+    <!--    main-->
+    <nz-content>
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
