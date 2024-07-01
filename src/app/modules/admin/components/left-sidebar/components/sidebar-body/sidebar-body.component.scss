@@ -2,8 +2,7 @@
   .menu-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 16px;
+    font-size: 18px;
     margin: 0;
 
     .menu-item-icon {
@@ -14,11 +13,11 @@
 
 :host::ng-deep {
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected, .ant-menu-submenu-selected, .ant-menu-item:active, .ant-menu-submenu-title:active {
-    background-color: var(--route-active);
-    color: var(--primary);
+    background-color: var(--pink12);
+    color: var(--white);
 
     &:hover {
-      color: var(--primary);
+      color: var(--white);
     }
   }
 
@@ -36,9 +35,17 @@
 
   .ant-menu-item .ant-menu-item-icon + span, .ant-menu-submenu-title .ant-menu-item-icon + span, .ant-menu-item .anticon + span, .ant-menu-submenu-title .anticon + span {
     margin-left: 0;
+    font-weight: 600;
+    font-size: 16px;
   }
 
   .ant-menu-inline.ant-menu-root .ant-menu-item, .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
     gap: 8px;
+  }
+
+  .ant-menu-inline.ant-menu-root .ant-menu-item {
+    margin: 0;
+    padding: 26px 0;
+    border-bottom: 1px solid #d9d5d5;
   }
 }
