@@ -1,38 +1,17 @@
 import {IconNameTypes} from "@app/shared/components/icon/icon.types";
 
 export const ADMIN_ROUTES: IRoute[] = [{
-  route: ['profile'],
+  route: ['my-profile'],
   icon: 'user',
   title: 'My Profile'
 }, {
-  title: 'Admin',
+  title: 'Manga',
   icon: 'deployment-unit',
-  children: [
-    {
-      title: 'Users',
-      icon: 'team',
-      route: ['users'],
-    }, {
-      title: 'Roles',
-      icon: 'tags',
-      route: ['roles'],
-    }, {
-      title: 'Configurations',
-      icon: 'sliders',
-      route: ['configurations'],
-    },],
+  route: ['manga'],
 }, {
-  title: 'Projects',
+  title: 'User',
   icon: 'project',
-  route: ['projects'],
-}, {
-  title: 'My Working Time',
-  icon: 'calendar',
-  route: ['my-working-time'],
-}, {
-  title: 'Manage Working Time',
-  icon: 'clock-circle',
-  route: ['manage-working-time'],
+  route: ['user'],
 }];
 
 

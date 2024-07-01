@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MangaManagementComponent } from './manga-management.component';
-
+import {NgModule} from '@angular/core';
+import {MangaManagementComponent} from './manga-management.component';
+import {
+  MangaManagementRoutingModule
+} from "@app/modules/admin/modules/manga-management/manga-management-routing.module";
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { MangaManagementComponent } from './manga-management.component';
     MangaManagementComponent
   ],
   imports: [
-    CommonModule
+    MangaManagementRoutingModule
   ]
 })
-export class MangaManagementModule { }
+export class MangaManagementModule {
+}
