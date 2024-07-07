@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {AuthComponent} from "@app/modules/auth/auth.component";
+import { MyProfileComponent } from './my-profile.component';
 
 
 const routes: Routes = [{
-  path: 'my-profile',
-  component: AuthComponent,
+  path: '',
+  component: MyProfileComponent,
+  children: [] 
 }];
 
 @NgModule({

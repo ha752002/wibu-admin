@@ -1,0 +1,15 @@
+.my-profile {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    gap: 24px;
+    background: linear-gradient(45deg, #e2a3ac77, #FFFFFF);
+
+    .user {
+        flex: 1 1 25%
+    }
+
+    .user-details {
+        flex: 1 1 75%
+    }
+}
