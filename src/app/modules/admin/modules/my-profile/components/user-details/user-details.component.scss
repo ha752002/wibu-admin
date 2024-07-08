@@ -28,11 +28,9 @@
     .group-information {
         display: flex;
         flex-direction: column;
-    //   grid-template-columns: 1fr; /* 1 column for smaller screens */
     }
   }
   
-  /* Media Query for mobile devices */
   @media (max-width: 480px) {
     .user-details {
       padding: 5px;

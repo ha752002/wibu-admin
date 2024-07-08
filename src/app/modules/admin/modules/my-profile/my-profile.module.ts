@@ -1,7 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyProfileComponent } from './my-profile.component';
-// import {NzAvatarComponent} from "ng-zorro-antd/avatar";
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { UserComponent } from './components/user/user.component';
@@ -20,7 +19,6 @@ import { ItemInformationComponent } from './components/user-details/components/i
   ],
   imports: [
     CommonModule,
-    // NzAvatarComponent,
     NzInputModule,
     NzAvatarModule,
     MyProfileRoutingModule,
