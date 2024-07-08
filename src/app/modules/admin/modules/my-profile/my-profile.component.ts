@@ -2,17 +2,18 @@ import { Component } from '@angular/core';
 
 
 export interface User {
-  avatarUrl: string;
-  name: string;
-  phone: string;
-  email: string;
+  id?: number;
+  avatarUrl?: string;
+  name?: string;
+  phone?: string;
+  email?: string;
   dateOfBirth?: Date;
   postedStories? : number;
   followStory? : number;
   followers? : number;
   teams? : string;
   userType? : string;
-  roles: string[];
+  roles?: string[];
 }
 
 @Component({
