@@ -1,0 +1,12 @@
+.user{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 12px;
+    align-items: center;
+
+    .mail{
+        font-size: small;
+        color: gray;
+    }
+}
