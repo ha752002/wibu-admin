@@ -39,6 +39,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
               }
             ],
             "styles": [
@@ -110,5 +115,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

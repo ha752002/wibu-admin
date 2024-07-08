@@ -10,13 +10,13 @@ const routes: Routes = [{
   component: AdminComponent,
   children: [{
     path: 'manga',
-    component: MangaManagementComponent
+    loadChildren: () => import('./modules/manga-management/manga-management.module').then(module => module.MangaManagementModule)
   }, {
     path: 'user',
-    component: UserManagementComponent
+    loadChildren: () => import('./modules/user-management/user-management.module').then(module => module.UserManagementModule)
   }, {
     path: 'my-profile',
-    component: MyProfileComponent
+    loadChildren: () => import('./modules/my-profile/my-profile.module').then(module => module.MyProfileModule)
   }]
 }]
 
