@@ -1,0 +1,23 @@
+.input-field{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    position: relative;
+
+    label{
+        text-align: left;
+        display: flex;
+        gap: 4px;
+        p{
+            color: red;
+        }
+        // position: absolute;
+        // z-index: 10;
+        // padding: 4px 12px;
+    }
+
+    input{
+        min-width: 360px;
+        text-align: left;
+    }
+}
