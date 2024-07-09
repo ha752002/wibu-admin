@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '../my-profile/my-profile.component';
+import { formNameTypes } from '@app/shared/components/open-form/open-form.types';
 
 @Component({
   selector: 'app-user-management',
@@ -39,4 +40,5 @@ export class UserManagementComponent {
 
     },
   ];
+
 }

@@ -1,8 +1,8 @@
 <div class="title-user-management">
-    Users       
+    Users
 </div>
 
 <div class="user-management">
-<app-user-list [listOfData]="listOfData"></app-user-list>
-
+    <app-open-form [formName]="'add user'" buttonType="danger"></app-open-form>
+    <app-user-list [listOfData]="listOfData"></app-user-list>
 </div>
