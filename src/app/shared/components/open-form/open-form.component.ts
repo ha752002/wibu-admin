@@ -28,8 +28,8 @@ export class OpenFormComponent {
   @Input() formName: formNameTypes = 'add story';
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
-
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
+  @Input() id?: number;
 
   openForm() {
     console.log(this.formName);

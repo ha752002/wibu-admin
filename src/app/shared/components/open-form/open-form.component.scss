@@ -11,6 +11,8 @@
     z-index: 100;
 
     .content {
+        position: fixed;
+        top: 100px;
         padding: 24px;
         background-color: white;
         border-radius: 8px;

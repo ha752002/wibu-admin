@@ -1,6 +1,6 @@
 <div class="input-field">
     <label>{{label}} <p *ngIf="required === true">*</p></label>
-    <nz-input-group [nzSuffix]="type === 'password' ? suffixTemplate : undefined">
+    <nz-input-group [nzSuffix]="type === 'password' ? suffixTemplate : undefined" >
         <input nz-input [type]="passwordVisible ? 'text' : type  " [(ngModel)]="value" (ngModelChange)="valueChange.emit($event)" [required]="required">
         <ng-template #suffixTemplate >
             <ts-icon (click)="passwordVisible = !passwordVisible"

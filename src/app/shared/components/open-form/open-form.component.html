@@ -7,7 +7,7 @@
         <ng-container *ngIf="currentForm === formName">
             <ng-container [ngSwitch]="formName">
                 <app-add-user-form *ngSwitchCase="'add user'"></app-add-user-form>
-                <app-edit-user-form *ngSwitchCase="'edit user'"></app-edit-user-form>
+                <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
                 <app-add-story-form *ngSwitchCase="'add story'"></app-add-story-form>
                 <app-edit-story-form *ngSwitchCase="'edit story'"></app-edit-story-form>
                 <div *ngSwitchCase="'delete'">Delete Form</div>
