@@ -46,9 +46,11 @@ export class AddUserFormComponent {
     email: '',
     dateOfBirth: undefined,
     teams: '',
-    userType: '',
+    userType: 'user',
     password: '',
   };
+
+  userTypeList: string[] = ['user','admin','management'];
 
   confirmPassword: string = '';
 

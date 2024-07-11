@@ -35,8 +35,11 @@ export class EditUserFormComponent {
     email: '',
     dateOfBirth: undefined,
     teams: 'sasasaasa',
-    userType: '',
+    userType: 'user',
   };
+
+  userTypeList: string[] = ['user','admin','management'];
+
 
   onSubmit(event: Event): void {
     event.preventDefault();

@@ -1,4 +1,4 @@
-<p class="title">edit-user id : {{id}}</p>
+<p class="title">edit user id : {{id}}</p>
 <div>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
@@ -22,8 +22,8 @@
                 (valueChange)="onFieldValueChange('teams', $event)" [required]="true">
             </app-input-field>
 
-            <app-input-field label="User Type" [(value)]="user.userType" type="number"
-                (valueChange)="onFieldValueChange('userType', $event)">
+            <app-input-field label="User Type" [(value)]="user.userType"
+                (valueChange)="onFieldValueChange('userType', $event)" [optionValue]="userTypeList">
             </app-input-field>
         </div>
         <div class="group-button">

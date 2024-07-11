@@ -23,7 +23,7 @@
             </app-input-field>
 
             <app-input-field label="User Type" [(value)]="user.userType" type="number"
-                (valueChange)="onFieldValueChange('userType', $event)">
+                (valueChange)="onFieldValueChange('userType', $event)" [optionValue]="userTypeList">
             </app-input-field>
 
             <app-input-field label="Password" [(value)]="user.password" type="password"

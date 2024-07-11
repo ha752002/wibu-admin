@@ -2,12 +2,27 @@ import { Component } from '@angular/core';
 import { User } from '../my-profile/my-profile.component';
 import { formNameTypes } from '@app/shared/components/open-form/open-form.types';
 
+export interface IuserFilter {
+  search?:string,
+  userType?: string,
+  teams?: string,
+}
+
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss'
 })
 export class UserManagementComponent {
+  filter: IuserFilter = {
+    search:'',
+    teams: '',
+    userType: '',
+  }
+
+  userTypeList: string[] = ['All','user','admin','management'];
+  teamList: string[] = ['All','Team A', 'Team B', 'Team C'];
+
   listOfData: User[] = [
     {
       id: 1,
@@ -40,5 +55,10 @@ export class UserManagementComponent {
 
     },
   ];
+
+  onFieldValueChange(field: keyof IuserFilter, value: string | number | Date | undefined): void {
+
+    console.log(this.filter);
+  }
 
 }

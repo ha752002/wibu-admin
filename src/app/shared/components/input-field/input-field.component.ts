@@ -15,15 +15,16 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
   styleUrl: './input-field.component.scss'
 })
 export class InputFieldComponent implements OnInit {
-  @Input() label: string = 'plus';
+  @Input() label: string = '';
   @Input() type: InputFieldTypes = 'text';
   @Input() value: string | number | Date | undefined;
+  @Input() placeholder: string ='';
   @Input() required: boolean = false;
   @Input() optionValue?: string[];
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 
   passwordVisible = false;
-  listOfOption: Array<{ label: string; value: string }> = [];
+  // listOfOption: Array<{ label: string; value: string }> = [];
   ngOnInit(): void {
     
     
@@ -34,6 +35,8 @@ export class InputFieldComponent implements OnInit {
     if (input !== undefined) {
       this.value = input;
       this.valueChange.emit(this.value);
+      console.log(this.value);
+      
     }
   }
 
