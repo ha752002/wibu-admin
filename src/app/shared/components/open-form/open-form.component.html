@@ -10,7 +10,7 @@
                 <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
                 <app-add-story-form *ngSwitchCase="'add story'"></app-add-story-form>
                 <app-edit-story-form *ngSwitchCase="'edit story'"></app-edit-story-form>
-                <div *ngSwitchCase="'delete'">Delete Form</div>
+                <app-delete-form *ngSwitchCase="'delete'" [id]="id"></app-delete-form>
             </ng-container>
         </ng-container>
     </div>

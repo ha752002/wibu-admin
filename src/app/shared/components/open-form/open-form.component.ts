@@ -5,6 +5,8 @@ import { AddUserFormComponent } from './components/add-user-form/add-user-form.c
 import { EditUserFormComponent } from './components/edit-user-form/edit-user-form.component';
 import { AddStoryFormComponent } from './components/add-story-form/add-story-form.component';
 import { EditStoryFormComponent } from './components/edit-story-form/edit-story-form.component';
+import { DeleteFormComponent } from './components/delete-form/delete-form.component';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconComponent } from '../icon/icon.component';
 import { IconNameTypes } from '../icon/icon.types';
@@ -19,7 +21,8 @@ import { IconNameTypes } from '../icon/icon.types';
     AddUserFormComponent,
     EditUserFormComponent,
     AddStoryFormComponent,
-    EditStoryFormComponent
+    EditStoryFormComponent,
+    DeleteFormComponent
   ],
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
