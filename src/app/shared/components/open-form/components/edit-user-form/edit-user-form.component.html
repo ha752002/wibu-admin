@@ -1,0 +1,34 @@
+<p class="title">edit user id : {{id}}</p>
+<div>
+    <form nz-form (ngSubmit)="onSubmit($event)">
+        <div class="basic">
+            <app-input-field label="Name" [(value)]="user.name" type="text"
+                (valueChange)="onFieldValueChange('name', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="Phone" [(value)]="user.phone" type="tel"
+                (valueChange)="onFieldValueChange('phone', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="Email" [(value)]="user.email" type="email"
+                (valueChange)="onFieldValueChange('email', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="Date of Birth" [(value)]="user.dateOfBirth" type="date"
+                (valueChange)="onFieldValueChange('dateOfBirth', $event)">
+            </app-input-field>
+
+            <app-input-field label="Teams" [(value)]="user.teams" type="text"
+                (valueChange)="onFieldValueChange('teams', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="User Type" [(value)]="user.userType"
+                (valueChange)="onFieldValueChange('userType', $event)" [optionValue]="userTypeList">
+            </app-input-field>
+        </div>
+        <div class="group-button">
+            <button nz-button nzType="text" type="reset" >Reset</button>
+            <button nz-button nzType="primary" type="submit" class="submit" nzDanger>Submit</button>
+        </div>
+    </form>
+</div>

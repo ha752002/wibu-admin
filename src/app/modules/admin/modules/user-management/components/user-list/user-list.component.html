@@ -1,0 +1,48 @@
+<nz-table #basicTable [nzOuterBordered]="true" [nzSize]="'small'" [nzData]="listOfData || []">
+    <thead>
+        <tr>
+            <th>user</th>
+            <th>Phone</th>
+            <th>Date of Birth</th>
+            <th>Posted Stories</th>
+            <th>Follow Story</th>
+            <th>Followers</th>
+            <th>Teams</th>
+            <th>User Type</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>
+                <div class=" flex user">
+                    <nz-avatar [nzSrc]="data.avatarUrl" nzIcon="user" [nzSize]="36"></nz-avatar>
+                    <div>
+                        <p class="name"> {{ data.name }} </p>
+                        <p class="mail"> {{ data.email }} </p>
+                    </div>
+                </div>
+            </td>
+            <td>{{ data.phone }}</td>
+            <td>{{ data.dateOfBirth | date: 'shortDate' }}</td>
+            <td>{{ data.postedStories }}</td>
+            <td>{{ data.followStory }}</td>
+            <td>{{ data.followers }}</td>
+            <td>{{ data.teams }}</td>
+            <td>{{ data.userType }}</td>
+            <td>
+                <ul>
+                    <li *ngFor="let role of data.roles">{{ role }}</li>
+                </ul>
+            </td>
+            <td>
+                <div class="flex">
+                    <app-open-form [formName]="'edit user'" buttonType="warning" [id]="data.id"></app-open-form>
+                    <app-open-form [formName]="'delete'" buttonType="danger" [id]="data.id"></app-open-form>
+                </div>
+
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
