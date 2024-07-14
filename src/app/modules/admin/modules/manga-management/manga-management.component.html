@@ -1,1 +1,23 @@
-<p>manga-management works!</p>
+<div class="title-manga-management">
+    Manga
+</div>
+<div class="manga-management">
+    <div class="group-tool">
+        <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
+        
+        <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
+        placeholder="select genre"  [optionValue]="userTypeList">
+        </app-input-field>
+        <app-input-field [(value)]="filter.chapterNumber" type="text" (valueChange)="onFieldValueChange('chapterNumber', $event)"
+        placeholder="select chapter number" [optionValue]="teamList">
+        </app-input-field>
+        <app-input-field [(value)]="filter.search" type="text" (valueChange)="onFieldValueChange('search', $event)"
+            placeholder="search">
+        </app-input-field>
+        <div (click)="changeViewType(viewType)" class="change-view">
+            <ts-icon [name]="viewType === 'table' ? 'bars' : 'calendar'"></ts-icon>
+        </div>
+    </div>
+
+    <app-manga-list [storyData]="story" [viewType]="viewType"></app-manga-list>
+</div>
