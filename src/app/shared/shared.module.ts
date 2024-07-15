@@ -1,8 +1,14 @@
 import {NgModule} from '@angular/core';
 import {IconComponent} from './components/icon/icon.component';
+import { UploadImgComponent } from './components/upload-img/upload-img.component';
+import { InputFieldComponent } from './components/input-field/input-field.component';
+import { OpenFormComponent } from './components/open-form/open-form.component';
 
 const COMPONENTS = [
-  IconComponent
+  IconComponent,
+  UploadImgComponent,
+  InputFieldComponent,
+  OpenFormComponent,
 ];
 
 @NgModule({

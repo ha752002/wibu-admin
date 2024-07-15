@@ -26,4 +26,5 @@ export class ListGridComponent implements OnInit{
     this.currentPage = page;
     this.updatePaginatedData();
   }
+  
 }

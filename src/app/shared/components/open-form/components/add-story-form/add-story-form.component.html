@@ -1,1 +1,36 @@
-<p>add-story-form works!</p>
+<p class="title">Create New Story</p>
+
+
+<form nz-form (ngSubmit)="onSubmit($event)">
+    <div>
+        <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1" [style]="styleUpload"></app-upload-img>
+    </div>
+    <div>
+        <div class="basic">
+            <app-input-field label="Name" [(value)]="story.name" type="text"
+                (valueChange)="onFieldValueChange('name', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="author" [(value)]="story.author" type="text"
+                (valueChange)="onFieldValueChange('author', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="introduce" [(value)]="story.introduce" type="text"
+                (valueChange)="onFieldValueChange('introduce', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="translator" [(value)]="story.translator" type="text"
+                (valueChange)="onFieldValueChange('translator', $event)">
+            </app-input-field>
+
+            <app-input-field label="status" [(value)]="story.status" type="text"
+                (valueChange)="onFieldValueChange('status', $event)" [required]="true" [optionValue]="status">
+            </app-input-field>
+
+        </div>
+        <div class="group-button">
+            <button nz-button nzType="text" type="reset">Reset</button>
+            <button nz-button nzType="primary" type="submit" class="submit" nzDanger>Submit</button>
+        </div>
+    </div>
+</form>
