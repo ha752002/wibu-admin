@@ -5,7 +5,8 @@ const initialState = {}
 
 export const authReducer = createReducer(
   initialState,
-  on(authActions.login, (state) => {
+  on(authActions.loginSuccess, (state, payload) => {
+    console.log(payload)
     return state;
-  })
+  }),
 )

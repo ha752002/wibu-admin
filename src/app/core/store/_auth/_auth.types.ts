@@ -9,5 +9,6 @@ export type ActionProps<P, S = {}> = {
 }
 
 export interface ILoginResponse {
-  token: string
+  token: string,
+  expires: Date
 }

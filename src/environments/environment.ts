@@ -1,12 +1,8 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://training-api-timesheet.nccsoft.vn/api/',
+  apiUrl: 'http://localhost:8763/',
   authEndpoint: {
-    login: 'TokenAuth/Authenticate',
-    getUserInfo: 'services/app/Session/GetCurrentLoginInformations',
+    login: 'auth/login',
+    register: 'auth/register',
   },
-  projectEndpoint: {
-    getAllProjects: 'services/app/Project/getAll',
-    getAllCustomers: 'services/app/Customer/getAll',
-  }
 };
