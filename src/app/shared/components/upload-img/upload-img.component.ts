@@ -38,12 +38,17 @@ export class UploadImgComponent {
   @Output() thumbnailChange = new EventEmitter<NzUploadFile[]>();
   @Input() thumbnail: string = '';
   @Input() length: number = 99;
-  @Input() style?: Istyle ;
+  @Input() size: 'size-s' | 'size-m' | 'size-l' = 'size-l';
 
   fileList: NzUploadFile[] = [];
+  // sizeClass = '';
 
   previewImage: string | undefined = '';
   previewVisible = false;
+
+  // updateSizeClass(): void {
+  //   this.sizeClass = this.size ? `size-${this.size}` : '';
+  // }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     if (!file.url && !file['preview']) {

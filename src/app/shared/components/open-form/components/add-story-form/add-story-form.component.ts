@@ -37,10 +37,6 @@ export type statusType = 'Updating' | 'Halt' | 'Full';
 export class AddStoryFormComponent {
   story: ICreateStory = {};
   status: string[] = ['Updating','Halt','Full'];
-  styleUpload: Istyle = {
-    height: '240px',
-    width: '180px'
-  };
 
 
   receiveThumbnail(thumbnailUrl: NzUploadFile[]): void {
