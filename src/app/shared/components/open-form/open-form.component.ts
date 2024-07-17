@@ -33,6 +33,8 @@ export class OpenFormComponent {
   @Input() icon: IconNameTypes = 'plus';
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
   @Input() id?: number;
+  @Input() img?: string;
+  @Input() delete: 'user' | 'story' = 'user';
 
   openForm() {
     console.log(this.formName);

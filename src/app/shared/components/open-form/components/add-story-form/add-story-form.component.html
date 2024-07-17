@@ -2,10 +2,15 @@
 
 
 <form nz-form (ngSubmit)="onSubmit($event)">
-    <div>
+    <div class="upload-img">
         <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1" size="size-l"></app-upload-img>
+        <div class="url-img">
+            <p>Url image :</p>
+            <a [href]="story.thumbnail" *ngIf="story.thumbnail !== ''">{{story.thumbnail }}</a>
+            <p *ngIf="story.thumbnail == ''" class="empty">empty</p>
+        </div>
     </div>
-    <div>
+    <div class="story">
         <div class="basic">
             <app-input-field label="Name" [(value)]="story.name" type="text"
                 (valueChange)="onFieldValueChange('name', $event)" [required]="true">
@@ -15,7 +20,7 @@
                 (valueChange)="onFieldValueChange('author', $event)" [required]="true">
             </app-input-field>
 
-            <app-input-field label="introduce" [(value)]="story.introduce" type="text"
+            <app-input-field label="introduce" [(value)]="story.introduce" type="textarea"
                 (valueChange)="onFieldValueChange('introduce', $event)" [required]="true">
             </app-input-field>
 

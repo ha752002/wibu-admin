@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -34,21 +34,39 @@ export interface Istyle {
   templateUrl: './upload-img.component.html',
   styleUrl: './upload-img.component.scss'
 })
-export class UploadImgComponent {
+export class UploadImgComponent implements OnInit{
   @Output() thumbnailChange = new EventEmitter<NzUploadFile[]>();
   @Input() thumbnail: string = '';
   @Input() length: number = 99;
   @Input() size: 'size-s' | 'size-m' | 'size-l' = 'size-l';
+  @Input() img?: string;
 
   fileList: NzUploadFile[] = [];
-  // sizeClass = '';
 
   previewImage: string | undefined = '';
   previewVisible = false;
 
-  // updateSizeClass(): void {
-  //   this.sizeClass = this.size ? `size-${this.size}` : '';
-  // }
+  ngOnInit(): void {
+    if (this.img) {
+      console.log(1);
+      console.log(this.img);
+      
+      this.addImageToFileList(this.img);
+    }
+  }
+
+  private addImageToFileList(imgUrl: string): void {
+    const existingFileIndex = this.fileList.findIndex(file => file.url === imgUrl);
+    if (existingFileIndex === -1) {
+      this.fileList = [{
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: imgUrl
+      }];
+    }
+  }
+
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     if (!file.url && !file['preview']) {

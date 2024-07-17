@@ -26,8 +26,8 @@
         <td>{{ data.update | date: 'short' }}</td>
         <td>
           <div class="flex">
-            <app-open-form [formName]="'edit story'" buttonType="warning" [id]="data.id"></app-open-form>
-            <app-open-form [formName]="'delete'" buttonType="danger" [id]="data.id"></app-open-form>
+            <app-open-form [formName]="'edit story'" buttonType="warning" [id]="data.id" [img]="data.thumbnail"></app-open-form>
+            <app-open-form [formName]="'delete'" buttonType="danger" [id]="data.id" delete="story"></app-open-form>
           </div>
         </td>
       </tr>

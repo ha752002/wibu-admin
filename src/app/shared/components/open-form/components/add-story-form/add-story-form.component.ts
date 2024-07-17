@@ -35,7 +35,9 @@ export type statusType = 'Updating' | 'Halt' | 'Full';
   styleUrl: './add-story-form.component.scss'
 })
 export class AddStoryFormComponent {
-  story: ICreateStory = {};
+  story: ICreateStory = {
+    thumbnail: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg'
+  };
   status: string[] = ['Updating','Halt','Full'];
 
 
