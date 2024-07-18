@@ -14,9 +14,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of basicTable.data">
+        <tr *ngFor="let data of basicTable.data" >
+
             <td>
-                <div class=" flex user">
+                <div class=" flex user" (click)="selectUser(data)">
                     <nz-avatar [nzSrc]="data.avatarUrl" nzIcon="user" [nzSize]="36"></nz-avatar>
                     <div>
                         <p class="name"> {{ data.name }} </p>
@@ -43,6 +44,9 @@
                 </div>
 
             </td>
+
         </tr>
+        
     </tbody>
 </nz-table>
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)"><app-user [user]="selectedUser"></app-user></app-open-modal>

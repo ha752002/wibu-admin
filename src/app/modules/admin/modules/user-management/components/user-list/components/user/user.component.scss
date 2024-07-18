@@ -1,0 +1,53 @@
+.user {
+
+    .backgrourd-image {
+        width: 100%;
+        background-color: aqua;
+        height: 120px;
+    }
+
+    .detail {
+        text-align: left;
+        position: relative;
+
+        .follow {
+            padding: 20px;
+            display: flex;
+            justify-content: end;
+        }
+
+        .avata {
+            position: absolute;
+            top: -64px;
+            left: 24px;
+            border: 8px solid white;
+            border-radius: 50%;
+
+        }
+
+        .Information {
+            padding: 18px 24px;
+
+            .name {
+                font-size: large;
+                font-weight: 700;
+            }
+
+            .subtitle {
+                display: flex;
+                gap: 12px;
+
+                .role {
+                    background-color: #f38990;
+                    border-radius: 100px;
+                    padding: 2px 12px;
+                    font-size: small;
+                    color: white;
+                }
+            }
+        }
+    }
+
+
+
+}

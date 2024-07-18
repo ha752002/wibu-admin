@@ -1,0 +1,25 @@
+.user-profile {
+    border-radius: 8px;
+    flex: 1;
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.078);
+    flex-direction: column;
+
+    .title {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.484);
+        display: flex;
+        padding: 0px 24px;
+
+        .item {
+            padding: 6px 24px;
+        }
+
+        .select {
+            border-bottom: 2px solid #f38990;
+        }
+    }
+
+    .content {
+        padding: 24px;
+    }
+}
