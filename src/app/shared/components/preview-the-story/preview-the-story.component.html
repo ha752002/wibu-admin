@@ -1,0 +1,30 @@
+<div class="story">
+    <img [src]="storyData?.thumbnail" alt="">
+    <div class="content">
+
+        <div>
+            <p class="name">{{storyData?.name}}</p>
+            <p>{{storyData?.author}}</p>
+        </div>
+        <div>
+            <p>Chapter : {{storyData?.chapter}}</p>
+            <p>Views : {{storyData?.views}}</p>
+            <p>Status : {{storyData?.status}}</p>
+            <p>Translator: {{storyData?.translator}}</p>
+        </div>
+        <div class="genne">
+            <p class="title">genne : </p>
+            <div class="genre">
+                <p *ngFor="let genre of storyData?.genres">{{genre?.genre}}</p>
+            </div>
+        </div>
+        <div class="introduce">
+            <p class="title">Story content : </p>
+            <p>{{storyData?.introduce}}</p>
+
+        </div>
+        <div class="group-button">
+            <button nz-button nzType="link" >xem</button>
+        </div>
+    </div>
+</div>

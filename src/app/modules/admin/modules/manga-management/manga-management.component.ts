@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { viewType } from './components/manga-list/manga-list.component';
+import { viewType } from '@app/shared/components/story-list/story-list.component';
 
 export interface IStoryInformation {
-  id: number;
+  id?: number;
   thumbnail?: string;
   name?: string;
+  genres?: IGenre[],
   author?: string;
   translator?: string;
   views?: number;
@@ -13,6 +14,13 @@ export interface IStoryInformation {
   status?: statusType;
   created?: Date;
   update?: Date;
+}
+
+
+export interface IGenre {
+  genre?: string,
+  AgeWarning?: boolean,
+  describe?: string,
 }
 
 export interface ImangaFilter {
@@ -40,7 +48,7 @@ export class MangaManagementComponent {
 
   userTypeList: string[] = ['All', 'user', 'admin', 'management'];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
-  viewType: viewType = "table"
+  viewType: viewType = "grid"
 
   story: IStoryInformation[] = [
     {
@@ -49,9 +57,13 @@ export class MangaManagementComponent {
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
       translator: "Mary Smith",
+      genres: [
+        { genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
+        { genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
+      ],
       views: 12000,
       chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
+      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.\n\nmời các bạn đón xem!",
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
@@ -180,6 +192,19 @@ export class MangaManagementComponent {
       update: new Date(),
     }
 
+  ];
+
+  genre: IGenre[] = [
+    { genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
+    { genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
+    { genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
+    { genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
+    { genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories' },
+    { genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories' },
+    { genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories' },
+    { genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales' },
+    { genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories' },
+    { genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
   ];
 
   onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {

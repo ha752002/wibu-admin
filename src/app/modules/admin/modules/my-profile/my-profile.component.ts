@@ -8,6 +8,7 @@ export interface IUser {
   phone?: string;
   email?: string;
   dateOfBirth?: Date;
+  intro?: string;
   postedStories? : number;
   followStory? : number;
   followers? : number;

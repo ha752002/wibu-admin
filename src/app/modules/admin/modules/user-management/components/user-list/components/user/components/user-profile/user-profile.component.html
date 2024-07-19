@@ -6,7 +6,9 @@
           </div>
     </div>
     <div class="content">
-        <app-story-list></app-story-list>
+        <div class="intro" *ngIf="selectedTitle === 'Intro'">{{intro}}</div>
+        <app-story-list [viewType]="'grid'" *ngIf="selectedTitle === 'Story Posted'"></app-story-list>
+        <app-story-list [viewType]="'grid'" *ngIf="selectedTitle === 'Story Is Following'"></app-story-list>
 
     </div>
 

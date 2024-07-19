@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IStoryInformation } from '@app/modules/admin/modules/manga-management/manga-management.component';
+import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
+import { PreviewTheStoryComponent } from '@app/shared/components/preview-the-story/preview-the-story.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
@@ -13,16 +15,22 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzListModule,
     NzCardModule,
     NzPaginationModule,
+    OpenModalComponent,
+    PreviewTheStoryComponent,
   ],
   templateUrl: './list-grid.component.html',
   styleUrl: './list-grid.component.scss'
 })
 export class ListGridComponent {
   @Input() storyData: IStoryInformation[] = [];
-  pageSize = 8; // Số lượng mục trên mỗi trang
+  @Input() rowSize: 3 | 4 | 5 = 3;
+
+
+  pageSize = 8;
   currentPage = 1;
   paginatedData: IStoryInformation[] = [];
-
+  previewVisible = false;
+  selectedStory: IStoryInformation = {};
   ngOnInit() {
     this.updatePaginatedData();
   }
@@ -36,5 +44,15 @@ export class ListGridComponent {
   onPageChange(page: number): void {
     this.currentPage = page;
     this.updatePaginatedData();
+  }
+
+  selectStory(user: IStoryInformation): void {
+    this.previewVisible = !this.previewVisible;
+    console.log(this.previewVisible);
+    this.selectedStory = user
+  }
+
+  handleVisible(value: boolean) {
+    this.previewVisible = value;
   }
 }

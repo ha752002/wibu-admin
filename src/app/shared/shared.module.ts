@@ -5,6 +5,7 @@ import { InputFieldComponent } from './components/input-field/input-field.compon
 import { OpenFormComponent } from './components/open-form/open-form.component';
 import { OpenModalComponent } from './components/open-modal/open-modal.component';
 import { StoryListComponent } from './components/story-list/story-list.component';
+import { PreviewTheStoryComponent } from './components/preview-the-story/preview-the-story.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -13,6 +14,7 @@ const COMPONENTS = [
   OpenFormComponent,
   OpenModalComponent,
   StoryListComponent,
+  PreviewTheStoryComponent,
 ];
 
 @NgModule({
@@ -22,8 +24,6 @@ const COMPONENTS = [
   exports: [
     COMPONENTS
   ],
-
-
 
 })
 export class SharedModule {

@@ -1,13 +1,16 @@
 <div class="list-grid">
-    <nz-list [nzDataSource]="paginatedData" [nzRenderItem]="itemTemplate" [nzGrid]="{gutter: 16, span: 3}">
-        <ng-template #itemTemplate let-item>
-          <nz-list-item>
-              <img [src]="item.thumbnail" alt="Thumbnail" >
-              <p class="name">{{ item.name }}</p>
-              <p>{{ item.author }}</p>
-              
-          </nz-list-item>
-        </ng-template>
-      </nz-list>
-      <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="storyData.length" [nzPageSize]="pageSize" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+  <nz-list [nzDataSource]="paginatedData" [nzRenderItem]="itemTemplate" [nzGrid]="{gutter: 16, span: rowSize}">
+    <ng-template #itemTemplate let-item>
+      <nz-list-item (click)="selectStory(item)">
+        <img [src]="item.thumbnail" alt="Thumbnail">
+        <p class="name">{{ item.name }}</p>
+        <p>{{ item.author }}</p>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+  <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="storyData.length" [nzPageSize]="pageSize"
+    (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
 </div>
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+  <app-preview-the-story [storyData]="selectedStory"></app-preview-the-story>
+</app-open-modal>

@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IStoryInformation } from '@app/modules/admin/modules/manga-management/manga-management.component';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
+import { ListTableComponent } from './components/list-table/list-table.component';
+
+export type viewType = 'grid' | 'table' ;
 
 @Component({
   selector: 'app-story-list',
@@ -9,12 +12,15 @@ import { ListGridComponent } from './components/list-grid/list-grid.component';
   imports: [
     CommonModule,
     ListGridComponent,
+    ListTableComponent,
   ],
   templateUrl: './story-list.component.html',
   styleUrl: './story-list.component.scss'
 })
 export class StoryListComponent {
   @Input() storyData: IStoryInformation[] = [];
+  @Input() rowSize: 3 | 4 | 5 = 3;
+  @Input() viewType: viewType = 'grid';
 
 
   story: IStoryInformation[] = [

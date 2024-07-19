@@ -17,7 +17,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.updateTitle();
     console.log(this.titles);
-    this.titles.push('Intro');
     this.titles.push('Story Posted');
 
   }

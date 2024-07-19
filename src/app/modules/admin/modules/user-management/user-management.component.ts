@@ -30,6 +30,7 @@ export class UserManagementComponent {
       email: 'nguyenvana@example.com',
       phone: '0123456789',
       dateOfBirth: new Date('1990-01-01'),
+      intro: 'Hello! I am Minh, a tech enthusiast and avid reader who loves diving into captivating stories. It’s great to meet you!',
       postedStories: 5,
       followStory: 10,
       followers: 200,
@@ -45,6 +46,8 @@ export class UserManagementComponent {
       email: 'nguyenvana@example.com',
       phone: '0123456789',
       dateOfBirth: new Date('1990-01-01'),
+      intro: 'Hi there! I’m ha, a graphic designer with a passion for creativity and a love for reading fascinating tales. I hope we can share and discover many interesting stories together!',
+
       postedStories: 5,
       followStory: 10,
       followers: 200,

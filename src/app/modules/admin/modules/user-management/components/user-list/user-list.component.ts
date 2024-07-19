@@ -10,8 +10,8 @@ export class UserListComponent {
   @Input() listOfData?: IUser[] = [];
 
   previewVisible = false;
-  selectedUser: IUser ={}
-  selectUser(user : IUser) : void{
+  selectedUser: IUser = {};
+  selectUser(user: IUser): void {
     this.previewVisible = !this.previewVisible;
     console.log(this.previewVisible);
     this.selectedUser = user

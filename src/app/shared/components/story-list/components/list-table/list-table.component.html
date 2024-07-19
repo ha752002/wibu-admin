@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td class="Thumbnail"><img [src]="data.thumbnail" alt="Thumbnail" class=""></td>
+        <td class="Thumbnail"><img [src]="data.thumbnail" alt="Thumbnail" class="" (click)="selectStory(data)"></td>
         <td>{{ data.name }}</td>
         <td>{{ data.author }}</td>
         <td>{{ data.translator }}</td>
@@ -33,4 +33,7 @@
       </tr>
     </tbody>
   </nz-table>
+  <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <app-preview-the-story [storyData]="selectedStory"></app-preview-the-story>
+  </app-open-modal>
   
