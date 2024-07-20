@@ -1,0 +1,14 @@
+<div class="drag-drop-container" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)">
+  <div *ngIf="imagePreviews.length === 0" class="title">Drag and drop files or folders here</div>
+
+      <div *ngFor="let image of imagePreviews; let i = index" class="item-img">
+        <app-img [url]="image" [imgType]="'square'" [padding]="true" [shadow]="true" [size]="size"></app-img>
+        <div class="close" (click)="removeImage(i)">
+          <ts-icon [name]="'close'"></ts-icon>
+        </div>
+      </div>
+  <!-- <button (click)="uploadImages()" nz-button nzType="primary">Upload Images</button> -->
+</div>
+<!-- <input type="file" id="fileInput" style="display: none" (change)="onFileChange($event)" multiple webkitdirectory> -->
+

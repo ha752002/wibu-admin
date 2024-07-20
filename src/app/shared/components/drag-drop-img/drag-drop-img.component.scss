@@ -1,0 +1,63 @@
+.drag-drop-container {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  background-color: #f9f9f9;
+  padding: 24px;
+  position: relative;
+
+  &.drag-over {
+    border-color: #4a90e2; // Blue border when dragging over
+    background-color: #9bdfffb2; // Light blue background when dragging over
+  }
+
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .item-img {
+    position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .close {
+    padding: 4px;
+    border-radius: 50%;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: rgb(255, 75, 75);
+      color: white;
+      transition: 0.2s;
+    }
+
+  }
+}
+
+
+// .drag-drop-container.drag-over {
+//   border-color: #000;
+//   background-color: #e0e0e0;
+// }
+
+.drag-drop-container p {
+  margin: 0;
+}

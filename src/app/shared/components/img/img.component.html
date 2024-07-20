@@ -1,0 +1,12 @@
+<div [ngClass]="[
+    'img-container',
+    imgType,
+    size,
+    padding ? 'padding' : '',
+    shadow ? 'shadow' : ''
+    ]">
+    <div class="content">
+        <img [src]="url" alt="Image" />
+
+    </div>
+</div>
