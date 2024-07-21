@@ -3,6 +3,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
 
+export interface IImagePreview {
+  name?: string;
+  url?: string
+}
+
 @Component({
   selector: 'app-drag-drop-img',
   standalone: true,
@@ -20,15 +25,13 @@ export class DragDropImgComponent {
   @Output() imagesSelected = new EventEmitter<File[]>();
 
   imageFiles: File[] = [];
-  imagePreviews: string[] = [];
+  imagePreviews: IImagePreview[] = [];
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
     const element = event.target as HTMLElement;
     element.classList.add('drag-over');
-    console.log('add');
-    
   }
 
   onDragLeave(event: DragEvent) {
@@ -36,8 +39,6 @@ export class DragDropImgComponent {
     event.stopPropagation();
     const element = event.target as HTMLElement;
     element.classList.remove('drag-over');
-    console.log('remove');
-
   }
 
   onDrop(event: DragEvent) {
@@ -45,8 +46,6 @@ export class DragDropImgComponent {
     event.stopPropagation();
     const element = event.target as HTMLElement;
     element.classList.remove('drag-over');
-    console.log('remove');
-
 
     const items = event.dataTransfer?.items;
     if (items) {
@@ -63,8 +62,7 @@ export class DragDropImgComponent {
       }
     }
     Promise.all(promises).then(() => {
-      this.updateImagePreviews();
-      this.imagesSelected.emit(this.imageFiles);
+      this.sortAndPreviewImages();
     });
   }
 
@@ -90,7 +88,7 @@ export class DragDropImgComponent {
   removeImage(index: number) {
     this.imagePreviews.splice(index, 1);
     this.imageFiles.splice(index, 1);
-    this.imagesSelected.emit(this.imageFiles);
+    this.sortAndPreviewImages();
   }
 
   openFolder() {
@@ -112,25 +110,36 @@ export class DragDropImgComponent {
         this.imageFiles.push(file);
       }
     }
+    this.sortAndPreviewImages();
+  }
+
+  sortAndPreviewImages() {
+    this.imageFiles.sort((a, b) => {
+      const aName = this.extractNumberFromName(a.name);
+      const bName = this.extractNumberFromName(b.name);
+      return aName - bName;
+    });
     this.updateImagePreviews();
     this.imagesSelected.emit(this.imageFiles);
   }
 
+  extractNumberFromName(name: string): number {
+    const match = name.match(/(\d+)/);
+    return match ? parseInt(match[0], 10) : 0;
+  }
+
   updateImagePreviews() {
-    this.imagePreviews = this.imageFiles.map(file => URL.createObjectURL(file));
+    this.imagePreviews = this.imageFiles.map(file => ({
+      name: file.name,
+      url: URL.createObjectURL(file)
+    }));
   }
 
   uploadImages() {
     this.imagesSelected.emit(this.imageFiles);
 
     this.imageFiles.forEach(file => {
-      // this.uploadService.uploadImage(file).subscribe(response => {
-      //   console.log('Upload successful', response);
-      // }, error => {
-      //   console.error('Upload failed', error);
-      // });
       console.log(file.name);
-
     });
   }
 }

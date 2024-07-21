@@ -1,7 +1,14 @@
+.title {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
 .drag-drop-container {
   width: 100%;
-  height: 100%;
   min-height: 200px;
+  max-height: 350px;
+  overflow-y: auto;
   border: 2px dashed #ccc;
   display: flex;
   flex-direction: row;
@@ -25,11 +32,10 @@
 
   .item-img {
     position: relative;
+    display: flex;
+    flex-direction: column;
 
-    img {
-      width: 100%;
-      height: auto;
-    }
+    
   }
 
   .close {
@@ -52,11 +58,6 @@
   }
 }
 
-
-// .drag-drop-container.drag-over {
-//   border-color: #000;
-//   background-color: #e0e0e0;
-// }
 
 .drag-drop-container p {
   margin: 0;

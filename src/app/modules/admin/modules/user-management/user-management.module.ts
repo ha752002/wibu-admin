@@ -27,6 +27,7 @@ import { ItemInformationComponent } from '@app/shared/components/item-informatio
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { StoryListComponent } from '@app/shared/components/story-list/story-list.component';
 import { UserProfileComponent } from './components/user-list/components/user/components/user-profile/user-profile.component';
+import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { UserProfileComponent } from './components/user-list/components/user/com
     OpenModalComponent,
     DragDropModule,
     StoryListComponent,
+    DragDropImgComponent,
   ]
 })
 export class UserManagementModule {

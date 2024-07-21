@@ -11,6 +11,7 @@
                 <app-add-story-form *ngSwitchCase="'add story'"></app-add-story-form>
                 <app-edit-story-form *ngSwitchCase="'edit story'" [id]="id" [img]="img"></app-edit-story-form>
                 <app-delete-form *ngSwitchCase="'delete'" [id]="id" [delete]="delete"></app-delete-form>
+                <app-add-chapter-form *ngSwitchCase="'add chapter'"></app-add-chapter-form>
             </ng-container>
         </ng-container>
     </div>

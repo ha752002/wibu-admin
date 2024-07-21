@@ -1,12 +1,21 @@
-<div [ngClass]="[
+<div class="container">
+    <div (click)="selectImg()" [ngClass]="[
     'img-container',
     imgType,
     size,
     padding ? 'padding' : '',
     shadow ? 'shadow' : ''
     ]">
-    <div class="content">
-        <img [src]="url" alt="Image" />
-
+        <div class="content">
+            <img [src]="url" alt="Image" />
+        </div>
     </div>
+
+    <div *ngIf="name !== '' " class="name-img">{{name}}</div>
 </div>
+
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <div class="preview">
+        <img [src]="url" alt="">
+    </div>
+</app-open-modal>

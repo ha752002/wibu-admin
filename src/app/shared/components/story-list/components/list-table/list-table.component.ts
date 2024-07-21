@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IStoryInformation } from '@app/modules/admin/modules/manga-management/manga-management.component';
+import { IStoryInformation } from '@app/modules/admin/modules/story/story.component';
 import { OpenFormComponent } from '@app/shared/components/open-form/open-form.component';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { PreviewTheStoryComponent } from '@app/shared/components/preview-the-story/preview-the-story.component';

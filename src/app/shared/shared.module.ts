@@ -6,6 +6,8 @@ import { OpenFormComponent } from './components/open-form/open-form.component';
 import { OpenModalComponent } from './components/open-modal/open-modal.component';
 import { StoryListComponent } from './components/story-list/story-list.component';
 import { PreviewTheStoryComponent } from './components/preview-the-story/preview-the-story.component';
+import { DragDropImgComponent } from './components/drag-drop-img/drag-drop-img.component';
+import { ImgComponent } from './components/img/img.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -15,6 +17,8 @@ const COMPONENTS = [
   OpenModalComponent,
   StoryListComponent,
   PreviewTheStoryComponent,
+  DragDropImgComponent,
+  ImgComponent
 ];
 
 @NgModule({
@@ -24,7 +28,6 @@ const COMPONENTS = [
   exports: [
     COMPONENTS
   ],
-
 })
 export class SharedModule {
 }

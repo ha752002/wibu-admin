@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IStoryInformation } from '@app/modules/admin/modules/manga-management/manga-management.component';
+import { IStoryInformation } from '@app/modules/admin/modules/story/story.component';
 
 @Component({
   selector: 'app-user-profile',

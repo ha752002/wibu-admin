@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IStoryInformation } from '@app/modules/admin/modules/manga-management/manga-management.component';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
+import { IStoryInformation } from '@app/modules/admin/modules/story/story.component';
 
 export type viewType = 'grid' | 'table' ;
 

@@ -10,6 +10,7 @@ import { DeleteFormComponent } from './components/delete-form/delete-form.compon
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconComponent } from '../icon/icon.component';
 import { IconNameTypes } from '../icon/icon.types';
+import { AddChapterFormComponent } from './components/add-chapter-form/add-chapter-form.component';
 
 @Component({
   selector: 'app-open-form',
@@ -22,7 +23,8 @@ import { IconNameTypes } from '../icon/icon.types';
     EditUserFormComponent,
     AddStoryFormComponent,
     EditStoryFormComponent,
-    DeleteFormComponent
+    DeleteFormComponent,
+    AddChapterFormComponent
   ],
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'

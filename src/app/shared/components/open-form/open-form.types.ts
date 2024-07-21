@@ -3,4 +3,5 @@ export type formNameTypes =
   | 'edit user'
   | 'add story'
   | 'edit story'
-  | 'delete';
+  | 'delete'
+  | 'add chapter';

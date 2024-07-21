@@ -1,21 +1,6 @@
 import { Component } from '@angular/core';
 import { viewType } from '@app/shared/components/story-list/story-list.component';
-
-export interface IStoryInformation {
-  id?: number;
-  thumbnail?: string;
-  name?: string;
-  genres?: IGenre[],
-  author?: string;
-  translator?: string;
-  views?: number;
-  chapter?: number;
-  introduce?: string;
-  status?: statusType;
-  created?: Date;
-  update?: Date;
-}
-
+import { IStoryInformation } from '../story/story.component';
 
 export interface IGenre {
   genre?: string,
@@ -29,7 +14,6 @@ export interface ImangaFilter {
   chapterNumber?: string,
 }
 
-export type statusType = 'Updating' | 'Halt' | 'Full';
 
 
 @Component({
