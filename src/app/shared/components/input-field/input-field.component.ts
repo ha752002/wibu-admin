@@ -24,7 +24,6 @@ export class InputFieldComponent implements OnInit {
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 
   passwordVisible = false;
-  // listOfOption: Array<{ label: string; value: string }> = [];
   ngOnInit(): void {
     
     

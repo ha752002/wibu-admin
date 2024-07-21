@@ -84,11 +84,7 @@ export class UploadImgComponent implements OnInit{
   }
 
   handleChange(info: { file: NzUploadFile }): void {
-    // if (info.file.status === 'done') {
-    // console.log(this.previewImage);
     this.thumbnailChange.emit(this.fileList);
-
-    // }
   }
 
 }

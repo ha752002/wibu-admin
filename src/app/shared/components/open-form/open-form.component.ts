@@ -48,7 +48,7 @@ export class OpenFormComponent {
   }
 
   blockFormClosing(event: MouseEvent) {
-    event.stopPropagation(); // Ngăn chặn sự kiện lan truyền lên thẻ cha
+    event.stopPropagation(); 
     console.log('Child clicked');
   }
 }

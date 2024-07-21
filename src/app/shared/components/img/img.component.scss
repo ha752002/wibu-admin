@@ -23,9 +23,8 @@
   align-items: center;
   background-color: rgb(240, 240, 240);
 
-  // Default padding when padding is enabled
   &.padding {
-    padding: 0; // Default padding is 0, will be overridden by size classes
+    padding: 0; 
   }
 
   &.square {
@@ -44,7 +43,7 @@
     width: 100px;
 
     &.padding {
-      padding: 8px; // Padding for small size
+      padding: 8px; 
     }
   }
 
@@ -52,7 +51,7 @@
     width: 150px;
 
     &.padding {
-      padding: 18px; // Padding for medium size
+      padding: 18px; 
     }
   }
 
@@ -60,7 +59,7 @@
     width: 200px;
 
     &.padding {
-      padding: 24px; // Padding for large size
+      padding: 24px; 
     }
   }
 
@@ -90,8 +89,7 @@
 }
 
 .preview {
-  // height: 80%;
-  // width: 60%;
+
   margin: 24px;
   max-width: 788px;
   overflow: hidden;

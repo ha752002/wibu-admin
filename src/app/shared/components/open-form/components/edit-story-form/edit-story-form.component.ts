@@ -24,7 +24,6 @@ export class EditStoryFormComponent implements OnInit{
 
 
   story: ICreateStory = {
-    // thumbnail: this.img,
     name: 'Triệu Hồi Đến Thế Giới Fantasy',
 
   };

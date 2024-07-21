@@ -10,8 +10,6 @@ export interface ICreateStory {
   name?: string;
   author?: string;
   translator?: string;
-  // views?: number;
-  // chapter?: number;
   introduce?: string;
   status?: statusType;
   created?: Date;
