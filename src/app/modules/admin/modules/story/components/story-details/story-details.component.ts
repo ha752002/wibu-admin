@@ -1,12 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IStoryInformation } from '../../story.component';
+import { ActivatedRoute ,Router } from '@angular/router';
 
 @Component({
   selector: 'app-story-details',
   templateUrl: './story-details.component.html',
   styleUrl: './story-details.component.scss'
 })
-export class StoryDetailsComponent {
+export class StoryDetailsComponent implements OnInit{
   @Input() storyData?: IStoryInformation = {
     id: 1,
     thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
@@ -39,5 +40,21 @@ export class StoryDetailsComponent {
     created: new Date(-10),
     update: new Date(),
   };
+
+  constructor(private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (this.storyData) {
+        this.storyData.id = +params['id'];
+      }
+    });
+  }
+
+  navigateToChapter( chapterId?: number) {
+    if(this.storyData?.id){
+      this.router.navigate([`admin/story/${this.storyData.id}/chapter/${chapterId}`]);
+    }
+  }
 
 }

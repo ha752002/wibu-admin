@@ -9,6 +9,7 @@
             <p>Translator : {{storyData?.translator}}</p>
             <p>Views: {{storyData?.views}}</p>
             <p>Chapter: {{storyData?.chapter}}</p>
+            <p>Chapter: {{storyData?.id}}</p>
         </div>
         <div>
             <p class="title">Genre : </p>
@@ -28,7 +29,7 @@
         <p >chapter : {{storyData?.chapters?.length}}</p>
         <app-open-form formName="add chapter"></app-open-form>
     </div>
-    <div class="item-chapter" *ngFor="let chapter of storyData?.chapters">
+    <div class="item-chapter" *ngFor="let chapter of storyData?.chapters" (click)="navigateToChapter(chapter?.id)">
         {{chapter.name}}
     </div>
 </div>
