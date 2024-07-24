@@ -8,6 +8,7 @@ import { StoryListComponent } from './components/story-list/story-list.component
 import { PreviewTheStoryComponent } from './components/preview-the-story/preview-the-story.component';
 import { DragDropImgComponent } from './components/drag-drop-img/drag-drop-img.component';
 import { ImgComponent } from './components/img/img.component';
+import { GenreSelectorComponent } from './components/genre-selector/genre-selector.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -18,7 +19,8 @@ const COMPONENTS = [
   StoryListComponent,
   PreviewTheStoryComponent,
   DragDropImgComponent,
-  ImgComponent
+  ImgComponent,
+  GenreSelectorComponent
 ];
 
 @NgModule({

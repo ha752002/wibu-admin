@@ -3,7 +3,8 @@
 
 <form nz-form (ngSubmit)="onSubmit($event)">
     <div class="upload-img">
-        <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1" size="size-l" [img]="img"></app-upload-img>
+        <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1" size="size-l"
+            [img]="img"></app-upload-img>
         <div class="url-img">
             <p>Url image :</p>
             <a [href]="story.thumbnail " *ngIf="story.thumbnail !== ''">{{story.thumbnail }}</a>
@@ -24,6 +25,14 @@
                 (valueChange)="onFieldValueChange('introduce', $event)" [required]="true">
             </app-input-field>
 
+            <div class="add-genre" (click)="handleVisible(true)">
+                <p>genre</p>
+                <ul>
+                    <li *ngFor="let genre of story.genre">{{ genre.genre }}</li>
+                    <li>+ add</li>
+                </ul>
+            </div>
+
             <app-input-field label="translator" [(value)]="story.translator" type="text"
                 (valueChange)="onFieldValueChange('translator', $event)">
             </app-input-field>
@@ -39,3 +48,7 @@
         </div>
     </div>
 </form>
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <app-genre-selector [inGenresSelected]="story.genre"
+        (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
+</app-open-modal>

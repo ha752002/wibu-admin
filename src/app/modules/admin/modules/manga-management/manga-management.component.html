@@ -6,7 +6,7 @@
         <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
         
         <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
-        placeholder="select genre"  [optionValue]="userTypeList">
+        placeholder="select genre"  [optionValue]="genreNames">
         </app-input-field>
         <app-input-field [(value)]="filter.chapterNumber" type="text" (valueChange)="onFieldValueChange('chapterNumber', $event)"
         placeholder="select chapter number" [optionValue]="teamList">

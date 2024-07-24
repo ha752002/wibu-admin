@@ -1,0 +1,17 @@
+<div class="genres">
+    <h3>Select Genres:</h3>
+    <div>
+        <div class="group-genre">
+            <div class="item" *ngFor="let genre of genres" (click)="toggleGenre(genre)"
+                [class.selected]="isSelected(genre)">
+                <div>
+                    <strong>{{ genre.genre }}</strong>
+                    <p>{{ genre.describe }}</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</div>

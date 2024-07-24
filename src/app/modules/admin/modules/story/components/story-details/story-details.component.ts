@@ -57,4 +57,8 @@ export class StoryDetailsComponent implements OnInit{
     }
   }
 
+  navigateToMangaWithId(genreId: string) {
+    this.router.navigate(['admin/manga/', genreId]);
+  }
+
 }

@@ -2,9 +2,11 @@
   <nz-list [nzDataSource]="paginatedData" [nzRenderItem]="itemTemplate" [nzGrid]="{gutter: 16, span: rowSize}">
     <ng-template #itemTemplate let-item>
       <nz-list-item (click)="selectStory(item)">
+        <div class="item">
         <img [src]="item.thumbnail" alt="Thumbnail">
         <p class="name">{{ item.name }}</p>
         <p>{{ item.author }}</p>
+        </div>
       </nz-list-item>
     </ng-template>
   </nz-list>

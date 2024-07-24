@@ -19,7 +19,7 @@ export interface IStoryInformation {
 
 export interface IGenre {
   id?: number;
-  genre?: string,
+  genre: string,
   AgeWarning?: boolean,
   describe?: string,
 }

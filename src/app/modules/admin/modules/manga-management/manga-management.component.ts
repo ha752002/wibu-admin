@@ -1,12 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { viewType } from '@app/shared/components/story-list/story-list.component';
-import { IStoryInformation } from '../story/story.component';
-
-export interface IGenre {
-  genre?: string,
-  AgeWarning?: boolean,
-  describe?: string,
-}
+import { IGenre, IStoryInformation } from '../story/story.component';
+import { ActivatedRoute } from '@angular/router';
 
 export interface ImangaFilter {
   search?: string,
@@ -21,8 +16,7 @@ export interface ImangaFilter {
   templateUrl: './manga-management.component.html',
   styleUrl: './manga-management.component.scss'
 })
-export class MangaManagementComponent {
-
+export class MangaManagementComponent implements OnInit{
 
   filter: ImangaFilter = {
     search: '',
@@ -30,7 +24,7 @@ export class MangaManagementComponent {
     chapterNumber: '',
   }
 
-  userTypeList: string[] = ['All', 'user', 'admin', 'management'];
+  genreNames: string[] = [];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
   viewType: viewType = "grid"
 
@@ -191,8 +185,23 @@ export class MangaManagementComponent {
     { genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
   ];
 
-  onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {
+  constructor(private route: ActivatedRoute) { }
 
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      if (params['genreId'] != null) {
+        this.filter.genre = params['genreId'];
+        console.log(this.filter.genre);
+        
+      } else {
+        console.log('No manga ID provided');
+      }
+      console.log(this.filter.genre);
+    });
+    this.genreNames = this.genre.map(g => g.genre);
+  }
+
+  onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {
     console.log(this.filter);
   }
 
@@ -201,9 +210,7 @@ export class MangaManagementComponent {
       this.viewType = 'grid'
     } else {
       this.viewType = 'table'
-
     }
-
     console.log(this.viewType);
 
   }

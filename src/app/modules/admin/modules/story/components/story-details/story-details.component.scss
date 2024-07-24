@@ -28,6 +28,7 @@
                 border-radius: 100px;
                 background-color: #f38990;
                 color: white;
+                cursor: pointer;
             }
         }
 
@@ -57,7 +58,7 @@
     .item-chapter{
         padding: 6px 24px;
         transition: 0.2s;
-
+        cursor: pointer;
         &:hover{
             background-color: #f38990;
             color: white;

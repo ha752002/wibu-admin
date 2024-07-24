@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { IChapter } from '@app/modules/admin/modules/story/story.component';
+import { Component, Input, OnInit } from '@angular/core';
+import { IChapter, IStoryInformation } from '@app/modules/admin/modules/story/story.component';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
@@ -19,8 +19,20 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   templateUrl: './add-chapter-form.component.html',
   styleUrl: './add-chapter-form.component.scss'
 })
-export class AddChapterFormComponent {
+export class AddChapterFormComponent implements OnInit {
   chapter: IChapter = {}
+  @Input() storyData?: IStoryInformation = {}
+
+  ngOnInit(): void {
+    this.chapter.name = this.getLastChapter()?.name;
+  }
+
+  getLastChapter(): IChapter | undefined {
+    if (this.storyData?.chapters && this.storyData.chapters.length > 0) {
+      return this.storyData.chapters[this.storyData.chapters.length - 1];
+    }
+    return undefined;
+  }
 
   onImagesSelected(images: File[]) {
     this.chapter.image = images.map(file => URL.createObjectURL(file));
@@ -31,7 +43,7 @@ export class AddChapterFormComponent {
     console.log('Form submitted:', this.chapter);
   }
 
-    onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
     console.log(this.chapter);
   }
 }

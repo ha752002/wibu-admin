@@ -27,13 +27,13 @@ form {
 
             }
 
-            .empty{
+            .empty {
                 color: gray;
             }
         }
     }
 
-    .story{
+    .story {
         display: flex;
         flex-direction: column;
         gap: 24px;
@@ -41,8 +41,33 @@ form {
         .basic {
             display: grid;
             gap: 6px 20px;
+
+            .add-genre {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                gap: 12px;
+                text-align: left;
+                cursor: pointer;
+
+                ul {
+                    display: flex;
+                    gap: 6px 12px;
+                    list-style-type: none;
+                    font-size: x-small;
+                    color: white;
+                    flex-wrap: wrap;
+                    width: 360px;
+
+                    li {
+                        padding: 2px 12px;
+                        border-radius: 100px;
+                        background-color: #f38990;
+                    }
+                }
+            }
         }
-    
+
         .group-button {
             display: flex;
             justify-content: right;

@@ -46,10 +46,10 @@ export class ListGridComponent {
     this.updatePaginatedData();
   }
 
-  selectStory(user: IStoryInformation): void {
+  selectStory(story: IStoryInformation): void {
     this.previewVisible = !this.previewVisible;
     console.log(this.previewVisible);
-    this.selectedStory = user
+    this.selectedStory = story
   }
 
   handleVisible(value: boolean) {

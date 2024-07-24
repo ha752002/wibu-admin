@@ -18,12 +18,9 @@ export type viewType = 'grid' | 'table' ;
   styleUrl: './story-list.component.scss'
 })
 export class StoryListComponent {
-  @Input() storyData: IStoryInformation[] = [];
   @Input() rowSize: 3 | 4 | 5 = 3;
   @Input() viewType: viewType = 'grid';
-
-
-  story: IStoryInformation[] = [
+  @Input() storyData: IStoryInformation[] = [
     {
       id: 1,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
@@ -162,4 +159,5 @@ export class StoryListComponent {
     }
 
   ];
+
 }

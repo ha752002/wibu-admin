@@ -5,6 +5,9 @@ import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { IGenre } from '@app/modules/admin/modules/story/story.component';
+import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
+import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 
 @Component({
   standalone: true,
@@ -13,22 +16,26 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzUploadModule,
     UploadImgComponent,
     InputFieldComponent,
-    NzButtonModule],
+    NzButtonModule,
+    OpenModalComponent,
+    GenreSelectorComponent
+  ],
   selector: 'app-edit-story-form',
   templateUrl: './edit-story-form.component.html',
   styleUrl: './edit-story-form.component.scss'
 })
-export class EditStoryFormComponent implements OnInit{
+export class EditStoryFormComponent implements OnInit {
   @Input() id?: number;
   @Input() img?: string;
 
 
   story: ICreateStory = {
     name: 'Triệu Hồi Đến Thế Giới Fantasy',
-
+    genre: [{genre: 'ksssksk'}]
   };
 
-  status: string[] = ['Updating','Halt','Full'];
+  status: string[] = ['Updating', 'Halt', 'Full'];
+  previewVisible = false;
 
   ngOnInit(): void {
     if (this.img) {
@@ -50,5 +57,13 @@ export class EditStoryFormComponent implements OnInit{
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
     console.log(this.story);
+  }
+
+  handleVisible(value: boolean) {
+    this.previewVisible = value;
+  }
+
+  onGenresSelected(genres: IGenre[]) {
+    this.story.genre = genres;
   }
 }

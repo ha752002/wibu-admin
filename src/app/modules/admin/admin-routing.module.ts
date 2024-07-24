@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/manga-management/manga-management.module').then(module => module.MangaManagementModule)
       },
       {
+        path: 'manga/:genreId',
+        loadChildren: () => import('./modules/manga-management/manga-management.module').then(module => module.MangaManagementModule)
+      },
+      {
         path: 'user',
         loadChildren: () => import('./modules/user-management/user-management.module').then(module => module.UserManagementModule)
       },
