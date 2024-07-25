@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IGenre } from '@app/modules/admin/modules/story/story.component';
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
@@ -38,7 +38,9 @@ export type statusType = 'Updating' | 'Halt' | 'Full';
   templateUrl: './add-story-form.component.html',
   styleUrl: './add-story-form.component.scss'
 })
-export class AddStoryFormComponent {
+export class AddStoryFormComponent implements OnInit{
+  @Input() genre: IGenre[] = [];
+
   story: ICreateStory = {
     thumbnail: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg',
     genre:[]
@@ -47,6 +49,9 @@ export class AddStoryFormComponent {
   // selectedGenres: IGenre[] = [];
   previewVisible = false;
 
+  ngOnInit(): void {
+    this.story.genre = this.genre
+  }
 
   receiveThumbnail(thumbnailUrl: NzUploadFile[]): void {
     if (thumbnailUrl.length === 1) {

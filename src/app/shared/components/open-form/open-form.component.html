@@ -1,17 +1,26 @@
 <button (click)="openForm()" nz-button nzType="primary" [ngClass]="buttonType">
     <ts-icon [name]="icon"></ts-icon>
-    {{ formName }}
+    <p *ngIf="label">{{ formName }}</p>
 </button>
 <div class="container" *ngIf="currentForm === formName" (click)="closeForm()">
     <div class="content" (click)="blockFormClosing($event)">
         <ng-container *ngIf="currentForm === formName">
             <ng-container [ngSwitch]="formName">
+
                 <app-add-user-form *ngSwitchCase="'add user'"></app-add-user-form>
-                <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
-                <app-add-story-form *ngSwitchCase="'add story'"></app-add-story-form>
-                <app-edit-story-form *ngSwitchCase="'edit story'" [id]="id" [img]="img"></app-edit-story-form>
-                <app-delete-form *ngSwitchCase="'delete'" [id]="id" [delete]="delete"></app-delete-form>
+                <app-add-story-form *ngSwitchCase="'add story'" [genre]="genre"></app-add-story-form>
                 <app-add-chapter-form *ngSwitchCase="'add chapter'" [storyData]="data"></app-add-chapter-form>
+                <app-add-genre-form *ngSwitchCase="'add genre'"></app-add-genre-form>
+                <app-add-author-form *ngSwitchCase="'add author'"></app-add-author-form>
+
+                <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
+                <app-edit-story-form *ngSwitchCase="'edit story'" [id]="id" [img]="img"></app-edit-story-form>
+                <app-edit-chapter-form *ngSwitchCase="'edit chapter'"></app-edit-chapter-form>
+                <app-edit-genre-form *ngSwitchCase="'edit genre'" [id]="id" ></app-edit-genre-form>
+                <app-edit-author-form *ngSwitchCase="'edit author'"></app-edit-author-form>
+                
+                <app-delete-form *ngSwitchCase="'delete'" [id]="id" [delete]="delete"></app-delete-form>
+
             </ng-container>
         </ng-container>
     </div>

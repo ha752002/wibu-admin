@@ -11,7 +11,12 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconComponent } from '../icon/icon.component';
 import { IconNameTypes } from '../icon/icon.types';
 import { AddChapterFormComponent } from './components/add-chapter-form/add-chapter-form.component';
-import { IChapter } from '@app/modules/admin/modules/story/story.component';
+import { IChapter, IGenre } from '@app/modules/admin/modules/story/story.component';
+import { AddAuthorFormComponent } from './components/add-author-form/add-author-form.component';
+import { AddGenreFormComponent } from './components/add-genre-form/add-genre-form.component';
+import { EditGenreFormComponent } from './components/edit-genre-form/edit-genre-form.component';
+import { EditAuthorFormComponent } from './components/edit-author-form/edit-author-form.component';
+import { EditChapterFormComponent } from './components/edit-chapter-form/edit-chapter-form.component';
 
 @Component({
   selector: 'app-open-form',
@@ -26,19 +31,26 @@ import { IChapter } from '@app/modules/admin/modules/story/story.component';
     EditStoryFormComponent,
     DeleteFormComponent,
     AddChapterFormComponent,
+    AddAuthorFormComponent,
+    AddGenreFormComponent,
+    EditGenreFormComponent,
+    EditAuthorFormComponent,
+    EditChapterFormComponent
   ],
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
 })
 export class OpenFormComponent {
   @Input() formName: formNameTypes = 'add story';
+  @Input() label: boolean = true;
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
   @Input() id?: number;
   @Input() img?: string;
-  @Input() data?: ICreateStory | IChapter | IUpdateUser;
-  @Input() delete: 'user' | 'story' = 'user';
+  @Input() data?: ICreateStory | IChapter | IUpdateUser |IGenre;
+  @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
+  @Input() genre: IGenre[] =[];
 
   openForm() {
     console.log(this.formName);

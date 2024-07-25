@@ -1,0 +1,12 @@
+<div class="library">
+    <div >
+        <ul class="title">
+            <li *ngFor="let content of contents" (click)="changeContent(content)" [ngClass]="{'select': contentLibrary === content}">{{content}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <app-genre-list *ngIf="contentLibrary === 'genre'"></app-genre-list>
+        <app-author-list *ngIf="contentLibrary === 'author'"></app-author-list>
+    </div>
+    
+</div>

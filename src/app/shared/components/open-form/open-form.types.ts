@@ -1,7 +1,13 @@
 export type formNameTypes =
   | 'add user'
-  | 'edit user'
   | 'add story'
+  | 'add chapter'
+  | 'add author'
+  | 'add genre'
+  | 'edit user'
   | 'edit story'
+  | 'edit chapter'
+  | 'edit author'
+  | 'edit genre'
   | 'delete'
-  | 'add chapter';
+  ;

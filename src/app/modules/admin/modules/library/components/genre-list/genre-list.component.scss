@@ -1,0 +1,70 @@
+.genres {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .tool {
+            display: flex;
+            gap: 12px;
+        }
+    }
+
+    .group-genre {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 6px;
+
+        .item {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 24.6%;
+            position: relative;
+
+            .form-group {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                display: none;
+
+                gap: 4px;
+            }
+
+            .content {
+                padding: 5px;
+
+                strong {
+                    cursor: pointer;
+                    &:hover{
+                        color: #007bff;
+                    }
+                }
+
+            }
+
+            &.selectMode {
+                cursor: pointer;
+            }
+
+            &.selected .content {
+
+                background-color: #007bff;
+                color: white;
+            }
+
+            &:hover .form-group {
+                display: flex;
+            }
+
+        }
+    }
+}
