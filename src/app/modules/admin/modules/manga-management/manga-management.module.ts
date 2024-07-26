@@ -13,6 +13,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { StoryListComponent } from '@app/shared/components/story-list/story-list.component';
+import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
+import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { StoryListComponent } from '@app/shared/components/story-list/story-list
     NzListModule,
     NzCardModule,
     NzPaginationModule,
+    OpenModalComponent,
+    GenreSelectorComponent
   ]
 })
 export class MangaManagementModule {

@@ -5,6 +5,7 @@ import { ChapterRoutingModule } from './chapter-routing.module';
 import { ChapterComponent } from './chapter.component';
 import { ImgComponent } from '@app/shared/components/img/img.component';
 import { IconComponent } from '@app/shared/components/icon/icon.component';
+import { OpenFormComponent } from '@app/shared/components/open-form/open-form.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { IconComponent } from '@app/shared/components/icon/icon.component';
     CommonModule,
     ChapterRoutingModule,
     ImgComponent,
-    IconComponent
+    IconComponent,
+    OpenFormComponent
 
   ]
 })

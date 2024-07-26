@@ -2,6 +2,9 @@
   <div class="name-chapter">
     <p>{{ chapterData?.name }}</p>
     <div class="next-chapter">
+      <app-open-form formName="delete" [id]="chapterData?.id" [buttonType]="'danger'" [delete]="'chapter'" [icon]="'delete'"></app-open-form>
+      <app-open-form formName="edit chapter" [data]="chapterData" [icon]="'edit'"></app-open-form>
+
       <ts-icon [name]="'left'"></ts-icon>
       <ts-icon [name]="'right'"></ts-icon>
     </div>

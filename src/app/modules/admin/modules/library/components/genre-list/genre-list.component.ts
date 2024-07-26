@@ -69,6 +69,6 @@ export class GenreListComponent implements OnInit {
 
   navigateToStory() {
     const selectedGenresIds = this.selectedGenres.map(genre => genre.id); // Chỉ truyền ID
-    this.router.navigate(['admin/manga/'], { queryParams: { genres: JSON.stringify(selectedGenresIds) } });
+    this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(selectedGenresIds) } });
   }
 }

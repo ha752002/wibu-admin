@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
 
-export interface IImagePreview {
+export interface IImage {
   name?: string;
   url?: string
 }
@@ -19,13 +19,20 @@ export interface IImagePreview {
   templateUrl: './drag-drop-img.component.html',
   styleUrl: './drag-drop-img.component.scss'
 })
-export class DragDropImgComponent {
+export class DragDropImgComponent implements OnInit{
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
+  @Input() imgData: string[] = []
 
   @Output() imagesSelected = new EventEmitter<File[]>();
 
   imageFiles: File[] = [];
-  imagePreviews: IImagePreview[] = [];
+  imagePreviews: IImage[] = [];
+
+ ngOnInit(): void {
+  this.imgData.forEach((url) => {
+    this.imagePreviews.push({ url });
+  });
+ } 
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -85,7 +92,7 @@ export class DragDropImgComponent {
     });
   }
 
-  removeImage(index: number) {
+  removeImage(index: number) {    
     this.imagePreviews.splice(index, 1);
     this.imageFiles.splice(index, 1);
     this.sortAndPreviewImages();
@@ -129,10 +136,12 @@ export class DragDropImgComponent {
   }
 
   updateImagePreviews() {
-    this.imagePreviews = this.imageFiles.map(file => ({
-      name: file.name,
-      url: URL.createObjectURL(file)
-    }));
+    if(this.imageFiles.length > 0){
+      this.imagePreviews = this.imageFiles.map(file => ({
+        name: file.name,
+        url: URL.createObjectURL(file)
+      }));
+    }
   }
 
   uploadImages() {

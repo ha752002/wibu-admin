@@ -16,7 +16,7 @@ export interface ImangaFilter {
   templateUrl: './manga-management.component.html',
   styleUrl: './manga-management.component.scss'
 })
-export class MangaManagementComponent implements OnInit{
+export class MangaManagementComponent implements OnInit {
 
   filter: ImangaFilter = {
     search: '',
@@ -27,6 +27,8 @@ export class MangaManagementComponent implements OnInit{
   genreNames: string[] = [];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
   viewType: viewType = "grid"
+  multiGenreMode: boolean = false;
+  previewVisible = false;
 
   story: IStoryInformation[] = [
     {
@@ -84,7 +86,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 5,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -96,7 +98,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 6,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -108,7 +110,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 7,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -120,7 +122,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 8,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -132,7 +134,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 9,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -144,7 +146,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 10,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -156,7 +158,7 @@ export class MangaManagementComponent implements OnInit{
       status: "Updating",
       created: new Date(-10),
       update: new Date(),
-    },{
+    }, {
       id: 11,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -172,33 +174,57 @@ export class MangaManagementComponent implements OnInit{
 
   ];
 
-  genre: IGenre[] = [
-    { genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
-    { genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
-    { genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
-    { genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
-    { genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories' },
-    { genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories' },
-    { genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories' },
-    { genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales' },
-    { genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories' },
-    { genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
+  genres: IGenre[] = [
+    { id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
+    { id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
+    { id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
+    { id: 4, genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
+    { id: 5, genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories' },
+    { id: 6, genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories' },
+    { id: 7, genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories' },
+    { id: 8, genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales' },
+    { id: 9, genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories' },
+    { id: 10, genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
   ];
-
+  selectedGenres: IGenre[] = [];
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      if (params['genreId'] != null) {
-        this.filter.genre = params['genreId'];
-        console.log(this.filter.genre);
-        
+    this.getParams();
+    this.genreNames = this.genres.map(g => g.genre);
+    console.log(this.selectedGenres);
+    console.log(this.multiGenreMode);
+    console.log(this.filter.genre);
+
+  }
+
+  getParams() {
+    this.route.queryParams.subscribe(params => {
+      const genreParam = params['genreId'];
+      if (genreParam) {
+        const parsedGenres = JSON.parse(genreParam);
+        this.multiGenreMode = true;
+        this.selectedGenres = this.getGenresByIds(parsedGenres);
       } else {
-        console.log('No manga ID provided');
+        this.getGenreById()
       }
-      console.log(this.filter.genre);
     });
-    this.genreNames = this.genre.map(g => g.genre);
+  }
+
+  getGenreById() {
+    this.route.params.subscribe(params => {
+      const genreParam = params['genreId'];
+      if (genreParam) {
+        this.filter.genre = genreParam;
+      }
+    });
+  }
+
+  getGenresByIds(ids: number[]): IGenre[] {
+    if (this.genres) {
+      return this.genres.filter(genre => genre.id !== undefined && ids.includes(genre.id));
+    }
+    return [];
   }
 
   onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {
@@ -213,5 +239,24 @@ export class MangaManagementComponent implements OnInit{
     }
     console.log(this.viewType);
 
+  }
+
+  changeMultiGenreMode(Mode: boolean) {
+    if (this.multiGenreMode) {
+
+    }
+  }
+
+  handleVisible(value: boolean) {
+    this.previewVisible = value;
+  }
+
+  onGenresSelected(genres: IGenre[]) {
+    this.selectedGenres = genres;
+    if (this.selectedGenres.length == 0) {
+      this.multiGenreMode = false
+    } else{
+      this.multiGenreMode = true
+    }
   }
 }
