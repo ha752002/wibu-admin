@@ -47,7 +47,7 @@
     <p>Forgot Password</p>
   </div>
 
-  <div class="btn-sign d-flex justify-content-end">
-    <button (click)="handleSubmitSignIn()" nz-button>Sign In</button>
+  <div [class]="!loginFormGroup.invalid ? 'enable' : ''" class="btn-sign d-flex justify-content-end">
+    <button (click)="handleSubmitSignIn()" [disabled]="loginFormGroup.invalid" nz-button>Sign In</button>
   </div>
 </div>

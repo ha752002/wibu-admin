@@ -3,7 +3,7 @@ import {ApiCallerService} from "@app/core/services/api-caller.service";
 import {catchError, EMPTY, map, switchMap} from "rxjs";
 import {ActionProps, ILoginPayload, ILoginResponse} from "@app/core/store/_auth/_auth.types";
 import {authActions} from "@app/core/store/_auth/_auth.actions";
-import {IResponseTemplate} from "@app/core/type/api.types";
+import {IResponseTemplate} from "@app/core/types/api.types";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Injectable} from "@angular/core";
 import {environment} from "../../../../environments/environment";

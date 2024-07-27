@@ -4,5 +4,6 @@ export const environment = {
   authEndpoint: {
     login: 'auth/login',
     register: 'auth/register',
+    getUserInfo: 'auth/user-info',
   },
 };

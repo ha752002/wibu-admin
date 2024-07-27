@@ -147,8 +147,11 @@
     background: var(--pink14);
     color: var(--white);
   }
+}
 
-  .ant-btn:focus, .ant-btn:hover {
+
+.enable {
+  button .ant-btn:focus, .ant-btn:hover {
     border-color: var(--primary-hover);
     color: var(--primary-hover);
   }
