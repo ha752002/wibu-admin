@@ -1,0 +1,24 @@
+<p class="title">add genre</p>
+<div>
+    <form nz-form (ngSubmit)="onSubmit($event)">
+        <div class="basic">
+            <app-input-field label="Name" [(value)]="genre.genre" type="text"
+                (valueChange)="onFieldValueChange('genre', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="Phone" [(value)]="genre.describe" type="textarea"
+                (valueChange)="onFieldValueChange('describe', $event)" [required]="true">
+            </app-input-field>
+
+            <label nz-checkbox [(ngModel)]="genre.AgeWarning"
+                (ngModelChange)="onFieldValueChange('AgeWarning', $event)" name="ageWarning">
+                Age Warning
+            </label>
+            
+        </div>
+        <div class="group-button">
+            <button nz-button nzType="text" type="reset">Reset</button>
+            <button nz-button nzType="primary" type="submit" class="submit" nzDanger>Submit</button>
+        </div>
+    </form>
+</div>

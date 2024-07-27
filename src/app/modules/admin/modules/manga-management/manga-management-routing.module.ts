@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {AuthComponent} from "@app/modules/auth/auth.component";
+import { MangaManagementComponent } from './manga-management.component';
 
 const routes: Routes = [{
-  path: 'manga',
-  component: AuthComponent,
+  path: '',
+  component: MangaManagementComponent,
+  children: [] 
+
 }];
 
 

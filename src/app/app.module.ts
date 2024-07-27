@@ -8,6 +8,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { UserOutline, LockOutline } from '@ant-design/icons-angular/icons';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { provideHttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const icons: IconDefinition[] = [UserOutline, LockOutline];
@@ -16,6 +17,7 @@ const icons: IconDefinition[] = [UserOutline, LockOutline];
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([])

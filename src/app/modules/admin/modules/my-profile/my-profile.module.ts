@@ -8,14 +8,14 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { MyProfileRoutingModule } from './my-profile-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ItemInformationComponent } from './components/user-details/components/item-information/item-information.component';
+import { ItemInformationComponent } from '@app/shared/components/item-information/item-information.component';
 
 @NgModule({
   declarations: [
     MyProfileComponent,
     UserComponent,
     UserDetailsComponent,
-    ItemInformationComponent
+    
   ],
   imports: [
     CommonModule,
@@ -23,7 +23,8 @@ import { ItemInformationComponent } from './components/user-details/components/i
     NzAvatarModule,
     MyProfileRoutingModule,
     SharedModule,
-    NzIconModule
+    NzIconModule,
+    ItemInformationComponent,
   ]
 })
 export class MyProfileModule { }

@@ -1,0 +1,6 @@
+<ng-container>
+    <ng-container [ngSwitch]="viewType">
+        <app-list-table *ngSwitchCase="'table'" [storyData]="storyData"></app-list-table>
+        <app-list-grid *ngSwitchCase="'grid'" [storyData]="storyData" [rowSize]="rowSize"> </app-list-grid>
+    </ng-container>
+</ng-container>

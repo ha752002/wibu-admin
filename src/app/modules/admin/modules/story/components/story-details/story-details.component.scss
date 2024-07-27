@@ -1,0 +1,68 @@
+.tory-details {
+    padding: 24px;
+    display: flex;
+    gap: 24px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+
+    .content {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .name {
+            font-size: large;
+            font-weight: 600;
+        }
+
+
+        ul {
+            display: flex;
+            gap: 12px;
+
+            li {
+                font-size: small;
+                list-style-type: none;
+                padding: 4px 12px;
+                border-radius: 100px;
+                background-color: #f38990;
+                color: white;
+                cursor: pointer;
+            }
+        }
+
+
+    }
+}
+
+.title {
+    font-weight: 500;
+}
+
+.chapters {
+    margin-top: 24px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+    width: 100%;
+    text-align: left;
+
+    .title {
+        padding: 12px 24px;
+        border-bottom: 1px solid gray;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .item-chapter{
+        padding: 6px 24px;
+        transition: 0.2s;
+        cursor: pointer;
+        &:hover{
+            background-color: #f38990;
+            color: white;
+            transition: 0.2s;
+        }
+    }
+}

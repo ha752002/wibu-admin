@@ -1,1 +1,53 @@
-<p>add-story-form works!</p>
+<p class="title">Create New Story</p>
+
+
+<form nz-form (ngSubmit)="onSubmit($event)">
+    <div class="upload-img">
+        <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1" size="size-l"></app-upload-img>
+        <div class="url-img">
+            <p>Url image :</p>
+            <a [href]="story.thumbnail" *ngIf="story.thumbnail !== ''">{{story.thumbnail }}</a>
+            <p *ngIf="story.thumbnail == ''" class="empty">empty</p>
+        </div>
+    </div>
+    <div class="story">
+        <div class="basic">
+            <app-input-field label="Name" [(value)]="story.name" type="text"
+                (valueChange)="onFieldValueChange('name', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="author" [(value)]="story.author" type="text"
+                (valueChange)="onFieldValueChange('author', $event)" [required]="true">
+            </app-input-field>
+
+            <app-input-field label="introduce" [(value)]="story.introduce" type="textarea"
+                (valueChange)="onFieldValueChange('introduce', $event)" [required]="true">
+            </app-input-field>
+
+            <div class="add-genre" (click)="handleVisible(true)">
+                <p >genre</p>
+                <ul >
+                    <li *ngFor="let genre of story.genre">{{ genre.genre }}</li>
+                    <li>+ add</li>
+                </ul>
+            </div>
+
+            <app-input-field label="translator" [(value)]="story.translator" type="text"
+                (valueChange)="onFieldValueChange('translator', $event)">
+            </app-input-field>
+
+            <app-input-field label="status" [(value)]="story.status" type="text"
+                (valueChange)="onFieldValueChange('status', $event)" [required]="true" [optionValue]="status">
+            </app-input-field>
+
+        </div>
+        <div class="group-button">
+            <button nz-button nzType="text" type="reset">Reset</button>
+            <button nz-button nzType="primary" type="submit" class="submit" nzDanger>Submit</button>
+        </div>
+    </div>
+</form>
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <app-genre-selector [inGenresSelected]="story.genre"
+        (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
+</app-open-modal>

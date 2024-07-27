@@ -14,12 +14,13 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 })
 export class DeleteFormComponent {
   @Input() id?: number;
+  @Input() delete: 'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
 
 
   onDelete(): void {
     if (this.id) {
-      console.log("deleted user id " + this.id);
-      
+      console.log('deleted ' + this.delete + ' with id: ' + this.id);
+      return;
     }
   }
 }

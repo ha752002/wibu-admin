@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from '../my-profile/my-profile.component';
+import { IUser } from '../my-profile/my-profile.component';
 import { formNameTypes } from '@app/shared/components/open-form/open-form.types';
 
 export interface IuserFilter {
@@ -23,13 +23,14 @@ export class UserManagementComponent {
   userTypeList: string[] = ['All','user','admin','management'];
   teamList: string[] = ['All','Team A', 'Team B', 'Team C'];
 
-  listOfData: User[] = [
+  listOfData: IUser[] = [
     {
       id: 1,
       name: 'Nguyễn Văn A',
       email: 'nguyenvana@example.com',
       phone: '0123456789',
       dateOfBirth: new Date('1990-01-01'),
+      intro: 'Hello! I am Minh, a tech enthusiast and avid reader who loves diving into captivating stories. It’s great to meet you!',
       postedStories: 5,
       followStory: 10,
       followers: 200,
@@ -45,10 +46,12 @@ export class UserManagementComponent {
       email: 'nguyenvana@example.com',
       phone: '0123456789',
       dateOfBirth: new Date('1990-01-01'),
+      intro: 'Hi there! I’m ha, a graphic designer with a passion for creativity and a love for reading fascinating tales. I hope we can share and discover many interesting stories together!',
+
       postedStories: 5,
       followStory: 10,
       followers: 200,
-      teams: 'Team A',
+      teams: 'Team b',
       userType: 'Admin',
       roles: ['Admin', 'User'],
       avatarUrl: 'https://do78x13wq0td.cloudfront.net/prod/avatars/host/20240616143304_3df38a8c-cfd3-4ed6-8c70-517bd452f87f.jpg',

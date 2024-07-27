@@ -1,1 +1,36 @@
-<p>manga-management works!</p>
+<div class="title-manga-management">
+    Manga
+</div>
+<div class="manga-management">
+    <div class="group-tool">
+        <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
+        
+        <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
+        placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">
+        </app-input-field>
+        <app-input-field [(value)]="filter.chapterNumber" type="text" (valueChange)="onFieldValueChange('chapterNumber', $event)"
+        placeholder="select chapter number" [optionValue]="teamList" *ngIf="multiGenreMode != true">
+        </app-input-field>
+        <app-input-field [(value)]="filter.search" type="text" (valueChange)="onFieldValueChange('search', $event)"
+            placeholder="search" *ngIf="multiGenreMode != true">
+        </app-input-field>
+        <div (click)="changeViewType(viewType)" class="icon">
+            <ts-icon [name]="viewType === 'table' ? 'bars' : 'calendar'"></ts-icon>
+        </div>
+        <div (click)="handleVisible(true)" class="icon" [class.multi]="multiGenreMode">
+            <ts-icon [name]="'filter'"></ts-icon>
+        </div>
+        <div class="selected-Genres" (click)="handleVisible(true)">
+            <ul >
+                <li *ngFor="let genre of selectedGenres">{{ genre.genre }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <app-story-list [storyData]="story" [viewType]="viewType"></app-story-list>
+</div>
+
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <app-genre-selector [inGenresSelected]="selectedGenres"
+        (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
+</app-open-modal>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { User } from '../../../my-profile/my-profile.component';
+import { IUser } from '../../../my-profile/my-profile.component';
 
 @Component({
   selector: 'app-user-list',
@@ -7,6 +7,17 @@ import { User } from '../../../my-profile/my-profile.component';
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent {
-  @Input() listOfData?: User[] = [];
-  
+  @Input() listOfData?: IUser[] = [];
+
+  previewVisible = false;
+  selectedUser: IUser = {};
+  selectUser(user: IUser): void {
+    this.previewVisible = !this.previewVisible;
+    console.log(this.previewVisible);
+    this.selectedUser = user
+  }
+
+  handleVisible(value: boolean) {
+    this.previewVisible = value;
+  }
 }

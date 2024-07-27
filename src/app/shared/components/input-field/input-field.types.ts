@@ -20,4 +20,5 @@ export type InputFieldTypes =
   | 'text'
   | 'time'
   | 'url'
-  | 'week';
+  | 'week'
+  | 'textarea';

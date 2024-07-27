@@ -31,6 +31,7 @@ export type IconNameTypes =
   | 'deployment-unit'
   | 'menu-unfold'
   | 'menu-fold'
-  | 'check';
+  | 'check'
+  | 'filter';
 
 export type IconThemeTypes = 'fill' | 'outline' | 'twotone';

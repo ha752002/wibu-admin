@@ -1,15 +1,22 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { formNameTypes } from './open-form.types';
 import { CommonModule } from '@angular/common';
-import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
-import { EditUserFormComponent } from './components/edit-user-form/edit-user-form.component';
-import { AddStoryFormComponent } from './components/add-story-form/add-story-form.component';
+import { AddUserFormComponent, ICreateUser } from './components/add-user-form/add-user-form.component';
+import { EditUserFormComponent, IUpdateUser } from './components/edit-user-form/edit-user-form.component';
+import { AddStoryFormComponent, ICreateStory } from './components/add-story-form/add-story-form.component';
 import { EditStoryFormComponent } from './components/edit-story-form/edit-story-form.component';
 import { DeleteFormComponent } from './components/delete-form/delete-form.component';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconComponent } from '../icon/icon.component';
 import { IconNameTypes } from '../icon/icon.types';
+import { AddChapterFormComponent } from './components/add-chapter-form/add-chapter-form.component';
+import { IChapter, IGenre } from '@app/modules/admin/modules/story/story.component';
+import { AddAuthorFormComponent } from './components/add-author-form/add-author-form.component';
+import { AddGenreFormComponent } from './components/add-genre-form/add-genre-form.component';
+import { EditGenreFormComponent } from './components/edit-genre-form/edit-genre-form.component';
+import { EditAuthorFormComponent } from './components/edit-author-form/edit-author-form.component';
+import { EditChapterFormComponent } from './components/edit-chapter-form/edit-chapter-form.component';
 
 @Component({
   selector: 'app-open-form',
@@ -22,17 +29,28 @@ import { IconNameTypes } from '../icon/icon.types';
     EditUserFormComponent,
     AddStoryFormComponent,
     EditStoryFormComponent,
-    DeleteFormComponent
+    DeleteFormComponent,
+    AddChapterFormComponent,
+    AddAuthorFormComponent,
+    AddGenreFormComponent,
+    EditGenreFormComponent,
+    EditAuthorFormComponent,
+    EditChapterFormComponent
   ],
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
 })
 export class OpenFormComponent {
   @Input() formName: formNameTypes = 'add story';
+  @Input() label: boolean = true;
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
   @Input() id?: number;
+  @Input() img?: string;
+  @Input() data?: ICreateStory | IChapter | IUpdateUser |IGenre;
+  @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
+  @Input() genre: IGenre[] =[];
 
   openForm() {
     console.log(this.formName);
@@ -44,7 +62,7 @@ export class OpenFormComponent {
   }
 
   blockFormClosing(event: MouseEvent) {
-    event.stopPropagation(); // Ngăn chặn sự kiện lan truyền lên thẻ cha
+    event.stopPropagation(); 
     console.log('Child clicked');
   }
 }
