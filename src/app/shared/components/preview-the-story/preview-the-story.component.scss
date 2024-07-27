@@ -1,0 +1,41 @@
+.story {
+    padding: 24px;
+    background-color: white;
+    display: flex;
+    gap: 24px;
+
+    img {
+        width: 280px;
+        height: 420px;
+    }
+
+    .content {
+        width: 280px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .name{
+            font-weight: 700;
+            font-size: larger;
+        }
+
+        .title{
+            font-weight: 500
+        }
+
+        .genre{
+            display: flex;
+            gap: 12px;
+        }
+
+        .group-button{
+            display: flex;
+            justify-content: end;
+            align-items: end;
+            flex: 1;
+        }
+
+    }
+}

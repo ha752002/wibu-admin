@@ -1,0 +1,45 @@
+.input-field {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    position: relative;
+
+    label {
+        text-align: left;
+        display: flex;
+        gap: 4px;
+        font-size: small;
+
+        p {
+            color: red;
+        }
+    }
+
+    input {
+        min-width: 360px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .group-select {
+        width: 100%;
+        padding: 4px 11px;
+        border: 1px solid #d9d9d9;
+        select {
+            border: none;
+            width: 100%;
+            cursor: pointer;
+
+            .placeholder{
+                color: #bfbfbf;
+            }
+
+            &:focus {
+                border: none;
+                outline: none;
+                border-color: #007bff;
+            }
+        }
+    }
+}

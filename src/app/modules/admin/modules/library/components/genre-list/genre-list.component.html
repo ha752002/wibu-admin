@@ -1,0 +1,45 @@
+<div class="genres">
+    <div class="title">
+        <h3>Select Genres:</h3>
+        <div class="tool">
+            <button (click)="navigateToStory()" nz-button nzType="primary" *ngIf="selectedGenres.length > 0"
+                nzDanger>
+                <ts-icon [name]="'search'"></ts-icon>
+            </button>
+            <app-open-form [formName]="'add story'" *ngIf="selectedGenres.length > 0" buttonType="danger"
+                [genre]="selectedGenres">
+            </app-open-form>
+
+            <button (click)="ChangeSelectionMode()" nz-button nzType="primary">
+                <p *ngIf="selectMode == true">selection on</p>
+                <p *ngIf="selectMode == false">selection off</p>
+            </button>
+            <app-open-form [formName]="'add genre'"></app-open-form>
+            <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
+                placeholder="search">
+            </app-input-field>
+        </div>
+
+    </div>
+    <div>
+        <div class="group-genre">
+            <div class="item" *ngFor="let genre of filteredGenres" (click)="toggleGenre(genre)"
+                [class.selected]="isSelected(genre)" [class.selectMode]="selectMode">
+                <div class="form-group" (click)="blockFormClosing($event)" *ngIf="selectMode == false">
+                    <app-open-form [formName]="'edit genre'" [label]="false" [icon]="'edit'"
+                        [id]="genre.id"></app-open-form>
+                    <app-open-form [formName]="'delete'" [label]="false" [icon]="'delete'" [id]="genre.id"
+                        buttonType="danger" [delete]="'genre'"></app-open-form>
+
+                </div>
+                <div class="content">
+                    <strong (click)="navigateToMangaWithId(genre.genre)">{{ genre.genre }}</strong>
+                    <p>{{ genre.describe }}</p>
+                </div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>

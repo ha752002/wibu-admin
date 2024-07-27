@@ -15,12 +15,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {apiResolverInterceptor} from "@app/core/interceptors/api-resolver.interceptor";
 
 
+
 const icons: IconDefinition[] = [UserOutline, LockOutline];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NzMessageModule,
     BrowserAnimationsModule,
