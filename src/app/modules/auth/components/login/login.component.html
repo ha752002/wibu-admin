@@ -4,7 +4,7 @@
       <p class="title-welcome">Welcome to <span>WIBU</span></p>
       <p class="title-main">Sign in</p>
     </div>
-    <div class="title-no-account d-flex flex-dir-column gap-8">
+    <form class="title-no-account d-flex flex-dir-column gap-8">
       <p><span>No Account</span> ?</p>
       <p (click)="handleClickSignUp()">Sign up</p>
       <!--  social-->
@@ -21,29 +21,33 @@
           <img alt="apple-img" src="/assets/icon/apple.svg">
         </button>
       </div>
-    </div>
+    </form>
   </div>
 
   <!--  Form control-->
-  <div class="form-control-wrapper d-flex flex-dir-column gap-20">
-    <div class="form-control d-flex flex-dir-column  gap-12">
-      <label>Enter your username or email address</label>
-      <input nz-input placeholder="Username or email address"/>
-    </div>
+  <form [formGroup]="loginFormGroup" class="form-control-wrapper d-flex flex-dir-column gap-20" nz-form>
+    <nz-form-item class=" d-flex flex-dir-column gap-12">
+      <nz-form-control nzErrorTip="Please input your email!">
+        <nz-input-group nzPrefixIcon="user">
+          <input formControlName="email" nz-input placeholder="Enter email" type="text"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
-    <div class="form-control d-flex flex-dir-column gap-12">
-      <label>Enter your Password</label>
-      <input nz-input placeholder="Password"/>
-    </div>
-  </div>
+    <nz-form-item class=" d-flex flex-dir-column gap-12">
+      <nz-form-control nzErrorTip="Please input your password!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input formControlName="password" nz-input placeholder="Enter password" type="password"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
 
   <div class="forgot d-flex justify-content-end">
     <p>Forgot Password</p>
   </div>
 
-  <div class="btn-sign d-flex justify-content-end">
-    <button nz-button>Sign In</button>
+  <div [class]="!loginFormGroup.invalid ? 'enable' : ''" class="btn-sign d-flex justify-content-end">
+    <button (click)="handleSubmitSignIn()" [disabled]="loginFormGroup.invalid" nz-button>Sign In</button>
   </div>
-
-
 </div>

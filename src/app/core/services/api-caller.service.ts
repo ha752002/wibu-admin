@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {HttpRequestOptions} from "@app/core/type/api.types";
+import {HttpRequestOptions} from "@app/core/types/api.types";
 import {environment} from "../../../environments/environment";
 import _ from "lodash";
 
