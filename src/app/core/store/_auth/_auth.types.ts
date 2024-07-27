@@ -9,14 +9,16 @@ export type ActionProps<P, S = {}> = {
 export type AuthState = {
   token?: string,
   expires?: Date,
-  userInfo?: {
-    createdDate: Date,
-    email: string,
-    id: string,
-    lastUpdated: Date,
-    roles: EUserRole,
-    username: string
-  }
+  userInfo?: IUserInfo
+}
+
+export interface IUserInfo {
+  createdDate: Date,
+  email: string,
+  id: string,
+  lastUpdated: Date,
+  roles: EUserRole[],
+  username: string
 }
 
 export interface ILoginPayload {
@@ -30,12 +32,12 @@ export interface ILoginResponse {
 }
 
 export interface IUserInfoResponse {
-  "id": string,
-  "email": string,
-  "username": string,
-  "roles": string[],
-  "createdDate": Date,
-  "lastUpdated": Date
+  id: string,
+  email: string,
+  username: string,
+  roles: EUserRole[],
+  createdDate: Date,
+  lastUpdated: Date
 }
 
 

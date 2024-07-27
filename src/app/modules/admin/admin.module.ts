@@ -14,6 +14,9 @@ import {LeftSidebarComponent} from '@app/modules/admin/components/left-sidebar/l
 import {SidebarBodyComponent} from './components/left-sidebar/components/sidebar-body/sidebar-body.component';
 import {NzMenuDirective, NzMenuItemComponent, NzSubMenuComponent} from "ng-zorro-antd/menu";
 import {NzIconDirective} from "ng-zorro-antd/icon";
+import {NzButtonComponent} from "ng-zorro-antd/button";
+import {RxLet} from "@rx-angular/template/let";
+import {RxPush} from "@rx-angular/template/push";
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import {NzIconDirective} from "ng-zorro-antd/icon";
     NzMenuItemComponent,
     NzIconDirective,
     NzSubMenuComponent,
-    NzMenuDirective
+    NzMenuDirective,
+    NzButtonComponent,
+    RxLet,
+    RxPush
   ]
 })
 export class AdminModule {

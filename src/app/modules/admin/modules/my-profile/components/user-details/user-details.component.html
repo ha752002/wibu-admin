@@ -1,17 +1,7 @@
 <div class="user-details">
-    <div class="group-information">
-        <div >
-            <app-item-information title="Name" content={{user?.name}}></app-item-information>
-            <app-item-information title="Email" content={{user?.email}}></app-item-information>
-            <app-item-information title="Phone" content={{user?.phone}}></app-item-information>
-            <app-item-information title="date Of Birth" content={{user?.dateOfBirth}}></app-item-information>
-        </div>
-        <div>
-            <app-item-information title="Posted Stories" content={{user?.postedStories}}></app-item-information>
-            <app-item-information title="Follow Story" content={{user?.followStory}}></app-item-information>
-            <app-item-information title="followers" content={{user?.followers}}></app-item-information>
-        </div>
+  <div class="group-information">
+    <div>
+      <p>{{ userInfo?.email }}</p>
     </div>
-    <app-item-information title="user Type" content={{user?.userType}}></app-item-information>
-    <app-item-information title="Teams" content={{user?.teams}}></app-item-information>
+  </div>
 </div>

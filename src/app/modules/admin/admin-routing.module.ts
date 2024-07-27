@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
-import { AdminComponent } from "@app/modules/admin/admin.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from "@angular/router";
+import {AdminComponent} from "@app/modules/admin/admin.component";
 
 const routes: Routes = [
   {
@@ -14,10 +14,6 @@ const routes: Routes = [
       {
         path: 'manga/:genreId',
         loadChildren: () => import('./modules/manga-management/manga-management.module').then(module => module.MangaManagementModule)
-      },
-      {
-        path: 'user',
-        loadChildren: () => import('./modules/user-management/user-management.module').then(module => module.UserManagementModule)
       },
       {
         path: 'my-profile',
@@ -46,4 +42,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {
+}

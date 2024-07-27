@@ -1,6 +1,6 @@
 import {createReducer, on} from "@ngrx/store";
 import {authActions} from "@app/core/store/_auth/_auth.actions";
-import {AuthState} from "@app/core/store/_auth/_auth.types";
+import {AuthState, IUserInfo} from "@app/core/store/_auth/_auth.types";
 
 const initialState: AuthState = {
   token: '',
@@ -16,10 +16,12 @@ export const authReducer = createReducer(
       ...payload
     }
   }),
-  on(authActions.saveUserInfo, (state, payload) => {
+  on(authActions.saveUserInfo, (state, payload: IUserInfo) => {
     return {
       ...state,
-      ...payload
+      userInfo: {
+        ...payload
+      }
     }
   })
 )

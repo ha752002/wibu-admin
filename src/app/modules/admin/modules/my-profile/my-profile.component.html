@@ -1,8 +1,8 @@
-<div class="my-profile">
-    <div class="user">
-        <app-user [user]="user"></app-user>
-    </div>
-    <div class="user-details">
-        <app-user-details [user]="user"></app-user-details>
-    </div>
+<div *rxLet="userInfo$ | push; let userInfo" class="my-profile">
+  <div class="user">
+    <app-user [userInfo]="userInfo"></app-user>
+  </div>
+  <div class="user-details">
+    <app-user-details [userInfo]="userInfo"></app-user-details>
+  </div>
 </div>

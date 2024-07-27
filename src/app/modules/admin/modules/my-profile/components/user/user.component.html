@@ -1,16 +1,15 @@
-<div class="user" *ngIf="user">
-  <nz-avatar [nzSrc]="user.avatarUrl" nzIcon="user" [nzSize]="180"></nz-avatar>
-  <div class="information">
-    <div class="name">
-      <div>{{ user.name }}</div>
-      <span nz-icon nzType="man" nzTheme="outline"></span>
-
+@if (userInfo) {
+  <div class="user">
+    <nz-avatar [nzSrc]="" nzIcon="user" [nzSize]="180"></nz-avatar>
+    <div class="information">
+      <div class="name">
+        <div>{{ userInfo.username }}</div>
+        <span nz-icon nzType="man" nzTheme="outline"></span>
+      </div>
+      <div>{{ userInfo.email }}</div>
     </div>
-    
-    <div>{{ user.phone }}</div>
-    <div>{{ user.email }}</div>
+    <ul class="role" *ngFor="let role of userInfo.roles">
+      <li>{{ role | mapUserRole }}</li>
+    </ul>
   </div>
-  <ul class="role">
-    <li *ngFor="let role of user.roles">{{ role }}</li>
-  </ul>
-</div>
+}
