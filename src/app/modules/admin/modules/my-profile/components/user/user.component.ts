@@ -10,6 +10,7 @@ import {MapUserRolePipe} from "@app/core/pipe/map-user-role.pipe";
 })
 export class UserComponent {
   @Input() userInfo?: IUserInfo;
+  defaultAvatar: string = 'assets/img/eyes.png';
 
   constructor() {
   }

@@ -7,7 +7,8 @@ export const apiResolverInterceptor: HttpInterceptorFn = (req: HttpRequest<unkno
   const [reqApi] = req.url.split('?')
   if (accessToken && !API_NOT_ATTACH_ACCESS_TOKEN.some(endpoint => reqApi.endsWith(endpoint))) {
     const reqWithHeader = req.clone({
-      headers: req.headers.set('Authorization', accessToken),
+      headers: req.headers.set('Authorization', accessToken)
+        .set('ngrok-skip-browser-warning', 'true'),
     })
 
     return next(reqWithHeader).pipe(

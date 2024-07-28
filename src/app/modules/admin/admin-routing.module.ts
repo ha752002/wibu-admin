@@ -30,6 +30,11 @@ const routes: Routes = [
       {
         path: 'story/:storyid/chapter/:chapterId',
         loadChildren: () => import('./modules/chapter/chapter.module').then(module => module.ChapterModule)
+      },
+      {
+        path: '**',
+        pathMatch: 'prefix',
+        redirectTo: 'my-profile'
       }
     ]
   }

@@ -22,6 +22,7 @@
     "@ngrx/store": "^18.0.1",
     "@rx-angular/cdk": "^18.0.0",
     "@rx-angular/template": "^18.0.0",
+    "dayjs": "^1.11.12",
     "lodash": "^4.17.21",
     "ng-zorro-antd": "^18.0.0",
     "rxjs": "~7.8.0",

@@ -8,4 +8,5 @@ import {IUserInfo} from "@app/core/store/_auth/_auth.types";
 })
 export class UserDetailsComponent {
   @Input() userInfo?: IUserInfo;
+
 }

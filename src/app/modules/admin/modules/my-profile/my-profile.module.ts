@@ -13,6 +13,15 @@ import {
 } from "@app/modules/admin/modules/my-profile/components/user-details/user-details.component";
 import {UserComponent} from "@app/modules/admin/modules/my-profile/components/user/user.component";
 import {MyProfileComponent} from "@app/modules/admin/modules/my-profile/my-profile.component";
+import {
+  NzListComponent,
+  NzListItemComponent,
+  NzListItemMetaComponent,
+  NzListItemMetaTitleComponent
+} from "ng-zorro-antd/list";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzCardComponent} from "ng-zorro-antd/card";
+import {FormatDatePipe} from "@app/core/pipe/format-date.pipe";
 
 @NgModule({
   declarations: [UserDetailsComponent, UserComponent, MyProfileComponent],
@@ -26,6 +35,14 @@ import {MyProfileComponent} from "@app/modules/admin/modules/my-profile/my-profi
     RxPush,
     RxLet,
     MapUserRolePipe,
+    NzListComponent,
+    NzRowDirective,
+    NzListItemComponent,
+    NzCardComponent,
+    NzColDirective,
+    NzListItemMetaTitleComponent,
+    NzListItemMetaComponent,
+    FormatDatePipe,
   ]
 })
 export class MyProfileModule {

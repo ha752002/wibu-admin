@@ -1,13 +1,6 @@
 @if (userInfo) {
   <div class="user">
-    <nz-avatar [nzSrc]="" nzIcon="user" [nzSize]="180"></nz-avatar>
-    <div class="information">
-      <div class="name">
-        <div>{{ userInfo.username }}</div>
-        <span nz-icon nzType="man" nzTheme="outline"></span>
-      </div>
-      <div>{{ userInfo.email }}</div>
-    </div>
+    <nz-avatar [nzSrc]="defaultAvatar" nzIcon="user" [nzSize]="180"></nz-avatar>
     <ul class="role" *ngFor="let role of userInfo.roles">
       <li>{{ role | mapUserRole }}</li>
     </ul>
