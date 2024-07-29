@@ -1,0 +1,5 @@
+<div *rxLet="userList$ | push; let userList">
+  @if (userList) {
+    <app-user-list [userList]="userList"></app-user-list>
+  }
+</div>

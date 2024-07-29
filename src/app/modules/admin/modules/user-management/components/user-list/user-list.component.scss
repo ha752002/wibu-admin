@@ -1,0 +1,9 @@
+:host {
+  padding: 10px 20px;
+
+  ::ng-deep {
+    nz-list.ant-list.ant-list-split {
+      padding: 10px 20px;
+    }
+  }
+}

@@ -18,6 +18,9 @@ const routes: Routes = [
       {
         path: 'my-profile',
         loadChildren: () => import('./modules/my-profile/my-profile.module').then(module => module.MyProfileModule)
+      }, {
+        path: 'user',
+        loadChildren: () => import('./modules/user-management/user-management.module').then(module => module.UserManagementModule)
       },
       {
         path: 'library',
