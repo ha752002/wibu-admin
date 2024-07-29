@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-type contentType = 'genre' | 'author';
+type contentType = 'Genre' | 'Author';
 
 @Component({
   selector: 'app-library',
@@ -8,9 +8,9 @@ type contentType = 'genre' | 'author';
   styleUrl: './library.component.scss'
 })
 export class LibraryComponent {
-  contentLibrary: contentType = 'genre';
+  contentLibrary: contentType = 'Genre';
 
-  contents: contentType[] = ['genre' , 'author']
+  contents: contentType[] = ['Genre' , 'Author']
 
   changeContent(titleContent: contentType) {
     this.contentLibrary = titleContent

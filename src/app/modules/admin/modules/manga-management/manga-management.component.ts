@@ -204,7 +204,7 @@ export class MangaManagementComponent implements OnInit {
       if (genreParam) {
         const parsedGenres = JSON.parse(genreParam);
         this.multiGenreMode = true;
-        this.selectedGenres = this.getGenresByIds(parsedGenres);
+        this.selectedGenres = this.genres.filter(genre => genre.id !== undefined && parsedGenres.includes(genre.id));
       } else {
         this.getGenreById()
       }
@@ -218,13 +218,6 @@ export class MangaManagementComponent implements OnInit {
         this.filter.genre = genreParam;
       }
     });
-  }
-
-  getGenresByIds(ids: number[]): IGenre[] {
-    if (this.genres) {
-      return this.genres.filter(genre => genre.id !== undefined && ids.includes(genre.id));
-    }
-    return [];
   }
 
   onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {

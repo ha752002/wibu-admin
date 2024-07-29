@@ -1,10 +1,10 @@
 <div class="genres">
     <div class="title">
-        <h3>Select Genres:</h3>
+        <h3>Genres</h3>
         <div class="tool">
             <button (click)="navigateToStory()" nz-button nzType="primary" *ngIf="selectedGenres.length > 0"
                 nzDanger>
-                <ts-icon [name]="'search'"></ts-icon>
+                <ts-icon [name]="'filter'"></ts-icon>
             </button>
             <app-open-form [formName]="'add story'" *ngIf="selectedGenres.length > 0" buttonType="danger"
                 [genre]="selectedGenres">

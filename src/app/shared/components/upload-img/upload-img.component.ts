@@ -38,7 +38,7 @@ export class UploadImgComponent implements OnInit{
   @Output() thumbnailChange = new EventEmitter<NzUploadFile[]>();
   @Input() thumbnail: string = '';
   @Input() length: number = 99;
-  @Input() size: 'size-s' | 'size-m' | 'size-l' = 'size-l';
+  @Input() size?: 'size-s' | 'size-m' | 'size-l';
   @Input() img?: string;
 
   fileList: NzUploadFile[] = [];
