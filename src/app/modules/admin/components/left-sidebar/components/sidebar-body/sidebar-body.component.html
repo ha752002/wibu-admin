@@ -11,8 +11,11 @@
         [routerLink]="menu.route"
         nz-menu-item
       >
-        <span *ngIf="menu.icon" [nzType]="menu.icon" nz-icon></span>
-        <span>{{ menu.title }}</span>
+        <div class="d-flex flex-dir-row gap-16"
+        >
+          <span *ngIf="menu.icon" [nzType]="menu.icon" nz-icon></span>
+          <span>{{ menu.title }}</span>
+        </div>
       </li>
       <li
         *ngIf="menu.children"

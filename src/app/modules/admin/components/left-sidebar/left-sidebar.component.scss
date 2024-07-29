@@ -13,9 +13,14 @@
 nz-header,
 nz-footer {
   background-color: transparent;
-  padding: 10px 5px;
   border-top: 1px solid #8080802b;
   border-bottom: 1px solid #8080802b;
+  padding: 0;
+
+  button {
+    height: 54px;
+    width: 100%;
+  }
 }
 
 
@@ -48,7 +53,7 @@ nz-footer {
 
     .userName:hover,
     .email:hover {
-      color: var(--black);
+      color: var(--primary);
       font-style: normal;
       cursor: pointer;
       text-decoration: underline;

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { viewType } from '@app/shared/components/story-list/story-list.component';
-import { IGenre, IStoryInformation } from '../story/story.component';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {viewType} from '@app/shared/components/story-list/story-list.component';
+import {IGenre, IStoryInformation} from '../story/story.component';
+import {ActivatedRoute} from '@angular/router';
 
 export interface ImangaFilter {
   search?: string,
   genre?: string,
   chapterNumber?: string,
 }
-
 
 
 @Component({
@@ -38,8 +37,8 @@ export class MangaManagementComponent implements OnInit {
       author: "Park Jinjoon",
       translator: "Mary Smith",
       genres: [
-        { genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
-        { genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
+        {genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale'},
+        {genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories'},
       ],
       views: 12000,
       chapter: 50,
@@ -175,27 +174,25 @@ export class MangaManagementComponent implements OnInit {
   ];
 
   genres: IGenre[] = [
-    { id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
-    { id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
-    { id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
-    { id: 4, genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
-    { id: 5, genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories' },
-    { id: 6, genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories' },
-    { id: 7, genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories' },
-    { id: 8, genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales' },
-    { id: 9, genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories' },
-    { id: 10, genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
+    {id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story'},
+    {id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey'},
+    {id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale'},
+    {id: 4, genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories'},
+    {id: 5, genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories'},
+    {id: 6, genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories'},
+    {id: 7, genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories'},
+    {id: 8, genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales'},
+    {id: 9, genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories'},
+    {id: 10, genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories'}
   ];
   selectedGenres: IGenre[] = [];
-  constructor(private route: ActivatedRoute) { }
+
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.getParams();
     this.genreNames = this.genres.map(g => g.genre);
-    console.log(this.selectedGenres);
-    console.log(this.multiGenreMode);
-    console.log(this.filter.genre);
-
   }
 
   getParams() {
@@ -248,7 +245,7 @@ export class MangaManagementComponent implements OnInit {
     this.selectedGenres = genres;
     if (this.selectedGenres.length == 0) {
       this.multiGenreMode = false
-    } else{
+    } else {
       this.multiGenreMode = true
     }
   }

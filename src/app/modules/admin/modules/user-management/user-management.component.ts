@@ -1,67 +1,67 @@
-import { Component } from '@angular/core';
-import { IUser } from '../my-profile/my-profile.component';
-import { formNameTypes } from '@app/shared/components/open-form/open-form.types';
-
-export interface IuserFilter {
-  search?:string,
-  userType?: string,
-  teams?: string,
-}
+import {Component, OnInit} from '@angular/core';
+import {of} from "rxjs";
+import {IUser} from "@app/modules/admin/modules/user-management/type/user.types";
+import {EUserRole} from "@app/core/enums/user.enums";
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss'
 })
-export class UserManagementComponent {
-  filter: IuserFilter = {
-    search:'',
-    teams: '',
-    userType: '',
-  }
-
-  userTypeList: string[] = ['All','user','admin','management'];
-  teamList: string[] = ['All','Team A', 'Team B', 'Team C'];
-
-  listOfData: IUser[] = [
+export class UserManagementComponent implements OnInit {
+  data = [
     {
-      id: 1,
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@example.com',
-      phone: '0123456789',
-      dateOfBirth: new Date('1990-01-01'),
-      intro: 'Hello! I am Minh, a tech enthusiast and avid reader who loves diving into captivating stories. It’s great to meet you!',
-      postedStories: 5,
-      followStory: 10,
-      followers: 200,
-      teams: 'Team A',
-      userType: 'Admin',
-      roles: ['Admin', 'User'],
-      avatarUrl: 'https://scontent.fhan14-3.fna.fbcdn.net/v/t1.6435-1/127523077_443369593493599_7081637295600256055_n.jpg?stp=dst-jpg_p200x200&_nc_cat=111&ccb=1-7&_nc_sid=e4545e&_nc_eui2=AeFqvFBDovjkPGdWHYPRctsrqcVrOAsuC7apxWs4Cy4LtnMM9V5r5Ft9QaaGpPGyKqnm8qYhJ3hH9zdbju9d19fE&_nc_ohc=4m12X8lVKp8Q7kNvgFHppPH&_nc_ht=scontent.fhan14-3.fna&oh=00_AYBQlE7Vq5HTWlMDFZtfemV7hzGSMTQQrEcG-8mjbQl-2Q&oe=66A9DD8C',
-
+      avatarUrl: 'https://example.com/avatar1.jpg',
+      birthday: new Date('1990-01-01'),
+      createdDate: new Date(),
+      email: 'user1@example.com',
+      id: '1',
+      lastUpdated: new Date(),
+      roles: [EUserRole.ROLE_USER],
+      username: 'user1'
     },
     {
-      id: 2,
-      name: 'Ha ngốc ngếch',
-      email: 'nguyenvana@example.com',
-      phone: '0123456789',
-      dateOfBirth: new Date('1990-01-01'),
-      intro: 'Hi there! I’m ha, a graphic designer with a passion for creativity and a love for reading fascinating tales. I hope we can share and discover many interesting stories together!',
-
-      postedStories: 5,
-      followStory: 10,
-      followers: 200,
-      teams: 'Team b',
-      userType: 'Admin',
-      roles: ['Admin', 'User'],
-      avatarUrl: 'https://do78x13wq0td.cloudfront.net/prod/avatars/host/20240616143304_3df38a8c-cfd3-4ed6-8c70-517bd452f87f.jpg',
-
+      avatarUrl: 'https://example.com/avatar2.jpg',
+      birthday: new Date('1992-02-02'),
+      createdDate: new Date(),
+      email: 'user2@example.com',
+      id: '2',
+      lastUpdated: new Date(),
+      roles: [EUserRole.ROLE_ADMIN],
+      username: 'user2'
     },
-  ];
+    {
+      avatarUrl: 'https://example.com/avatar3.jpg',
+      birthday: new Date('1994-03-03'),
+      createdDate: new Date(),
+      email: 'user3@example.com',
+      id: '333',
+      lastUpdated: new Date(),
+      roles: [EUserRole.ROLE_USER],
+      username: 'user3'
+    },
+    {
+      avatarUrl: 'https://example.com/avatar4.jpg',
+      birthday: new Date('1996-04-04'),
+      createdDate: new Date(),
+      email: 'user4@example.com',
+      id: '4',
+      lastUpdated: new Date(),
+      roles: [EUserRole.ROLE_ADMIN, EUserRole.ROLE_USER],
+      username: 'user4'
+    }
+  ] as IUser[]
+  userList$ = of(this.data as []);
 
-  onFieldValueChange(field: keyof IuserFilter, value: string | number | Date | undefined): void {
-
-    console.log(this.filter);
+  constructor() {
   }
+
+  ngOnInit(): void {
+  }
+
+  getUserList(list: IUser[]) {
+    return list as IUser[];
+  }
+
 
 }

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { IUser } from '../../my-profile.component';
+import {Component, Input} from '@angular/core';
+import {IUserInfo} from "@app/core/store/_auth/_auth.types";
 
 @Component({
   selector: 'app-user-details',
@@ -7,18 +7,6 @@ import { IUser } from '../../my-profile.component';
   styleUrl: './user-details.component.scss'
 })
 export class UserDetailsComponent {
-  @Input() user?: IUser = {
-    avatarUrl: '',
-    name: '',
-    phone: '',
-    email: '',
-    followers: 0,
-    postedStories: 0,
-    followStory: 0,
-    userType: '',
-    teams: '',
-    dateOfBirth: new Date(),
-    roles: []
-  };;
+  @Input() userInfo?: IUserInfo;
 
 }

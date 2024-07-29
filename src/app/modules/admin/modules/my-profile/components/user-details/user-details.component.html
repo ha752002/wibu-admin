@@ -1,17 +1,22 @@
-<div class="user-details">
-    <div class="group-information">
-        <div >
-            <app-item-information title="Name" content={{user?.name}}></app-item-information>
-            <app-item-information title="Email" content={{user?.email}}></app-item-information>
-            <app-item-information title="Phone" content={{user?.phone}}></app-item-information>
-            <app-item-information title="date Of Birth" content={{user?.dateOfBirth}}></app-item-information>
-        </div>
-        <div>
-            <app-item-information title="Posted Stories" content={{user?.postedStories}}></app-item-information>
-            <app-item-information title="Follow Story" content={{user?.followStory}}></app-item-information>
-            <app-item-information title="followers" content={{user?.followers}}></app-item-information>
-        </div>
+@if (userInfo) {
+  <div class="user-details">
+    <div class="user-item">
+      <span class="title">Email: </span>
+      <span class="desc">{{ (userInfo.email | titlecase) || 'No Name' }}</span>
     </div>
-    <app-item-information title="user Type" content={{user?.userType}}></app-item-information>
-    <app-item-information title="Teams" content={{user?.teams}}></app-item-information>
-</div>
+    <div class="user-item">
+      <span class="title">Name: </span>
+      <span class="desc">{{ (userInfo.username | titlecase) || 'No Email' }}</span>
+    </div>
+    <div class="user-item">
+      <span class="title">Name: </span>
+      @for (role of userInfo.roles; track role) {
+        <span class="desc"> {{ role | mapUserRole }}</span>
+      }
+    </div>
+    <div class="user-item">
+      <span class="title">Created Date: </span>
+      <span class="desc">{{ userInfo.createdDate | formatDate }}</span>
+    </div>
+  </div>
+}

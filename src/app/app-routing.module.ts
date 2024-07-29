@@ -11,12 +11,12 @@ const routes: Routes = [{
   canActivate: [authGuard]
 }, {
   path: '**',
-  redirectTo: 'auth/signIn',
+  redirectTo: 'admin',
   pathMatch: 'full'
 }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes) ,],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule]
 })
 

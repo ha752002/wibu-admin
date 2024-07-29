@@ -1,18 +1,20 @@
 <nz-layout>
   <nz-header>
-    <div class="header">
+    <div *rxLet="userInfo$ | push; let userInfo" class="header">
       <div class="avatar">
         <img [height]="64" [width]="64" alt=""
              src="https://do78x13wq0td.cloudfront.net/prod/avatars/host/20240616143304_3df38a8c-cfd3-4ed6-8c70-517bd452f87f.jpg">
       </div>
       <div class="user-info">
-        <span class="userName">Admin222</span>
-        <span class="email">admin&#64;gmail.com</span>
+        <span class="userName">{{ userInfo?.username |  titlecase }}</span>
+        <span class="email">{{ userInfo?.email |  titlecase }}</span>
       </div>
     </div>
   </nz-header>
   <nz-content>
     <app-sidebar-body/>
   </nz-content>
-  <nz-footer>Footer</nz-footer>
+  <nz-footer>
+    <button nz-button nzDanger nzType="primary">Log Out</button>
+  </nz-footer>
 </nz-layout>
