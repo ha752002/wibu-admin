@@ -1,26 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { IGenre } from '@app/modules/admin/modules/story/story.component';
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { Istyle, UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
+import { IGenre } from '../../types/genre.type';
+import { ICreateStory } from '../../types/story.type';
 
-export interface ICreateStory {
-  thumbnail?: string;
-  name?: string;
-  author?: string;
-  translator?: string;
-  introduce?: string;
-  status?: statusType;
-  created?: Date;
-  update?: Date;
-  genre: IGenre[];
-}
-
-export type statusType = 'Updating' | 'Halt' | 'Full';
 
 
 @Component({

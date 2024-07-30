@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IStoryInformation } from '../../story.component';
 import { ActivatedRoute ,Router } from '@angular/router';
+import { IStoryInformation } from '../../type/story.type';
 
 @Component({
   selector: 'app-story-details',

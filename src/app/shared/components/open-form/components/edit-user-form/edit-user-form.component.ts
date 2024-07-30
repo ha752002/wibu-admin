@@ -3,17 +3,8 @@ import { Component, Input } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { IUpdateUser } from '../../types/user.type';
 
-export interface IUpdateUser {
-  id?: number;
-  avatarUrl?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  dateOfBirth?: Date;
-  teams?: string;
-  userType?: string;
-}
 
 @Component({
   standalone: true,

@@ -4,12 +4,7 @@ import { InputFieldComponent } from '@app/shared/components/input-field/input-fi
 import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-
-export interface IAuthor {
-  name: string;
-  avatar?: string;
-  describe: string;
-}
+import { IAuthor } from '../../types/author.type';
 
 @Component({
   selector: 'app-add-author-form',

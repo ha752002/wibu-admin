@@ -12,18 +12,9 @@ import {
   Validators
 } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ICreateUser } from '../../types/user.type';
 
-export interface ICreateUser {
-  id?: number;
-  avatarUrl?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  dateOfBirth?: Date;
-  teams?: string;
-  userType?: string;
-  password?: string;
-}
+
 
 @Component({
   standalone: true,

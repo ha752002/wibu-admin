@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IGenre } from '@app/modules/admin/modules/story/story.component';
 import { OpenModalComponent } from '../open-modal/open-modal.component';
+import { IGenre } from '../open-form/types/genre.type';
 
 @Component({
   selector: 'app-genre-selector',

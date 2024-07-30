@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IChapter } from '../story/story.component';
+import { IChapter } from '@app/shared/components/open-form/types/chapter.type';
 
 @Component({
   selector: 'app-chapter',

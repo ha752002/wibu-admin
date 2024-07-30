@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IGenre } from '@app/modules/admin/modules/story/story.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { IGenre } from '../../types/genre.type';
 
 @Component({
   selector: 'app-add-genre-form',

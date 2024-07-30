@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { IChapter, IStoryInformation } from '@app/modules/admin/modules/story/story.component';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { IChapter } from '../../types/chapter.type';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 
 @Component({
   standalone: true,

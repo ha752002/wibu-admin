@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IGenre } from '../../../story/story.component';
 import { ActivatedRoute ,Router } from '@angular/router';
+import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 
 @Component({
   selector: 'app-genre-list',

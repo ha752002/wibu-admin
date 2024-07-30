@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {viewType} from '@app/shared/components/story-list/story-list.component';
-import {IGenre, IStoryInformation} from '../story/story.component';
 import {ActivatedRoute} from '@angular/router';
+import { IGenre } from '@app/shared/components/open-form/types/genre.type';
+import { IStoryInformation } from '../story/type/story.type';
 
 export interface ImangaFilter {
   search?: string,
