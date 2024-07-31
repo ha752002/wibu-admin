@@ -5,6 +5,7 @@ import { InputFieldComponent } from '@app/shared/components/input-field/input-fi
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { IGenre } from '../../types/genre.type';
+import { GenreService } from '../../services/genre/genre.service';
 
 @Component({
   selector: 'app-add-genre-form',
@@ -13,8 +14,8 @@ import { IGenre } from '../../types/genre.type';
     CommonModule,
     InputFieldComponent,
     NzButtonModule,
-    NzCheckboxModule, 
-    FormsModule ,
+    NzCheckboxModule,
+    FormsModule,
   ],
   templateUrl: './add-genre-form.component.html',
   styleUrl: './add-genre-form.component.scss'
@@ -26,9 +27,19 @@ export class AddGenreFormComponent {
     AgeWarning: false,
   };
 
+  constructor(private genreService: GenreService) { }
+
+
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.genre);
+    this.genreService.createGenre(this.genre).subscribe(
+      response => {
+        console.log('Genre created successfully', response);
+      },
+      error => {
+        console.error('Error creating genre', error);
+      }
+    );
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {

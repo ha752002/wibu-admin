@@ -5,6 +5,7 @@ import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { IAuthor } from '../../types/author.type';
+import { AuthorService } from '../../services/author/author.service';
 
 @Component({
   selector: 'app-add-author-form',
@@ -25,9 +26,19 @@ export class AddAuthorFormComponent {
     avatar: '',
   };
 
+  constructor(private authorService: AuthorService) { }
+
+
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.author);
+    this.authorService.createAuthor(this.author).subscribe(
+      response => {
+        console.log('author created successfully', response);
+      },
+      error => {
+        console.error('Error creating author', error);
+      }
+    );
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
