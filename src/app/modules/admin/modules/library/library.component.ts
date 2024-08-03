@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { ELibrary } from '@app/core/enums/library.enums';
 
-type contentType = 'Genre' | 'Author';
 
 @Component({
   selector: 'app-library',
@@ -8,11 +8,11 @@ type contentType = 'Genre' | 'Author';
   styleUrl: './library.component.scss'
 })
 export class LibraryComponent {
-  contentLibrary: contentType = 'Genre';
+  ELibrary = ELibrary;
+  contentLibrary: ELibrary = ELibrary.Genre;
+  contents: ELibrary[] = [ELibrary.Genre, ELibrary.Author];
 
-  contents: contentType[] = ['Genre' , 'Author']
-
-  changeContent(titleContent: contentType) {
+  changeContent(titleContent: ELibrary) {
     this.contentLibrary = titleContent
   }
 }

@@ -3,13 +3,7 @@ import {viewType} from '@app/shared/components/story-list/story-list.component';
 import {ActivatedRoute} from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 import { IStoryInformation } from '../story/type/story.type';
-
-export interface ImangaFilter {
-  search?: string,
-  genre?: string,
-  chapterNumber?: string,
-}
-
+import { ImangaFilter } from './type/manga-Filter.type';
 
 @Component({
   selector: 'app-manga-management',
