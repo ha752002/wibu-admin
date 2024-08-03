@@ -6,3 +6,9 @@ export interface ILoginFormGroup {
 }
 
 
+export interface IRegisterFormGroup {
+  email: FormControl<string>,
+  password: FormControl<string>,
+  username: FormControl<string>,
+  confirmPassword: FormControl<string>,
+}
