@@ -36,9 +36,9 @@ export class ListGridComponent {
   }
 
   updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const startIndex = (this.currentPage - 1) * this.pageSize;    
     const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.storyData.slice(startIndex, endIndex);
+    this.paginatedData = this.storyData.slice(startIndex, endIndex);    
   }
 
   onPageChange(page: number): void {

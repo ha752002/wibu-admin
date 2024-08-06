@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute ,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
+import { GenreService } from '@app/shared/components/services/genre/genre.service';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-genre-list',
@@ -8,7 +11,9 @@ import { IGenre } from '@app/shared/components/open-form/types/genre.type';
   styleUrl: './genre-list.component.scss'
 })
 export class GenreListComponent implements OnInit {
-  genres: IGenre[] = [
+  private subscriptions: Subscription = new Subscription();
+  genres: IGenre[] = [];
+  dataGenres: IGenre[] = [
     { id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
     { id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
     { id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
@@ -22,14 +27,35 @@ export class GenreListComponent implements OnInit {
   ];
 
   selectedGenres: IGenre[] = [];
-  filteredGenres: IGenre[] = [];
   selectMode: boolean = false;
   searchQuery: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private genreService: GenreService) { }
 
   ngOnInit(): void {
-    this.filteredGenres = this.genres;
+    this.getAllGenres()
+  }
+
+  getAllGenres(): void {
+    this.subscriptions.add(
+      this.genreService.getAllGenres().pipe(
+        finalize(() => {
+          console.log('Genres loaded');
+        })
+      ).subscribe(
+        response => {
+          this.genres = response;
+          console.log('Genres:', this.genres);
+        },
+        error => {
+          console.error('Error loading genres', error);
+          this.genres = this.dataGenres
+        }
+      )
+    );
   }
 
   toggleGenre(genre: IGenre) {
@@ -41,8 +67,6 @@ export class GenreListComponent implements OnInit {
         this.selectedGenres.splice(index, 1);
       }
     }
-
-    // this.outGenresSelected.emit(this.selectedGenres);
   }
 
   isSelected(genre: IGenre): boolean {
@@ -68,7 +92,7 @@ export class GenreListComponent implements OnInit {
   }
 
   navigateToStory() {
-    const selectedGenresIds = this.selectedGenres.map(genre => genre.id); // Chỉ truyền ID
+    const selectedGenresIds = this.selectedGenres.map(genre => genre.id);
     this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(selectedGenresIds) } });
   }
 }

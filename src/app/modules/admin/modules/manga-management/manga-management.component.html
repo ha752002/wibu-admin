@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <app-story-list [storyData]="story" [viewType]="viewType"></app-story-list>
+    <app-story-list [storyData]="storys" [viewType]="viewType"></app-story-list>
 </div>
 
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">

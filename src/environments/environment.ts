@@ -26,7 +26,7 @@ export const environment = {
       update: 'author/update/{id}',
     },
     chapter: {
-      getAll: 'chapter/get-all',
+      getAll: 'story/{id}/chapters',
       getById: 'chapter/{id}',
       push: 'chapter/create',
       update: 'chapter/update/{id}',
