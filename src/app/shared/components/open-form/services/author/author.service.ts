@@ -1,18 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IAuthor } from '../../types/author.type';
 import { Observable } from 'rxjs';
+import { ApiCallerService } from '@app/core/services/api-caller.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorService {
-  private apiUrl = environment.apiUrl + environment.adminEndpoint.genre.push;
+  private apiUrl = environment.adminEndpoint.author.push;
 
-  constructor(private http: HttpClient) { }
+  constructor(private apiCallerService: ApiCallerService) { }
 
   createAuthor(author: IAuthor): Observable<IAuthor> {
-    return this.http.post<IAuthor>(this.apiUrl, author);
+    return this.apiCallerService.post<IAuthor, IAuthor>(this.apiUrl, author);
   }
 }

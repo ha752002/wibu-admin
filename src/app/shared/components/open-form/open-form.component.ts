@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { formNameTypes } from './open-form.types';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+
 import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
 import { EditUserFormComponent } from './components/edit-user-form/edit-user-form.component';
 import { AddStoryFormComponent } from './components/add-story-form/add-story-form.component';
@@ -21,6 +23,7 @@ import { IGenre } from './types/genre.type';
 import { ICreateStory } from './types/story.type';
 import { ICreateUser, IUpdateUser } from './types/user.type';
 import { IAuthor } from './types/author.type';
+import { AuthorService } from './services/author/author.service';
 
 @Component({
   selector: 'app-open-form',
@@ -44,7 +47,7 @@ import { IAuthor } from './types/author.type';
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
 })
-export class OpenFormComponent {
+export class OpenFormComponent implements OnDestroy{
   @Input() formName: formNameTypes = 'add story';
   @Input() label: boolean = true;
   @Input() currentForm?: formNameTypes | null = null;
@@ -55,6 +58,9 @@ export class OpenFormComponent {
   @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser |IGenre | IAuthor;
   @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
   @Input() genre: IGenre[] =[];
+
+  private subscriptions: Subscription = new Subscription();
+  constructor(private authorService: AuthorService) { }
 
   openForm() {
     console.log(this.formName);
@@ -68,5 +74,9 @@ export class OpenFormComponent {
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation(); 
     console.log('Child clicked');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
