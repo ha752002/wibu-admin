@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IAuthor } from '../../types/author.type';
@@ -19,6 +19,8 @@ import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img
   styleUrl: './edit-author-form.component.scss'
 })
 export class EditAuthorFormComponent {
+  @Input() id?: number;
+
   author: IAuthor = {
     name: '',
     describe: '',

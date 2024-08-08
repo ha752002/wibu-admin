@@ -15,6 +15,10 @@
         }
     }
 
+    .pagination{
+        margin-top: 24px;
+    }
+
     .group-author {
         list-style-type: none;
         padding: 0;
@@ -25,15 +29,41 @@
         gap: 6px;
 
         .item {
-            cursor: pointer;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
             width: 24.6%;
+            position: relative;
 
-            &.selected {
-                background-color: #007bff;
-                color: white;
+            .author {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                
+            }
+
+            .form-group {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                display: none;
+                gap: 4px;
+            }
+
+            .content {
+                padding: 5px;
+
+                strong {
+                    cursor: pointer;
+                    &:hover{
+                        color: #007bff;
+                    }
+                }
+
+            }
+
+            &:hover .form-group {
+                display: flex;
             }
 
         }

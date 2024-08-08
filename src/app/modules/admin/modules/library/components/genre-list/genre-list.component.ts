@@ -31,9 +31,9 @@ export class GenreListComponent implements OnInit {
   searchQuery: string = '';
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    private genreService: GenreService) { }
+    private genreService: GenreService
+  ) { }
 
   ngOnInit(): void {
     this.getAllGenres()

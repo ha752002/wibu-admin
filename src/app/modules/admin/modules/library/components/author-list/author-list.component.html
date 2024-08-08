@@ -11,10 +11,27 @@
     </div>
     <div>
         <div class="group-author">
-            
-        </div>
-        <div>
+            <div *ngFor="let author of paginatedData" class="item">
+                <div class="content">
+                    <div class="author">
+                        <nz-avatar [nzSrc]="author.avatar" nzIcon="user" [nzSize]="64"></nz-avatar>
+                        <strong >{{ author.name }}</strong>
+                    </div>
+                    <p>{{ author.describe }}</p>
+                </div>
+                
+                <div class="form-group">
+                    <app-open-form [formName]="'edit author'" [label]="false" [icon]="'edit'"
+                        [id]="author.id"></app-open-form>
+                    <app-open-form [formName]="'delete'" [label]="false" [icon]="'delete'" [id]="author.id"
+                        buttonType="danger" [delete]="'author'"></app-open-form>
 
+                </div>
+              </div>
+        </div>
+        <div class="pagination">
+            <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="authors.length" [nzPageSize]="pageSize"
+            (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
         </div>
     </div>
 </div>

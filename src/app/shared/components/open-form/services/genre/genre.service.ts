@@ -9,12 +9,15 @@ import { ApiCallerService } from '@app/core/services/api-caller.service';
 })
 export class GenreService {
 
-  private apiUrl = environment.apiUrl + environment.adminEndpoint.genre.push;
+  private apiUrl = environment.adminEndpoint.genre;
 
   constructor(private apiCallerService: ApiCallerService) { }
 
   createGenre(genre: IGenre): Observable<IGenre> {
-    return this.apiCallerService.post<IGenre, IGenre>(this.apiUrl, genre);
+    return this.apiCallerService.post<IGenre, IGenre>(this.apiUrl.push, genre);
+  }
 
+  deleteGenre(id: number): Observable<void> {
+    return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }
 }

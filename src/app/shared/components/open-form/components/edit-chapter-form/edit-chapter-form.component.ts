@@ -22,6 +22,7 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
 })
 export class EditChapterFormComponent {
   chapter: IChapter = {}
+  @Input() id?: number;
   @Input() storyData?: IStoryInformation = {}
   @Input() ChapterData?: IChapter = {}
 

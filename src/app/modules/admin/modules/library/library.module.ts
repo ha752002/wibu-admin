@@ -9,6 +9,8 @@ import { InputFieldComponent } from '@app/shared/components/input-field/input-fi
 import { OpenFormComponent } from '@app/shared/components/open-form/open-form.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconComponent } from '@app/shared/components/icon/icon.component';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { IconComponent } from '@app/shared/components/icon/icon.component';
   imports: [
     CommonModule,
     LibraryRoutingModule,
+    NzPaginationModule,
+    NzAvatarModule,
     InputFieldComponent,
     OpenFormComponent,
     NzButtonModule,

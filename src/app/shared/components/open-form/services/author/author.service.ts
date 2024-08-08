@@ -8,11 +8,15 @@ import { ApiCallerService } from '@app/core/services/api-caller.service';
   providedIn: 'root'
 })
 export class AuthorService {
-  private apiUrl = environment.adminEndpoint.author.push;
+  private apiUrl = environment.adminEndpoint.author;
 
   constructor(private apiCallerService: ApiCallerService) { }
 
   createAuthor(author: IAuthor): Observable<IAuthor> {
-    return this.apiCallerService.post<IAuthor, IAuthor>(this.apiUrl, author);
+    return this.apiCallerService.post<IAuthor, IAuthor>(this.apiUrl.push, author);
+  }
+
+  deleteAuthor(id: number): Observable<void> {
+    return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }
 }
