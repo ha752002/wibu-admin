@@ -86,24 +86,24 @@ export class AuthorListComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.getAllGenres()
+    this.getAllAuthors()
   }
 
-  getAllGenres(): void {
+  getAllAuthors(): void {
     this.subscriptions.add(
       this.authorService.getAllAuthors().pipe(
         finalize(() => {
-          console.log('Genres loaded');
+          console.log('Authors loaded');
         })
       ).subscribe(
         response => {
           this.authors = response;
-          console.log('Genres:', this.authors);
+          console.log('Author:', this.authors);
           this.updatePaginatedData()
         },
 
         error => {
-          console.error('Error loading genres', error);
+          console.error('Error loading Authors', error);
           this.authors = this.dataAuthors
           this.updatePaginatedData()
 

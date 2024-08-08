@@ -50,13 +50,11 @@ export class MangaManagementComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getParams();
     this.getAllStorys();
     this.getAllGenres();
     console.log(this.storys);
     console.log(this.genres);
     console.log(this.genreNames);
-
   }
 
   getParams() {
@@ -92,11 +90,13 @@ export class MangaManagementComponent implements OnInit {
           this.genres = response;
           console.log('Genres:', this.genres);
           this.genreNames = this.genres.map(g => g.genre);
+          this.getParams();
         },
         error => {
           console.error('Error loading genres', error);
           this.genres = this.dataGenres      
           this.genreNames = this.genres.map(g => g.genre);
+          this.getParams();
         }
       )
     );
