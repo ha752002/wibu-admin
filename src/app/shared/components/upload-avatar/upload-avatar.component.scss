@@ -9,3 +9,21 @@
     align-items: center;
     justify-content: center;
 }
+
+:host ::ng-deep .size-s>.ant-upload-list>.ant-upload-list-picture-card-container,
+:host ::ng-deep .size-s>.ant-upload {
+  width:  100px;
+  height: 140px;
+}
+
+:host ::ng-deep .size-m>.ant-upload-list>.ant-upload-list-picture-card-container,
+:host ::ng-deep .size-m>.ant-upload {
+  width: 160px;
+  height: 200px;
+}
+
+:host ::ng-deep .size-l>.ant-upload-list>.ant-upload-list-picture-card-container,
+:host ::ng-deep .size-l>.ant-upload {
+  width: 220px;
+  height: 320px;
+}

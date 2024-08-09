@@ -5,6 +5,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IAuthor } from '../../types/author.type';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
+import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 
 @Component({
   selector: 'app-edit-author-form',
@@ -13,7 +14,7 @@ import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img
     CommonModule,
     InputFieldComponent,
     NzButtonModule,
-    UploadImgComponent
+    UploadAvatarComponent
   ],
   templateUrl: './edit-author-form.component.html',
   styleUrl: './edit-author-form.component.scss'
@@ -36,11 +37,8 @@ export class EditAuthorFormComponent {
     console.log(this.author);
   }
 
-  receiveThumbnail(thumbnailUrl: NzUploadFile[]): void {
-    if (thumbnailUrl.length === 1) {
-      this.author.avatar = thumbnailUrl[0].url;
-    } else {
-      console.log('err');
-    }
+  onAvatarUrlChange(url: string) {
+    this.author.avatar = url;
+    console.log(this.author);
   }
 }

@@ -88,7 +88,8 @@ export class GenreListComponent implements OnInit {
   }
 
   navigateToMangaWithId(genreId: string) {
-    this.router.navigate(['admin/manga/', genreId]);
+    if(!this.selectMode){this.router.navigate(['admin/manga/', genreId]);}
+    
   }
 
   navigateToStory() {

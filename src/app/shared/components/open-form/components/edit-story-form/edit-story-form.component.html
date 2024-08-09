@@ -3,11 +3,11 @@
 
 <form nz-form (ngSubmit)="onSubmit($event)">
     <div class="upload-img">
-        <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1" size="size-l"
-            [img]="img"></app-upload-img>
+        <app-upload-avatar (avatarUrlChange)="receiveThumbnail($event)" size="size-l" [img]="img"></app-upload-avatar>
+
         <div class="url-img">
             <p>Url image :</p>
-            <a [href]="story.thumbnail " *ngIf="story.thumbnail !== ''">{{story.thumbnail }}</a>
+            <a [href]="story.thumbnail " *ngIf="story.thumbnail !== ''" target="_blank">{{story.thumbnail }}</a>
             <p *ngIf="story.thumbnail == '' " class="empty">empty</p>
         </div>
     </div>
@@ -17,15 +17,19 @@
                 (valueChange)="onFieldValueChange('name', $event)" [required]="true">
             </app-input-field>
 
-            <app-input-field label="author" [(value)]="story.author" type="text"
-                (valueChange)="onFieldValueChange('author', $event)" [required]="true">
-            </app-input-field>
+            <div class="add-author" (click)="handleAuthorVisible(true)">
+                <button *ngIf="!selectedAuthors" nz-button nzType="primary" type="button" nzDanger>add author</button>
+                <div class="author" *ngIf="selectedAuthors">
+                    <nz-avatar [nzSrc]="selectedAuthors.avatar" nzIcon="user" [nzSize]="42"></nz-avatar>
+                    <strong >{{ selectedAuthors.name }}</strong>
+                </div>
+            </div>
 
             <app-input-field label="introduce" [(value)]="story.introduce" type="textarea"
                 (valueChange)="onFieldValueChange('introduce', $event)" [required]="true">
             </app-input-field>
 
-            <div class="add-genre" (click)="handleVisible(true)">
+            <div class="add-genre" (click)="handleGenreVisible(true)">
                 <p>genre</p>
                 <ul>
                     <li *ngFor="let genre of story.genre">{{ genre.genre }}</li>
@@ -48,7 +52,11 @@
         </div>
     </div>
 </form>
-<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+<app-open-modal *ngIf="genreVisible" (previewVisible)="handleGenreVisible($event)">
     <app-genre-selector [inGenresSelected]="story.genre"
         (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
+</app-open-modal>
+<app-open-modal *ngIf="authorVisible" (previewVisible)="handleAuthorVisible($event)">
+    <app-author-selector [inAuthorsSelected]="selectedAuthors"
+        (outAuthorsSelected)="onauthorsSelected($event)"></app-author-selector>
 </app-open-modal>

@@ -3,7 +3,7 @@ import { IGenre } from "./genre.type";
 export interface ICreateStory {
     thumbnail?: string;
     name?: string;
-    author?: string;
+    author: string;
     translator?: string;
     introduce?: string;
     status?: statusType;

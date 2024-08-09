@@ -21,11 +21,22 @@
             border-radius: 4px;
             width: 16%;
 
+            &:hover {
+                background-color: #007bff69;
+                transition: 0.2s;
+            }
+
             &.selected {
                 background-color: #007bff;
                 color: white;
+                transition: 0.2s;
+
+                &:hover {
+                    background-color: #fd7676c4;
+                    transition: 0.1s;
+                }
             }
-            
+
         }
     }
 }
