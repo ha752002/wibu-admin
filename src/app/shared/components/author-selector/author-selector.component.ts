@@ -94,8 +94,10 @@ export class AuthorSelectorComponent {
 
   ngOnInit(): void {
     this.getAllAuthors()
+
     if (this.inAuthorsSelected) {
       this.selectedAuthors = this.inAuthorsSelected
+      console.log(this.selectedAuthors);
     }
   }
 
@@ -121,26 +123,32 @@ export class AuthorSelectorComponent {
     );
   }
 
+  identify(index: number, item: any): any {
+    return item.id; 
+  }
+
   toggleauthor(author: IAuthor) {
     const index = this.dataAuthors.findIndex(a => a.name === author.name);
     if (index === -1) {
       this.selectedAuthors = author;
     } else {
-      this.selectedAuthors= author;
+      this.selectedAuthors = author;
     }
     this.outAuthorsSelected.emit(this.selectedAuthors);
   }
 
   isSelected(author: IAuthor): boolean {
-    return this.selectedAuthors === author;
+    return this.selectedAuthors?.id === author.id;
   }
 
   updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;    
+    console.log(2);
+    
+    const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.authors.slice(startIndex, endIndex);    
+    this.paginatedData = this.authors.slice(startIndex, endIndex);
   }
-  
+
   onPageChange(page: number): void {
     this.currentPage = page;
     this.updatePaginatedData();
@@ -151,6 +159,8 @@ export class AuthorSelectorComponent {
   }
 
   ngOnDestroy(): void {
+    console.log(3);
+
     this.subscriptions.unsubscribe();
   }
 }

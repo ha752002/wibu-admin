@@ -7,7 +7,7 @@
         </app-input-field>
     </div>
     <div class="group-author">
-        <div *ngFor="let author of paginatedData" class="item" (click)="toggleauthor(author)"
+        <div *ngFor="let author of paginatedData , trackBy:identify" class="item" (click)="toggleauthor(author)"
             [class.selected]="isSelected(author)">
             <div class="content">
                 <div class="author">

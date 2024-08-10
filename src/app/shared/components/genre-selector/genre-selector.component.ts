@@ -76,7 +76,10 @@ getAllGenres(): void {
   }
 
   isSelected(genre: IGenre): boolean {
+    console.log(this.selectedGenres.some(g => g.genre === genre.genre));
+    
     return this.selectedGenres.some(g => g.genre === genre.genre);
+
   }
 
   ngOnDestroy(): void {
