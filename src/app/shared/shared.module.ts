@@ -10,6 +10,7 @@ import { DragDropImgComponent } from './components/drag-drop-img/drag-drop-img.c
 import { ImgComponent } from './components/img/img.component';
 import { GenreSelectorComponent } from './components/genre-selector/genre-selector.component';
 import { UploadAvatarComponent } from './components/upload-avatar/upload-avatar.component';
+import { AuthorSelectorComponent } from './components/author-selector/author-selector.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -22,7 +23,8 @@ const COMPONENTS = [
   DragDropImgComponent,
   ImgComponent,
   GenreSelectorComponent,
-  UploadAvatarComponent
+  UploadAvatarComponent,
+  AuthorSelectorComponent
 ];
 
 @NgModule({
@@ -31,9 +33,6 @@ const COMPONENTS = [
   ],
   exports: [
     COMPONENTS
-  ],
-  declarations: [
-    
   ],
 })
 export class SharedModule {

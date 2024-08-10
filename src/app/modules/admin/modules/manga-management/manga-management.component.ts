@@ -4,6 +4,10 @@ import {ActivatedRoute} from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 import { IStoryInformation } from '../story/type/story.type';
 import { ImangaFilter } from './type/manga-Filter.type';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { GenreService } from '@app/shared/components/services/genre/genre.service';
+import { StoryService } from '@app/shared/components/services/story/story.service';
 
 @Component({
   selector: 'app-manga-management',
@@ -11,6 +15,7 @@ import { ImangaFilter } from './type/manga-Filter.type';
   styleUrl: './manga-management.component.scss'
 })
 export class MangaManagementComponent implements OnInit {
+  private subscriptions: Subscription = new Subscription();
 
   filter: ImangaFilter = {
     search: '',
@@ -23,152 +28,10 @@ export class MangaManagementComponent implements OnInit {
   viewType: viewType = "grid"
   multiGenreMode: boolean = false;
   previewVisible = false;
-
-  story: IStoryInformation[] = [
-    {
-      id: 1,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      genres: [
-        {genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale'},
-        {genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories'},
-      ],
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.\n\nmời các bạn đón xem!",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    },
-    {
-      id: 2,
-      thumbnail: "https://i.pinimg.com/474x/f2/e9/3a/f2e93adf802e2cd5cd83c0637ddf0f72.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    },
-    {
-      id: 3,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    },
-    {
-      id: 4,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 5,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 6,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 7,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 8,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 9,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 10,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }, {
-      id: 11,
-      thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
-      name: "Triệu Hồi Đến Thế Giới Fantasy",
-      author: "Park Jinjoon",
-      translator: "Mary Smith",
-      views: 12000,
-      chapter: 50,
-      introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.",
-      status: "Updating",
-      created: new Date(-10),
-      update: new Date(),
-    }
-
-  ];
-
-  genres: IGenre[] = [
+  storys: IStoryInformation[] = [];
+  
+  genres: IGenre[]=[];
+  dataGenres: IGenre[] = [
     {id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story'},
     {id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey'},
     {id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale'},
@@ -182,12 +45,16 @@ export class MangaManagementComponent implements OnInit {
   ];
   selectedGenres: IGenre[] = [];
 
-  constructor(private route: ActivatedRoute) {
-  }
+  constructor(private route: ActivatedRoute,private genreService: GenreService,private storyService: StoryService) {
+  }  
+
 
   ngOnInit(): void {
-    this.getParams();
-    this.genreNames = this.genres.map(g => g.genre);
+    this.getAllStorys();
+    this.getAllGenres();
+    console.log(this.storys);
+    console.log(this.genres);
+    console.log(this.genreNames);
   }
 
   getParams() {
@@ -210,6 +77,49 @@ export class MangaManagementComponent implements OnInit {
         this.filter.genre = genreParam;
       }
     });
+  }
+
+  getAllGenres(): void {
+    this.subscriptions.add(
+      this.genreService.getAllGenres().pipe(
+        finalize(() => {
+          console.log('Genres loaded');
+        })
+      ).subscribe(
+        response => {
+          this.genres = response;
+          console.log('Genres:', this.genres);
+          this.genreNames = this.genres.map(g => g.genre);
+          this.getParams();
+        },
+        error => {
+          console.error('Error loading genres', error);
+          this.genres = this.dataGenres      
+          this.genreNames = this.genres.map(g => g.genre);
+          this.getParams();
+        }
+      )
+    );
+  }
+
+  getAllStorys(): void {
+    this.subscriptions.add(
+      this.storyService.getAllStorys().pipe(
+        finalize(() => {
+          console.log('storys loaded');
+        })
+      ).subscribe(
+        response => {
+          this.storys = response;
+          console.log('storys:', this.genres);
+        },
+        error => {
+          console.error('Error loading storys', error);
+          console.log(this.storys);
+              
+        }
+      )
+    );
   }
 
   onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {

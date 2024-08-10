@@ -1,4 +1,4 @@
 export enum ELibrary {
-    Genre = 'GENRE',
+    Genre = 'Genre',
     Author = 'Author',
 }

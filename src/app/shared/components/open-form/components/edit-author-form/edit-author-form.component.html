@@ -1,8 +1,9 @@
-<p class="title">add author</p>
+<p class="title">edit author id : {{id}}</p>
 <div>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
-            <app-upload-img (thumbnailChange)="receiveThumbnail($event)" [length]="1"></app-upload-img>
+            <app-upload-avatar (avatarUrlChange)="onAvatarUrlChange($event)"></app-upload-avatar>
+
             <app-input-field label="name" [(value)]="author.name" type="text"
                 (valueChange)="onFieldValueChange('name', $event)" [required]="true">
             </app-input-field>

@@ -40,7 +40,17 @@ form {
 
         .basic {
             display: grid;
-            gap: 6px 20px;
+            gap: 12px 0px;
+
+            .add-author {
+                cursor: pointer;
+
+                .author {
+                    display: flex;
+                    align-items: center;
+                    gap: 24px;
+                }
+            }
 
             .add-genre {
                 display: flex;

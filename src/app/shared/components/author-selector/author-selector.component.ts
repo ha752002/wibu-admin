@@ -1,24 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { IAuthor } from '@app/shared/components/open-form/types/author.type';
-import { Router } from '@angular/router';
-import { AuthorService } from '@app/shared/components/services/author/author.service';
-import { Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IAuthor } from '../open-form/types/author.type';
+import { finalize, Subscription } from 'rxjs';
+import { AuthorService } from '../services/author/author.service';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { InputFieldComponent } from '../input-field/input-field.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @Component({
-  selector: 'app-author-list',
-  templateUrl: './author-list.component.html',
-  styleUrl: './author-list.component.scss'
+  standalone: true,
+  imports: [
+    CommonModule,
+    NzAvatarModule,
+    InputFieldComponent,
+    NzPaginationModule
+  ],
+  selector: 'app-author-selector',
+  templateUrl: './author-selector.component.html',
+  styleUrl: './author-selector.component.scss'
 })
-export class AuthorListComponent implements OnInit{
+export class AuthorSelectorComponent {
+  @Output() outAuthorsSelected = new EventEmitter<IAuthor>();
+  @Input() inAuthorsSelected?: IAuthor;
   private subscriptions: Subscription = new Subscription();
 
   searchQuery: string = '';
-  defaultAvatar: string = 'assets/img/eyes.png';
-  authors: IAuthor[] = [];
-  paginatedData: IAuthor[] = [];
-  pageSize = 12;
-  currentPage = 1;
+  authors: IAuthor[] = []
   dataAuthors: IAuthor[] = [
     {
       id: 1,
@@ -79,14 +86,17 @@ export class AuthorListComponent implements OnInit{
       describe: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
     }
   ];
-  
-  constructor(
-    private router: Router,
-    private authorService: AuthorService
-  ) { }
+  selectedAuthors?: IAuthor;
+  paginatedData: IAuthor[] = [];
+  pageSize = 8;
+  currentPage = 1;
+  constructor(private authorService: AuthorService) { }
 
   ngOnInit(): void {
     this.getAllAuthors()
+    if (this.inAuthorsSelected) {
+      this.selectedAuthors = this.inAuthorsSelected
+    }
   }
 
   getAllAuthors(): void {
@@ -106,11 +116,23 @@ export class AuthorListComponent implements OnInit{
           console.error('Error loading Authors', error);
           this.authors = this.dataAuthors
           this.updatePaginatedData()
-
         }
       )
     );
+  }
 
+  toggleauthor(author: IAuthor) {
+    const index = this.dataAuthors.findIndex(a => a.name === author.name);
+    if (index === -1) {
+      this.selectedAuthors = author;
+    } else {
+      this.selectedAuthors= author;
+    }
+    this.outAuthorsSelected.emit(this.selectedAuthors);
+  }
+
+  isSelected(author: IAuthor): boolean {
+    return this.selectedAuthors === author;
   }
 
   updatePaginatedData(): void {
@@ -124,8 +146,11 @@ export class AuthorListComponent implements OnInit{
     this.updatePaginatedData();
   }
 
-
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
     console.log(this.searchQuery);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

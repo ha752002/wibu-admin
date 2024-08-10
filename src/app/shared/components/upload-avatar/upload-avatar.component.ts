@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -19,16 +19,23 @@ import { Observable, Observer } from 'rxjs';
   templateUrl: './upload-avatar.component.html',
   styleUrl: './upload-avatar.component.scss'
 })
-export class UploadAvatarComponent {
+export class UploadAvatarComponent implements OnInit {
   @Output() avatarUrlChange = new EventEmitter<string>();
-  
+
   @Input() size?: 'size-s' | 'size-m' | 'size-l';
   @Input() img?: string;
-  
+
   loading = false;
   avatarUrl?: string;
   uploadUrl = 'http://localhost:8763/gallery/upload';
-  constructor(private msg: NzMessageService) {}
+
+  constructor(private msg: NzMessageService) { }
+
+  ngOnInit(): void {
+    if (this.img) {
+      this.avatarUrl = this.img
+    }
+  }
 
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
     new Observable((observer: Observer<boolean>) => {

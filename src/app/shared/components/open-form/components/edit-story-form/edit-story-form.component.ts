@@ -8,17 +8,24 @@ import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 import { IGenre } from '../../types/genre.type';
 import { ICreateStory } from '../../types/story.type';
+import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { AuthorSelectorComponent } from '@app/shared/components/author-selector/author-selector.component';
+import { IAuthor } from '../../types/author.type';
+import { StoryService } from '../../services/story/story.service';
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
     NzUploadModule,
-    UploadImgComponent,
+    UploadAvatarComponent,
     InputFieldComponent,
+    NzAvatarModule,
     NzButtonModule,
     OpenModalComponent,
-    GenreSelectorComponent
+    GenreSelectorComponent,
+    AuthorSelectorComponent
   ],
   selector: 'app-edit-story-form',
   templateUrl: './edit-story-form.component.html',
@@ -31,39 +38,60 @@ export class EditStoryFormComponent implements OnInit {
 
   story: ICreateStory = {
     name: 'Triệu Hồi Đến Thế Giới Fantasy',
-    genre: [{genre: 'ksssksk'}]
+    genre: [{genre: 'ksssksk'}],
+    author:'',
   };
 
   status: string[] = ['Updating', 'Halt', 'Full'];
-  previewVisible = false;
+  selectedAuthors?: IAuthor;
+  authorVisible = false;
+  genreVisible = false;
+
+  constructor(private storyService: StoryService) { }
 
   ngOnInit(): void {
     if (this.img) {
       this.story.thumbnail = this.img
     }
   }
-  receiveThumbnail(thumbnailUrl: NzUploadFile[]): void {
-    if (thumbnailUrl.length === 1) {
-      this.story.thumbnail = thumbnailUrl[0].url;
-    } else {
-      console.log('err');
-    }
+
+  receiveThumbnail(url: string) {
+    this.story.thumbnail  = url;
+    console.log(this.story);
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.story);
+    if (this.id) {
+      this.storyService.updateStory(this.id, this.story).subscribe(
+        (response) => {
+          console.log('Story updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating story:', error);
+        }
+      );
+    }
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
     console.log(this.story);
   }
 
-  handleVisible(value: boolean) {
-    this.previewVisible = value;
+  handleGenreVisible(value: boolean) {
+    this.genreVisible = value;
+  }
+
+  handleAuthorVisible(value: boolean) {
+    this.authorVisible = value;
   }
 
   onGenresSelected(genres: IGenre[]) {
     this.story.genre = genres;
+  }
+
+  onauthorsSelected(author: IAuthor) {
+    this.selectedAuthors= author;
+    this.story.author = author.name;
   }
 }

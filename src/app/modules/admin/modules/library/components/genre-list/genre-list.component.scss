@@ -53,12 +53,24 @@
 
             &.selectMode {
                 cursor: pointer;
+                transition: 0.2s;
+
+                &:hover{
+                    background-color: #007bff69;
+                    transition: 0.2s;
+                }
             }
 
             &.selected .content {
 
                 background-color: #007bff;
                 color: white;
+                transition: 0.2s;
+
+                &:hover{
+                    background-color: #fd7676c4;
+                    transition: 0.1s;
+                }
             }
 
             &:hover .form-group {

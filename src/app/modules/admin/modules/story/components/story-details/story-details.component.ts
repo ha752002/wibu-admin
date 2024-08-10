@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute ,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IStoryInformation } from '../../type/story.type';
 
 @Component({
@@ -7,8 +7,10 @@ import { IStoryInformation } from '../../type/story.type';
   templateUrl: './story-details.component.html',
   styleUrl: './story-details.component.scss'
 })
-export class StoryDetailsComponent implements OnInit{
-  @Input() storyData?: IStoryInformation = {
+export class StoryDetailsComponent implements OnInit {
+  @Input() storyData?: IStoryInformation
+
+  story?: IStoryInformation = {
     id: 1,
     thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
     name: "Triệu Hồi Đến Thế Giới Fantasy",
@@ -40,6 +42,7 @@ export class StoryDetailsComponent implements OnInit{
     created: new Date(-10),
     update: new Date(),
   };
+  ;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -49,10 +52,14 @@ export class StoryDetailsComponent implements OnInit{
         this.storyData.id = +params['id'];
       }
     });
+
+    if (this.storyData) {
+      this.storyData = this.story
+    }
   }
 
-  navigateToChapter( chapterId?: number) {
-    if(this.storyData?.id){
+  navigateToChapter(chapterId?: number) {
+    if (this.storyData?.id) {
       this.router.navigate([`admin/story/${this.storyData.id}/chapter/${chapterId}`]);
     }
   }

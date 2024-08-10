@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
@@ -17,10 +17,12 @@ export type viewType = 'grid' | 'table' ;
   templateUrl: './story-list.component.html',
   styleUrl: './story-list.component.scss'
 })
-export class StoryListComponent {
+export class StoryListComponent implements OnInit{
   @Input() rowSize: 3 | 4 | 5 = 3;
   @Input() viewType: viewType = 'grid';
-  @Input() storyData: IStoryInformation[] = [
+  @Input() storyData: IStoryInformation[]= [];
+
+  storys: IStoryInformation[] = [
     {
       id: 1,
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
@@ -160,4 +162,9 @@ export class StoryListComponent {
 
   ];
 
+  ngOnInit(): void {
+    if(this.storyData){
+      this.storyData = this.storys
+    }
+  }
 }

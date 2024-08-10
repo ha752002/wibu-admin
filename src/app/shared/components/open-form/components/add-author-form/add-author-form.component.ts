@@ -18,7 +18,6 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
     CommonModule,
     InputFieldComponent,
     NzButtonModule,
-    UploadImgComponent,
     UploadAvatarComponent
   ],
   templateUrl: './add-author-form.component.html',
