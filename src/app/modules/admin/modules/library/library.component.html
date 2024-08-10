@@ -5,8 +5,7 @@
         </ul>
     </div>
     <div class="content">
-        <app-genre-list *ngIf="contentLibrary === 'genre'"></app-genre-list>
-        <app-author-list *ngIf="contentLibrary === 'author'"></app-author-list>
-    </div>
-    
+        <app-genre-list *ngIf="contentLibrary === ELibrary.Genre"></app-genre-list>
+        <app-author-list *ngIf="contentLibrary === ELibrary.Author"></app-author-list>
+      </div> 
 </div>

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
-import { IStoryInformation } from '@app/modules/admin/modules/story/story.component';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 
 export type viewType = 'grid' | 'table' ;
 

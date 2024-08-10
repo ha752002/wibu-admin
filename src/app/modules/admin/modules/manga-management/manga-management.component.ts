@@ -1,14 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {viewType} from '@app/shared/components/story-list/story-list.component';
-import {IGenre, IStoryInformation} from '../story/story.component';
 import {ActivatedRoute} from '@angular/router';
-
-export interface ImangaFilter {
-  search?: string,
-  genre?: string,
-  chapterNumber?: string,
-}
-
+import { IGenre } from '@app/shared/components/open-form/types/genre.type';
+import { IStoryInformation } from '../story/type/story.type';
+import { ImangaFilter } from './type/manga-Filter.type';
 
 @Component({
   selector: 'app-manga-management',
@@ -201,7 +196,7 @@ export class MangaManagementComponent implements OnInit {
       if (genreParam) {
         const parsedGenres = JSON.parse(genreParam);
         this.multiGenreMode = true;
-        this.selectedGenres = this.getGenresByIds(parsedGenres);
+        this.selectedGenres = this.genres.filter(genre => genre.id !== undefined && parsedGenres.includes(genre.id));
       } else {
         this.getGenreById()
       }
@@ -215,13 +210,6 @@ export class MangaManagementComponent implements OnInit {
         this.filter.genre = genreParam;
       }
     });
-  }
-
-  getGenresByIds(ids: number[]): IGenre[] {
-    if (this.genres) {
-      return this.genres.filter(genre => genre.id !== undefined && ids.includes(genre.id));
-    }
-    return [];
   }
 
   onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {

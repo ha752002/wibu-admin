@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Pipe } from '@angular/core';
 import { Router } from '@angular/router';
-import { IStoryInformation } from '@app/modules/admin/modules/story/story.component';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 

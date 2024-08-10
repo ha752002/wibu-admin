@@ -1,5 +1,12 @@
+.upload{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .clearfix {
   position: relative;
+  
 
   &:after {
     content: '';

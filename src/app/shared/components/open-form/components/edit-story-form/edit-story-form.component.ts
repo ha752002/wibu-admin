@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ICreateStory } from '../add-story-form/add-story-form.component';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IGenre } from '@app/modules/admin/modules/story/story.component';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
+import { IGenre } from '../../types/genre.type';
+import { ICreateStory } from '../../types/story.type';
 
 @Component({
   standalone: true,
