@@ -67,7 +67,6 @@ export class UploadAvatarComponent implements OnInit {
         this.loading = true;
         break;
       case 'done':
-        // Get this url from response in real world.
         const response = info.file.response;
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.loading = false;
