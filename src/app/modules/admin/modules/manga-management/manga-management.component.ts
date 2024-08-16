@@ -6,8 +6,8 @@ import { IStoryInformation } from '../story/type/story.type';
 import { ImangaFilter } from './type/manga-Filter.type';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { GenreService } from '@app/shared/components/services/genre/genre.service';
-import { StoryService } from '@app/shared/components/services/story/story.service';
+import { GenreService } from '@app/shared/services/genre/genre.service';
+import { StoryService } from '@app/shared/services/story/story.service';
 
 @Component({
   selector: 'app-manga-management',

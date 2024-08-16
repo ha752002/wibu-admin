@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IAuthor } from '../open-form/types/author.type';
 import { finalize, Subscription } from 'rxjs';
-import { AuthorService } from '../services/author/author.service';
+import { AuthorService } from '../../services/author/author.service';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { InputFieldComponent } from '../input-field/input-field.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';

@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { UploadService } from '@app/shared/services/upload/upload.service';
+import { ChapterService } from '../../services/chapter/chapter.service';
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
     DragDropImgComponent,
-    UploadImgComponent,
     InputFieldComponent,
     NzButtonModule
   ],
@@ -22,11 +22,47 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
 })
 export class AddChapterFormComponent implements OnInit {
   chapter: IChapter = {}
+  img: File[] = []
   @Input() storyData?: IStoryInformation = {}
 
+  constructor(
+    private uploadService: UploadService,
+    private chapterService: ChapterService
+  ) { }
+
   ngOnInit(): void {
-    this.chapter.name = this.getLastChapter()?.name;
+    if (this.img.length > 0) {
+      this.uploadImagesAndSubmitChapter();
+    } else {
+      console.error('Error creating chapter:');
+    }
   }
+
+  uploadImagesAndSubmitChapter(): void {
+    this.uploadService.uploadImages(this.img).subscribe(
+      (urls: string[]) => {
+        this.chapter.image = urls;
+        this.submitChapter();
+      },
+      
+      error => {
+        console.error('Error uploading images:', error);
+      }
+    );
+  }
+
+  submitChapter(): void {
+    this.chapterService.createChapter(this.chapter).subscribe(
+      response => {
+        console.log('Chapter created successfully:', response);
+      },
+      error => {
+        console.error('Error creating chapter:', error);
+      }
+    );
+  }
+
+
 
   getLastChapter(): IChapter | undefined {
     if (this.storyData?.chapters && this.storyData.chapters.length > 0) {
@@ -36,7 +72,8 @@ export class AddChapterFormComponent implements OnInit {
   }
 
   onImagesSelected(images: File[]) {
-    this.chapter.image = images.map(file => URL.createObjectURL(file));
+    this.img = images;
+    console.log(this.img);
   }
 
   onSubmit(event: Event): void {

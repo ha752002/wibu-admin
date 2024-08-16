@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IAuthor } from '@app/shared/components/open-form/types/author.type';
 import { Router } from '@angular/router';
-import { AuthorService } from '@app/shared/components/services/author/author.service';
+import { AuthorService } from '@app/shared/services/author/author.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 

@@ -17,6 +17,10 @@ export class GenreService {
     return this.apiCallerService.post<IGenre, IGenre>(this.apiUrl.push, genre);
   }
 
+  updateGenre(id: number, genre: IGenre): Observable<IGenre> {
+    return this.apiCallerService.patch(`${this.apiUrl.update}/${id}`, genre);
+  }
+
   deleteGenre(id: number): Observable<void> {
     return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }

@@ -1,12 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-
 import { Component, OnDestroy } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { IAuthor } from '../../types/author.type';
 import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';

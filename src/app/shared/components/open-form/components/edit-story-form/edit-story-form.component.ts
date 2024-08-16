@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';

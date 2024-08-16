@@ -16,6 +16,10 @@ export class AuthorService {
     return this.apiCallerService.post<IAuthor, IAuthor>(this.apiUrl.push, author);
   }
 
+  updateAuthor(id: number, author: IAuthor): Observable<IAuthor> {
+    return this.apiCallerService.patch(`${this.apiUrl.update}/${id}`, author);
+  }
+
   deleteAuthor(id: number): Observable<void> {
     return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
-import { GenreService } from '@app/shared/components/services/genre/genre.service';
+import { GenreService } from '@app/shared/services/genre/genre.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 

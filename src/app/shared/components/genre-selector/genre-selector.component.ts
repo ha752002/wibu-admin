@@ -5,7 +5,7 @@ import { IGenre } from '../open-form/types/genre.type';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { GenreService } from '../services/genre/genre.service';
+import { GenreService } from '../../services/genre/genre.service';
 
 @Component({
   selector: 'app-genre-selector',

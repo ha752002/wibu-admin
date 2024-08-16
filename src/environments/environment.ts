@@ -6,6 +6,7 @@ export const environment = {
     register: 'auth/register',
     getUserInfo: 'auth/user-info',
     delete: 'auth/deActive/{id}',
+    update: 'auth/update/{id}',
 
   },
   adminEndpoint: {
@@ -37,5 +38,9 @@ export const environment = {
       update: 'chapter/update/{id}',
       delete: 'chapter/deActive/{id}',
     },
+  },
+  galleryEndpoint:{
+    multiUpload: 'gallery/multi-upload',
+    upload: 'gallery/upload',
   }
 };

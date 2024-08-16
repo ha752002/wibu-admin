@@ -4,6 +4,7 @@ import { InputFieldComponent } from '@app/shared/components/input-field/input-fi
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IUpdateUser } from '../../types/user.type';
+import { UserService } from '../../services/user/user.service';
 
 
 @Component({
@@ -31,10 +32,20 @@ export class EditUserFormComponent {
 
   userTypeList: string[] = ['user','admin','management'];
 
+  constructor(private userService: UserService) { }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.user);
+    if (this.id) {
+      this.userService.updateUser(this.id, this.user).subscribe(
+        (response) => {
+          console.log('User updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating user:', error);
+        }
+      );
+    }
   }
 
   onFieldValueChange(field: keyof IUpdateUser, value: string | number | Date | undefined): void {

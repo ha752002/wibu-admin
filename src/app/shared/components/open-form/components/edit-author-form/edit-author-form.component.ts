@@ -3,9 +3,8 @@ import { Component, Input } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IAuthor } from '../../types/author.type';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
+import { AuthorService } from '../../services/author/author.service';
 
 @Component({
   selector: 'app-edit-author-form',
@@ -28,9 +27,21 @@ export class EditAuthorFormComponent {
     avatar: '',
   };
 
+  constructor(private authorService: AuthorService) { }
+
+
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.author);
+    if (this.id) {
+      this.authorService.updateAuthor(this.id, this.author).subscribe(
+        (response) => {
+          console.log('Author updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating author:', error);
+        }
+      );
+    }
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {

@@ -2,11 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
+import { IImage } from '@app/shared/types/image.types';
 
-export interface IImage {
-  name?: string;
-  url?: string
-}
 
 @Component({
   selector: 'app-drag-drop-img',

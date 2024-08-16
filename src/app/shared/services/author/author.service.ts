@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { environment } from 'src/environments/environment';
-import { IAuthor } from '../../open-form/types/author.type';
 import { Observable } from 'rxjs';
+import { IAuthor } from '@app/shared/components/open-form/types/author.type';
 
 @Injectable({
   providedIn: 'root'

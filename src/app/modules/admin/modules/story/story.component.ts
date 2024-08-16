@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { GenreService } from '@app/shared/components/services/genre/genre.service';
-import { StoryService } from '@app/shared/components/services/story/story.service';
+import { GenreService } from '@app/shared/services/genre/genre.service';
+import { StoryService } from '@app/shared/services/story/story.service';
 import { ActivatedRoute } from '@angular/router';
 import { IStoryInformation } from './type/story.type';
 @Component({

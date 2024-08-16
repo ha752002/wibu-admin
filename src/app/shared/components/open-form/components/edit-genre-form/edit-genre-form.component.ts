@@ -5,6 +5,7 @@ import { InputFieldComponent } from '@app/shared/components/input-field/input-fi
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { IGenre } from '../../types/genre.type';
+import { GenreService } from '../../services/genre/genre.service';
 
 @Component({
   selector: 'app-edit-genre-form',
@@ -28,13 +29,24 @@ export class EditGenreFormComponent implements OnInit{
     AgeWarning: false,
   };
 
+  constructor(private genreService: GenreService) { }
+
   ngOnInit(): void {
     this.genre.id = this.id
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.genre);
+    if (this.id) {
+      this.genreService.updateGenre(this.id, this.genre).subscribe(
+        (response) => {
+          console.log('Genre updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating genre:', error);
+        }
+      );
+    }
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
