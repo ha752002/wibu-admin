@@ -97,7 +97,6 @@ export class AuthorSelectorComponent {
 
     if (this.inAuthorsSelected) {
       this.selectedAuthors = this.inAuthorsSelected
-      console.log(this.selectedAuthors);
     }
   }
 
@@ -110,7 +109,6 @@ export class AuthorSelectorComponent {
       ).subscribe(
         response => {
           this.authors = response;
-          console.log('Author:', this.authors);
           this.updatePaginatedData()
         },
 
@@ -142,8 +140,6 @@ export class AuthorSelectorComponent {
   }
 
   updatePaginatedData(): void {
-    console.log(2);
-    
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedData = this.authors.slice(startIndex, endIndex);
@@ -155,12 +151,9 @@ export class AuthorSelectorComponent {
   }
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
-    console.log(this.searchQuery);
   }
 
   ngOnDestroy(): void {
-    console.log(3);
-
     this.subscriptions.unsubscribe();
   }
 }

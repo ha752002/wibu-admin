@@ -53,24 +53,20 @@ export class AddStoryFormComponent implements OnInit{
 
   receiveThumbnail(url: string) {
     this.story.thumbnail  = url;
-    console.log(this.story);
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
     this.storyService.createStory(this.story).subscribe(
       (response) => {
-        console.log('Story created successfully:', response);
       },
       (error) => {
         console.error('Error creating story:', error);
       }
     );
-    console.log('Form submitted:', this.story);
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
-    console.log(this.story);
   }
 
   handleGenreVisible(value: boolean) {

@@ -31,6 +31,11 @@ export class AddChapterFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
+  }
+
+  onSubmit(event: Event): void {
+    event.preventDefault();
     if (this.img.length > 0) {
       this.uploadImagesAndSubmitChapter();
     } else {
@@ -54,7 +59,6 @@ export class AddChapterFormComponent implements OnInit {
   submitChapter(): void {
     this.chapterService.createChapter(this.chapter).subscribe(
       response => {
-        console.log('Chapter created successfully:', response);
       },
       error => {
         console.error('Error creating chapter:', error);
@@ -73,15 +77,8 @@ export class AddChapterFormComponent implements OnInit {
 
   onImagesSelected(images: File[]) {
     this.img = images;
-    console.log(this.img);
-  }
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    console.log('Form submitted:', this.chapter);
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
-    console.log(this.chapter);
   }
 }

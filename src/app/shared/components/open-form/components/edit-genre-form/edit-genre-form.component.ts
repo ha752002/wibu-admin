@@ -40,7 +40,6 @@ export class EditGenreFormComponent implements OnInit{
     if (this.id) {
       this.genreService.updateGenre(this.id, this.genre).subscribe(
         (response) => {
-          console.log('Genre updated successfully:', response);
         },
         (error) => {
           console.error('Error updating genre:', error);
@@ -50,6 +49,5 @@ export class EditGenreFormComponent implements OnInit{
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
-    console.log(this.genre);
   }
 }

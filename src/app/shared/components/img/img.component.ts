@@ -27,7 +27,6 @@ export class ImgComponent {
   previewVisible = false;
   selectImg(): void {
     this.previewVisible = !this.previewVisible;
-    console.log(this.previewVisible);
   }
 
   handleVisible(value: boolean) {

@@ -27,7 +27,6 @@ export class ListTableComponent {
 
   selectStory(user: IStoryInformation): void {
     this.previewVisible = !this.previewVisible;
-    console.log(this.previewVisible);
     this.selectedStory = user
   }
 

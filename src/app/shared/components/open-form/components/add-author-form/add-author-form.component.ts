@@ -34,7 +34,6 @@ export class AddAuthorFormComponent implements OnDestroy {
     event.preventDefault();
     this.authorService.createAuthor(this.author).subscribe(
       response => {
-        console.log('author created successfully', response);
       },
       error => {
         console.error('Error creating author', error);
@@ -43,7 +42,6 @@ export class AddAuthorFormComponent implements OnDestroy {
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
-    console.log(this.author);
   }
 
   onAvatarUrlChange(url: string) {

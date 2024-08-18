@@ -39,7 +39,6 @@ export class EditUserFormComponent {
     if (this.id) {
       this.userService.updateUser(this.id, this.user).subscribe(
         (response) => {
-          console.log('User updated successfully:', response);
         },
         (error) => {
           console.error('Error updating user:', error);
@@ -49,6 +48,5 @@ export class EditUserFormComponent {
   }
 
   onFieldValueChange(field: keyof IUpdateUser, value: string | number | Date | undefined): void {
-    console.log(this.user);
   }
 }

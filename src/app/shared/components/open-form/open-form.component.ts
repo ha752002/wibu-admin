@@ -63,7 +63,6 @@ export class OpenFormComponent implements OnDestroy{
   constructor(private authorService: AuthorService) { }
 
   openForm() {
-    console.log(this.formName);
     this.currentForm = this.formName
   }
 
@@ -73,7 +72,6 @@ export class OpenFormComponent implements OnDestroy{
 
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation(); 
-    console.log('Child clicked');
   }
 
   ngOnDestroy(): void {

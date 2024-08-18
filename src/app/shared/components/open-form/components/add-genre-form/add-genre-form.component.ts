@@ -34,7 +34,6 @@ export class AddGenreFormComponent {
     event.preventDefault();
     this.genreService.createGenre(this.genre).subscribe(
       response => {
-        console.log('Genre created successfully', response);
       },
       error => {
         console.error('Error creating genre', error);
@@ -43,6 +42,5 @@ export class AddGenreFormComponent {
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
-    console.log(this.genre);
   }
 }

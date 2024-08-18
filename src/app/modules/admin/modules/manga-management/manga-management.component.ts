@@ -52,9 +52,6 @@ export class MangaManagementComponent implements OnInit {
   ngOnInit(): void {
     this.getAllStorys();
     this.getAllGenres();
-    console.log(this.storys);
-    console.log(this.genres);
-    console.log(this.genreNames);
   }
 
   getParams() {
@@ -88,7 +85,6 @@ export class MangaManagementComponent implements OnInit {
       ).subscribe(
         response => {
           this.genres = response;
-          console.log('Genres:', this.genres);
           this.genreNames = this.genres.map(g => g.genre);
           this.getParams();
         },
@@ -111,19 +107,15 @@ export class MangaManagementComponent implements OnInit {
       ).subscribe(
         response => {
           this.storys = response;
-          console.log('storys:', this.genres);
         },
         error => {
           console.error('Error loading storys', error);
-          console.log(this.storys);
-              
         }
       )
     );
   }
 
   onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {
-    console.log(this.filter);
   }
 
   changeViewType(view: viewType) {
@@ -132,8 +124,6 @@ export class MangaManagementComponent implements OnInit {
     } else {
       this.viewType = 'table'
     }
-    console.log(this.viewType);
-
   }
 
   changeMultiGenreMode(Mode: boolean) {

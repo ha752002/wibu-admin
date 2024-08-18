@@ -143,9 +143,7 @@ export class DragDropImgComponent implements OnInit{
 
   uploadImages() {
     this.imagesSelected.emit(this.imageFiles);
-
     this.imageFiles.forEach(file => {
-      console.log(file.name);
     });
   }
 }

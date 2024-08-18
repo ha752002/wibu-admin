@@ -56,7 +56,6 @@ export class EditStoryFormComponent implements OnInit {
 
   receiveThumbnail(url: string) {
     this.story.thumbnail  = url;
-    console.log(this.story);
   }
 
   onSubmit(event: Event): void {
@@ -64,7 +63,6 @@ export class EditStoryFormComponent implements OnInit {
     if (this.id) {
       this.storyService.updateStory(this.id, this.story).subscribe(
         (response) => {
-          console.log('Story updated successfully:', response);
         },
         (error) => {
           console.error('Error updating story:', error);
@@ -74,7 +72,6 @@ export class EditStoryFormComponent implements OnInit {
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
-    console.log(this.story);
   }
 
   handleGenreVisible(value: boolean) {

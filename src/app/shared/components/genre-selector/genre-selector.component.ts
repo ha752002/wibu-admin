@@ -55,7 +55,6 @@ getAllGenres(): void {
     ).subscribe(
       response => {
         this.genres = response;
-        console.log('Genres:', this.genres);
       },
       error => {
         console.error('Error loading genres', error);
@@ -76,8 +75,6 @@ getAllGenres(): void {
   }
 
   isSelected(genre: IGenre): boolean {
-    console.log(this.selectedGenres.some(g => g.genre === genre.genre));
-    
     return this.selectedGenres.some(g => g.genre === genre.genre);
 
   }

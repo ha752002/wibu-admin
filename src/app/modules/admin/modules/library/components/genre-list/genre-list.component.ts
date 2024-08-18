@@ -48,7 +48,6 @@ export class GenreListComponent implements OnInit {
       ).subscribe(
         response => {
           this.genres = response;
-          console.log('Genres:', this.genres);
         },
         error => {
           console.error('Error loading genres', error);
@@ -74,12 +73,10 @@ export class GenreListComponent implements OnInit {
   }
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
-    console.log(this.searchQuery);
   }
 
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation();
-    console.log('Child clicked');
   }
 
   ChangeSelectionMode() {

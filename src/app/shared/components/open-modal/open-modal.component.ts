@@ -19,6 +19,5 @@ export class OpenModalComponent {
 
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation(); 
-    console.log('Child clicked');
   }
 }

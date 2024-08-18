@@ -35,7 +35,6 @@ export class EditAuthorFormComponent {
     if (this.id) {
       this.authorService.updateAuthor(this.id, this.author).subscribe(
         (response) => {
-          console.log('Author updated successfully:', response);
         },
         (error) => {
           console.error('Error updating author:', error);
@@ -45,11 +44,9 @@ export class EditAuthorFormComponent {
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
-    console.log(this.author);
   }
 
   onAvatarUrlChange(url: string) {
     this.author.avatar = url;
-    console.log(this.author);
   }
 }

@@ -35,10 +35,8 @@ export class EditChapterFormComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.chapter);
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
-    console.log(this.chapter);
   }
 }

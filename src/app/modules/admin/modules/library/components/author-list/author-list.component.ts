@@ -98,7 +98,6 @@ export class AuthorListComponent implements OnInit{
       ).subscribe(
         response => {
           this.authors = response;
-          console.log('Author:', this.authors);
           this.updatePaginatedData()
         },
 
@@ -126,6 +125,5 @@ export class AuthorListComponent implements OnInit{
 
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
-    console.log(this.searchQuery);
   }
 }

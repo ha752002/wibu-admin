@@ -48,7 +48,6 @@ export class ListGridComponent {
 
   selectStory(story: IStoryInformation): void {
     this.previewVisible = !this.previewVisible;
-    console.log(this.previewVisible);
     this.selectedStory = story
   }
 
