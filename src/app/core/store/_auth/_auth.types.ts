@@ -16,6 +16,7 @@ export interface IUserInfo {
   createdDate: Date,
   email: string,
   id: string,
+  birthday: Date,
   lastUpdated: Date,
   roles: EUserRole[],
   username: string
@@ -37,7 +38,8 @@ export interface IUserInfoResponse {
   username: string,
   roles: EUserRole[],
   createdDate: Date,
-  lastUpdated: Date
+  lastUpdated: Date,
+  birthday: Date
 }
 
 

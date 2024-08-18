@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {IUser} from "@app/modules/admin/modules/user-management/type/user.types";
+import {size} from "lodash";
 
 @Component({
   selector: 'app-user-item',
@@ -8,5 +9,8 @@ import {IUser} from "@app/modules/admin/modules/user-management/type/user.types"
 })
 export class UserItemComponent {
   @Input() user!: IUser;
-
+  defaultAvatar: string = 'assets/img/user.png';
+  @Input() isLast!: boolean;
+  @Input() isEven!: boolean;
+  protected readonly size = size;
 }

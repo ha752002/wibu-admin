@@ -1,3 +1,14 @@
+<div class="action">
+  <div>Lọc</div>
+  <div>
+    <nz-input-group [nzSuffix]="" class="search-input">
+      <input nz-input placeholder="Search user..." type="text"/>
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
+    </ng-template>
+  </div>
+</div>
 <div *rxLet="userList$ | push; let userList">
   @if (userList) {
     <app-user-list [userList]="userList"></app-user-list>

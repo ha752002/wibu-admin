@@ -1,9 +1,29 @@
 :host {
-  padding: 10px 20px;
-
   ::ng-deep {
     nz-list.ant-list.ant-list-split {
-      padding: 10px 20px;
+
+
+      .last-item {
+        border-bottom: none !important;
+      }
+
+      .ant-list-item {
+        border-bottom: 1px solid var(--text-gray14);
+        padding: 10px 10px;
+      }
     }
   }
+}
+
+.title {
+  color: var(--pink12);
+  font-weight: bold;
+  padding-top: 0;
+  font-size: 20px;
+}
+
+.user-list-container {
+  padding: 10px 20px;
+  max-height: 500px;
+  overflow-y: auto;
 }

@@ -1,20 +1,10 @@
 @if (userList.length > 0) {
-  <nz-list>
-    @for (user of userList; track user.id) {
-      <nz-list-item>
-        <ng-container>
-          <nz-list-item-meta
-            [nzAvatar]="user.avatarUrl"
-            [nzDescription]="user.username"
-          >
-          </nz-list-item-meta>
-          <ul nz-list-item-actions>
-            <nz-list-item-action><a>edit</a></nz-list-item-action>
-            <nz-list-item-action><a>more</a></nz-list-item-action>
-          </ul>
-        </ng-container>
-        <app-user-item [user]="user"></app-user-item>
-      </nz-list-item>
-    }
-  </nz-list>
+  <nz-list-header class="title">List of users</nz-list-header>
+  <div class="user-list-container">
+    <nz-list>
+      @for (user of userList; track user.id; let isLast = $last; let isEven = $even) {
+        <app-user-item [user]="user" [isLast]="isLast" [isEven]="isEven"></app-user-item>
+      }
+    </nz-list>
+  </div>
 }

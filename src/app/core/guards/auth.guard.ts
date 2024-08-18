@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthApiService)
   const accessToken = localStorage.getItem("accessToken");
   if (!accessToken) {
-    return router.navigate(['/auth/login']);
+    return router.navigate(['/auth/signIn']);
   }
   return authService.getUserInfo().pipe(
     map(res => {

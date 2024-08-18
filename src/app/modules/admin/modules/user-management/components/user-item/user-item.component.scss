@@ -1,1 +1,10 @@
 
+.item-even {
+  background: #ebebeb;
+}
+
+:host {
+  .user-name-text::ng-deep .ant-list-item-meta-content nz-list-item-meta-description .ant-list-item-meta-description {
+    color: var(--black) !important;
+  }
+}

@@ -1,1 +1,24 @@
-<p>user-item works!</p>
+<nz-list-item [ngClass]="{
+  'last-item': isLast,
+  'item-even': isEven
+}">
+  <ng-container>
+    <nz-list-item-meta
+      [nzAvatar]="user.avatarUrl ? user.avatarUrl : defaultAvatar"
+      [nzDescription]="user.username"
+      class="user-name-text"
+    >
+    </nz-list-item-meta>
+    <ul nz-list-item-actions>
+      <nz-list-item-action>
+        <button nz-button nzType="primary">View</button>
+      </nz-list-item-action>
+      <nz-list-item-action>
+        <button nz-button nzType="primary">Edit</button>
+      </nz-list-item-action>
+      <nz-list-item-action>
+        <button nz-button nzDanger nzType="primary">Delete</button>
+      </nz-list-item-action>
+    </ul>
+  </ng-container>
+</nz-list-item>

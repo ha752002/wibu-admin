@@ -9,7 +9,11 @@
       <span class="desc">{{ (userInfo.username | titlecase) || 'No Email' }}</span>
     </div>
     <div class="user-item">
-      <span class="title">Name: </span>
+      <span class="title">Birthday: </span>
+      <span class="desc">{{ (userInfo.birthday | formatDate) || 'No Email' }}</span>
+    </div>
+    <div class="user-item">
+      <span class="title">Roles: </span>
       @for (role of userInfo.roles; track role) {
         <span class="desc"> {{ role | mapUserRole }}</span>
       }

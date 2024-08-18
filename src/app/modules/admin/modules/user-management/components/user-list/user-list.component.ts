@@ -8,5 +8,6 @@ import {IUser} from "@app/modules/admin/modules/user-management/type/user.types"
 })
 export class UserListComponent {
   @Input() userList!: IUser[];
+  defaultAvatar: string = 'assets/img/user.png';
 
 }
