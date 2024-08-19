@@ -5,8 +5,8 @@
             <div class="item" *ngFor="let genre of genres" (click)="toggleGenre(genre)"
                 [class.selected]="isSelected(genre)">
                 <div>
-                    <strong>{{ genre.genre }}</strong>
-                    <p>{{ genre.describe }}</p>
+                    <strong>{{ genre.title }}</strong>
+                    <p>{{ genre.description }}</p>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
-import { IGenre } from '@app/shared/components/open-form/types/genre.type';
+import { IGenre, IGenres } from '@app/shared/components/open-form/types/genre.type';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -13,7 +13,7 @@ export class GenreService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  getAllGenres(): Observable<IGenre[]> {
-    return this.apiCallerService.get<null, IGenre[]>(this.apiGetAllUrl);
+  getAllGenres(): Observable<IGenres> {
+    return this.apiCallerService.get<null, IGenres>(this.apiGetAllUrl);
   }
 }

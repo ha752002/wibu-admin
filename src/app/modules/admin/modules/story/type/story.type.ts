@@ -2,7 +2,7 @@ import { IChapter } from "@app/shared/components/open-form/types/chapter.type";
 import { IGenre } from "@app/shared/components/open-form/types/genre.type";
 
 export interface IStoryInformation {
-    id?: number;
+    id?: string;
     thumbnail?: string;
     name?: string;
     genres?: IGenre[],

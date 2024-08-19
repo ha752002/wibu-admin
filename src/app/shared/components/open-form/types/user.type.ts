@@ -1,5 +1,5 @@
 export interface ICreateUser {
-    id?: number;
+    id?: string;
     avatarUrl?: string;
     name?: string;
     phone?: string;
@@ -11,7 +11,7 @@ export interface ICreateUser {
   }
 
   export interface IUpdateUser {
-    id?: number;
+    id?: string;
     avatarUrl?: string;
     name?: string;
     phone?: string;

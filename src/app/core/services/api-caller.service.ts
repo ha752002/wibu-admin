@@ -20,6 +20,10 @@ export class ApiCallerService {
     return this._httpClient.post<U>(environment.apiUrl + endpoint, body || {}, options);
   }
 
+  public put<T, U>(endpoint: string, body?: T, options?: HttpRequestOptions) {
+    return this._httpClient.put<U>(environment.apiUrl + endpoint, body || {}, options);
+  }
+
   public patch<U>(endpoint: string, body?: any, options?: HttpRequestOptions) {
     return this._httpClient.patch<U>(environment.apiUrl + endpoint, body, options);
   }

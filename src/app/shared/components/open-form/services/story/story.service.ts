@@ -16,12 +16,11 @@ export class StoryService {
     return this.apiCallerService.post<ICreateStory, ICreateStory>(this.apiUrl.push, storyData);
   }
 
-  updateStory(id: number, storyData: ICreateStory): Observable<ICreateStory> {
-    const endpoint = this.apiUrl.update.replace('{id}', id.toString());
-    return this.apiCallerService.patch<ICreateStory>(endpoint, storyData);
+  updateStory(id: string, storyData: ICreateStory): Observable<ICreateStory> {
+    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, storyData);
   }
 
-  deleteStory(id: number): Observable<void> {
+  deleteStory(id: string): Observable<void> {
     return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }
 }

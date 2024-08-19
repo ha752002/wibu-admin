@@ -21,7 +21,7 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
 export class EditChapterFormComponent {
   chapter: IChapter = {}
   img: File[] = []
-  @Input() id?: number;
+  @Input() id?: string;
   @Input() storyData?: IStoryInformation = {}
   @Input() ChapterData?: IChapter = {}
 

@@ -20,7 +20,7 @@
             <div class="add-author" (click)="handleAuthorVisible(true)">
                 <button *ngIf="!selectedAuthors" nz-button nzType="primary" type="button">add author</button>
                 <div class="author" *ngIf="selectedAuthors">
-                    <nz-avatar [nzSrc]="selectedAuthors.avatar" nzIcon="user" [nzSize]="42"></nz-avatar>
+                    <nz-avatar [nzSrc]="selectedAuthors.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
                     <strong >{{ selectedAuthors.name }}</strong>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="add-genre" (click)="handleGenreVisible(true)">
                 <p >genre</p>
                 <ul >
-                    <li *ngFor="let genre of story.genre">{{ genre.genre }}</li>
+                    <li *ngFor="let genre of story.genre">{{ genre.title }}</li>
                     <li>+ add</li>
                 </ul>
             </div>

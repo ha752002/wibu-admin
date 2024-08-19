@@ -1,7 +1,13 @@
 
 export interface IAuthor {
-  id?: number;
+  id?: string;
   name: string;
-  avatar?: string;
-  describe: string;
+  avatarUrl?: string;
+  description: string;
+}
+
+export interface IAuthors {
+  data: IAuthor[];
+  message: string,
+  status?: boolean,
 }

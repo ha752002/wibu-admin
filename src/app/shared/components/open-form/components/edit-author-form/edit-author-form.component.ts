@@ -19,12 +19,12 @@ import { AuthorService } from '../../services/author/author.service';
   styleUrl: './edit-author-form.component.scss'
 })
 export class EditAuthorFormComponent {
-  @Input() id?: number;
+  @Input() id?: string;
 
   author: IAuthor = {
     name: '',
-    describe: '',
-    avatar: '',
+    description: '',
+    avatarUrl: '',
   };
 
   constructor(private authorService: AuthorService) { }
@@ -47,6 +47,6 @@ export class EditAuthorFormComponent {
   }
 
   onAvatarUrlChange(url: string) {
-    this.author.avatar = url;
+    this.author.avatarUrl = url;
   }
 }

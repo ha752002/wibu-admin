@@ -31,13 +31,13 @@ import { StoryService } from '../../services/story/story.service';
   styleUrl: './edit-story-form.component.scss'
 })
 export class EditStoryFormComponent implements OnInit {
-  @Input() id?: number;
+  @Input() id?: string;
   @Input() img?: string;
 
 
   story: ICreateStory = {
     name: 'Triệu Hồi Đến Thế Giới Fantasy',
-    genre: [{genre: 'ksssksk'}],
+    genre: [{title: 'ksssksk'}],
     author:'',
   };
 

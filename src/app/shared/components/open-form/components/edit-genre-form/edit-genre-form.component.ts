@@ -21,12 +21,12 @@ import { GenreService } from '../../services/genre/genre.service';
   styleUrl: './edit-genre-form.component.scss'
 })
 export class EditGenreFormComponent implements OnInit{
-  @Input() id?: number;
+  @Input() id?: string;
 
   genre: IGenre = {
-    genre: '',
-    describe: '',
-    AgeWarning: false,
+    title: '',
+    description: '',
+    // AgeWarning: false,
   };
 
   constructor(private genreService: GenreService) { }

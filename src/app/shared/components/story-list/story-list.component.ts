@@ -24,7 +24,7 @@ export class StoryListComponent implements OnInit{
 
   storys: IStoryInformation[] = [
     {
-      id: 1,
+      id: '1',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -37,7 +37,7 @@ export class StoryListComponent implements OnInit{
       update: new Date(),
     },
     {
-      id: 2,
+      id: '2',
       thumbnail: "https://i.pinimg.com/474x/f2/e9/3a/f2e93adf802e2cd5cd83c0637ddf0f72.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -50,7 +50,7 @@ export class StoryListComponent implements OnInit{
       update: new Date(),
     },
     {
-      id: 3,
+      id: '3',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -63,7 +63,7 @@ export class StoryListComponent implements OnInit{
       update: new Date(),
     },
     {
-      id: 4,
+      id: '4',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -75,7 +75,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 5,
+      id: '5',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -87,7 +87,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 6,
+      id: '6',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -99,7 +99,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 7,
+      id:'7',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -111,7 +111,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 8,
+      id: '8',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -123,7 +123,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 9,
+      id: '9',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -135,7 +135,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 10,
+      id: '10',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",
@@ -147,7 +147,7 @@ export class StoryListComponent implements OnInit{
       created: new Date(-10),
       update: new Date(),
     },{
-      id: 11,
+      id: '11',
       thumbnail: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
       name: "Triệu Hồi Đến Thế Giới Fantasy",
       author: "Park Jinjoon",

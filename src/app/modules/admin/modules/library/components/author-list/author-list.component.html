@@ -14,10 +14,10 @@
             <div *ngFor="let author of paginatedData" class="item">
                 <div class="content">
                     <div class="author">
-                        <nz-avatar [nzSrc]="author.avatar" nzIcon="user" [nzSize]="64"></nz-avatar>
+                        <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64"></nz-avatar>
                         <strong >{{ author.name }}</strong>
                     </div>
-                    <p>{{ author.describe }}</p>
+                    <p>{{ author.description }}</p>
                 </div>
                 
                 <div class="form-group">

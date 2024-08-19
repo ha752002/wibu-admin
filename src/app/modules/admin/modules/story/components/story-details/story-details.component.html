@@ -14,7 +14,7 @@
         <div>
             <p class="title">Genre : </p>
             <ul>
-                <li class="item-genre" *ngFor="let genre of storyData?.genres" (click)="navigateToMangaWithId(genre.genre)">{{genre.genre}}</li>
+                <li class="item-genre" *ngFor="let genre of storyData?.genres" (click)="navigateToMangaWithId(genre.title)">{{genre.title}}</li>
             </ul>
         </div>
         <div>

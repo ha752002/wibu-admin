@@ -22,9 +22,9 @@ import { GenreService } from '../../services/genre/genre.service';
 })
 export class AddGenreFormComponent {
   genre: IGenre = {
-    genre: '',
-    describe: '',
-    AgeWarning: false,
+    title: '',
+    description: '',
+    // AgeWarning: false,
   };
 
   constructor(private genreService: GenreService) { }

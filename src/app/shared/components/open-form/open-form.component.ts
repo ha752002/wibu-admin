@@ -24,6 +24,7 @@ import { ICreateStory } from './types/story.type';
 import { ICreateUser, IUpdateUser } from './types/user.type';
 import { IAuthor } from './types/author.type';
 import { AuthorService } from './services/author/author.service';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 
 @Component({
   selector: 'app-open-form',
@@ -53,9 +54,9 @@ export class OpenFormComponent implements OnDestroy{
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
-  @Input() id?: number;
+  @Input() id?: string;
   @Input() img?: string;
-  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser |IGenre | IAuthor;
+  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser |IGenre | IAuthor |IStoryInformation;
   @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
   @Input() genre: IGenre[] =[];
 

@@ -23,16 +23,16 @@ export class GenreSelectorComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription = new Subscription();
   genres: IGenre[] = []
   dataGenres: IGenre[] = [
-    { genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
-    { genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
-    { genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
-    { genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
-    { genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories' },
-    { genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories' },
-    { genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories' },
-    { genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales' },
-    { genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories' },
-    { genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
+    { id: '1', title: 'Fantasy', description: 'A fantasy story' },
+    { id: '2', title: 'Adventure', description: 'An adventurous journey' },
+    { id: '3', title: 'Mystery', description: 'A mysterious tale' },
+    { id: '4', title: 'Mythology', description: 'Mythological stories' },
+    { id: '5', title: 'Sci-Fi', description: 'Science fiction stories' },
+    { id: '6', title: 'Horror', description: 'Scary and horror stories' },
+    { id: '7', title: 'Romance', description: 'Love and romance stories' },
+    { id: '8', title: 'Thriller', description: 'Thrilling and suspenseful tales' },
+    { id: '9', title: 'Comedy', description: 'Humorous and funny stories' },
+    { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
   ];
   selectedGenres: IGenre[] = [];
 
@@ -54,7 +54,7 @@ getAllGenres(): void {
       })
     ).subscribe(
       response => {
-        this.genres = response;
+        this.genres = response.data;
       },
       error => {
         console.error('Error loading genres', error);
@@ -65,7 +65,7 @@ getAllGenres(): void {
 }
 
   toggleGenre(genre: IGenre) {
-    const index = this.selectedGenres.findIndex(g => g.genre === genre.genre);
+    const index = this.selectedGenres.findIndex(g => g.title === genre.title);
     if (index === -1) {
       this.selectedGenres.push(genre);
     } else {
@@ -75,7 +75,7 @@ getAllGenres(): void {
   }
 
   isSelected(genre: IGenre): boolean {
-    return this.selectedGenres.some(g => g.genre === genre.genre);
+    return this.selectedGenres.some(g => g.title === genre.title);
 
   }
 

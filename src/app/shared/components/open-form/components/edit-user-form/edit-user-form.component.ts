@@ -19,7 +19,7 @@ import { UserService } from '../../services/user/user.service';
   styleUrl: './edit-user-form.component.scss'
 })
 export class EditUserFormComponent {
-  @Input() id?: number;
+  @Input() id?: string;
 
   user: IUpdateUser = {
     name: '',

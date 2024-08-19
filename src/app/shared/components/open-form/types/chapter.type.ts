@@ -1,5 +1,5 @@
 export interface IChapter {
-    id?: number;
+    id?: string;
     name?: string,
     chapter?: number,
     image?: string[],

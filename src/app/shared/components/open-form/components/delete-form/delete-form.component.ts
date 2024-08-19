@@ -18,7 +18,7 @@ import { GenreService } from '../../services/genre/genre.service';
   styleUrl: './delete-form.component.scss'
 })
 export class DeleteFormComponent {
-  @Input() id?: number;
+  @Input() id?: string;
   @Input() delete: 'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
 
   constructor(

@@ -6,6 +6,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IAuthor } from '../../types/author.type';
 import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-author-form',
@@ -14,7 +15,8 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
     CommonModule,
     InputFieldComponent,
     NzButtonModule,
-    UploadAvatarComponent
+    UploadAvatarComponent,
+    FormsModule,
   ],
   templateUrl: './add-author-form.component.html',
   styleUrl: './add-author-form.component.scss'
@@ -22,8 +24,8 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 export class AddAuthorFormComponent implements OnDestroy {
   author: IAuthor = {
     name: '',
-    describe: '',
-    avatar: '',
+    description: '',
+    avatarUrl: '',
   };
   private subscriptions: Subscription = new Subscription();
 
@@ -45,7 +47,7 @@ export class AddAuthorFormComponent implements OnDestroy {
   }
 
   onAvatarUrlChange(url: string) {
-    this.author.avatar = url;
+    this.author.avatarUrl = url;
     console.log(this.author);
   }
 

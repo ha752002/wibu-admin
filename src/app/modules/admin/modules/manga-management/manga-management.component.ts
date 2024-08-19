@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {viewType} from '@app/shared/components/story-list/story-list.component';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { viewType } from '@app/shared/components/story-list/story-list.component';
+import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 import { IStoryInformation } from '../story/type/story.type';
 import { ImangaFilter } from './type/manga-Filter.type';
@@ -29,24 +29,24 @@ export class MangaManagementComponent implements OnInit {
   multiGenreMode: boolean = false;
   previewVisible = false;
   storys: IStoryInformation[] = [];
-  
-  genres: IGenre[]=[];
+
+  genres: IGenre[] = [];
   dataGenres: IGenre[] = [
-    {id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story'},
-    {id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey'},
-    {id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale'},
-    {id: 4, genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories'},
-    {id: 5, genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories'},
-    {id: 6, genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories'},
-    {id: 7, genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories'},
-    {id: 8, genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales'},
-    {id: 9, genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories'},
-    {id: 10, genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories'}
+    { id: '1', title: 'Fantasy', description: 'A fantasy story' },
+    { id: '2', title: 'Adventure', description: 'An adventurous journey' },
+    { id: '3', title: 'Mystery', description: 'A mysterious tale' },
+    { id: '4', title: 'Mythology', description: 'Mythological stories' },
+    { id: '5', title: 'Sci-Fi', description: 'Science fiction stories' },
+    { id: '6', title: 'Horror', description: 'Scary and horror stories' },
+    { id: '7', title: 'Romance', description: 'Love and romance stories' },
+    { id: '8', title: 'Thriller', description: 'Thrilling and suspenseful tales' },
+    { id: '9', title: 'Comedy', description: 'Humorous and funny stories' },
+    { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
   ];
   selectedGenres: IGenre[] = [];
 
-  constructor(private route: ActivatedRoute,private genreService: GenreService,private storyService: StoryService) {
-  }  
+  constructor(private route: ActivatedRoute, private genreService: GenreService, private storyService: StoryService) {
+  }
 
 
   ngOnInit(): void {
@@ -84,14 +84,14 @@ export class MangaManagementComponent implements OnInit {
         })
       ).subscribe(
         response => {
-          this.genres = response;
-          this.genreNames = this.genres.map(g => g.genre);
+          this.genres = response.data;
+          this.genreNames = this.genres.map(g => g.title);
           this.getParams();
         },
         error => {
           console.error('Error loading genres', error);
-          this.genres = this.dataGenres      
-          this.genreNames = this.genres.map(g => g.genre);
+          this.genres = this.dataGenres
+          this.genreNames = this.genres.map(g => g.title);
           this.getParams();
         }
       )

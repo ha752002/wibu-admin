@@ -2,18 +2,18 @@
 <div>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
-            <app-input-field label="Name" [(value)]="genre.genre" type="text"
-                (valueChange)="onFieldValueChange('genre', $event)" [required]="true">
+            <app-input-field label="Name" [(value)]="genre.title" type="text"
+                (valueChange)="onFieldValueChange('title', $event)" [required]="true">
             </app-input-field>
 
-            <app-input-field label="Phone" [(value)]="genre.describe" type="textarea"
-                (valueChange)="onFieldValueChange('describe', $event)" [required]="true">
+            <app-input-field label="Phone" [(value)]="genre.description" type="textarea"
+                (valueChange)="onFieldValueChange('description', $event)" [required]="true">
             </app-input-field>
 
-            <label nz-checkbox [(ngModel)]="genre.AgeWarning"
+            <!-- <label nz-checkbox [(ngModel)]="genre.AgeWarning"
                 (ngModelChange)="onFieldValueChange('AgeWarning', $event)" name="ageWarning">
                 Age Warning
-            </label>
+            </label> -->
             
         </div>
         <div class="group-button">
