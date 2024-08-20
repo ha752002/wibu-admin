@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { viewType } from '@app/shared/components/story-list/story-list.component';
 import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
-import { IStoryInformation } from '../story/type/story.type';
 import { ImangaFilter } from './type/manga-Filter.type';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
+import { IStoryInformation } from './type/manga.type';
 
 @Component({
   selector: 'app-manga-management',
@@ -50,7 +50,6 @@ export class MangaManagementComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllStorys();
     this.getAllGenres();
   }
 
@@ -87,6 +86,7 @@ export class MangaManagementComponent implements OnInit {
           this.genres = response.data;
           this.genreNames = this.genres.map(g => g.title);
           this.getParams();
+          this.getAllStorys();
         },
         error => {
           console.error('Error loading genres', error);
@@ -106,7 +106,7 @@ export class MangaManagementComponent implements OnInit {
         })
       ).subscribe(
         response => {
-          this.storys = response;
+          this.storys = response.data;
         },
         error => {
           console.error('Error loading storys', error);

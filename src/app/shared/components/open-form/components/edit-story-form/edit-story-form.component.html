@@ -7,21 +7,21 @@
 
         <div class="url-img">
             <p>Url image :</p>
-            <a [href]="story.thumbnail " *ngIf="story.thumbnail !== ''" target="_blank">{{story.thumbnail }}</a>
-            <p *ngIf="story.thumbnail == '' " class="empty">empty</p>
+            <a [href]="story.thumbnailUrl " *ngIf="story.thumbnailUrl !== ''" target="_blank">{{story.thumbnailUrl }}</a>
+            <p *ngIf="story.thumbnailUrl == '' " class="empty">empty</p>
         </div>
     </div>
     <div class="story">
         <div class="basic">
-            <app-input-field label="Name" [(value)]="story.name" type="text"
-                (valueChange)="onFieldValueChange('name', $event)" [required]="true">
+            <app-input-field label="Name" [(value)]="story.title" type="text"
+                (valueChange)="onFieldValueChange('title', $event)" [required]="true">
             </app-input-field>
 
             <div class="add-author" (click)="handleAuthorVisible(true)">
                 <button *ngIf="!selectedAuthors" nz-button nzType="primary" type="button" nzDanger>add author</button>
-                <div class="author" *ngIf="selectedAuthors">
-                    <nz-avatar [nzSrc]="selectedAuthors.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
-                    <strong >{{ selectedAuthors.name }}</strong>
+                <div class="author" *ngFor="let selectedAuthor of selectedAuthors">
+                    <nz-avatar [nzSrc]="selectedAuthor.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
+                    <strong >{{ selectedAuthor.name }}</strong>
                 </div>
             </div>
 
@@ -32,14 +32,10 @@
             <div class="add-genre" (click)="handleGenreVisible(true)">
                 <p>genre</p>
                 <ul>
-                    <li *ngFor="let genre of story.genre">{{ genre.title }}</li>
+                    <li *ngFor="let genre of selectedGenres">{{ genre.title }}</li>
                     <li>+ add</li>
                 </ul>
             </div>
-
-            <app-input-field label="translator" [(value)]="story.translator" type="text"
-                (valueChange)="onFieldValueChange('translator', $event)">
-            </app-input-field>
 
             <app-input-field label="status" [(value)]="story.status" type="text"
                 (valueChange)="onFieldValueChange('status', $event)" [required]="true" [optionValue]="status">
@@ -53,7 +49,7 @@
     </div>
 </form>
 <app-open-modal *ngIf="genreVisible" (previewVisible)="handleGenreVisible($event)">
-    <app-genre-selector [inGenresSelected]="story.genre"
+    <app-genre-selector [inGenresSelected]="selectedGenres"
         (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
 </app-open-modal>
 <app-open-modal *ngIf="authorVisible" (previewVisible)="handleAuthorVisible($event)">

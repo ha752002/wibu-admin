@@ -9,13 +9,13 @@
 
                 <app-add-user-form *ngSwitchCase="'add user'"></app-add-user-form>
                 <app-add-story-form *ngSwitchCase="'add story'" [genre]="genre"></app-add-story-form>
-                <app-add-chapter-form *ngSwitchCase="'add chapter'" [storyData]="data"></app-add-chapter-form>
+                <app-add-chapter-form *ngSwitchCase="'add chapter'" [storyData]="storyData"></app-add-chapter-form>
                 <app-add-genre-form *ngSwitchCase="'add genre'"></app-add-genre-form>
                 <app-add-author-form *ngSwitchCase="'add author'"></app-add-author-form>
 
                 <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
                 <app-edit-story-form *ngSwitchCase="'edit story'" [id]="id" [img]="img"></app-edit-story-form>
-                <app-edit-chapter-form *ngSwitchCase="'edit chapter'" [ChapterData]="data" [id]="id"></app-edit-chapter-form>
+                <app-edit-chapter-form *ngSwitchCase="'edit chapter'" [ChapterData]="ChapterData" [id]="id"></app-edit-chapter-form>
                 <app-edit-genre-form *ngSwitchCase="'edit genre'" [id]="id" ></app-edit-genre-form>
                 <app-edit-author-form *ngSwitchCase="'edit author'" [id]="id"></app-edit-author-form>
                 

@@ -27,6 +27,7 @@ export class GenreListComponent implements OnInit {
   ];
 
   selectedGenres: IGenre[] = [];
+  selectedGenresId: string[] = [];
   selectMode: boolean = false;
   searchQuery: string = '';
 
@@ -59,17 +60,21 @@ export class GenreListComponent implements OnInit {
 
   toggleGenre(genre: IGenre) {
     if (this.selectMode) {
-      const index = this.selectedGenres.findIndex(g => g.title === genre.title);
+      const index = this.selectedGenres.findIndex(g => g.id === genre.id);
       if (index === -1) {
         this.selectedGenres.push(genre);
+        if (genre.id) { 
+          this.selectedGenresId.push(genre.id);
+        }
       } else {
         this.selectedGenres.splice(index, 1);
+        this.selectedGenresId.splice(index, 1);
       }
     }
   }
 
   isSelected(genre: IGenre): boolean {
-    return this.selectedGenres.some(g => g.title === genre.title);
+    return this.selectedGenres.some(g => g.id === genre.id);
   }
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
@@ -90,7 +95,6 @@ export class GenreListComponent implements OnInit {
   }
 
   navigateToStory() {
-    const selectedGenresIds = this.selectedGenres.map(genre => genre.id);
-    this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(selectedGenresIds) } });
+    this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(this.selectedGenresId) } });
   }
 }

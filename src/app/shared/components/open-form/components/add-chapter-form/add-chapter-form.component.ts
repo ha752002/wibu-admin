@@ -7,6 +7,7 @@ import { IChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { UploadService } from '@app/shared/services/upload/upload.service';
 import { ChapterService } from '../../services/chapter/chapter.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -14,7 +15,8 @@ import { ChapterService } from '../../services/chapter/chapter.service';
     CommonModule,
     DragDropImgComponent,
     InputFieldComponent,
-    NzButtonModule
+    NzButtonModule,
+    FormsModule
   ],
   selector: 'app-add-chapter-form',
   templateUrl: './add-chapter-form.component.html',

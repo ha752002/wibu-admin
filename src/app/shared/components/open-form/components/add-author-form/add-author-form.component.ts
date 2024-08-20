@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Component, OnDestroy } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IAuthor } from '../../types/author.type';
+import { IUpdateAndCreateAuthor } from '../../types/author.type';
 import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-author-form.component.scss'
 })
 export class AddAuthorFormComponent implements OnDestroy {
-  author: IAuthor = {
+  author: IUpdateAndCreateAuthor = {
     name: '',
     description: '',
     avatarUrl: '',
@@ -43,7 +43,7 @@ export class AddAuthorFormComponent implements OnDestroy {
     );
   }
 
-  onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: keyof IUpdateAndCreateAuthor, value: string | number | Date | undefined): void {
   }
 
   onAvatarUrlChange(url: string) {

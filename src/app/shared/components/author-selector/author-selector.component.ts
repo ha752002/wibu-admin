@@ -20,8 +20,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
   styleUrl: './author-selector.component.scss'
 })
 export class AuthorSelectorComponent {
-  @Output() outAuthorsSelected = new EventEmitter<IAuthor>();
-  @Input() inAuthorsSelected?: IAuthor;
+  @Output() outAuthorsSelected = new EventEmitter<IAuthor[]>();
+  @Input() inAuthorsSelected?: IAuthor[];
   private subscriptions: Subscription = new Subscription();
 
   searchQuery: string = '';
@@ -86,7 +86,7 @@ export class AuthorSelectorComponent {
       description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
     }
   ];
-  selectedAuthors?: IAuthor;
+  selectedAuthors: IAuthor[] = [];
   paginatedData: IAuthor[] = [];
   pageSize = 8;
   currentPage = 1;
@@ -126,17 +126,17 @@ export class AuthorSelectorComponent {
   }
 
   toggleauthor(author: IAuthor) {
-    const index = this.dataAuthors.findIndex(a => a.name === author.name);
+    const index = this.dataAuthors.findIndex(a => a.id === author.id);
     if (index === -1) {
-      this.selectedAuthors = author;
+      this.selectedAuthors.push(author);
     } else {
-      this.selectedAuthors = author;
+      this.selectedAuthors.splice(index, 1);;
     }
     this.outAuthorsSelected.emit(this.selectedAuthors);
   }
 
   isSelected(author: IAuthor): boolean {
-    return this.selectedAuthors?.id === author.id;
+    return this.selectedAuthors.some(g => g.id === author.id);
   }
 
   updatePaginatedData(): void {

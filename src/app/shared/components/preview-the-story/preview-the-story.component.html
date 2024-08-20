@@ -1,16 +1,15 @@
 <div class="story">
-    <img [src]="storyData?.thumbnail" alt="">
+    <img [src]="storyData?.thumbnailUrl" alt="">
     <div class="content">
 
         <div>
-            <p class="name">{{storyData?.name}}</p>
+            <p class="name">{{storyData?.title}}</p>
             <p>{{storyData?.author}}</p>
         </div>
         <div>
             <p>Chapter : {{storyData?.chapter}}</p>
             <p>Views : {{storyData?.views}}</p>
             <p>Status : {{storyData?.status}}</p>
-            <p>Translator: {{storyData?.translator}}</p>
         </div>
         <div class="genne">
             <p class="title">genne : </p>

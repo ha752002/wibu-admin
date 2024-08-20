@@ -37,7 +37,7 @@ export class StoryComponent implements OnInit{
         })
       ).subscribe(
         response => {
-          this.storyData = response;
+          this.storyData = response.data;
         },
         error => {
           console.error('Error loading storys', error);

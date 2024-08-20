@@ -1,16 +1,14 @@
 import { IGenre } from "./genre.type";
 
 export interface ICreateStory {
-    thumbnail?: string;
-    name?: string;
-    author: string;
-    translator?: string;
-    introduce?: string;
-    status?: statusType;
-    created?: Date;
-    update?: Date;
-    genre: IGenre[];
-  }
-  
-  export type statusType = 'Updating' | 'Halt' | 'Full';
-  
+  thumbnailUrl?: string;
+  title?: string;
+  authorIds: string[];
+  genreIds: string[];
+  introduce?: string;
+  status?: statusType;
+  created?: Date;
+  update?: Date;
+}
+
+export type statusType = 'Updating' | 'Halt' | 'Full';

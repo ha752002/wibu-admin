@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IAuthor } from '../../types/author.type';
+import { IAuthor, IUpdateAndCreateAuthor } from '../../types/author.type';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { AuthorService } from '../../services/author/author.service';
 
@@ -21,7 +21,7 @@ import { AuthorService } from '../../services/author/author.service';
 export class EditAuthorFormComponent {
   @Input() id?: string;
 
-  author: IAuthor = {
+  author: IUpdateAndCreateAuthor = {
     name: '',
     description: '',
     avatarUrl: '',

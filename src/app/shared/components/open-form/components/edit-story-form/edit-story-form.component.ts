@@ -36,13 +36,15 @@ export class EditStoryFormComponent implements OnInit {
 
 
   story: ICreateStory = {
-    name: 'Triệu Hồi Đến Thế Giới Fantasy',
-    genre: [{title: 'ksssksk'}],
-    author:'',
+    title: 'Triệu Hồi Đến Thế Giới Fantasy',
+    genreIds: [],
+    authorIds:[],
   };
 
   status: string[] = ['Updating', 'Halt', 'Full'];
-  selectedAuthors?: IAuthor;
+  selectedAuthors?: IAuthor[];
+  selectedGenres?: IGenre[] = [];
+
   authorVisible = false;
   genreVisible = false;
 
@@ -50,12 +52,12 @@ export class EditStoryFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.img) {
-      this.story.thumbnail = this.img
+      this.story.thumbnailUrl = this.img
     }
   }
 
   receiveThumbnail(url: string) {
-    this.story.thumbnail  = url;
+    this.story.thumbnailUrl  = url;
   }
 
   onSubmit(event: Event): void {
@@ -83,11 +85,11 @@ export class EditStoryFormComponent implements OnInit {
   }
 
   onGenresSelected(genres: IGenre[]) {
-    this.story.genre = genres;
+    this.selectedGenres = genres;
   }
 
-  onauthorsSelected(author: IAuthor) {
+  onauthorsSelected(author: IAuthor[]) {
     this.selectedAuthors= author;
-    this.story.author = author.name;
+    // this.story.authorIds = author;
   }
 }

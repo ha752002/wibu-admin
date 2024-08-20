@@ -19,7 +19,9 @@ import { GenreService } from '../../services/genre/genre.service';
 })
 export class GenreSelectorComponent implements OnInit, OnDestroy{
   @Output() outGenresSelected = new EventEmitter<IGenre[]>();
-  @Input() inGenresSelected: IGenre[] = [];
+  @Output() outGenresSelectedId = new EventEmitter<string[]>();
+  @Input() inGenresSelected?: IGenre[] = [];
+  @Input() inGenresSelectedId: string[] = [];
   private subscriptions: Subscription = new Subscription();
   genres: IGenre[] = []
   dataGenres: IGenre[] = [
@@ -35,13 +37,14 @@ export class GenreSelectorComponent implements OnInit, OnDestroy{
     { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
   ];
   selectedGenres: IGenre[] = [];
+  selectedGenresId: string[] = [];
 
   constructor(private genreService: GenreService) { }
 
 
 ngOnInit(): void {
   this.getAllGenres();
-  if(this.inGenresSelected.length > 0){
+  if(this.inGenresSelected){
     this.selectedGenres = this.inGenresSelected
   }
 }
@@ -65,17 +68,23 @@ getAllGenres(): void {
 }
 
   toggleGenre(genre: IGenre) {
-    const index = this.selectedGenres.findIndex(g => g.title === genre.title);
+    const index = this.selectedGenres.findIndex(g => g.id === genre.id);
     if (index === -1) {
       this.selectedGenres.push(genre);
+      if (genre.id) { 
+        this.selectedGenresId.push(genre.id);
+      }
     } else {
       this.selectedGenres.splice(index, 1);
+      this.selectedGenresId.splice(index, 1);
+
     }
     this.outGenresSelected.emit(this.selectedGenres);
+    this.outGenresSelectedId.emit(this.selectedGenresId);
   }
 
   isSelected(genre: IGenre): boolean {
-    return this.selectedGenres.some(g => g.title === genre.title);
+    return this.selectedGenres.some(g => g.id === genre.id);
 
   }
 

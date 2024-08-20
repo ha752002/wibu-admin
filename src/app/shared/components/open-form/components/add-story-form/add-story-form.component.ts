@@ -12,6 +12,7 @@ import { IAuthor } from '../../types/author.type';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { StoryService } from '../../services/story/story.service';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -26,36 +27,40 @@ import { StoryService } from '../../services/story/story.service';
     NzButtonModule,
     OpenModalComponent,
     GenreSelectorComponent,
-    AuthorSelectorComponent
+    AuthorSelectorComponent,
+    FormsModule
   ],
   selector: 'app-add-story-form',
   templateUrl: './add-story-form.component.html',
   styleUrl: './add-story-form.component.scss'
 })
 export class AddStoryFormComponent implements OnInit{
-  @Input() genre: IGenre[] = [];
+  @Input() genre?: IGenre[] = [];
 
   story: ICreateStory = {
-    thumbnail: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg',
-    genre:[],
-    author:'',
+    thumbnailUrl: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg',
+    genreIds:[],
+    authorIds:[],
   };
   status: string[] = ['Updating','Halt','Full'];
-  selectedAuthors?: IAuthor;
+  selectedAuthors?: IAuthor[];
+  selectedGenres?: IGenre[] = [];
   authorVisible = false;
   genreVisible = false;
 
   constructor(private storyService: StoryService) { }
 
   ngOnInit(): void {
-    this.story.genre = this.genre
+    this.selectedGenres = this.genre
   }
 
   receiveThumbnail(url: string) {
-    this.story.thumbnail  = url;
+    this.story.thumbnailUrl  = url;
   }
 
   onSubmit(event: Event): void {
+    this.getGenreIds(this.selectedGenres)
+    this.getAuthorIds(this.selectedAuthors)
     event.preventDefault();
     this.storyService.createStory(this.story).subscribe(
       (response) => {
@@ -64,6 +69,18 @@ export class AddStoryFormComponent implements OnInit{
         console.error('Error creating story:', error);
       }
     );
+  }
+
+  getGenreIds(genre? : IGenre[]){
+    if (genre ) { 
+      this.story.genreIds = genre.map(genre => genre.id || '');
+    }
+  }
+
+  getAuthorIds(author? : IAuthor[]){
+    if (author ) { 
+      this.story.authorIds = author.map(author => author.id || '');
+    }
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
@@ -78,11 +95,10 @@ export class AddStoryFormComponent implements OnInit{
   }
 
   onGenresSelected(genres: IGenre[]) {
-    this.story.genre = genres;
+    this.selectedGenres = genres;
   }
 
-  onauthorsSelected(author: IAuthor) {
+  onAuthorsSelected(author: IAuthor[]) {
     this.selectedAuthors= author;
-    this.story.author = author.name;
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IAuthor } from '../../types/author.type';
+import { IAuthor, IUpdateAndCreateAuthor } from '../../types/author.type';
 import { Observable } from 'rxjs';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 
@@ -12,11 +12,11 @@ export class AuthorService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  createAuthor(author: IAuthor): Observable<IAuthor> {
-    return this.apiCallerService.post<IAuthor, IAuthor>(this.apiUrl.push, author);
+  createAuthor(author: IUpdateAndCreateAuthor): Observable<IUpdateAndCreateAuthor> {
+    return this.apiCallerService.post<IUpdateAndCreateAuthor, IUpdateAndCreateAuthor>(this.apiUrl.push, author);
   }
 
-  updateAuthor(id: string, author: IAuthor): Observable<IAuthor> {
+  updateAuthor(id: string, author: IUpdateAndCreateAuthor): Observable<IAuthor> {
     return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, author);
   }
 

@@ -1,15 +1,20 @@
 <div class="tory-details">
     <!-- <img [src]="storyData?.thumbnail" alt=""> -->
-    <app-img [url]="storyData?.thumbnail" [size]="'large'" [imgType]="'portrait'"></app-img>
+    <app-img [url]="storyData?.thumbnailUrl" [size]="'large'" [imgType]="'portrait'"></app-img>
     <div class="content">
         <div>
-            <p class="name">{{storyData?.name}}</p>
+            <p class="name">{{storyData?.title}}</p>
+            
             <p>Author : {{storyData?.author}}</p>
             <p>Status : {{storyData?.status}}</p>
-            <p>Translator : {{storyData?.translator}}</p>
             <p>Views: {{storyData?.views}}</p>
             <p>Chapter: {{storyData?.chapter}}</p>
-            <p>Chapter: {{storyData?.id}}</p>
+        </div>
+        <div>
+            <p class="title">Author : </p>
+            <ul>
+                <li class="item-genre" *ngFor="let author of storyData?.author" >{{author.name}}</li>
+            </ul>
         </div>
         <div>
             <p class="title">Genre : </p>
