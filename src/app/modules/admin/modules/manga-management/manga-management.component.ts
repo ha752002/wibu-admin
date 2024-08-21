@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { viewType } from '@app/shared/components/story-list/story-list.component';
 import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
@@ -45,8 +45,12 @@ export class MangaManagementComponent implements OnInit {
   ];
   selectedGenres: IGenre[] = [];
 
-  constructor(private route: ActivatedRoute, private genreService: GenreService, private storyService: StoryService) {
-  }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
+     private genreService: GenreService,
+      private storyService: StoryService
+    ){}
 
 
   ngOnInit(): void {

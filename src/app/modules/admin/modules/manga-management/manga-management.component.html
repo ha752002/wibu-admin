@@ -3,7 +3,7 @@
 </div>
 <div class="manga-management">
     <div class="group-tool">
-        <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
+        <app-open-form [formName]="'add story'" buttonType="danger" (complete)="getAllStorys()"></app-open-form>
         
         <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
         placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">

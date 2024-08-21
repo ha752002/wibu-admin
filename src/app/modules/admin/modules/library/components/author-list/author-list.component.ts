@@ -89,6 +89,8 @@ export class AuthorListComponent implements OnInit{
     this.getAllAuthors()
   }
 
+  
+
   getAllAuthors(): void {
     this.subscriptions.add(
       this.authorService.getAllAuthors().pipe(

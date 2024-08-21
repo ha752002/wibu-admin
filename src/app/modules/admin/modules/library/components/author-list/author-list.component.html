@@ -2,7 +2,7 @@
     <div class="title">
         <h3> Author</h3>
         <div class="tool">
-            <app-open-form [formName]="'add author'"></app-open-form>
+            <app-open-form [formName]="'add author'" (complete)="getAllAuthors()"></app-open-form>
             <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
                 placeholder="search">
             </app-input-field>
@@ -25,7 +25,6 @@
                         [id]="author.id"></app-open-form>
                     <app-open-form [formName]="'delete'" [label]="false" [icon]="'delete'" [id]="author.id"
                         buttonType="danger" [delete]="'author'"></app-open-form>
-
                 </div>
               </div>
         </div>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IUpdateAndCreateAuthor } from '../../types/author.type';
@@ -22,6 +22,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-author-form.component.scss'
 })
 export class AddAuthorFormComponent implements OnDestroy {
+  @Output() complete = new EventEmitter<void>();
+
   author: IUpdateAndCreateAuthor = {
     name: '',
     description: '',
@@ -36,6 +38,7 @@ export class AddAuthorFormComponent implements OnDestroy {
     event.preventDefault();
     this.authorService.createAuthor(this.author).subscribe(
       response => {
+        this.complete.emit();        
       },
       error => {
         console.error('Error creating author', error);

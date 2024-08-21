@@ -7,7 +7,7 @@
                 <ts-icon [name]="'filter'"></ts-icon>
             </button>
             <app-open-form [formName]="'add story'" *ngIf="selectedGenres.length > 0" buttonType="danger"
-                [genre]="selectedGenres">
+                [genre]="selectedGenres" (complete)="getAllGenres()">
             </app-open-form>
 
             <button (click)="ChangeSelectionMode()" nz-button nzType="primary">

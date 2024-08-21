@@ -61,6 +61,7 @@ export class OpenFormComponent implements OnDestroy{
   @Input() storyData?: IStoryInformation;
   @Input() ChapterData?: IChapter;
   @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
+  @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();
   constructor(private authorService: AuthorService) { }
@@ -70,6 +71,11 @@ export class OpenFormComponent implements OnDestroy{
   }
 
   closeForm() {
+    this.currentForm = null
+  }
+
+  done(){
+    this.complete.emit();        
     this.currentForm = null
   }
 

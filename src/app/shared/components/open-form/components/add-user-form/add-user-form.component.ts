@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ICreateUser } from '../../types/user.type';
+import { Subscription } from 'rxjs';
 
 
 
@@ -28,8 +29,9 @@ import { ICreateUser } from '../../types/user.type';
   templateUrl: './add-user-form.component.html',
   styleUrl: './add-user-form.component.scss'
 })
-export class AddUserFormComponent {
+export class AddUserFormComponent  implements OnDestroy{
   @ViewChild('userForm') userForm!: NgForm;
+  @Output() complete = new EventEmitter<void>();
 
   user: ICreateUser = {
     name: '',
@@ -42,8 +44,8 @@ export class AddUserFormComponent {
   };
 
   userTypeList: string[] = ['user','admin','management'];
-
   confirmPassword: string = '';
+  private subscriptions: Subscription = new Subscription();
 
   onSubmit(event: Event): void {
     event.preventDefault();
@@ -68,6 +70,9 @@ export class AddUserFormComponent {
 
   onPasswordValueChange(value: string): void {
     console.log(value);
+  }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

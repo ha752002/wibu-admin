@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
@@ -13,6 +13,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { StoryService } from '../../services/story/story.service';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 
 
@@ -34,8 +35,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './add-story-form.component.html',
   styleUrl: './add-story-form.component.scss'
 })
-export class AddStoryFormComponent implements OnInit{
+export class AddStoryFormComponent implements OnInit , OnDestroy{
   @Input() genre?: IGenre[] = [];
+  @Output() complete = new EventEmitter<void>();
 
   story: ICreateStory = {
     thumbnailUrl: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg',
@@ -47,6 +49,7 @@ export class AddStoryFormComponent implements OnInit{
   selectedGenres?: IGenre[] = [];
   authorVisible = false;
   genreVisible = false;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private storyService: StoryService) { }
 
@@ -64,6 +67,7 @@ export class AddStoryFormComponent implements OnInit{
     event.preventDefault();
     this.storyService.createStory(this.story).subscribe(
       (response) => {
+        this.complete.emit();        
       },
       (error) => {
         console.error('Error creating story:', error);
@@ -100,5 +104,9 @@ export class AddStoryFormComponent implements OnInit{
 
   onAuthorsSelected(author: IAuthor[]) {
     this.selectedAuthors= author;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

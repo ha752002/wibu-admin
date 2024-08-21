@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
@@ -30,5 +30,13 @@ export class StoryListComponent implements OnInit {
     // if (this.storyData) {
       this.storys = this.storyData
     // }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['storyData']) {
+      this.storys = this.storyData
+
+      console.log('storyData changed:');
+    }
   }
 }
