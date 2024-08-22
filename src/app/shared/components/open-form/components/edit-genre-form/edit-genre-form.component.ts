@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { IGenre } from '../../types/genre.type';
 import { GenreService } from '../../services/genre/genre.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-genre-form',
@@ -20,8 +21,10 @@ import { GenreService } from '../../services/genre/genre.service';
   templateUrl: './edit-genre-form.component.html',
   styleUrl: './edit-genre-form.component.scss'
 })
-export class EditGenreFormComponent implements OnInit{
+export class EditGenreFormComponent implements OnInit , OnDestroy{
   @Input() id?: string;
+  @Output() complete = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
 
   genre: IGenre = {
     title: '',
@@ -32,7 +35,20 @@ export class EditGenreFormComponent implements OnInit{
   constructor(private genreService: GenreService) { }
 
   ngOnInit(): void {
-    this.genre.id = this.id
+    if (this.id) {
+      this.getGenreDetails(this.id)
+    }
+  }
+
+  getGenreDetails(id: string): void {
+    this.genreService.getGenreById(id).subscribe(
+      (response) => {
+        this.genre = response.data;
+      },
+      (error) => {
+        console.error('Error fetching author details:', error);
+      }
+    );
   }
 
   onSubmit(event: Event): void {
@@ -49,5 +65,9 @@ export class EditGenreFormComponent implements OnInit{
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

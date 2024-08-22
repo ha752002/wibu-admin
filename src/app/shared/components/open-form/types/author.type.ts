@@ -12,7 +12,13 @@ export interface IAuthors {
   status?: boolean;
 }
 
-export interface IUpdateAndCreateAuthor{
+export interface IResponseAuthor {
+  data: ISimpleAuthor;
+  message: string;
+  status?: boolean;
+}
+
+export interface ISimpleAuthor{
   name: string;
   avatarUrl?: string;
   description: string;

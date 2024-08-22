@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IUpdateAndCreateAuthor } from '../../types/author.type';
+import { ISimpleAuthor } from '../../types/author.type';
 import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
 export class AddAuthorFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
 
-  author: IUpdateAndCreateAuthor = {
+  author: ISimpleAuthor = {
     name: '',
     description: '',
     avatarUrl: '',
@@ -46,7 +46,7 @@ export class AddAuthorFormComponent implements OnDestroy {
     );
   }
 
-  onFieldValueChange(field: keyof IUpdateAndCreateAuthor, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: keyof ISimpleAuthor, value: string | number | Date | undefined): void {
   }
 
   onAvatarUrlChange(url: string) {

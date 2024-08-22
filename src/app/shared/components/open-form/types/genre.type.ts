@@ -10,3 +10,15 @@ export interface IGenres {
   message: string,
   status?: boolean,
 }
+
+export interface IResponseGenre {
+  data: ISimpleGenre;
+  message: string;
+  status?: boolean;
+}
+
+export interface ISimpleGenre{
+  title: string;
+  // AgeWarning?: boolean,
+  description: string;
+}

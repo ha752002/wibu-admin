@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -12,6 +12,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { AuthorSelectorComponent } from '@app/shared/components/author-selector/author-selector.component';
 import { IAuthor } from '../../types/author.type';
 import { StoryService } from '../../services/story/story.service';
+import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -24,16 +26,19 @@ import { StoryService } from '../../services/story/story.service';
     NzButtonModule,
     OpenModalComponent,
     GenreSelectorComponent,
-    AuthorSelectorComponent
+    AuthorSelectorComponent,
+    FormsModule ,
+
   ],
   selector: 'app-edit-story-form',
   templateUrl: './edit-story-form.component.html',
   styleUrl: './edit-story-form.component.scss'
 })
-export class EditStoryFormComponent implements OnInit {
+export class EditStoryFormComponent implements OnInit , OnDestroy {
   @Input() id?: string;
   @Input() img?: string;
-
+  @Output() complete = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
 
   story: ICreateStory = {
     title: 'Triệu Hồi Đến Thế Giới Fantasy',
@@ -51,9 +56,20 @@ export class EditStoryFormComponent implements OnInit {
   constructor(private storyService: StoryService) { }
 
   ngOnInit(): void {
-    if (this.img) {
-      this.story.thumbnailUrl = this.img
+    if (this.id) {
+      this.getStoryDetails(this.id)
     }
+  }
+
+  getStoryDetails(id: string): void {
+    this.storyService.getStoryById(id).subscribe(
+      (response) => {
+        this.story = response.data;
+      },
+      (error) => {
+        console.error('Error fetching author details:', error);
+      }
+    );
   }
 
   receiveThumbnail(url: string) {
@@ -62,6 +78,8 @@ export class EditStoryFormComponent implements OnInit {
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.getGenreIds(this.selectedGenres)
+    this.getAuthorIds(this.selectedAuthors)
     if (this.id) {
       this.storyService.updateStory(this.id, this.story).subscribe(
         (response) => {
@@ -70,6 +88,18 @@ export class EditStoryFormComponent implements OnInit {
           console.error('Error updating story:', error);
         }
       );
+    }
+  }
+
+  getGenreIds(genre? : IGenre[]){
+    if (genre ) { 
+      this.story.genreIds = genre.map(genre => genre.id || '');
+    }
+  }
+
+  getAuthorIds(author? : IAuthor[]){
+    if (author ) { 
+      this.story.authorIds = author.map(author => author.id || '');
     }
   }
 
@@ -91,5 +121,9 @@ export class EditStoryFormComponent implements OnInit {
   onauthorsSelected(author: IAuthor[]) {
     this.selectedAuthors= author;
     // this.story.authorIds = author;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

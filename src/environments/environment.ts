@@ -12,21 +12,21 @@ export const environment = {
   adminEndpoint: {
     manga: {
       getAll: 'manga/get-all',
-      getById: 'manga/{id}',
+      getById: 'manga/',
       push: 'manga/create',
-      update: 'manga/update/{id}',
+      update: 'manga/update',
       delete: 'manga/deActive/{id}',
     },
     genre: {
       getAll: 'manga/genre/get-all',
-      getById: 'manga/genre/{id}',
+      getById: 'manga/genre/',
       push: 'manga/genre/create',
       update: 'manga/genre/update',
       delete: 'manga/genre/deActive/{id}',
     },
     author: {
       getAll: 'manga/author/get-all',
-      getById: 'manga/author/{id}',
+      getById: 'manga/author/',
       push: 'manga/author/create',
       update: 'manga/author/update',
       delete: 'manga/author/deActive/{id}',
