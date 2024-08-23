@@ -84,6 +84,10 @@ export class DeleteFormComponent implements OnDestroy{
     }
   }
 
+  done(){
+    this.complete.emit();
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

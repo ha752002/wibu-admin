@@ -56,6 +56,7 @@ export class EditGenreFormComponent implements OnInit , OnDestroy{
     if (this.id) {
       this.genreService.updateGenre(this.id, this.genre).subscribe(
         (response) => {
+          this.complete.emit();     
         },
         (error) => {
           console.error('Error updating genre:', error);

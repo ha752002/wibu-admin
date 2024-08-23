@@ -83,6 +83,7 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
     if (this.id) {
       this.storyService.updateStory(this.id, this.story).subscribe(
         (response) => {
+          this.complete.emit();     
         },
         (error) => {
           console.error('Error updating story:', error);

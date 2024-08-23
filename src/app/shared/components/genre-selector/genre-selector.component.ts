@@ -6,13 +6,21 @@ import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { GenreService } from '../../services/genre/genre.service';
+import { InputFieldComponent } from '../input-field/input-field.component';
+import { IconComponent } from '../icon/icon.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { OpenFormComponent } from '../open-form/open-form.component';
 
 @Component({
   selector: 'app-genre-selector',
   standalone: true,
   imports: [
     CommonModule,
-    OpenModalComponent
+    OpenModalComponent,
+    InputFieldComponent,
+    IconComponent,
+    // OpenFormComponent,
+    NzButtonModule
   ],
   templateUrl: './genre-selector.component.html',
   styleUrl: './genre-selector.component.scss'
@@ -86,6 +94,11 @@ getAllGenres(): void {
   isSelected(genre: IGenre): boolean {
     return this.selectedGenres.some(g => g.id === genre.id);
 
+  }
+
+  clean(){
+    this.selectedGenres = []
+    this.outGenresSelected.emit(this.selectedGenres);
   }
 
   ngOnDestroy(): void {

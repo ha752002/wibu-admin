@@ -22,9 +22,9 @@
                 
                 <div class="form-group">
                     <app-open-form [formName]="'edit author'" [label]="false" [icon]="'edit'"
-                        [id]="author.id"></app-open-form>
+                        [id]="author.id" (complete)="getAllAuthors()"></app-open-form>
                     <app-open-form [formName]="'delete'" [label]="false" [icon]="'delete'" [id]="author.id"
-                        buttonType="danger" [delete]="'author'"></app-open-form>
+                        buttonType="danger" [delete]="'author'" (complete)="getAllAuthors()"></app-open-form>
                 </div>
               </div>
         </div>

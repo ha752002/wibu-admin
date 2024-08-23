@@ -56,6 +56,7 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.authorService.updateAuthor(this.id, this.author).subscribe(
         (response) => {
+          this.complete.emit();     
         },
         (error) => {
           console.error('Error updating author:', error);

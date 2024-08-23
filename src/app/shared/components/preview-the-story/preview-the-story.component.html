@@ -4,7 +4,9 @@
 
         <div>
             <p class="name">{{storyData?.title}}</p>
-            <p>{{storyData?.author}}</p>
+            <ul>
+                <li *ngFor="let author of storyData?.authors">{{author.name}}</li>
+            </ul>
         </div>
         <div>
             <p>Chapter : {{storyData?.chapter}}</p>

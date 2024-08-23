@@ -103,6 +103,7 @@ export class MangaManagementComponent implements OnInit {
   }
 
   getAllStorys(): void {
+    this.storys = []
     this.subscriptions.add(
       this.storyService.getAllStorys().pipe(
         finalize(() => {

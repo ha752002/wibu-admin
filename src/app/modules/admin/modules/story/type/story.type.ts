@@ -7,7 +7,7 @@ export interface IStoryInformation {
   thumbnailUrl?: string;
   title?: string;
   genres?: IGenre[],
-  author?: IAuthor[];
+  authors?: IAuthor[];
   views?: number;
   chapter?: number;
   chapters?: IChapter[];

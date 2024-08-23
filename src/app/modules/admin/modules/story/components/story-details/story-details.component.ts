@@ -14,7 +14,7 @@ export class StoryDetailsComponent implements OnInit {
     id: '1',
     thumbnailUrl: "https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg",
     title: "Triệu Hồi Đến Thế Giới Fantasy",
-    author: [],
+    authors: [],
     genres: [
       { title: 'Mystery', description: 'A mysterious tale' },
       { title: 'Mythology', description: 'Mythological stories' },

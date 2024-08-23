@@ -6,6 +6,9 @@ import { AuthorService } from '../../services/author/author.service';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { InputFieldComponent } from '../input-field/input-field.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { IconComponent } from '../icon/icon.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { OpenFormComponent } from '../open-form/open-form.component';
 
 @Component({
   standalone: true,
@@ -13,7 +16,10 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     CommonModule,
     NzAvatarModule,
     InputFieldComponent,
-    NzPaginationModule
+    NzPaginationModule,
+    IconComponent,
+    // OpenFormComponent,
+    NzButtonModule
   ],
   selector: 'app-author-selector',
   templateUrl: './author-selector.component.html',
@@ -126,11 +132,13 @@ export class AuthorSelectorComponent {
   }
 
   toggleauthor(author: IAuthor) {
-    const index = this.dataAuthors.findIndex(a => a.id === author.id);
+    const index = this.selectedAuthors.findIndex(a => a.id === author.id);
+    console.log(index);
+    
     if (index === -1) {
       this.selectedAuthors.push(author);
     } else {
-      this.selectedAuthors.splice(index, 1);;
+      this.selectedAuthors.splice(index, 1);
     }
     this.outAuthorsSelected.emit(this.selectedAuthors);
   }
@@ -148,6 +156,12 @@ export class AuthorSelectorComponent {
   onPageChange(page: number): void {
     this.currentPage = page;
     this.updatePaginatedData();
+  }
+
+  clean(){
+    this.selectedAuthors = []
+    this.outAuthorsSelected.emit(this.selectedAuthors);
+
   }
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {

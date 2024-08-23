@@ -25,11 +25,13 @@ export class StoryComponent implements OnInit{
   getId() {
     this.route.params.subscribe(params => {
       const id = params['id'];
+      console.log(id);
+      
       this.getStoryById(id)
     });
   }
 
-  getStoryById(id : string| number): void {
+  getStoryById(id : string): void {
     this.subscriptions.add(
       this.storyService.getStoryById(id).pipe(
         finalize(() => {

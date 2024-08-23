@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { IStory, IStoryInformation, IStorys } from '@app/modules/admin/modules/story/type/story.type';
+import { IResponseStory } from '@app/shared/components/open-form/types/story.type';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -9,16 +10,15 @@ import { environment } from 'src/environments/environment';
 })
 export class StoryService {
 
-  private apiGetAllUrl = environment.adminEndpoint.manga;
+  private apiUrl = environment.adminEndpoint.manga;
 
   constructor(private apiCallerService: ApiCallerService) { }
 
   getAllStorys(): Observable<IStorys> {
-    return this.apiCallerService.get<null, IStorys>(this.apiGetAllUrl.getAll);
+    return this.apiCallerService.get<null, IStorys>(this.apiUrl.getAll);
   }
 
-  getStoryById(id: number| string): Observable<IStory> {
-    const endpoint = this.apiGetAllUrl.getById.replace('{id}', id.toString());
-    return this.apiCallerService.get<null, IStory>(endpoint);
+  getStoryById(id: string): Observable<IStory> {
+    return this.apiCallerService.get<string , IStory>(this.apiUrl.getById , id);
   }
 }

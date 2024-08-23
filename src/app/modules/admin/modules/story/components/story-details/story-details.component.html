@@ -5,7 +5,6 @@
         <div>
             <p class="name">{{storyData?.title}}</p>
             
-            <p>Author : {{storyData?.author}}</p>
             <p>Status : {{storyData?.status}}</p>
             <p>Views: {{storyData?.views}}</p>
             <p>Chapter: {{storyData?.chapter}}</p>
@@ -13,7 +12,7 @@
         <div>
             <p class="title">Author : </p>
             <ul>
-                <li class="item-genre" *ngFor="let author of storyData?.author" >{{author.name}}</li>
+                <li class="item-genre" *ngFor="let author of storyData?.authors" >{{author.name}}</li>
             </ul>
         </div>
         <div>

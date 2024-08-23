@@ -17,7 +17,7 @@
       <tr *ngFor="let data of basicTable.data">
         <td class="Thumbnail"><img [src]="data.thumbnailUrl" alt="Thumbnail" class="" (click)="selectStory(data)"></td>
         <td>{{ data.title }}</td>
-        <td>{{ data.author }}</td>
+        <td ><p *ngFor="let author of data.authors">{{ author }}</p></td>
         <td>{{ data.views }}</td>
         <td>{{ data.chapter }}</td>
         <td>{{ data.status }}</td>
