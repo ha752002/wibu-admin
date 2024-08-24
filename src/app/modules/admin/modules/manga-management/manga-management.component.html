@@ -3,7 +3,7 @@
 </div>
 <div class="manga-management">
     <div class="group-tool">
-        <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
+        <app-open-form [formName]="'add story'" buttonType="danger" (complete)="getAllStorys()"></app-open-form>
         
         <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
         placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">
@@ -22,12 +22,12 @@
         </div>
         <div class="selected-Genres" (click)="handleVisible(true)">
             <ul >
-                <li *ngFor="let genre of selectedGenres">{{ genre.genre }}</li>
+                <li *ngFor="let genre of selectedGenres">{{ genre.title }}</li>
             </ul>
         </div>
     </div>
 
-    <app-story-list [storyData]="storys" [viewType]="viewType"></app-story-list>
+    <app-story-list *ngIf="storys && storys.length > 0" [storyData]="storys" [viewType]="viewType"></app-story-list>
 </div>
 
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">

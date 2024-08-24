@@ -7,7 +7,7 @@
                 <ts-icon [name]="'filter'"></ts-icon>
             </button>
             <app-open-form [formName]="'add story'" *ngIf="selectedGenres.length > 0" buttonType="danger"
-                [genre]="selectedGenres">
+                [genre]="selectedGenres" (complete)="getAllGenres()">
             </app-open-form>
 
             <button (click)="ChangeSelectionMode()" nz-button nzType="primary">
@@ -33,8 +33,8 @@
 
                 </div>
                 <div class="content">
-                    <strong (click)="navigateToMangaWithId(genre.genre)">{{ genre.genre }}</strong>
-                    <p>{{ genre.describe }}</p>
+                    <strong (click)="navigateToMangaWithId(genre.title)">{{ genre.title }}</strong>
+                    <p>{{ genre.description }}</p>
                 </div>
             </div>
         </div>

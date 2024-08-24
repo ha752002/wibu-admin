@@ -33,9 +33,7 @@ export class InputFieldComponent implements OnInit {
     const input = (event.target as HTMLInputElement)?.value;
     if (input !== undefined) {
       this.value = input;
-      this.valueChange.emit(this.value);
-      console.log(this.value);
-      
+      this.valueChange.emit(this.value);      
     }
   }
 

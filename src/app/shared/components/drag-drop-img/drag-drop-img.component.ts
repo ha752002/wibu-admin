@@ -2,11 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
+import { IImage } from '@app/shared/types/image.types';
 
-export interface IImage {
-  name?: string;
-  url?: string
-}
 
 @Component({
   selector: 'app-drag-drop-img',
@@ -146,9 +143,7 @@ export class DragDropImgComponent implements OnInit{
 
   uploadImages() {
     this.imagesSelected.emit(this.imageFiles);
-
     this.imageFiles.forEach(file => {
-      console.log(file.name);
     });
   }
 }

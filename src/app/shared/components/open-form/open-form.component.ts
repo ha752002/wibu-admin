@@ -24,6 +24,7 @@ import { ICreateStory } from './types/story.type';
 import { ICreateUser, IUpdateUser } from './types/user.type';
 import { IAuthor } from './types/author.type';
 import { AuthorService } from './services/author/author.service';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 
 @Component({
   selector: 'app-open-form',
@@ -53,17 +54,19 @@ export class OpenFormComponent implements OnDestroy{
   @Input() currentForm?: formNameTypes | null = null;
   @Input() icon: IconNameTypes = 'plus';
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
-  @Input() id?: number;
+  @Input() id?: string;
   @Input() img?: string;
-  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser |IGenre | IAuthor;
+  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser |IGenre | IAuthor |IStoryInformation | string[];
+  @Input() genre?: IGenre[];
+  @Input() storyData?: IStoryInformation;
+  @Input() ChapterData?: IChapter;
   @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
-  @Input() genre: IGenre[] =[];
+  @Output() complete = new EventEmitter<void>();
 
   private subscriptions: Subscription = new Subscription();
   constructor(private authorService: AuthorService) { }
 
   openForm() {
-    console.log(this.formName);
     this.currentForm = this.formName
   }
 
@@ -71,9 +74,13 @@ export class OpenFormComponent implements OnDestroy{
     this.currentForm = null
   }
 
+  done(){
+    this.complete.emit();        
+    this.currentForm = null
+  }
+
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation(); 
-    console.log('Child clicked');
   }
 
   ngOnDestroy(): void {

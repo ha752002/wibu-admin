@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
-import { GenreService } from '@app/shared/components/services/genre/genre.service';
+import { GenreService } from '@app/shared/services/genre/genre.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -14,19 +14,20 @@ export class GenreListComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   genres: IGenre[] = [];
   dataGenres: IGenre[] = [
-    { id: 1, genre: 'Fantasy', AgeWarning: false, describe: 'A fantasy story' },
-    { id: 2, genre: 'Adventure', AgeWarning: false, describe: 'An adventurous journey' },
-    { id: 3, genre: 'Mystery', AgeWarning: false, describe: 'A mysterious tale' },
-    { id: 4, genre: 'Mythology', AgeWarning: false, describe: 'Mythological stories' },
-    { id: 5, genre: 'Sci-Fi', AgeWarning: false, describe: 'Science fiction stories' },
-    { id: 6, genre: 'Horror', AgeWarning: true, describe: 'Scary and horror stories' },
-    { id: 7, genre: 'Romance', AgeWarning: false, describe: 'Love and romance stories' },
-    { id: 8, genre: 'Thriller', AgeWarning: true, describe: 'Thrilling and suspenseful tales' },
-    { id: 9, genre: 'Comedy', AgeWarning: false, describe: 'Humorous and funny stories' },
-    { id: 10, genre: 'Drama', AgeWarning: false, describe: 'Serious and dramatic stories' }
+    { id: '1', title: 'Fantasy', description: 'A fantasy story' },
+    { id: '2', title: 'Adventure', description: 'An adventurous journey' },
+    { id: '3', title: 'Mystery', description: 'A mysterious tale' },
+    { id: '4', title: 'Mythology', description: 'Mythological stories' },
+    { id: '5', title: 'Sci-Fi', description: 'Science fiction stories' },
+    { id: '6', title: 'Horror', description: 'Scary and horror stories' },
+    { id: '7', title: 'Romance', description: 'Love and romance stories' },
+    { id: '8', title: 'Thriller', description: 'Thrilling and suspenseful tales' },
+    { id: '9', title: 'Comedy', description: 'Humorous and funny stories' },
+    { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
   ];
 
   selectedGenres: IGenre[] = [];
+  selectedGenresId: string[] = [];
   selectMode: boolean = false;
   searchQuery: string = '';
 
@@ -47,8 +48,7 @@ export class GenreListComponent implements OnInit {
         })
       ).subscribe(
         response => {
-          this.genres = response;
-          console.log('Genres:', this.genres);
+          this.genres = response.data;
         },
         error => {
           console.error('Error loading genres', error);
@@ -60,26 +60,28 @@ export class GenreListComponent implements OnInit {
 
   toggleGenre(genre: IGenre) {
     if (this.selectMode) {
-      const index = this.selectedGenres.findIndex(g => g.genre === genre.genre);
+      const index = this.selectedGenres.findIndex(g => g.id === genre.id);
       if (index === -1) {
         this.selectedGenres.push(genre);
+        if (genre.id) { 
+          this.selectedGenresId.push(genre.id);
+        }
       } else {
         this.selectedGenres.splice(index, 1);
+        this.selectedGenresId.splice(index, 1);
       }
     }
   }
 
   isSelected(genre: IGenre): boolean {
-    return this.selectedGenres.some(g => g.genre === genre.genre);
+    return this.selectedGenres.some(g => g.id === genre.id);
   }
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
-    console.log(this.searchQuery);
   }
 
   blockFormClosing(event: MouseEvent) {
     event.stopPropagation();
-    console.log('Child clicked');
   }
 
   ChangeSelectionMode() {
@@ -93,7 +95,6 @@ export class GenreListComponent implements OnInit {
   }
 
   navigateToStory() {
-    const selectedGenresIds = this.selectedGenres.map(genre => genre.id);
-    this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(selectedGenresIds) } });
+    this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(this.selectedGenresId) } });
   }
 }

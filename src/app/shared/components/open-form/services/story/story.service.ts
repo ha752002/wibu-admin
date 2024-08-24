@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ICreateStory } from '../../types/story.type';
+import { ICreateStory, IResponseStory } from '../../types/story.type';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +12,19 @@ export class StoryService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
+  getStoryById(id: string): Observable<IResponseStory> {
+    return this.apiCallerService.get<string , IResponseStory>(this.apiUrl.getById , id);
+  }
+
   createStory(storyData: ICreateStory): Observable<ICreateStory> {
     return this.apiCallerService.post<ICreateStory, ICreateStory>(this.apiUrl.push, storyData);
   }
 
-  updateStory(id: number, storyData: ICreateStory): Observable<ICreateStory> {
-    const endpoint = this.apiUrl.update.replace('{id}', id.toString());
-    return this.apiCallerService.patch<ICreateStory>(endpoint, storyData);
+  updateStory(id: string, storyData: ICreateStory): Observable<ICreateStory> {
+    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, storyData);
   }
 
-  deleteStory(id: number): Observable<void> {
+  deleteStory(id: string): Observable<void> {
     return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }
 }

@@ -1,21 +1,22 @@
 <div class="story">
-    <img [src]="storyData?.thumbnail" alt="">
+    <img [src]="storyData?.thumbnailUrl" alt="">
     <div class="content">
 
         <div>
-            <p class="name">{{storyData?.name}}</p>
-            <p>{{storyData?.author}}</p>
+            <p class="name">{{storyData?.title}}</p>
+            <ul>
+                <li *ngFor="let author of storyData?.authors">{{author.name}}</li>
+            </ul>
         </div>
         <div>
             <p>Chapter : {{storyData?.chapter}}</p>
             <p>Views : {{storyData?.views}}</p>
             <p>Status : {{storyData?.status}}</p>
-            <p>Translator: {{storyData?.translator}}</p>
         </div>
         <div class="genne">
             <p class="title">genne : </p>
             <div class="genre">
-                <p *ngFor="let genre of storyData?.genres">{{genre?.genre}}</p>
+                <p *ngFor="let genre of storyData?.genres">{{genre?.title}}</p>
             </div>
         </div>
         <div class="introduce">

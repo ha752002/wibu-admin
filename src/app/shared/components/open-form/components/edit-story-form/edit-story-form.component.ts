@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
@@ -13,6 +12,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { AuthorSelectorComponent } from '@app/shared/components/author-selector/author-selector.component';
 import { IAuthor } from '../../types/author.type';
 import { StoryService } from '../../services/story/story.service';
+import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -25,47 +26,64 @@ import { StoryService } from '../../services/story/story.service';
     NzButtonModule,
     OpenModalComponent,
     GenreSelectorComponent,
-    AuthorSelectorComponent
+    AuthorSelectorComponent,
+    FormsModule ,
+
   ],
   selector: 'app-edit-story-form',
   templateUrl: './edit-story-form.component.html',
   styleUrl: './edit-story-form.component.scss'
 })
-export class EditStoryFormComponent implements OnInit {
-  @Input() id?: number;
+export class EditStoryFormComponent implements OnInit , OnDestroy {
+  @Input() id?: string;
   @Input() img?: string;
-
+  @Output() complete = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
 
   story: ICreateStory = {
-    name: 'Triệu Hồi Đến Thế Giới Fantasy',
-    genre: [{genre: 'ksssksk'}],
-    author:'',
+    title: 'Triệu Hồi Đến Thế Giới Fantasy',
+    genreIds: [],
+    authorIds:[],
   };
 
   status: string[] = ['Updating', 'Halt', 'Full'];
-  selectedAuthors?: IAuthor;
+  selectedAuthors?: IAuthor[];
+  selectedGenres?: IGenre[] = [];
+
   authorVisible = false;
   genreVisible = false;
 
   constructor(private storyService: StoryService) { }
 
   ngOnInit(): void {
-    if (this.img) {
-      this.story.thumbnail = this.img
+    if (this.id) {
+      this.getStoryDetails(this.id)
     }
   }
 
+  getStoryDetails(id: string): void {
+    this.storyService.getStoryById(id).subscribe(
+      (response) => {
+        this.story = response.data;
+      },
+      (error) => {
+        console.error('Error fetching author details:', error);
+      }
+    );
+  }
+
   receiveThumbnail(url: string) {
-    this.story.thumbnail  = url;
-    console.log(this.story);
+    this.story.thumbnailUrl  = url;
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.getGenreIds(this.selectedGenres)
+    this.getAuthorIds(this.selectedAuthors)
     if (this.id) {
       this.storyService.updateStory(this.id, this.story).subscribe(
         (response) => {
-          console.log('Story updated successfully:', response);
+          this.complete.emit();     
         },
         (error) => {
           console.error('Error updating story:', error);
@@ -74,8 +92,19 @@ export class EditStoryFormComponent implements OnInit {
     }
   }
 
+  getGenreIds(genre? : IGenre[]){
+    if (genre ) { 
+      this.story.genreIds = genre.map(genre => genre.id || '');
+    }
+  }
+
+  getAuthorIds(author? : IAuthor[]){
+    if (author ) { 
+      this.story.authorIds = author.map(author => author.id || '');
+    }
+  }
+
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
-    console.log(this.story);
   }
 
   handleGenreVisible(value: boolean) {
@@ -87,11 +116,15 @@ export class EditStoryFormComponent implements OnInit {
   }
 
   onGenresSelected(genres: IGenre[]) {
-    this.story.genre = genres;
+    this.selectedGenres = genres;
   }
 
-  onauthorsSelected(author: IAuthor) {
+  onauthorsSelected(author: IAuthor[]) {
     this.selectedAuthors= author;
-    this.story.author = author.name;
+    // this.story.authorIds = author;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

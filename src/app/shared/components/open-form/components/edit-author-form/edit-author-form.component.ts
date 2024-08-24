@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IAuthor } from '../../types/author.type';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
+import { IAuthor, ISimpleAuthor } from '../../types/author.type';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
+import { AuthorService } from '../../services/author/author.service';
+import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-author-form',
@@ -14,31 +15,64 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
     CommonModule,
     InputFieldComponent,
     NzButtonModule,
-    UploadAvatarComponent
+    UploadAvatarComponent,
+    FormsModule,
   ],
   templateUrl: './edit-author-form.component.html',
   styleUrl: './edit-author-form.component.scss'
 })
-export class EditAuthorFormComponent {
-  @Input() id?: number;
+export class EditAuthorFormComponent implements OnInit, OnDestroy {
+  @Input() id?: string;
+  @Output() complete = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
 
-  author: IAuthor = {
+  author: ISimpleAuthor = {
     name: '',
-    describe: '',
-    avatar: '',
+    description: '',
+    avatarUrl: '',
   };
+
+  constructor(private authorService: AuthorService) { }
+
+  ngOnInit(): void {
+    if (this.id) {
+      this.getAuthorDetails(this.id)
+    }
+  }
+
+  getAuthorDetails(id: string): void {
+    this.authorService.getAuthorById(id).subscribe(
+      (response) => {
+        this.author = response.data;
+      },
+      (error) => {
+        console.error('Error fetching author details:', error);
+      }
+    );
+  }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.author);
+    if (this.id) {
+      this.authorService.updateAuthor(this.id, this.author).subscribe(
+        (response) => {
+          this.complete.emit();     
+        },
+        (error) => {
+          console.error('Error updating author:', error);
+        }
+      );
+    }
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
-    console.log(this.author);
   }
 
   onAvatarUrlChange(url: string) {
-    this.author.avatar = url;
-    console.log(this.author);
+    this.author.avatarUrl = url;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

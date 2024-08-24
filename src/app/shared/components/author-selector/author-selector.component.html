@@ -1,25 +1,31 @@
 <div class="author-selector">
     <div class="title">
         <h3>author selector </h3>
+        <div class="actions">
+            <button (click)="clean()" nz-button nzType="primary" nzDanger>
+                <ts-icon [name]="'clear'"></ts-icon>
+                <p>clean</p>
+            </button>
+            <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
+                placeholder="search">
+            </app-input-field>
+        </div>
 
-        <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
-            placeholder="search">
-        </app-input-field>
     </div>
     <div class="group-author">
-        <div *ngFor="let author of paginatedData" class="item" (click)="toggleauthor(author)"
+        <div *ngFor="let author of paginatedData , trackBy:identify" class="item" (click)="toggleauthor(author)"
             [class.selected]="isSelected(author)">
             <div class="content">
                 <div class="author">
-                    <nz-avatar [nzSrc]="author.avatar" nzIcon="user" [nzSize]="64"></nz-avatar>
+                    <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64"></nz-avatar>
                     <strong>{{ author.name }}</strong>
                 </div>
-                <p>{{ author.describe }}</p>
+                <p>{{ author.description }}</p>
             </div>
         </div>
     </div>
     <div class="pagination">
         <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="authors.length" [nzPageSize]="pageSize"
-        (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+            (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
     </div>
 </div>

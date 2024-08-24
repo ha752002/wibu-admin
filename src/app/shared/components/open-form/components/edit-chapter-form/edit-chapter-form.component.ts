@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
-import { UploadImgComponent } from '@app/shared/components/upload-img/upload-img.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
@@ -13,7 +12,6 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
   imports: [
     CommonModule,
     DragDropImgComponent,
-    UploadImgComponent,
     InputFieldComponent,
     NzButtonModule
   ],
@@ -22,7 +20,8 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
 })
 export class EditChapterFormComponent {
   chapter: IChapter = {}
-  @Input() id?: number;
+  img: File[] = []
+  @Input() id?: string;
   @Input() storyData?: IStoryInformation = {}
   @Input() ChapterData?: IChapter = {}
 
@@ -31,15 +30,13 @@ export class EditChapterFormComponent {
   }
 
   onImagesSelected(images: File[]) {
-    this.chapter.image = images.map(file => URL.createObjectURL(file));
+    this.img = images;
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.chapter);
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
-    console.log(this.chapter);
   }
 }

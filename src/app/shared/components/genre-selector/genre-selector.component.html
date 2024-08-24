@@ -1,12 +1,21 @@
 <div class="genres">
-    <h3>Select Genres:</h3>
+    <div class="title">
+        <h3>Select Genres:</h3>
+        <div class="actions">
+            <button (click)="clean()" nz-button nzType="primary" nzDanger>
+                <ts-icon [name]="'clear'"></ts-icon>
+                <p>clean</p>
+            </button>
+            <!-- <app-open-form [formName]="'add genre'"></app-open-form> -->
+        </div>
+    </div>
     <div>
         <div class="group-genre">
             <div class="item" *ngFor="let genre of genres" (click)="toggleGenre(genre)"
                 [class.selected]="isSelected(genre)">
                 <div>
-                    <strong>{{ genre.genre }}</strong>
-                    <p>{{ genre.describe }}</p>
+                    <strong>{{ genre.title }}</strong>
+                    <p>{{ genre.description }}</p>
                 </div>
             </div>
         </div>

@@ -7,19 +7,19 @@
         <ng-container *ngIf="currentForm === formName">
             <ng-container [ngSwitch]="formName">
 
-                <app-add-user-form *ngSwitchCase="'add user'"></app-add-user-form>
-                <app-add-story-form *ngSwitchCase="'add story'" [genre]="genre"></app-add-story-form>
-                <app-add-chapter-form *ngSwitchCase="'add chapter'" [storyData]="data"></app-add-chapter-form>
-                <app-add-genre-form *ngSwitchCase="'add genre'"></app-add-genre-form>
-                <app-add-author-form *ngSwitchCase="'add author'"></app-add-author-form>
+                <app-add-user-form *ngSwitchCase="'add user'" (complete)="done()"></app-add-user-form>
+                <app-add-story-form *ngSwitchCase="'add story'" [genre]="genre" (complete)="done()"></app-add-story-form>
+                <app-add-chapter-form *ngSwitchCase="'add chapter'" [storyData]="storyData" (complete)="done()"></app-add-chapter-form>
+                <app-add-genre-form *ngSwitchCase="'add genre'" (complete)="done()"></app-add-genre-form>
+                <app-add-author-form *ngSwitchCase="'add author'" (complete)="done()"></app-add-author-form>
 
                 <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
-                <app-edit-story-form *ngSwitchCase="'edit story'" [id]="id" [img]="img"></app-edit-story-form>
-                <app-edit-chapter-form *ngSwitchCase="'edit chapter'" [ChapterData]="data" [id]="id"></app-edit-chapter-form>
-                <app-edit-genre-form *ngSwitchCase="'edit genre'" [id]="id" ></app-edit-genre-form>
-                <app-edit-author-form *ngSwitchCase="'edit author'" [id]="id"></app-edit-author-form>
+                <app-edit-story-form *ngSwitchCase="'edit story'" (complete)="done()" [id]="id" [img]="img"></app-edit-story-form>
+                <app-edit-chapter-form *ngSwitchCase="'edit chapter'" [ChapterData]="ChapterData" [id]="id"></app-edit-chapter-form>
+                <app-edit-genre-form *ngSwitchCase="'edit genre'" (complete)="done()" [id]="id" ></app-edit-genre-form>
+                <app-edit-author-form *ngSwitchCase="'edit author'" (complete)="done()" [id]="id"></app-edit-author-form>
                 
-                <app-delete-form *ngSwitchCase="'delete'" [id]="id" [delete]="delete"></app-delete-form>
+                <app-delete-form *ngSwitchCase="'delete'" [id]="id" (complete)="done()" [delete]="delete" ></app-delete-form>
 
             </ng-container>
         </ng-container>

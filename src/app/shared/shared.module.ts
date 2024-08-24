@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {IconComponent} from './components/icon/icon.component';
-import { UploadImgComponent } from './components/upload-img/upload-img.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { OpenFormComponent } from './components/open-form/open-form.component';
 import { OpenModalComponent } from './components/open-modal/open-modal.component';
@@ -14,7 +13,6 @@ import { AuthorSelectorComponent } from './components/author-selector/author-sel
 
 const COMPONENTS = [
   IconComponent,
-  UploadImgComponent,
   InputFieldComponent,
   OpenFormComponent,
   OpenModalComponent,

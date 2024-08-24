@@ -32,6 +32,8 @@ export type IconNameTypes =
   | 'menu-unfold'
   | 'menu-fold'
   | 'check'
-  | 'filter';
+  | 'filter'
+  | 'clear'
+  ;
 
 export type IconThemeTypes = 'fill' | 'outline' | 'twotone';

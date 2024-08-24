@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { IGenre } from '../../types/genre.type';
+import { GenreService } from '../../services/genre/genre.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-genre-form',
@@ -19,25 +21,54 @@ import { IGenre } from '../../types/genre.type';
   templateUrl: './edit-genre-form.component.html',
   styleUrl: './edit-genre-form.component.scss'
 })
-export class EditGenreFormComponent implements OnInit{
-  @Input() id?: number;
+export class EditGenreFormComponent implements OnInit , OnDestroy{
+  @Input() id?: string;
+  @Output() complete = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
 
   genre: IGenre = {
-    genre: '',
-    describe: '',
-    AgeWarning: false,
+    title: '',
+    description: '',
+    // AgeWarning: false,
   };
 
+  constructor(private genreService: GenreService) { }
+
   ngOnInit(): void {
-    this.genre.id = this.id
+    if (this.id) {
+      this.getGenreDetails(this.id)
+    }
+  }
+
+  getGenreDetails(id: string): void {
+    this.genreService.getGenreById(id).subscribe(
+      (response) => {
+        this.genre = response.data;
+      },
+      (error) => {
+        console.error('Error fetching author details:', error);
+      }
+    );
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log('Form submitted:', this.genre);
+    if (this.id) {
+      this.genreService.updateGenre(this.id, this.genre).subscribe(
+        (response) => {
+          this.complete.emit();     
+        },
+        (error) => {
+          console.error('Error updating genre:', error);
+        }
+      );
+    }
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
-    console.log(this.genre);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { environment } from 'src/environments/environment';
-import { IAuthor } from '../../open-form/types/author.type';
 import { Observable } from 'rxjs';
+import { IAuthor, IAuthors } from '@app/shared/components/open-form/types/author.type';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class AuthorService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  getAllAuthors(): Observable<IAuthor[]> {
-    return this.apiCallerService.get<null, IAuthor[]>(this.apiGetAllUrl);
+  getAllAuthors(): Observable<IAuthors> {
+    return this.apiCallerService.get<null, IAuthors>(this.apiGetAllUrl);
   }
 }

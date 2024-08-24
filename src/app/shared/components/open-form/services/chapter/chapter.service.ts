@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IChapter } from '../../types/chapter.type';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,15 @@ export class ChapterService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  deleteChapter(id: number): Observable<void> {
+  createChapter(chapter: IChapter): Observable<IChapter> {
+    return this.apiCallerService.post<IChapter, IChapter>(this.apiUrl.push, chapter);
+  }
+
+  updateChapter(id: string, chapter: IChapter): Observable<IChapter> {
+    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, chapter);
+  }
+
+  deleteChapter(id: string): Observable<void> {
     return this.apiCallerService.patch<void>(this.apiUrl.delete.replace('{id}', id.toString()), {});
   }
 }
