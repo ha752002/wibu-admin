@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
+import { IResponseImage } from '@app/shared/types/image.types';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +12,7 @@ export class UploadService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  uploadImages(files: File[]): Observable<any> {
-    return this.apiCallerService.post<File[], File[]>(this.apiUrl.multiUpload, files);
+  uploadImages(files: FormData): Observable<IResponseImage> {
+    return this.apiCallerService.post<FormData, IResponseImage>(this.apiUrl.multiUpload, files);
   }
 }

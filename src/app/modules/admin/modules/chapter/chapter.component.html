@@ -1,6 +1,6 @@
 <div class="chapter">
   <div class="name-chapter">
-    <p>{{ chapterData?.name }}</p>
+    <p>{{ chapterData?.title }}</p>
     <div class="next-chapter">
       <app-open-form formName="delete" [id]="chapterData?.id" [buttonType]="'danger'" [delete]="'chapter'" [icon]="'delete'"></app-open-form>
       <app-open-form formName="edit chapter" [data]="chapterData" [icon]="'edit'"></app-open-form>
@@ -11,7 +11,7 @@
 
   </div>
   <div class="image-container">
-    <div *ngFor="let img of chapterData?.image">
+    <div *ngFor="let img of chapterData?.pages">
       <app-img [size]="'full-screen'" [url]="img"></app-img>
     </div>
   </div>

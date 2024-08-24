@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IChapter } from '../../types/chapter.type';
+import { IChapter, ISimpleChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { UploadService } from '@app/shared/services/upload/upload.service';
 import { ChapterService } from '../../services/chapter/chapter.service';
@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './add-chapter-form.component.scss'
 })
 export class AddChapterFormComponent implements OnInit ,OnDestroy{
-  chapter: IChapter = {}
+  chapter: ISimpleChapter = {}
   img: File[] = []
   @Input() storyData?: IStoryInformation = {}
   @Output() complete = new EventEmitter<void>();
@@ -36,7 +36,9 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
   ) { }
 
   ngOnInit(): void {
+    console.log(this.storyData?.id);
     
+    this.chapter.mangaId = this.storyData?.id
   }
 
   onSubmit(event: Event): void {
@@ -49,9 +51,15 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
   }
 
   uploadImagesAndSubmitChapter(): void {
-    this.uploadService.uploadImages(this.img).subscribe(
-      (urls: string[]) => {
-        this.chapter.image = urls;
+    console.log(this.img);
+    const formData = new FormData();
+    this.img.forEach(file => {
+      formData.append('images', file, file.name);
+    });
+
+    this.uploadService.uploadImages(formData).subscribe(
+      response => {
+        this.chapter.pages = response.data;
         this.submitChapter();
       },
       
@@ -83,9 +91,13 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
 
   onImagesSelected(images: File[]) {
     this.img = images;
+    console.log(this.img);
+    
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
+    console.log(this.chapter);
+    
   }
 
   ngOnDestroy(): void {

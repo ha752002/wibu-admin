@@ -9,8 +9,8 @@ import { IChapter } from '@app/shared/components/open-form/types/chapter.type';
 export class ChapterComponent {
   @Input() chapterData?: IChapter = {
     id: '1',
-    name: 'Chapter 1',
-    image: [
+    title: 'Chapter 1',
+    pages: [
       'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/1.jpg',
       'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/2.jpg',
       'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/3.jpg',

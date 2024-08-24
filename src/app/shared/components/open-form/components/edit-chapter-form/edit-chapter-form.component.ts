@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Subscription } from 'rxjs';
+import { ChapterService } from '../../services/chapter/chapter.service';
 
 @Component({
   selector: 'app-edit-chapter-form',
@@ -24,9 +26,27 @@ export class EditChapterFormComponent {
   @Input() id?: string;
   @Input() storyData?: IStoryInformation = {}
   @Input() ChapterData?: IChapter = {}
+  @Output() complete = new EventEmitter<void>();
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(private chapterService: ChapterService) { }
 
   ngOnInit(): void {
     this.chapter = this.ChapterData ?? {}
+    if (this.id) {
+      this.getChapterDetails(this.id)
+    }
+  }
+
+  getChapterDetails(id: string): void {
+    this.chapterService.getChapterById(id).subscribe(
+      (response) => {
+        this.chapter = response.data;
+      },
+      (error) => {
+        console.error('Error fetching author details:', error);
+      }
+    );
   }
 
   onImagesSelected(images: File[]) {

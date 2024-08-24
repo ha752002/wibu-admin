@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IChapter } from '../../types/chapter.type';
+import { IChapter, IResponseChapter, ISimpleChapter } from '../../types/chapter.type';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,15 @@ export class ChapterService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  createChapter(chapter: IChapter): Observable<IChapter> {
-    return this.apiCallerService.post<IChapter, IChapter>(this.apiUrl.push, chapter);
+  getChapterById(id: string): Observable<IResponseChapter> {
+    return this.apiCallerService.get<string , IResponseChapter>(this.apiUrl.getById , id);
   }
 
-  updateChapter(id: string, chapter: IChapter): Observable<IChapter> {
+  createChapter(chapter: ISimpleChapter): Observable<ISimpleChapter> {
+    return this.apiCallerService.post<ISimpleChapter, ISimpleChapter>(this.apiUrl.push, chapter);
+  }
+
+  updateChapter(id: string, chapter: ISimpleChapter): Observable<ISimpleChapter> {
     return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, chapter);
   }
 
