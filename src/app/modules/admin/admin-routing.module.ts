@@ -31,7 +31,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/story/story.module').then(module => module.StoryModule)
       },
       {
-        path: 'story/:storyid/chapter/:chapterId',
+        path: 'chapter/:chapterId',
         loadChildren: () => import('./modules/chapter/chapter.module').then(module => module.ChapterModule)
       },
       {

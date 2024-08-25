@@ -7,6 +7,7 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { AuthorService } from '../../services/author/author.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
 
 @Component({
   selector: 'app-edit-author-form',
@@ -68,8 +69,8 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
   }
 
-  onAvatarUrlChange(url: string) {
-    this.author.avatarUrl = url;
+  onAvatarUrlChange(url: IResponseImage) {
+    this.author.avatarUrl = url.data.url;
   }
 
   ngOnDestroy(): void {

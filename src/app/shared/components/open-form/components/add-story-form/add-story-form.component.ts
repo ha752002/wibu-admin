@@ -14,6 +14,7 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { StoryService } from '../../services/story/story.service';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
 
 
 
@@ -57,8 +58,8 @@ export class AddStoryFormComponent implements OnInit , OnDestroy{
     this.selectedGenres = this.genre
   }
 
-  receiveThumbnail(url: string) {
-    this.story.thumbnailUrl  = url;
+  receiveThumbnail(url: IResponseImage) {    
+    this.story.thumbnailUrl  = url.data.url;
   }
 
   onSubmit(event: Event): void {
@@ -88,6 +89,8 @@ export class AddStoryFormComponent implements OnInit , OnDestroy{
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
+    console.log(this.story);
+    
   }
 
   handleGenreVisible(value: boolean) {

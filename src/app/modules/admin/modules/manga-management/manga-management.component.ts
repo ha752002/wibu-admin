@@ -48,9 +48,9 @@ export class MangaManagementComponent implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
-     private genreService: GenreService,
-      private storyService: StoryService
-    ){}
+    private genreService: GenreService,
+    private storyService: StoryService
+  ) { }
 
 
   ngOnInit(): void {

@@ -59,7 +59,9 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
 
     this.uploadService.uploadImages(formData).subscribe(
       response => {
-        this.chapter.pages = response.data;
+        console.log(response.data);
+        
+        this.chapter.pages = response.data.map(item => item.url);
         this.submitChapter();
       },
       

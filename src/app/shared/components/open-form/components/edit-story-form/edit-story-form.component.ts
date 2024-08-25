@@ -14,6 +14,7 @@ import { IAuthor } from '../../types/author.type';
 import { StoryService } from '../../services/story/story.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
 
 @Component({
   standalone: true,
@@ -72,8 +73,8 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
     );
   }
 
-  receiveThumbnail(url: string) {
-    this.story.thumbnailUrl  = url;
+  receiveThumbnail(url: IResponseImage) {
+    this.story.thumbnailUrl  = url.data.url;
   }
 
   onSubmit(event: Event): void {

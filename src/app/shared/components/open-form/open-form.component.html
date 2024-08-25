@@ -1,7 +1,6 @@
 <button (click)="openForm()" nz-button nzType="primary" [ngClass]="buttonType">
     <ts-icon [name]="icon"></ts-icon>
     <p *ngIf="label">{{ formName }}</p>
-    {{id}}
 </button>
 <div class="container" *ngIf="currentForm === formName" (click)="closeForm()">
     <div class="content" (click)="blockFormClosing($event)">

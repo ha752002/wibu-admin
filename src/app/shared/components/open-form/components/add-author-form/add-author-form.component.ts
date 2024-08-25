@@ -7,6 +7,7 @@ import { ISimpleAuthor } from '../../types/author.type';
 import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { FormsModule } from '@angular/forms';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
 
 @Component({
   selector: 'app-add-author-form',
@@ -49,8 +50,8 @@ export class AddAuthorFormComponent implements OnDestroy {
   onFieldValueChange(field: keyof ISimpleAuthor, value: string | number | Date | undefined): void {
   }
 
-  onAvatarUrlChange(url: string) {
-    this.author.avatarUrl = url;
+  onAvatarUrlChange(url: IResponseImage) {
+    this.author.avatarUrl = url.data.url;
     console.log(this.author);
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IStoryInformation } from '../../type/story.type';
 
@@ -9,6 +9,7 @@ import { IStoryInformation } from '../../type/story.type';
 })
 export class StoryDetailsComponent implements OnInit {
   @Input() storyData?: IStoryInformation
+  @Output() complete = new EventEmitter<void>();
 
   story?: IStoryInformation = {
     id: '1',
@@ -36,7 +37,7 @@ export class StoryDetailsComponent implements OnInit {
     ],
     views: 12000,
     chapter: 50,
-    introduce: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.\n\nmời các bạn đón xem!",
+    description: "Một câu chuyện hấp dẫn về những cuộc phiêu lưu đầy kỳ diệu.\n\nmời các bạn đón xem!",
     status: "Updating",
     created: new Date(-10),
     update: new Date(),
@@ -59,12 +60,16 @@ export class StoryDetailsComponent implements OnInit {
 
   navigateToChapter(chapterId?: string) {
     if (this.storyData?.id) {
-      this.router.navigate([`admin/story/${this.storyData.id}/chapter/${chapterId}`]);
+      this.router.navigate([`admin/chapter/${chapterId}`]);
     }
   }
 
   navigateToMangaWithId(genreId: string) {
     this.router.navigate(['admin/manga/', genreId]);
+  }
+
+  done(){
+    this.complete.emit();        
   }
 
 }

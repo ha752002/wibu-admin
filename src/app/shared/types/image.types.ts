@@ -3,8 +3,18 @@ export interface IImage {
     url?: string
   }
 
+  export interface IPage{
+    url : string;
+  }
+
+  export interface IResponseImages {
+    data: IPage[];
+    message: string;
+    status?: boolean;
+  }
+
   export interface IResponseImage {
-    data: string[];
+    data: IPage;
     message: string;
     status?: boolean;
   }
