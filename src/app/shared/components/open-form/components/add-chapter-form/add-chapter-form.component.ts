@@ -54,7 +54,7 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
     console.log(this.img);
     const formData = new FormData();
     this.img.forEach(file => {
-      formData.append('images', file, file.name);
+      formData.append('files', file, file.name);
     });
 
     this.uploadService.uploadImages(formData).subscribe(
