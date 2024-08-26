@@ -1,0 +1,25 @@
+<div class="user">
+    <div class="backgrourd-image">
+
+    </div>
+    <div class="detail">
+        <div class="avata">
+            <nz-avatar [nzSrc]="user?.avatarUrl" nzIcon="user" [nzSize]="128"></nz-avatar>
+        </div>
+        <div class="follow">
+            <button nz-button nzType="primary">follow</button>
+        </div>
+        <div class="Information">
+            <p class="name">{{user?.username}}</p>
+            <div class="subtitle">
+                <p>{{user?.email}}</p>
+
+                <p class="role" *ngFor="let role of user?.roles">{{ role }}</p>
+
+            </div>
+
+        </div>
+    </div>
+    <app-user-profile ></app-user-profile>
+
+</div>

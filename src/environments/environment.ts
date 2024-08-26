@@ -7,7 +7,7 @@ export const environment = {
     getUserInfo: 'auth/user-info',
     delete: 'auth/deActive/{id}',
     update: 'auth/update/{id}',
-
+    getAll: 'auth/user-list',
   },
   adminEndpoint: {
     manga: {
@@ -39,7 +39,7 @@ export const environment = {
       delete: 'manga/chapter/deActive/{id}',
     },
   },
-  galleryEndpoint:{
+  galleryEndpoint: {
     multiUpload: 'gallery/multi-upload',
     upload: 'gallery/upload',
   }

@@ -14,6 +14,9 @@ import {
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ICreateUser } from '../../types/user.type';
 import { Subscription } from 'rxjs';
+import { EUserRole } from '@app/core/enums/user.enums';
+import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
+import { IResponseImage } from '@app/shared/types/image.types';
 
 
 
@@ -23,7 +26,8 @@ import { Subscription } from 'rxjs';
     CommonModule,
     NzFormModule,
     NzButtonModule,
-    InputFieldComponent
+    InputFieldComponent,
+    UploadAvatarComponent
   ],
   selector: 'app-add-user-form',
   templateUrl: './add-user-form.component.html',
@@ -34,16 +38,15 @@ export class AddUserFormComponent  implements OnDestroy{
   @Output() complete = new EventEmitter<void>();
 
   user: ICreateUser = {
-    name: '',
-    phone: '',
+    username: '',
+    avatarUrl: '',
     email: '',
-    dateOfBirth: undefined,
-    teams: '',
-    userType: 'user',
+    birthday: new Date(),
+    roles: [],
     password: '',
   };
 
-  userTypeList: string[] = ['user','admin','management'];
+  userTypeList: string[] = [EUserRole.ROLE_USER];
   confirmPassword: string = '';
   private subscriptions: Subscription = new Subscription();
 
@@ -70,6 +73,10 @@ export class AddUserFormComponent  implements OnDestroy{
 
   onPasswordValueChange(value: string): void {
     console.log(value);
+  }
+
+  onAvatarUrlChange(url: IResponseImage) {
+    this.user.avatarUrl = url.data.url;
   }
 
   ngOnDestroy(): void {

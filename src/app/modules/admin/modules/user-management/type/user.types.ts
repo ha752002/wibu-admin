@@ -1,12 +1,23 @@
 import {EUserRole} from "@app/core/enums/user.enums";
 
 export interface IUser {
+  id: string,
+  username: string
   avatarUrl: string,
   birthday: Date,
-  createdDate: Date,
   email: string,
-  id: string,
-  lastUpdated: Date,
   roles: EUserRole[],
-  username: string
+  lastUpdated: Date,
+  createdDate: Date,
+}
+
+export interface IResponseUsers {
+  data: IUser[];
+  message: string;
+  status?: boolean;
+}
+
+export interface IuserFilter {
+  search?:string,
+  roles?: string,
 }

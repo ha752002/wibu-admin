@@ -3,7 +3,7 @@
   'item-even': isEven
 }">
   <ng-container>
-    <nz-list-item-meta
+    <nz-list-item-meta  (click)="handleVisible()"
       [nzAvatar]="user.avatarUrl ? user.avatarUrl : defaultAvatar"
       [nzDescription]="user.username"
       class="user-name-text"
@@ -11,14 +11,12 @@
     </nz-list-item-meta>
     <ul nz-list-item-actions>
       <nz-list-item-action>
-        <button nz-button nzType="primary">View</button>
+        <app-open-form [formName]="'edit user'" buttonType="warning" [id]="user.id" ></app-open-form>
       </nz-list-item-action>
       <nz-list-item-action>
-        <button nz-button nzType="primary">Edit</button>
-      </nz-list-item-action>
-      <nz-list-item-action>
-        <button nz-button nzDanger nzType="primary">Delete</button>
+        <app-open-form [formName]="'delete'" buttonType="danger" [id]="user.id" delete="user"></app-open-form>
       </nz-list-item-action>
     </ul>
   </ng-container>
 </nz-list-item>
+<app-open-modal *ngIf="previewVisible" (previewVisible)="handleHiddenVisible($event)"><app-preview-the-user [user]="user"></app-preview-the-user></app-open-modal>

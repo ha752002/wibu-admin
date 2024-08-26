@@ -10,6 +10,7 @@ import { ImgComponent } from './components/img/img.component';
 import { GenreSelectorComponent } from './components/genre-selector/genre-selector.component';
 import { UploadAvatarComponent } from './components/upload-avatar/upload-avatar.component';
 import { AuthorSelectorComponent } from './components/author-selector/author-selector.component';
+import { PreviewTheUserComponent } from './components/preview-the-user/preview-the-user.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -22,7 +23,8 @@ const COMPONENTS = [
   ImgComponent,
   GenreSelectorComponent,
   UploadAvatarComponent,
-  AuthorSelectorComponent
+  AuthorSelectorComponent,
+  PreviewTheUserComponent
 ];
 
 @NgModule({
