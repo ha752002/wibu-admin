@@ -27,10 +27,7 @@ export class UserManagementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllStorys()
-    console.log(this.users);
-    // console.log(this.userList$);
-    
+    this.getAllStorys()    
   }
 
   getUserList(list: IUser[]) {

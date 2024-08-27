@@ -27,17 +27,16 @@ export class UploadAvatarComponent implements OnInit {
   @Input() img?: string;
 
   loading = false;
-  avatarUrl?: IResponseImage;
+  avatarUrl: IResponseImage = {
+    data: { url: '' },
+  }
   uploadUrl = 'http://localhost:8763/gallery/upload';
 
   constructor(private msg: NzMessageService) { }
 
   ngOnInit(): void {
-    if (this.avatarUrl) {
-      if (this.img) {
-        this.avatarUrl.data.url = this.img
-      }
-
+    if (this.img) {
+      this.avatarUrl.data.url = this.img;
     }
   }
 

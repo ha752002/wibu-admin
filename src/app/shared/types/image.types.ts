@@ -15,6 +15,6 @@ export interface IImage {
 
   export interface IResponseImage {
     data: IPage;
-    message: string;
+    message?: string;
     status?: boolean;
   }

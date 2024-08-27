@@ -18,7 +18,6 @@ import { OpenFormComponent } from '../open-form/open-form.component';
     InputFieldComponent,
     NzPaginationModule,
     IconComponent,
-    // OpenFormComponent,
     NzButtonModule
   ],
   selector: 'app-author-selector',

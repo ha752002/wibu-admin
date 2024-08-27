@@ -122,7 +122,6 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
 
   onauthorsSelected(author: IAuthor[]) {
     this.selectedAuthors= author;
-    // this.story.authorIds = author;
   }
 
   ngOnDestroy(): void {

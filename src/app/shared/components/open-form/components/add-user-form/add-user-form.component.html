@@ -2,7 +2,7 @@
 <div>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
-            <app-upload-avatar (avatarUrlChange)="onAvatarUrlChange($event)"></app-upload-avatar>
+            <app-upload-avatar (avatarUrlChange)="onAvatarUrlChange($event)" [img]="user.avatarUrl"></app-upload-avatar>
             <app-input-field label="Name" [(value)]="user.username" type="text"
                 (valueChange)="onFieldValueChange('username', $event)" [required]="true">
             </app-input-field>
@@ -15,12 +15,16 @@
                 (valueChange)="onFieldValueChange('birthday', $event)">
             </app-input-field>
 
+            <app-input-field label="Roles" [(value)]="user.roles" type="date"
+                (valueChange)="onFieldValueChange('birthday', $event)" [optionValue]="roles" [multiple]="true">
+            </app-input-field>
+
             <app-input-field label="Password" [(value)]="user.password" type="password"
                 (valueChange)="onFieldValueChange('password', $event)">
             </app-input-field>
 
-            <app-input-field label="Confirm password" [(value)]="confirmPassword" type="password"
-                (valueChange)="onPasswordValueChange(confirmPassword)">
+            <app-input-field label="Confirm password" [(value)]="user.confirmPassword" type="password"
+                (valueChange)="onFieldValueChange('confirmPassword', $event)">
             </app-input-field>
         </div>
         <div class="group-button">

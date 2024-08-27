@@ -26,12 +26,13 @@
         width: 100%;
         padding: 4px 11px;
         border: 1px solid #d9d9d9;
+
         select {
             border: none;
             width: 100%;
             cursor: pointer;
 
-            .placeholder{
+            .placeholder {
                 color: #bfbfbf;
             }
 
@@ -41,5 +42,18 @@
                 border-color: #007bff;
             }
         }
+
+        .multiple-select {
+            border: none;
+            width: 100%;
+            cursor: pointer;
+
+        }
+
+        
     }
+}
+
+:host ::ng-deep .multiple-select >.ant-select-selector {
+    border: none !important;  
 }

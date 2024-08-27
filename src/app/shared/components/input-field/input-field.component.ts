@@ -18,10 +18,11 @@ import { EUserRole } from '@app/core/enums/user.enums';
 export class InputFieldComponent implements OnInit {
   @Input() label: string = '';
   @Input() type: InputFieldTypes = 'text';
-  @Input() value: string | number | Date | EUserRole | undefined;
+  @Input() value: string | number | Date | EUserRole[] | undefined;
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() optionValue?: string[];
+  @Input() multiple?: boolean;
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 
   passwordVisible = false;

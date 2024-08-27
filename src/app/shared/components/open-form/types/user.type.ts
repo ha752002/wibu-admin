@@ -7,15 +7,21 @@ export interface ICreateUser {
   email: string,
   roles: EUserRole[],
   password?: string;
+  confirmPassword?: string;
 }
 
 export interface IUpdateUser {
   id?: string;
-  avatarUrl?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  dateOfBirth?: Date;
-  teams?: string;
-  userType?: string;
+  username: string
+  avatarUrl: string,
+  birthday: Date,
+  email: string,
+  roles: EUserRole[],
 }
+
+export interface IResponseUser {
+  data: IUpdateUser;
+  message: string;
+  status?: boolean;
+}
+

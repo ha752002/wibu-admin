@@ -19,7 +19,6 @@ import { OpenFormComponent } from '../open-form/open-form.component';
     OpenModalComponent,
     InputFieldComponent,
     IconComponent,
-    // OpenFormComponent,
     NzButtonModule
   ],
   templateUrl: './genre-selector.component.html',

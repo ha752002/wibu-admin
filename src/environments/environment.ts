@@ -8,6 +8,8 @@ export const environment = {
     delete: 'auth/deActive/{id}',
     update: 'auth/update/{id}',
     getAll: 'auth/user-list',
+    getById: 'auth/',
+
   },
   adminEndpoint: {
     manga: {
