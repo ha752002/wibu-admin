@@ -9,6 +9,7 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { FormsModule } from '@angular/forms';
 import { EUserRole } from '@app/core/enums/user.enums';
 import { IResponseImage } from '@app/shared/types/image.types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 @Component({
@@ -24,7 +25,7 @@ import { IResponseImage } from '@app/shared/types/image.types';
   templateUrl: './edit-user-form.component.html',
   styleUrl: './edit-user-form.component.scss'
 })
-export class EditUserFormComponent implements OnInit{
+export class EditUserFormComponent implements OnInit {
   @Input() id?: string;
 
   user: IUpdateUser = {
@@ -36,8 +37,12 @@ export class EditUserFormComponent implements OnInit{
   };
 
   roles: string[] = [EUserRole.ROLE_USER, EUserRole.ROLE_ADMIN];
+  private messageId: string | null = null;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private message: NzMessageService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     if (this.id) {
@@ -71,6 +76,17 @@ export class EditUserFormComponent implements OnInit{
 
   onAvatarUrlChange(url: IResponseImage) {
     this.user.avatarUrl = url.data.url;
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   onFieldValueChange(field: keyof IUpdateUser, value: string | number | Date | undefined): void {

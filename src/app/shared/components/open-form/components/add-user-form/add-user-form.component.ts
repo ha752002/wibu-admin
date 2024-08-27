@@ -3,14 +3,6 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@
 import { FormsModule, NgForm } from '@angular/forms';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  NonNullableFormBuilder,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ICreateUser } from '../../types/user.type';
 import { Subscription } from 'rxjs';
@@ -19,6 +11,7 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { IResponseImage } from '@app/shared/types/image.types';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { UserService } from '../../services/user/user.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   standalone: true,
@@ -52,23 +45,24 @@ export class AddUserFormComponent implements OnDestroy {
   roles: string[] = [EUserRole.ROLE_USER, EUserRole.ROLE_ADMIN];
 
   private subscriptions: Subscription = new Subscription();
+  private messageId: string | null = null;
 
   constructor(
+    private message: NzMessageService,
     private userService: UserService
   ) { }
   onSubmit(event: Event): void {
     event.preventDefault();
-    console.log(1111);
-
+    this.createMessageloading();
 
     this.user.birthday = new Date(this.user.birthday)
     this.userService.createUser(this.user).subscribe(
       response => {
-        console.log('User created successfully:', response);
-        this.userForm.reset();
+        this.createMessage('success')
+        this.complete.emit();
       },
       error => {
-        console.error('Error creating user:', error);
+        this.createMessage('error')
       }
     );
 
@@ -86,6 +80,17 @@ export class AddUserFormComponent implements OnDestroy {
 
   onAvatarUrlChange(url: IResponseImage) {
     this.user.avatarUrl = url.data.url;
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

@@ -7,6 +7,7 @@ import { IChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { Subscription } from 'rxjs';
 import { ChapterService } from '../../services/chapter/chapter.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-edit-chapter-form',
@@ -28,8 +29,13 @@ export class EditChapterFormComponent {
   @Input() ChapterData?: IChapter = {}
   @Output() complete = new EventEmitter<void>();
   private subscriptions: Subscription = new Subscription();
+  private messageId: string | null = null;
 
-  constructor(private chapterService: ChapterService) { }
+  constructor(
+    private chapterService: ChapterService,
+    private message: NzMessageService,
+
+  ) { }
 
   ngOnInit(): void {
     this.chapter = this.ChapterData ?? {}
@@ -55,6 +61,19 @@ export class EditChapterFormComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    // this.createMessageloading();
+
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {

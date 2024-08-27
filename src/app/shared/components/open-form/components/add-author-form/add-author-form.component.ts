@@ -8,6 +8,7 @@ import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { FormsModule } from '@angular/forms';
 import { IPage, IResponseImage } from '@app/shared/types/image.types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-add-author-form',
@@ -24,6 +25,7 @@ import { IPage, IResponseImage } from '@app/shared/types/image.types';
 })
 export class AddAuthorFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
+  private messageId: string | null = null;
 
   author: ISimpleAuthor = {
     name: '',
@@ -32,17 +34,21 @@ export class AddAuthorFormComponent implements OnDestroy {
   };
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private authorService: AuthorService) { }
+  constructor(private authorService: AuthorService, private message: NzMessageService) { }
 
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.createMessageloading();
     this.authorService.createAuthor(this.author).subscribe(
       response => {
-        this.complete.emit();        
+        
+        this.createMessage('success')
+        this.complete.emit();
       },
       error => {
-        console.error('Error creating author', error);
+        
+        this.createMessage('error')
       }
     );
   }
@@ -53,6 +59,17 @@ export class AddAuthorFormComponent implements OnDestroy {
   onAvatarUrlChange(url: IResponseImage) {
     this.author.avatarUrl = url.data.url;
     console.log(this.author);
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

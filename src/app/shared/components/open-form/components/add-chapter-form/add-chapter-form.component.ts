@@ -9,6 +9,7 @@ import { UploadService } from '@app/shared/services/upload/upload.service';
 import { ChapterService } from '../../services/chapter/chapter.service';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   standalone: true,
@@ -23,21 +24,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './add-chapter-form.component.html',
   styleUrl: './add-chapter-form.component.scss'
 })
-export class AddChapterFormComponent implements OnInit ,OnDestroy{
+export class AddChapterFormComponent implements OnInit, OnDestroy {
   chapter: ISimpleChapter = {}
   img: File[] = []
   @Input() storyData?: IStoryInformation = {}
   @Output() complete = new EventEmitter<void>();
   private subscriptions: Subscription = new Subscription();
-
+  private messageId: string | null = null;
   constructor(
+    private message: NzMessageService,
     private uploadService: UploadService,
     private chapterService: ChapterService
   ) { }
 
   ngOnInit(): void {
     console.log(this.storyData?.id);
-    
+
     this.chapter.mangaId = this.storyData?.id
   }
 
@@ -51,6 +53,7 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
   }
 
   uploadImagesAndSubmitChapter(): void {
+    this.createMessageloading();
     console.log(this.img);
     const formData = new FormData();
     this.img.forEach(file => {
@@ -60,13 +63,14 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
     this.uploadService.uploadImages(formData).subscribe(
       response => {
         console.log(response.data);
-        
+
         this.chapter.pages = response.data.map(item => item.url);
         this.submitChapter();
       },
-      
+
       error => {
-        console.error('Error uploading images:', error);
+        
+        this.createMessage('error')
       }
     );
   }
@@ -74,10 +78,14 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
   submitChapter(): void {
     this.chapterService.createChapter(this.chapter).subscribe(
       response => {
-        this.complete.emit();        
+        
+        this.createMessage('success')
+        this.complete.emit();
       },
       error => {
-        console.error('Error creating chapter:', error);
+        
+        this.createMessage('error')
+
       }
     );
   }
@@ -94,12 +102,23 @@ export class AddChapterFormComponent implements OnInit ,OnDestroy{
   onImagesSelected(images: File[]) {
     this.img = images;
     console.log(this.img);
-    
+
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
     console.log(this.chapter);
-    
+
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `chapter added ${type}`);
   }
 
   ngOnDestroy(): void {
