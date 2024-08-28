@@ -82,8 +82,6 @@ export class OpenFormComponent implements OnDestroy {
   }
 
   closeConfirmationForm(confirm: boolean) {
-    console.log(confirm);
-
     if (confirm === true) {
       this.currentForm = null
       this.confirmationForm = false
@@ -91,8 +89,6 @@ export class OpenFormComponent implements OnDestroy {
 
     } else {
       this.confirmationForm = false
-      console.log(2);
-
     }
   }
 
@@ -100,8 +96,6 @@ export class OpenFormComponent implements OnDestroy {
     if (this.change === false) {
       this.change = true;
     }
-    console.log(this.change);
-
   }
 
   done() {
