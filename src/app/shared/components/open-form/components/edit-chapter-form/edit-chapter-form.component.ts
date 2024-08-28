@@ -28,6 +28,9 @@ export class EditChapterFormComponent {
   @Input() storyData?: IStoryInformation = {}
   @Input() ChapterData?: IChapter = {}
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
+
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
 
@@ -77,5 +80,6 @@ export class EditChapterFormComponent {
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 }

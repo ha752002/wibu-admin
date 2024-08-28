@@ -40,6 +40,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class AddStoryFormComponent implements OnInit, OnDestroy {
   @Input() genre?: IGenre[] = [];
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
 
   story: ICreateStory = {
     thumbnailUrl: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg',
@@ -98,8 +99,7 @@ export class AddStoryFormComponent implements OnInit, OnDestroy {
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
-    console.log(this.story);
-
+    this.change.emit();
   }
 
   handleGenreVisible(value: boolean) {

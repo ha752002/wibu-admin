@@ -14,7 +14,7 @@ export class ChapterComponent {
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private chapterService: ChapterService ,private route: ActivatedRoute,) { }
+  constructor(private chapterService: ChapterService, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.getId()
@@ -22,21 +22,23 @@ export class ChapterComponent {
 
   getId() {
     this.route.params.subscribe(params => {
-      const chapterParam : string = params['chapterId'];
-      if(chapterParam){
+      const chapterParam: string = params['chapterId'];
+      if (chapterParam) {
         this.getChapterDetails(chapterParam)
       }
     });
   }
 
   getChapterDetails(id: string): void {
-    this.chapterService.getChapterById(id).subscribe(
-      (response) => {
-        this.chapter = response.data;
-      },
-      (error) => {
-        console.error('Error fetching author details:', error);
-      }
+    this.subscriptions.add(
+      this.chapterService.getChapterById(id).subscribe(
+        (response) => {
+          this.chapter = response.data;
+        },
+        (error) => {
+          console.error('Error fetching author details:', error);
+        }
+      )
     );
   }
 

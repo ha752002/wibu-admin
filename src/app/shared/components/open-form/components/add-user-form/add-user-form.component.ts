@@ -31,6 +31,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class AddUserFormComponent implements OnDestroy {
   @ViewChild('userForm') userForm!: NgForm;
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
 
   user: ICreateUser = {
     username: 'haongvip',
@@ -70,8 +71,7 @@ export class AddUserFormComponent implements OnDestroy {
   }
 
   onFieldValueChange(field: keyof ICreateUser, value: string | number | Date | undefined): void {
-
-    console.log(this.user);
+    this.change.emit();
   }
 
   onPasswordValueChange(value: string): void {

@@ -1,0 +1,13 @@
+<div class="confirmation-form" (click)="handlecConfirm(false)">
+    <div class="group-content" (click)="blockFormClosing($event)">
+        <div class="title">confirmation form</div>
+
+        <div class="content">
+            <div class="text">{{content}}</div>
+            <div class="group-button">
+                <button nz-button nzType="text" type="button" (click)="handlecConfirm(false)">Cancel</button>
+                <button nz-button nzType="primary" type="button" (click)="handlecConfirm(true)" nzDanger>confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

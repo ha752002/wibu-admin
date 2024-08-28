@@ -29,6 +29,8 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
   img: File[] = []
   @Input() storyData?: IStoryInformation = {}
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
   constructor(
@@ -106,8 +108,7 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
-    console.log(this.chapter);
-
+    this.change.emit();
   }
 
   createMessageloading(): void {

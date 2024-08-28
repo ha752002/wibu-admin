@@ -40,6 +40,8 @@ export class EditStoryFormComponent implements OnInit, OnDestroy {
   @Input() id?: string;
   @Input() img?: string;
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
 
@@ -114,6 +116,7 @@ export class EditStoryFormComponent implements OnInit, OnDestroy {
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 
   handleGenreVisible(value: boolean) {

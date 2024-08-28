@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -27,6 +27,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class EditUserFormComponent implements OnInit {
   @Input() id?: string;
+  @Output() change = new EventEmitter<void>();
 
   user: IUpdateUser = {
     username: 'haongvip',
@@ -90,5 +91,6 @@ export class EditUserFormComponent implements OnInit {
   }
 
   onFieldValueChange(field: keyof IUpdateUser, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 }

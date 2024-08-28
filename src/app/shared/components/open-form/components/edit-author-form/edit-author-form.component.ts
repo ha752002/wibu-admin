@@ -26,6 +26,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class EditAuthorFormComponent implements OnInit, OnDestroy {
   @Input() id?: string;
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
+
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
 
@@ -75,6 +78,7 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 
   onAvatarUrlChange(url: IResponseImage) {

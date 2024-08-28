@@ -11,6 +11,7 @@ import { GenreSelectorComponent } from './components/genre-selector/genre-select
 import { UploadAvatarComponent } from './components/upload-avatar/upload-avatar.component';
 import { AuthorSelectorComponent } from './components/author-selector/author-selector.component';
 import { PreviewTheUserComponent } from './components/preview-the-user/preview-the-user.component';
+import { ConfirmationFormComponent } from './components/confirmation-form/confirmation-form.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -24,7 +25,8 @@ const COMPONENTS = [
   GenreSelectorComponent,
   UploadAvatarComponent,
   AuthorSelectorComponent,
-  PreviewTheUserComponent
+  PreviewTheUserComponent,
+  ConfirmationFormComponent
 ];
 
 @NgModule({

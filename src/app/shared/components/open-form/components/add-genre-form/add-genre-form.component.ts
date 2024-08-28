@@ -24,6 +24,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class AddGenreFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
   private messageId: string | null = null;
 
   genre: IGenre = {
@@ -57,6 +59,7 @@ export class AddGenreFormComponent implements OnDestroy {
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 
   createMessageloading(): void {
