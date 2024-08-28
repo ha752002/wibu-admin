@@ -73,6 +73,8 @@ export class EditStoryFormComponent implements OnInit, OnDestroy {
     this.storyService.getStoryById(id).subscribe(
       (response) => {
         this.story = response.data;
+        this.selectedAuthors = response.data.authors
+        this.selectedGenres = response.data.genres
       },
       (error) => {
         console.error('Error fetching author details:', error);
