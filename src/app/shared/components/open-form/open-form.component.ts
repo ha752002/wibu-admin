@@ -26,6 +26,7 @@ import { IAuthor } from './types/author.type';
 import { AuthorService } from './services/author/author.service';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { ConfirmationFormComponent } from '../confirmation-form/confirmation-form.component';
+import { EventService } from '@app/modules/admin/services/event/event.service';
 
 @Component({
   selector: 'app-open-form',
@@ -67,7 +68,7 @@ export class OpenFormComponent implements OnDestroy {
   change: boolean = false;
   confirmationForm: boolean = false;
   private subscriptions: Subscription = new Subscription();
-  constructor(private authorService: AuthorService) { }
+  constructor(private eventService: EventService) { }
 
   openForm() {
     this.currentForm = this.formName
@@ -101,6 +102,7 @@ export class OpenFormComponent implements OnDestroy {
   done() {
     this.complete.emit();
     this.currentForm = null
+    this.eventService.emitEvent();
   }
 
   blockFormClosing(event: MouseEvent) {
