@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -7,22 +7,32 @@ import { StoryService } from '@app/shared/services/story/story.service';
 import { ActivatedRoute } from '@angular/router';
 import { IStoryInformation } from './type/story.type';
 import { EStory } from '@app/core/enums/story.enum';
+import { EventService } from '../../services/event/event.service';
 @Component({
   selector: 'app-story',
   templateUrl: './story.component.html',
   styleUrl: './story.component.scss'
 })
-export class StoryComponent implements OnInit{
+export class StoryComponent implements OnInit, OnDestroy {
   storyData?: IStoryInformation = {}
   EStory = EStory;
   selectedTitle: string = EStory.Story;
   contents: EStory[] = [EStory.Story, EStory.Chapter];
   private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
 
-  constructor(private route: ActivatedRoute, private genreService: GenreService, private storyService: StoryService) {
+  constructor(
+    private route: ActivatedRoute,
+    private genreService: GenreService,
+    private storyService: StoryService,
+    private eventService: EventService,
+  ) {
   }
 
   ngOnInit(): void {
+    this.eventSubscription = this.eventService.event$.subscribe(() => {
+      this.getId();
+    });
     this.getId()
   }
 
@@ -30,12 +40,12 @@ export class StoryComponent implements OnInit{
     this.route.params.subscribe(params => {
       const id = params['id'];
       console.log(id);
-      
+
       this.getStoryById(id)
     });
   }
 
-  getStoryById(id : string): void {
+  getStoryById(id: string): void {
     this.subscriptions.add(
       this.storyService.getStoryById(id).pipe(
         finalize(() => {
@@ -54,5 +64,11 @@ export class StoryComponent implements OnInit{
 
   changeTitle(titleContent: string) {
     this.selectedTitle = titleContent
+  }
+
+  ngOnDestroy() {
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
   }
 }
