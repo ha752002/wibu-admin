@@ -8,6 +8,7 @@ export interface IStoryInformation {
   title?: string;
   genres?: IGenre[],
   authors?: IAuthor[];
+  publisher?:IPublisher,
   views?: number;
   chapter?: number;
   chapters?: IChapter[];
@@ -27,6 +28,14 @@ export interface IStory{
   data: IStoryInformation;
   message: string,
   status?: boolean,
+}
+
+export interface IPublisher{
+  avatarUrl?: string,
+  createdDate: Date,
+  email?: string,
+  id: string,
+  username: string,
 }
 
 

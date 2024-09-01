@@ -1,30 +1,52 @@
-.tory-details {
-    padding: 24px;
+.story-details {
     display: flex;
+    justify-content: left;
     gap: 24px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 8px;
+    text-align: left;
+    padding: 24px;
+    flex-direction: column;
+
+
+    .story {
+        display: flex;
+        gap: 24px;
+        border-radius: 8px;
+    }
 
     .content {
         text-align: left;
         display: flex;
         flex-direction: column;
         gap: 12px;
+        width: 100%;
+
+
+        .basic-information {
+            display: flex;
+            gap: 24px;
+            width: 100%;
+
+            >div {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
 
         .name {
             font-size: large;
             font-weight: 600;
         }
 
-
         ul {
             display: flex;
             gap: 12px;
 
             li {
-                font-size: small;
+                font-size: x-small;
                 list-style-type: none;
-                padding: 4px 12px;
+                padding: 2px 8px;
                 border-radius: 100px;
                 background-color: #f38990;
                 color: white;
@@ -32,37 +54,17 @@
             }
         }
 
-
+        .authors {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
     }
 }
+
 
 .title {
     font-weight: 500;
-}
-
-.chapters {
-    margin-top: 24px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 8px;
-    width: 100%;
-    text-align: left;
-
-    .title {
-        padding: 12px 24px;
-        border-bottom: 1px solid gray;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .item-chapter{
-        padding: 6px 24px;
-        transition: 0.2s;
-        cursor: pointer;
-        &:hover{
-            background-color: #f38990;
-            color: white;
-            transition: 0.2s;
-        }
-    }
+    margin-bottom: 12px;
 }

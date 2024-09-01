@@ -6,6 +6,7 @@ import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
 import { ActivatedRoute } from '@angular/router';
 import { IStoryInformation } from './type/story.type';
+import { EStory } from '@app/core/enums/story.enum';
 @Component({
   selector: 'app-story',
   templateUrl: './story.component.html',
@@ -13,6 +14,9 @@ import { IStoryInformation } from './type/story.type';
 })
 export class StoryComponent implements OnInit{
   storyData?: IStoryInformation = {}
+  EStory = EStory;
+  selectedTitle: string = EStory.Story;
+  contents: EStory[] = [EStory.Story, EStory.Chapter];
   private subscriptions: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute, private genreService: GenreService, private storyService: StoryService) {
@@ -46,5 +50,9 @@ export class StoryComponent implements OnInit{
         }
       )
     );
+  }
+
+  changeTitle(titleContent: string) {
+    this.selectedTitle = titleContent
   }
 }

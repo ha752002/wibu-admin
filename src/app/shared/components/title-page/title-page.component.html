@@ -1,0 +1,7 @@
+<ul class="title" *ngIf="multiTitlePage">
+    <li *ngFor="let title of multiTitlePage" (click)="changeTitle(title)" [ngClass]="{'select': selectedTitle === title}">{{title}}</li>
+</ul>
+
+<ul class="title" *ngIf="titlePage">
+    <li >{{titlePage}}</li>
+</ul>

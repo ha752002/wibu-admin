@@ -1,39 +1,48 @@
-<div class="tory-details">
+<div class="story-details">
     <!-- <img [src]="storyData?.thumbnail" alt=""> -->
-    <app-img [url]="storyData?.thumbnailUrl" [size]="'large'" [imgType]="'portrait'"></app-img>
-    <div class="content">
-        <div>
+    <div class="story">
+        <app-img [url]="storyData?.thumbnailUrl" [size]="'large'" [imgType]="'portrait'"></app-img>
+        <div class="content">
             <p class="name">{{storyData?.title}}</p>
-            
-            <p>Status : {{storyData?.status}}</p>
-            <p>Views: {{storyData?.views}}</p>
-            <p>Chapter: {{storyData?.chapter}}</p>
-        </div>
-        <div>
-            <p class="title">Author : </p>
-            <ul>
-                <li class="item-genre" *ngFor="let author of storyData?.authors" >{{author.name}}</li>
-            </ul>
-        </div>
-        <div>
-            <p class="title">Genre : </p>
-            <ul>
-                <li class="item-genre" *ngFor="let genre of storyData?.genres" (click)="navigateToMangaWithId(genre.title)">{{genre.title}}</li>
-            </ul>
-        </div>
-        <div>
-            <p class="title">Introduce : </p>
-            <p>{{storyData?.description}}</p>
-        </div>
-    </div>
-</div>
 
-<div class="chapters">
-    <div class="title">
-        <p >chapter : {{storyData?.chapters?.length}}</p>
-        <app-open-form formName="add chapter" [storyData]="storyData" (complete)="done()"></app-open-form>
+            <div class="basic-information">
+                <div>
+                    <div>
+                        <p>Status : {{storyData?.status|| 'Unknown'}}</p>
+                        <p>Views: {{storyData?.views || 0}}</p>
+                        <p>Chapter: {{storyData?.chapters?.length}}</p>
+                    </div>
+
+                    <div>
+                        <p class="title">Genre : </p>
+                        <ul>
+                            <li class="item-genre" *ngFor="let genre of storyData?.genres"
+                                (click)="navigateToMangaWithId(genre.title)">{{genre.title}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p class="title">Author : </p>
+                        <div class="authors">
+                            <app-item-author *ngFor="let author of storyData?.authors"
+                                [author]="author"></app-item-author>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="title">Story Poster : </p>
+                        <div class="authors">
+                            <app-item-author *ngIf="storyData?.publisher"
+                                [user]="storyData?.publisher"></app-item-author>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="item-chapter" *ngFor="let chapter of storyData?.chapters" (click)="navigateToChapter(chapter?.id)">
-        {{chapter.title}}
+    <div>
+        <p class="title">Introduce : </p>
+        <p>{{storyData?.description}}</p>
     </div>
 </div>

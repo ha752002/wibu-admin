@@ -31,66 +31,6 @@ export class AuthorSelectorComponent {
 
   searchQuery: string = '';
   authors: IAuthor[] = []
-  dataAuthors: IAuthor[] = [
-    {
-      id: '1',
-      name: 'John Doe',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'John Doe is a prolific writer known for his thrilling novels and captivating storytelling.'
-    },
-    {
-      id: '2',
-      name: 'Jane Smith',
-      description: 'Jane Smith specializes in historical fiction and has won numerous awards for her works.'
-    },
-    {
-      id: '3',
-      name: 'Alice Johnson',
-      avatarUrl: 'https://i.pinimg.com/736x/85/96/2b/85962b3340e2dc2b9c21389bb0bd3e00.jpg',
-      description: 'Alice Johnson writes science fiction and fantasy, creating intricate worlds and engaging characters.'
-    },
-    {
-      id: '4',
-      name: 'Bob Brown',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
-    },
-    {
-      id: '5',
-      name: 'John Doe',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'John Doe is a prolific writer known for his thrilling novels and captivating storytelling.'
-    },
-    {
-      id: '6',
-      name: 'Jane Smith',
-      description: 'Jane Smith specializes in historical fiction and has won numerous awards for her works.'
-    },
-    {
-      id: '7',
-      name: 'Alice Johnson',
-      avatarUrl: 'https://i.pinimg.com/736x/85/96/2b/85962b3340e2dc2b9c21389bb0bd3e00.jpg',
-      description: 'Alice Johnson writes science fiction and fantasy, creating intricate worlds and engaging characters.'
-    },
-    {
-      id: '8',
-      name: 'Bob Brown',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
-    },
-    {
-      id: '9',
-      name: 'Alice Johnson',
-      avatarUrl: 'https://i.pinimg.com/736x/85/96/2b/85962b3340e2dc2b9c21389bb0bd3e00.jpg',
-      description: 'Alice Johnson writes science fiction and fantasy, creating intricate worlds and engaging characters.'
-    },
-    {
-      id: '10',
-      name: 'Bob Brown',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
-    }
-  ];
   selectedAuthors: IAuthor[] = [];
   paginatedData: IAuthor[] = [];
   pageSize = 8;
@@ -119,7 +59,6 @@ export class AuthorSelectorComponent {
 
         error => {
           console.error('Error loading Authors', error);
-          this.authors = this.dataAuthors
           this.updatePaginatedData()
         }
       )

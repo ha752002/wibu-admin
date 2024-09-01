@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Pipe } from '@angular/core';
 import { Router } from '@angular/router';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ItemAuthorComponent } from '../item-author/item-author.component';
 
 
 @Component({
@@ -11,17 +13,17 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   imports: [
     CommonModule,
     NzButtonModule,
+    NzAvatarModule,
+    ItemAuthorComponent
   ],
   templateUrl: './preview-the-story.component.html',
   styleUrl: './preview-the-story.component.scss'
 })
 
-
 export class PreviewTheStoryComponent {
   @Input() storyData?: IStoryInformation;
 
   constructor(private router: Router) {}
-
 
   viewStory() {
     if (this.storyData?.id) {

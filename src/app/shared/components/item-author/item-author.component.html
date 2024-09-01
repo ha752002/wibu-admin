@@ -1,0 +1,13 @@
+<div class="item" *ngIf="author">
+    <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
+    <strong>{{ author.name }}</strong>
+</div>
+
+<div class="item" *ngIf="user">
+    <nz-avatar [nzSrc]="user.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
+    <strong>{{ user.username }}</strong>
+</div>
+
+<!-- <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <app-preview-the-user [user]="author"></app-preview-the-user>
+  </app-open-modal> -->

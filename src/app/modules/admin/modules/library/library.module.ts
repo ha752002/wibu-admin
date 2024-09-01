@@ -11,6 +11,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconComponent } from '@app/shared/components/icon/icon.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { TitlePageComponent } from '@app/shared/components/title-page/title-page.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     InputFieldComponent,
     OpenFormComponent,
     NzButtonModule,
-    IconComponent
+    IconComponent,
+    TitlePageComponent
   ]
 })
 export class LibraryModule { }

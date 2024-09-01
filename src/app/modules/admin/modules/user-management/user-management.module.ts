@@ -21,6 +21,7 @@ import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal
 import { PreviewTheUserComponent } from '@app/shared/components/preview-the-user/preview-the-user.component';
 import { OpenFormComponent } from '@app/shared/components/open-form/open-form.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
+import { TitlePageComponent } from '@app/shared/components/title-page/title-page.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { InputFieldComponent } from '@app/shared/components/input-field/input-fi
     OpenFormComponent,
     PreviewTheUserComponent,
     InputFieldComponent,
+    TitlePageComponent
   ]
 })
 export class UserManagementModule {

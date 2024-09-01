@@ -1,11 +1,9 @@
 <div class="library">
     <div >
-        <ul class="title">
-            <li *ngFor="let content of contents" (click)="changeContent(content)" [ngClass]="{'select': contentLibrary === content}">{{content}}</li>
-        </ul>
+        <app-title-page [multiTitlePage]="contents" (outSelectedTitle)="changeTitle($event)" [imSelectedTitle]="selectedTitle"></app-title-page>
     </div>
     <div class="content">
-        <app-genre-list *ngIf="contentLibrary === ELibrary.Genre"></app-genre-list>
-        <app-author-list *ngIf="contentLibrary === ELibrary.Author"></app-author-list>
+        <app-genre-list *ngIf="selectedTitle === ELibrary.Genre"></app-genre-list>
+        <app-author-list *ngIf="selectedTitle === ELibrary.Author"></app-author-list>
       </div> 
 </div>

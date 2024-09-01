@@ -1,3 +1,9 @@
 <div class="story">
-    <app-story-details [storyData]="storyData" (complete)="getId()"></app-story-details>
+    <div >
+        <app-title-page [multiTitlePage]="contents" (outSelectedTitle)="changeTitle($event)" [imSelectedTitle]="selectedTitle"></app-title-page>
+    </div>
+    <div class="content">
+        <app-story-details *ngIf="selectedTitle === EStory.Story" [storyData]="storyData"></app-story-details>
+        <app-chapter-story *ngIf="selectedTitle === EStory.Chapter" [storyData]="storyData"></app-chapter-story>
+      </div> 
 </div>

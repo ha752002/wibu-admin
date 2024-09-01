@@ -12,6 +12,8 @@ import { UploadAvatarComponent } from './components/upload-avatar/upload-avatar.
 import { AuthorSelectorComponent } from './components/author-selector/author-selector.component';
 import { PreviewTheUserComponent } from './components/preview-the-user/preview-the-user.component';
 import { ConfirmationFormComponent } from './components/confirmation-form/confirmation-form.component';
+import { ItemAuthorComponent } from './components/item-author/item-author.component';
+import { TitlePageComponent } from './components/title-page/title-page.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -26,7 +28,10 @@ const COMPONENTS = [
   UploadAvatarComponent,
   AuthorSelectorComponent,
   PreviewTheUserComponent,
-  ConfirmationFormComponent
+  ConfirmationFormComponent,
+  ItemAuthorComponent,
+  TitlePageComponent,
+
 ];
 
 @NgModule({
@@ -36,6 +41,7 @@ const COMPONENTS = [
   exports: [
     COMPONENTS
   ],
+
 })
 export class SharedModule {
 }

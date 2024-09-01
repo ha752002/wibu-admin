@@ -9,10 +9,10 @@ import { ELibrary } from '@app/core/enums/library.enums';
 })
 export class LibraryComponent {
   ELibrary = ELibrary;
-  contentLibrary: ELibrary = ELibrary.Genre;
+  selectedTitle: string = ELibrary.Genre;
   contents: ELibrary[] = [ELibrary.Genre, ELibrary.Author];
 
-  changeContent(titleContent: ELibrary) {
-    this.contentLibrary = titleContent
+  changeTitle(titleContent: string) {
+    this.selectedTitle = titleContent
   }
 }
