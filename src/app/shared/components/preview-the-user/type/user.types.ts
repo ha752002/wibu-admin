@@ -9,4 +9,6 @@ export interface IUser {
   lastUpdated?: Date,
   roles?: EUserRole[],
   username?: string
+  name?: string
+  description?: string;
 }

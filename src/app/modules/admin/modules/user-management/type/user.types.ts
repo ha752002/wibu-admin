@@ -17,6 +17,12 @@ export interface IResponseUsers {
   status?: boolean;
 }
 
+export interface IResponseUser {
+  data: IUser;
+  message: string;
+  status?: boolean;
+}
+
 export interface IuserFilter {
   search?:string,
   roles?: string,

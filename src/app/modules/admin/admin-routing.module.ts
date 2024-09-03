@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {AdminComponent} from "@app/modules/admin/admin.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from "@angular/router";
+import { AdminComponent } from "@app/modules/admin/admin.component";
 
 const routes: Routes = [
   {
@@ -18,9 +18,14 @@ const routes: Routes = [
       {
         path: 'my-profile',
         loadChildren: () => import('./modules/my-profile/my-profile.module').then(module => module.MyProfileModule)
-      }, {
+      },
+      {
         path: 'user',
         loadChildren: () => import('./modules/user-management/user-management.module').then(module => module.UserManagementModule)
+      },
+      {
+        path: 'user-detail/:id',
+        loadChildren: () => import('./modules/user-detail/user-detail.module').then(module => module.UserDetailModule)
       },
       {
         path: 'library',

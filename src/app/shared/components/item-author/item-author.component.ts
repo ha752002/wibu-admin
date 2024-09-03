@@ -6,6 +6,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { OpenModalComponent } from '../open-modal/open-modal.component';
 import { PreviewTheUserComponent } from '../preview-the-user/preview-the-user.component';
 import { IUser } from '../preview-the-user/type/user.types';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -21,12 +22,17 @@ import { IUser } from '../preview-the-user/type/user.types';
   styleUrl: './item-author.component.scss'
 })
 export class ItemAuthorComponent {
-  @Input() author?: IAuthor;
   @Input() user?: IUser;
   
   previewVisible = false;
+  constructor(private router: Router) {}
 
   handleVisible(value: boolean) {
     this.previewVisible = value;
+  }
+
+
+  navigateToUserDetail(userId: string): void {
+    this.router.navigate(['/admin/user-detail', userId]);
   }
 }

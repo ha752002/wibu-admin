@@ -10,9 +10,9 @@
             <button nz-button nzType="primary">follow</button>
         </div>
         <div class="Information">
-            <p class="name">{{user?.username}}</p>
+            <p class="name">{{user?.username || user?.name}}</p>
             <div class="subtitle">
-                <p>{{user?.email}}</p>
+                <p>{{user?.email || user?.description}}</p>
 
                 <p class="role" *ngFor="let role of user?.roles">{{ role }}</p>
 
@@ -20,6 +20,6 @@
 
         </div>
     </div>
-    <app-user-profile ></app-user-profile>
+    <app-user-profile></app-user-profile>
 
 </div>
