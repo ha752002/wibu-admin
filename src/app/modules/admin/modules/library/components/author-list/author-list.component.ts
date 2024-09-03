@@ -70,6 +70,10 @@ export class AuthorListComponent implements OnInit, OnDestroy {
     this.updatePaginatedData();
   }
 
+  navigateToUserDetail(userId: string): void {
+    this.router.navigate(['/admin/user-detail', userId]);
+  }
+
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
   }
 

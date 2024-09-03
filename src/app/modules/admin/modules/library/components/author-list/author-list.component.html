@@ -13,8 +13,8 @@
         <div class="group-author">
             <div *ngFor="let author of paginatedData" class="item">
                 <div class="content">
-                    <div class="author">
-                        <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64"></nz-avatar>
+                    <div class="author" (click)="navigateToUserDetail(author.id)">
+                        <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64" ></nz-avatar>
                         <strong >{{ author.name }}</strong>
                     </div>
                     <pre>{{ author.description }}</pre>
