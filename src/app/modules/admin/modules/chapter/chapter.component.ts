@@ -1,22 +1,32 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IChapter } from '@app/shared/components/open-form/types/chapter.type';
 import { Subscription } from 'rxjs';
 import { ChapterService } from './services/chapter/chapter.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from 'express';
+import { EventService } from '../../services/event/event.service';
 
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
   styleUrl: './chapter.component.scss'
 })
-export class ChapterComponent {
+export class ChapterComponent implements OnInit , OnDestroy {
   chapter: IChapter = {}
 
   private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
 
-  constructor(private chapterService: ChapterService, private route: ActivatedRoute,) { }
+  constructor(
+    private chapterService: ChapterService,
+    private route: ActivatedRoute,
+    private eventService: EventService,
+  ) { }
 
   ngOnInit(): void {
+    this.eventSubscription = this.eventService.event$.subscribe(() => {
+      this.getId();
+    });
     this.getId()
   }
 
@@ -41,5 +51,9 @@ export class ChapterComponent {
       )
     );
   }
-
+  ngOnDestroy() {
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
+  }
 }

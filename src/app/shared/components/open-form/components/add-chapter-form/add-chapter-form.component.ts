@@ -25,7 +25,25 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './add-chapter-form.component.scss'
 })
 export class AddChapterFormComponent implements OnInit, OnDestroy {
-  chapter: ISimpleChapter = {}
+  chapter: ISimpleChapter = {
+    pages: [
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/1.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/2.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/3.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/4.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/5.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/6.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/7.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/8.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/9.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/10.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/11.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/12.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/13.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/14.jpg',
+      'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/15.jpg',
+    ],
+  }
   img: File[] = []
   @Input() storyData?: IStoryInformation = {}
   @Output() complete = new EventEmitter<void>();
@@ -51,6 +69,7 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
       this.uploadImagesAndSubmitChapter();
     } else {
       console.error('Error creating chapter:');
+      this.submitChapter();
     }
   }
 
@@ -71,7 +90,6 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
       },
 
       error => {
-        
         this.createMessage('error')
       }
     );

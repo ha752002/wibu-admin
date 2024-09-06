@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -8,12 +8,15 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
 import { Subscription } from 'rxjs';
 import { ChapterService } from '../../services/chapter/chapter.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { UploadService } from '@app/shared/services/upload/upload.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-chapter-form',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     DragDropImgComponent,
     InputFieldComponent,
     NzButtonModule
@@ -21,7 +24,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './edit-chapter-form.component.html',
   styleUrl: './edit-chapter-form.component.scss'
 })
-export class EditChapterFormComponent {
+export class EditChapterFormComponent implements OnInit {
   chapter: IChapter = {}
   img: File[] = []
   @Input() id?: string;
@@ -37,6 +40,7 @@ export class EditChapterFormComponent {
   constructor(
     private chapterService: ChapterService,
     private message: NzMessageService,
+    private uploadService: UploadService,
 
   ) { }
 
@@ -51,6 +55,8 @@ export class EditChapterFormComponent {
     this.chapterService.getChapterById(id).subscribe(
       (response) => {
         this.chapter = response.data;
+        console.log(this.chapter);
+
       },
       (error) => {
         console.error('Error fetching author details:', error);
@@ -64,8 +70,47 @@ export class EditChapterFormComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    // this.createMessageloading();
+    if (this.img.length > 0) {
+      this.uploadImagesAndSubmitChapter();
+    } else {
+      this.submitChapter();
+    }
+  }
 
+  uploadImagesAndSubmitChapter(): void {
+    this.createMessageloading();
+    console.log(this.img);
+    const formData = new FormData();
+    this.img.forEach(file => {
+      formData.append('files', file, file.name);
+    });
+
+    this.uploadService.uploadImages(formData).subscribe(
+      response => {
+        console.log(response.data);
+
+        this.chapter.pages = response.data.map(item => item.url);
+        this.submitChapter();
+      },
+
+      error => {
+        this.createMessage('error')
+      }
+    );
+  }
+
+  submitChapter(): void {
+    if (this.id) {
+      this.chapterService.updateChapter(this.id, this.chapter).subscribe(
+        response => {
+          this.createMessage('success')
+          this.complete.emit();
+        },
+        error => {
+          this.createMessage('error')
+        }
+      );
+    }
   }
 
   createMessageloading(): void {

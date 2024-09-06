@@ -15,7 +15,7 @@
 
                 <app-edit-user-form *ngSwitchCase="'edit user'" [id]="id"></app-edit-user-form>
                 <app-edit-story-form *ngSwitchCase="'edit story'" (complete)="done()" (change)="changeValue()" [id]="id" [img]="img"></app-edit-story-form>
-                <app-edit-chapter-form *ngSwitchCase="'edit chapter'" [ChapterData]="ChapterData" [id]="id"></app-edit-chapter-form>
+                <app-edit-chapter-form *ngSwitchCase="'edit chapter'" (complete)="done()" [ChapterData]="ChapterData" [id]="id"></app-edit-chapter-form>
                 <app-edit-genre-form *ngSwitchCase="'edit genre'" (complete)="done()" (change)="changeValue()" [id]="id" ></app-edit-genre-form>
                 <app-edit-author-form *ngSwitchCase="'edit author'" (complete)="done()" (change)="changeValue()" [id]="id"></app-edit-author-form>
                 

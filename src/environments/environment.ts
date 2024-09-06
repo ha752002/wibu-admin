@@ -37,7 +37,7 @@ export const environment = {
       getAll: 'manga/story/{id}/chapters',
       getById: 'manga/chapter/',
       push: 'manga/chapter/create',
-      update: 'manga/chapter/update/{id}',
+      update: 'manga/chapter/update',
       delete: 'manga/chapter/deActive/{id}',
     },
   },
