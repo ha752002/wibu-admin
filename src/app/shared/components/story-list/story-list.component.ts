@@ -31,8 +31,6 @@ export class StoryListComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['storyData']) {
       this.storys = this.storyData
-
-      console.log('storyData changed:');
     }
   }
 }

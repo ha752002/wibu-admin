@@ -25,12 +25,12 @@ export class ChapterComponent implements OnInit , OnDestroy {
 
   ngOnInit(): void {
     this.eventSubscription = this.eventService.event$.subscribe(() => {
-      this.getId();
+      this.getChapterId();
     });
-    this.getId()
+    this.getChapterId()
   }
 
-  getId() {
+  getChapterId() {
     this.route.params.subscribe(params => {
       const chapterParam: string = params['chapterId'];
       if (chapterParam) {

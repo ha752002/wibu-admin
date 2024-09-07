@@ -39,8 +39,6 @@ export class StoryComponent implements OnInit, OnDestroy {
   getId() {
     this.route.params.subscribe(params => {
       const id = params['id'];
-      console.log(id);
-
       this.getStoryById(id)
     });
   }
@@ -49,7 +47,6 @@ export class StoryComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.storyService.getStoryById(id).pipe(
         finalize(() => {
-          console.log('storys loaded');
         })
       ).subscribe(
         response => {

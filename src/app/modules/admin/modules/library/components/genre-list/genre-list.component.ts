@@ -51,7 +51,6 @@ export class GenreListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
         finalize(() => {
-          console.log('Genres loaded');
         })
       ).subscribe(
         response => {

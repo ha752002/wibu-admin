@@ -55,8 +55,6 @@ export class EditChapterFormComponent implements OnInit {
     this.chapterService.getChapterById(id).subscribe(
       (response) => {
         this.chapter = response.data;
-        console.log(this.chapter);
-
       },
       (error) => {
         console.error('Error fetching author details:', error);
@@ -79,7 +77,6 @@ export class EditChapterFormComponent implements OnInit {
 
   uploadImagesAndSubmitChapter(): void {
     this.createMessageloading();
-    console.log(this.img);
     const formData = new FormData();
     this.img.forEach(file => {
       formData.append('files', file, file.name);
@@ -87,8 +84,6 @@ export class EditChapterFormComponent implements OnInit {
 
     this.uploadService.uploadImages(formData).subscribe(
       response => {
-        console.log(response.data);
-
         this.chapter.pages = response.data.map(item => item.url);
         this.submitChapter();
       },

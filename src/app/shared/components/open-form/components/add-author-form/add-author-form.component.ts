@@ -60,7 +60,6 @@ export class AddAuthorFormComponent implements OnDestroy {
 
   onAvatarUrlChange(url: IResponseImage) {
     this.author.avatarUrl = url.data.url;
-    console.log(this.author);
   }
 
   createMessageloading(): void {

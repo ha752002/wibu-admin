@@ -60,7 +60,6 @@ getAllGenres(): void {
   this.subscriptions.add(
     this.genreService.getAllGenres().pipe(
       finalize(() => {
-        console.log('Genres loaded');
       })
     ).subscribe(
       response => {

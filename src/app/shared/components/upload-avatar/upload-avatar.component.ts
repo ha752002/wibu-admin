@@ -71,8 +71,6 @@ export class UploadAvatarComponent implements OnInit {
         break;
       case 'done':
         const response = info.file.response;
-        console.log(response);
-
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.loading = false;
         });

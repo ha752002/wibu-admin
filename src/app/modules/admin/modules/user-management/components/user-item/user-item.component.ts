@@ -19,13 +19,10 @@ export class UserItemComponent {
 
   handleHiddenVisible(value: boolean) {
     this.previewVisible = value;
-    console.log(this.previewVisible);
     
   }
 
   handleVisible() {
     this.previewVisible = !this.previewVisible;
-    console.log(this.previewVisible);
-
   }
 }

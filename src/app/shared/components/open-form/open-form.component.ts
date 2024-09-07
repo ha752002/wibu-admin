@@ -102,9 +102,7 @@ export class OpenFormComponent implements OnDestroy {
   done() {
     this.complete.emit();
     this.currentForm = null
-    this.eventService.emitEvent();
-    console.log(1111);
-    
+    this.eventService.emitEvent();    
   }
 
   blockFormClosing(event: MouseEvent) {

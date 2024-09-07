@@ -41,7 +41,6 @@ export class AuthorListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.authorService.getAllAuthors().pipe(
         finalize(() => {
-          console.log('Authors loaded');
         })
       ).subscribe(
         response => {

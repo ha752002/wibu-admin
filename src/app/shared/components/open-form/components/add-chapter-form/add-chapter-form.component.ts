@@ -58,8 +58,6 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.storyData?.id);
-
     this.chapter.mangaId = this.storyData?.id
   }
 
@@ -75,7 +73,6 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
   uploadImagesAndSubmitChapter(): void {
     this.createMessageloading();
-    console.log(this.img);
     const formData = new FormData();
     this.img.forEach(file => {
       formData.append('files', file, file.name);
@@ -83,12 +80,9 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
     this.uploadService.uploadImages(formData).subscribe(
       response => {
-        console.log(response.data);
-
         this.chapter.pages = response.data.map(item => item.url);
         this.submitChapter();
       },
-
       error => {
         this.createMessage('error')
       }
@@ -97,20 +91,15 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
   submitChapter(): void {
     this.chapterService.createChapter(this.chapter).subscribe(
-      response => {
-        
+      response => { 
         this.createMessage('success')
         this.complete.emit();
       },
       error => {
-        
         this.createMessage('error')
-
       }
     );
   }
-
-
 
   getLastChapter(): IChapter | undefined {
     if (this.storyData?.chapters && this.storyData.chapters.length > 0) {
@@ -121,8 +110,6 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
   onImagesSelected(images: File[]) {
     this.img = images;
-    console.log(this.img);
-
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {

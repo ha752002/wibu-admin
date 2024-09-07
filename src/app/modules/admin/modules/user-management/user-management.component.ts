@@ -45,7 +45,6 @@ export class UserManagementComponent implements OnInit ,OnDestroy{
     this.subscriptions.add(
       this.userApiService.getAllUsers().pipe(
         finalize(() => {
-          console.log('storys loaded');
         })
       ).subscribe(
         response => {
@@ -59,7 +58,6 @@ export class UserManagementComponent implements OnInit ,OnDestroy{
   }
 
   onFieldValueChange(field: keyof IuserFilter, value: string | number | Date | undefined): void {
-    console.log(this.filter);
   }
 
   ngOnDestroy() {

@@ -49,7 +49,6 @@ export class AuthorSelectorComponent {
     this.subscriptions.add(
       this.authorService.getAllAuthors().pipe(
         finalize(() => {
-          console.log('Authors loaded');
         })
       ).subscribe(
         response => {
@@ -70,9 +69,7 @@ export class AuthorSelectorComponent {
   }
 
   toggleauthor(author: IAuthor) {
-    const index = this.selectedAuthors.findIndex(a => a.id === author.id);
-    console.log(index);
-    
+    const index = this.selectedAuthors.findIndex(a => a.id === author.id);    
     if (index === -1) {
       this.selectedAuthors.push(author);
     } else {

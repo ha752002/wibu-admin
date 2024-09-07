@@ -43,7 +43,6 @@ export class DeleteFormComponent implements OnDestroy {
         case 'user':
           this.userService.deleteUser(this.id).subscribe(
             () => {
-              console.log(`Deleted user with id: ${this.id}`);
               this.done('success')
             },
             error => {
@@ -54,7 +53,6 @@ export class DeleteFormComponent implements OnDestroy {
         case 'story':
           this.storyService.deleteStory(this.id).subscribe(
             () => {
-              console.log(`Deleted story with id: ${this.id}`);
               this.done('success')
             },
             error => {
@@ -65,7 +63,6 @@ export class DeleteFormComponent implements OnDestroy {
         case 'chapter':
           this.chapterService.deleteChapter(this.id).subscribe(
             () => {
-              console.log(`Deleted chapter with id: ${this.id}`);
               this.done('success')
             },
             error => {
@@ -76,7 +73,6 @@ export class DeleteFormComponent implements OnDestroy {
         case 'author':
           this.authorService.deleteAuthor(this.id).subscribe(
             () => {
-              console.log(`Deleted author with id: ${this.id}`);
               this.done('success')
             },
             error => {
@@ -87,7 +83,6 @@ export class DeleteFormComponent implements OnDestroy {
         case 'genre':
           this.genreService.deleteGenre(this.id).subscribe(
             () => {
-              console.log(`Deleted genre with id: ${this.id}`);
               this.done('success')
             },
             error => {

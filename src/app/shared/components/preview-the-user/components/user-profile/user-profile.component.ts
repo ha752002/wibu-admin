@@ -25,9 +25,7 @@ export class UserProfileComponent {
 
   ngOnInit(): void {
     this.updateTitle();
-    console.log(this.titles);
     this.titles.push('Story Posted');
-
   }
 
   selectTitle(title: string) {

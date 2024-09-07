@@ -89,20 +89,18 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
         finalize(() => {
-          console.log('Genres loaded');
+          this.getParams();
         })
       ).subscribe(
         response => {
           this.genres = response.data;
           this.genreNames = this.genres.map(g => g.title);
-          this.getParams();
           this.getAllStorys();
         },
         error => {
           console.error('Error loading genres', error);
           this.genres = this.dataGenres
           this.genreNames = this.genres.map(g => g.title);
-          this.getParams();
         }
       )
     );
@@ -113,7 +111,6 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
     this.subscriptions.add(
       this.storyService.getAllStorys().pipe(
         finalize(() => {
-          console.log('storys loaded');
         })
       ).subscribe(
         response => {

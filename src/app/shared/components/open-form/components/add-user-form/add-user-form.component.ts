@@ -75,7 +75,6 @@ export class AddUserFormComponent implements OnDestroy {
   }
 
   onPasswordValueChange(value: string): void {
-    console.log(value);
   }
 
   onAvatarUrlChange(url: IResponseImage) {
