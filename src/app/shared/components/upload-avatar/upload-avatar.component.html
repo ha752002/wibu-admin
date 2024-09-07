@@ -10,7 +10,7 @@
     [nzBeforeUpload]="beforeUpload"
     (nzChange)="handleChange($event)"
   >
-    <ng-container *ngIf="!avatarUrl" class="status">
+    <ng-container *ngIf="!avatarUrl.data.url" class="status">
       <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
       <div class="ant-upload-text" *ngIf="!img">Upload</div>
     </ng-container>
