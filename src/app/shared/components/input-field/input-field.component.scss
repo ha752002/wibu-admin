@@ -24,22 +24,17 @@
 
     .group-select {
         width: 100%;
-        padding: 4px 11px;
-        border: 1px solid #d9d9d9;
-        select {
+
+        .select {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .multiple-select {
             border: none;
             width: 100%;
             cursor: pointer;
 
-            .placeholder{
-                color: #bfbfbf;
-            }
-
-            &:focus {
-                border: none;
-                outline: none;
-                border-color: #007bff;
-            }
         }
     }
 }

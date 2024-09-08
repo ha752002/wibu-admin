@@ -1,0 +1,8 @@
+<div class="item" *ngIf="user" (click)="navigateToUserDetail(user.id)">
+    <nz-avatar [nzSrc]="user.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
+    <strong>{{ user.username || user.name}}</strong>
+</div>
+
+<!-- <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+    <app-preview-the-user [user]="author"></app-preview-the-user>
+  </app-open-modal> -->

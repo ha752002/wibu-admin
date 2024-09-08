@@ -25,18 +25,12 @@ export class StoryListComponent implements OnInit {
   storys: IStoryInformation[] = [];
 
   ngOnInit(): void {
-    console.log(this.storyData);
-    
-    // if (this.storyData) {
-      this.storys = this.storyData
-    // }
+    this.storys = this.storyData
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['storyData']) {
       this.storys = this.storyData
-
-      console.log('storyData changed:');
     }
   }
 }

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { IconComponent } from '../icon/icon.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { EUserRole } from '@app/core/enums/user.enums';
 
 @Component({
   standalone: true,
@@ -17,23 +18,24 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 export class InputFieldComponent implements OnInit {
   @Input() label: string = '';
   @Input() type: InputFieldTypes = 'text';
-  @Input() value: string | number | Date | undefined;
-  @Input() placeholder: string ='';
+  @Input() value: string | number | Date | EUserRole[] | undefined;
+  @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() optionValue?: string[];
+  @Input() multiple?: boolean;
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 
   passwordVisible = false;
   ngOnInit(): void {
-    
-    
+
+
   }
 
   onValueChange(event: Event): void {
     const input = (event.target as HTMLInputElement)?.value;
     if (input !== undefined) {
       this.value = input;
-      this.valueChange.emit(this.value);      
+      this.valueChange.emit(this.value);
     }
   }
 

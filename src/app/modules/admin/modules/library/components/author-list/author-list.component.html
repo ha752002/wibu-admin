@@ -2,7 +2,7 @@
     <div class="title">
         <h3> Author</h3>
         <div class="tool">
-            <app-open-form [formName]="'add author'" (complete)="getAllAuthors()"></app-open-form>
+            <app-open-form [formName]="'add author'" ></app-open-form>
             <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
                 placeholder="search">
             </app-input-field>
@@ -13,18 +13,18 @@
         <div class="group-author">
             <div *ngFor="let author of paginatedData" class="item">
                 <div class="content">
-                    <div class="author">
-                        <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64"></nz-avatar>
+                    <div class="author" (click)="navigateToUserDetail(author.id)">
+                        <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64" ></nz-avatar>
                         <strong >{{ author.name }}</strong>
                     </div>
-                    <p>{{ author.description }}</p>
+                    <pre>{{ author.description }}</pre>
                 </div>
                 
                 <div class="form-group">
                     <app-open-form [formName]="'edit author'" [label]="false" [icon]="'edit'"
-                        [id]="author.id" (complete)="getAllAuthors()"></app-open-form>
+                        [id]="author.id"></app-open-form>
                     <app-open-form [formName]="'delete'" [label]="false" [icon]="'delete'" [id]="author.id"
-                        buttonType="danger" [delete]="'author'" (complete)="getAllAuthors()"></app-open-form>
+                        buttonType="danger" [delete]="'author'"></app-open-form>
                 </div>
               </div>
         </div>

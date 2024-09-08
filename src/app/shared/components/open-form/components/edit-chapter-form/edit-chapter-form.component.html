@@ -2,12 +2,12 @@
     <p class="title">edit Chapter id : {{ChapterData?.id}}</p>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
-            <app-input-field label="Name" [(value)]="chapter.name" type="text"
-                (valueChange)="onFieldValueChange('name', $event)" [required]="true">
+            <app-input-field label="Name" [(value)]="chapter.title" type="text"
+                (valueChange)="onFieldValueChange('title', $event)" [required]="true">
             </app-input-field>
         </div>
         <div>
-            <app-drag-drop-img (imagesSelected)="onImagesSelected($event)" [size]="'small'" [imgData]="ChapterData?.image ?? []"></app-drag-drop-img>
+            <app-drag-drop-img (imagesSelected)="onImagesSelected($event)" [size]="'small'" [imgData]="ChapterData?.pages ?? []"></app-drag-drop-img>
         </div>
         <div class="group-button">
             <button nz-button nzType="text" type="reset">Reset</button>
@@ -15,6 +15,4 @@
         </div>
 
     </form>
-
-
 </div>

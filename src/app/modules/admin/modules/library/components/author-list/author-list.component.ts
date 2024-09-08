@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IAuthor } from '@app/shared/components/open-form/types/author.type';
 import { Router } from '@angular/router';
 import { AuthorService } from '@app/shared/services/author/author.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { EventService } from '@app/modules/admin/services/event/event.service';
 
 @Component({
   selector: 'app-author-list',
   templateUrl: './author-list.component.html',
   styleUrl: './author-list.component.scss'
 })
-export class AuthorListComponent implements OnInit{
+export class AuthorListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
 
   searchQuery: string = '';
   defaultavatarUrl: string = 'assets/img/eyes.png';
@@ -19,83 +21,26 @@ export class AuthorListComponent implements OnInit{
   paginatedData: IAuthor[] = [];
   pageSize = 12;
   currentPage = 1;
-  dataAuthors: IAuthor[] = [
-    {
-      id: '1',
-      name: 'John Doe',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'John Doe is a prolific writer known for his thrilling novels and captivating storytelling.'
-    },
-    {
-      id: '2',
-      name: 'Jane Smith',
-      description: 'Jane Smith specializes in historical fiction and has won numerous awards for her works.'
-    },
-    {
-      id: '3',
-      name: 'Alice Johnson',
-      avatarUrl: 'https://i.pinimg.com/736x/85/96/2b/85962b3340e2dc2b9c21389bb0bd3e00.jpg',
-      description: 'Alice Johnson writes science fiction and fantasy, creating intricate worlds and engaging characters.'
-    },
-    {
-      id: '4',
-      name: 'Bob Brown',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
-    },
-    {
-      id: '5',
-      name: 'John Doe',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'John Doe is a prolific writer known for his thrilling novels and captivating storytelling.'
-    },
-    {
-      id: '6',
-      name: 'Jane Smith',
-      description: 'Jane Smith specializes in historical fiction and has won numerous awards for her works.'
-    },
-    {
-      id: '7',
-      name: 'Alice Johnson',
-      avatarUrl: 'https://i.pinimg.com/736x/85/96/2b/85962b3340e2dc2b9c21389bb0bd3e00.jpg',
-      description: 'Alice Johnson writes science fiction and fantasy, creating intricate worlds and engaging characters.'
-    },
-    {
-      id: '8',
-      name: 'Bob Brown',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
-    },
-    {
-      id: '9',
-      name: 'Alice Johnson',
-      avatarUrl: 'https://i.pinimg.com/736x/85/96/2b/85962b3340e2dc2b9c21389bb0bd3e00.jpg',
-      description: 'Alice Johnson writes science fiction and fantasy, creating intricate worlds and engaging characters.'
-    },
-    {
-      id: '10',
-      name: 'Bob Brown',
-      avatarUrl: 'https://i.pinimg.com/736x/8d/12/49/8d1249009c78480d4f773714179f8d8f.jpg',
-      description: 'Bob Brown is an acclaimed author of mystery and detective novels, keeping readers on the edge of their seats.'
-    }
-  ];
-  
+
   constructor(
     private router: Router,
+    private eventService: EventService,
     private authorService: AuthorService
   ) { }
 
   ngOnInit(): void {
+    this.eventSubscription = this.eventService.event$.subscribe(() => {
+      this.getAllAuthors();
+    });
     this.getAllAuthors()
   }
 
-  
+
 
   getAllAuthors(): void {
     this.subscriptions.add(
       this.authorService.getAllAuthors().pipe(
         finalize(() => {
-          console.log('Authors loaded');
         })
       ).subscribe(
         response => {
@@ -105,7 +50,6 @@ export class AuthorListComponent implements OnInit{
 
         error => {
           console.error('Error loading Authors', error);
-          this.authors = this.dataAuthors
           this.updatePaginatedData()
 
         }
@@ -115,17 +59,26 @@ export class AuthorListComponent implements OnInit{
   }
 
   updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;    
+    const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.authors.slice(startIndex, endIndex);    
+    this.paginatedData = this.authors.slice(startIndex, endIndex);
   }
-  
+
   onPageChange(page: number): void {
     this.currentPage = page;
     this.updatePaginatedData();
   }
 
+  navigateToUserDetail(userId: string): void {
+    this.router.navigate(['/admin/user-detail', userId]);
+  }
 
   onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
+  }
+
+  ngOnDestroy() {
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
   }
 }

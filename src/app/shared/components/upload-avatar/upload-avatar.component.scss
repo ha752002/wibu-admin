@@ -8,6 +8,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+
+    .status{
+      position: relative;
+
+      .upload-icon{
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
 }
 
 :host ::ng-deep .size-s>.ant-upload-list>.ant-upload-list-picture-card-container,

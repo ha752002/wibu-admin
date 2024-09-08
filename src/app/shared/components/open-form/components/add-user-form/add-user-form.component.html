@@ -2,36 +2,29 @@
 <div>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
-            <app-input-field label="Name" [(value)]="user.name" type="text"
-                (valueChange)="onFieldValueChange('name', $event)" [required]="true">
-            </app-input-field>
-
-            <app-input-field label="Phone" [(value)]="user.phone" type="tel"
-                (valueChange)="onFieldValueChange('phone', $event)" [required]="true">
+            <app-upload-avatar (avatarUrlChange)="onAvatarUrlChange($event)" [img]="user.avatarUrl"></app-upload-avatar>
+            <app-input-field label="Name" [(value)]="user.username" type="text"
+                (valueChange)="onFieldValueChange('username', $event)" [required]="true">
             </app-input-field>
 
             <app-input-field label="Email" [(value)]="user.email" type="email"
                 (valueChange)="onFieldValueChange('email', $event)" [required]="true">
             </app-input-field>
 
-            <app-input-field label="Date of Birth" [(value)]="user.dateOfBirth" type="date"
-                (valueChange)="onFieldValueChange('dateOfBirth', $event)">
+            <app-input-field label="Date of Birth" [(value)]="user.birthday" type="date"
+                (valueChange)="onFieldValueChange('birthday', $event)">
             </app-input-field>
 
-            <app-input-field label="Teams" [(value)]="user.teams" type="text"
-                (valueChange)="onFieldValueChange('teams', $event)" [required]="true">
-            </app-input-field>
-
-            <app-input-field label="User Type" [(value)]="user.userType" type="number"
-                (valueChange)="onFieldValueChange('userType', $event)" [optionValue]="userTypeList">
+            <app-input-field label="Roles" [(value)]="user.roles" type="date"
+                (valueChange)="onFieldValueChange('birthday', $event)" [optionValue]="roles" [multiple]="true">
             </app-input-field>
 
             <app-input-field label="Password" [(value)]="user.password" type="password"
-                (valueChange)="onFieldValueChange('userType', $event)">
+                (valueChange)="onFieldValueChange('password', $event)">
             </app-input-field>
 
-            <app-input-field label="Confirm password" [(value)]="confirmPassword" type="password"
-                (valueChange)="onPasswordValueChange(confirmPassword)">
+            <app-input-field label="Confirm password" [(value)]="user.confirmPassword" type="password"
+                (valueChange)="onFieldValueChange('confirmPassword', $event)">
             </app-input-field>
         </div>
         <div class="group-button">

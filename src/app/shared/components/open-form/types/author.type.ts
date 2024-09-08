@@ -4,6 +4,9 @@ export interface IAuthor {
   name: string;
   avatarUrl?: string;
   description: string;
+  createdDate: Date,
+  lastUpdated: Date,
+
 }
 
 export interface IAuthors {

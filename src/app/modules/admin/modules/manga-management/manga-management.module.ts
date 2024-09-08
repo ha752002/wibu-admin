@@ -15,6 +15,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { StoryListComponent } from '@app/shared/components/story-list/story-list.component';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
+import { TitlePageComponent } from '@app/shared/components/title-page/title-page.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { GenreSelectorComponent } from '@app/shared/components/genre-selector/ge
     NzCardModule,
     NzPaginationModule,
     OpenModalComponent,
-    GenreSelectorComponent
+    GenreSelectorComponent,
+    TitlePageComponent
   ]
 })
 export class MangaManagementModule {

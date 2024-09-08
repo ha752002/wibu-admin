@@ -2,7 +2,7 @@
 <div>
     <form nz-form (ngSubmit)="onSubmit($event)">
         <div class="basic">
-            <app-upload-avatar (avatarUrlChange)="onAvatarUrlChange($event)"></app-upload-avatar>
+            <app-upload-avatar (avatarUrlChange)="onAvatarUrlChange($event)" [img]="author.avatarUrl"></app-upload-avatar>
 
             <app-input-field label="name" [(value)]="author.name" type="text"
                 (valueChange)="onFieldValueChange('name', $event)" [required]="true">

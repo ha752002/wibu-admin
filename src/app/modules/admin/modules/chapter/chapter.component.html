@@ -1,9 +1,9 @@
 <div class="chapter">
   <div class="name-chapter">
-    <p>{{ chapterData?.name }}</p>
+    <p>{{ chapter.title }}</p>
     <div class="next-chapter">
-      <app-open-form formName="delete" [id]="chapterData?.id" [buttonType]="'danger'" [delete]="'chapter'" [icon]="'delete'"></app-open-form>
-      <app-open-form formName="edit chapter" [data]="chapterData" [icon]="'edit'"></app-open-form>
+      <app-open-form formName="delete" [id]="chapter.id" [buttonType]="'danger'" [delete]="'chapter'" [icon]="'delete'"></app-open-form>
+      <app-open-form formName="edit chapter" [id]="chapter.id" [data]="chapter" [icon]="'edit'"></app-open-form>
 
       <ts-icon [name]="'left'"></ts-icon>
       <ts-icon [name]="'right'"></ts-icon>
@@ -11,7 +11,7 @@
 
   </div>
   <div class="image-container">
-    <div *ngFor="let img of chapterData?.image">
+    <div *ngFor="let img of chapter?.pages">
       <app-img [size]="'full-screen'" [url]="img"></app-img>
     </div>
   </div>

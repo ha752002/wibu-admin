@@ -7,6 +7,8 @@ import { ChapterService } from '../../services/chapter/chapter.service';
 import { AuthorService } from '../../services/author/author.service';
 import { GenreService } from '../../services/genre/genre.service';
 import { Subscription } from 'rxjs';
+import { message } from '../../types/message.type';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   standalone: true,
@@ -18,19 +20,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './delete-form.component.html',
   styleUrl: './delete-form.component.scss'
 })
-export class DeleteFormComponent implements OnDestroy{
+export class DeleteFormComponent implements OnDestroy {
   @Input() id?: string;
   @Input() delete: 'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
   @Output() complete = new EventEmitter<void>();
+  message?: message;
+
   private subscriptions: Subscription = new Subscription();
 
   constructor(
+    private messageService: NzMessageService,
     private userService: UserService,
     private storyService: StoryService,
     private chapterService: ChapterService,
     private authorService: AuthorService,
     private genreService: GenreService
-  ) {}
+  ) { }
 
   onDelete(): void {
     if (this.id) {
@@ -38,54 +43,66 @@ export class DeleteFormComponent implements OnDestroy{
         case 'user':
           this.userService.deleteUser(this.id).subscribe(
             () => {
-              console.log(`Deleted user with id: ${this.id}`);
-              this.complete.emit();
+              this.done('success')
             },
-            error => console.error(`Error deleting user: ${error}`)
+            error => {
+              this.done('error')
+            }
           );
           break;
         case 'story':
           this.storyService.deleteStory(this.id).subscribe(
             () => {
-              console.log(`Deleted story with id: ${this.id}`);
-              this.complete.emit();
+              this.done('success')
             },
-            error => console.error(`Error deleting story: ${error}`)
+            error => {
+              this.done('error')
+            }
           );
           break;
         case 'chapter':
           this.chapterService.deleteChapter(this.id).subscribe(
             () => {
-              console.log(`Deleted chapter with id: ${this.id}`);
-              this.complete.emit();
+              this.done('success')
             },
-            error => console.error(`Error deleting chapter: ${error}`)
+            error => {
+              this.done('error')
+            }
           );
           break;
         case 'author':
           this.authorService.deleteAuthor(this.id).subscribe(
             () => {
-              console.log(`Deleted author with id: ${this.id}`);
-              this.complete.emit();
+              this.done('success')
             },
-            error => console.error(`Error deleting author: ${error}`)
+            error => {
+              this.done('error')
+            }
           );
           break;
         case 'genre':
           this.genreService.deleteGenre(this.id).subscribe(
             () => {
-              console.log(`Deleted genre with id: ${this.id}`);
-              this.complete.emit();
+              this.done('success')
             },
-            error => console.error(`Error deleting genre: ${error}`)
+            error => {
+              this.done('error')
+            }
           );
           break;
       }
     }
   }
 
-  done(){
+  done(message: message) {
+    if (message != 'cancel') {
+      this.createMessage(message)
+    }
     this.complete.emit();
+  }
+
+  createMessage(type: string): void {
+    this.messageService.create(type, `${this.delete} deleted ${type}`);
   }
 
   ngOnDestroy(): void {

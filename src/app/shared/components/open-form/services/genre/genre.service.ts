@@ -21,9 +21,7 @@ export class GenreService {
     return this.apiCallerService.post<IGenre, IGenre>(this.apiUrl.push, genre);
   }
 
-  updateGenre(id: string, genre: IGenre): Observable<IGenre> {
-    console.log(this.apiUrl.update+'/'+id);
-    
+  updateGenre(id: string, genre: IGenre): Observable<IGenre> {    
     return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, genre);
   }
 

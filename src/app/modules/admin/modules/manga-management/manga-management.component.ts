@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { viewType } from '@app/shared/components/story-list/story-list.component';
 import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
@@ -8,14 +8,16 @@ import { finalize } from 'rxjs/operators';
 import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
 import { IStoryInformation } from './type/manga.type';
+import { EventService } from '../../services/event/event.service';
 
 @Component({
   selector: 'app-manga-management',
   templateUrl: './manga-management.component.html',
   styleUrl: './manga-management.component.scss'
 })
-export class MangaManagementComponent implements OnInit {
+export class MangaManagementComponent implements OnInit , OnDestroy {
   private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
 
   filter: ImangaFilter = {
     search: '',
@@ -48,12 +50,16 @@ export class MangaManagementComponent implements OnInit {
   constructor(
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
-     private genreService: GenreService,
-      private storyService: StoryService
-    ){}
+    private eventService: EventService,
+    private genreService: GenreService,
+    private storyService: StoryService
+  ) { }
 
 
   ngOnInit(): void {
+    this.eventSubscription = this.eventService.event$.subscribe(() => {
+      this.getAllGenres();
+    });
     this.getAllGenres();
   }
 
@@ -83,20 +89,18 @@ export class MangaManagementComponent implements OnInit {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
         finalize(() => {
-          console.log('Genres loaded');
+          this.getParams();
         })
       ).subscribe(
         response => {
           this.genres = response.data;
           this.genreNames = this.genres.map(g => g.title);
-          this.getParams();
           this.getAllStorys();
         },
         error => {
           console.error('Error loading genres', error);
           this.genres = this.dataGenres
           this.genreNames = this.genres.map(g => g.title);
-          this.getParams();
         }
       )
     );
@@ -107,7 +111,6 @@ export class MangaManagementComponent implements OnInit {
     this.subscriptions.add(
       this.storyService.getAllStorys().pipe(
         finalize(() => {
-          console.log('storys loaded');
         })
       ).subscribe(
         response => {
@@ -147,6 +150,12 @@ export class MangaManagementComponent implements OnInit {
       this.multiGenreMode = false
     } else {
       this.multiGenreMode = true
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
     }
   }
 }

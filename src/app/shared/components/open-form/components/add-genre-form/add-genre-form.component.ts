@@ -7,6 +7,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { IGenre } from '../../types/genre.type';
 import { GenreService } from '../../services/genre/genre.service';
 import { Subscription } from 'rxjs';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-add-genre-form',
@@ -21,8 +22,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './add-genre-form.component.html',
   styleUrl: './add-genre-form.component.scss'
 })
-export class AddGenreFormComponent implements OnDestroy{
+export class AddGenreFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
+  private messageId: string | null = null;
 
   genre: IGenre = {
     title: '',
@@ -31,22 +35,42 @@ export class AddGenreFormComponent implements OnDestroy{
   };
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private genreService: GenreService) { }
+  constructor(
+    private genreService: GenreService,
+    private message: NzMessageService,
+  ) { }
 
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.createMessageloading();
+
     this.genreService.createGenre(this.genre).subscribe(
       response => {
-        this.complete.emit();        
+
+        this.createMessage('success')
+        this.complete.emit();
       },
       error => {
-        console.error('Error creating genre', error);
+
+        this.createMessage('error')
       }
     );
   }
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
+    this.change.emit();
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

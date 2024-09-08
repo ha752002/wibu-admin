@@ -2,17 +2,18 @@
     <img [src]="storyData?.thumbnailUrl" alt="">
     <div class="content">
 
-        <div>
-            <p class="name">{{storyData?.title}}</p>
-            <ul>
-                <li *ngFor="let author of storyData?.authors">{{author.name}}</li>
-            </ul>
+        <p class="name">{{storyData?.title}}</p>
+
+        <div class="author" *ngFor="let author of storyData?.authors">
+            <app-item-author [user]="author"></app-item-author>
         </div>
+
         <div>
             <p>Chapter : {{storyData?.chapter}}</p>
             <p>Views : {{storyData?.views}}</p>
             <p>Status : {{storyData?.status}}</p>
         </div>
+        
         <div class="genne">
             <p class="title">genne : </p>
             <div class="genre">
@@ -21,7 +22,7 @@
         </div>
         <div class="introduce">
             <p class="title">Story content : </p>
-            <p>{{storyData?.introduce}}</p>
+            <p>{{storyData?.description}}</p>
 
         </div>
         <div class="group-button">

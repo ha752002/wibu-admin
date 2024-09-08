@@ -3,9 +3,11 @@
     <ng-template #itemTemplate let-item>
       <nz-list-item (click)="selectStory(item)">
         <div class="item">
-        <img [src]="item.thumbnailUrl" alt="Thumbnail">
-        <p class="name">{{ item.title }}</p>
-        <p>{{ item.author }}</p>
+          <div class="image-wrapper">
+            <img [src]="item.thumbnailUrl" alt="Thumbnail">
+        </div>
+          <p class="name">{{ item.title }}</p>
+          <p>{{ item.author }}</p>
         </div>
       </nz-list-item>
     </ng-template>

@@ -14,6 +14,8 @@ import { IAuthor } from '../../types/author.type';
 import { StoryService } from '../../services/story/story.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   standalone: true,
@@ -27,23 +29,26 @@ import { FormsModule } from '@angular/forms';
     OpenModalComponent,
     GenreSelectorComponent,
     AuthorSelectorComponent,
-    FormsModule ,
+    FormsModule,
 
   ],
   selector: 'app-edit-story-form',
   templateUrl: './edit-story-form.component.html',
   styleUrl: './edit-story-form.component.scss'
 })
-export class EditStoryFormComponent implements OnInit , OnDestroy {
+export class EditStoryFormComponent implements OnInit, OnDestroy {
   @Input() id?: string;
   @Input() img?: string;
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
   private subscriptions: Subscription = new Subscription();
+  private messageId: string | null = null;
 
   story: ICreateStory = {
     title: 'Triệu Hồi Đến Thế Giới Fantasy',
     genreIds: [],
-    authorIds:[],
+    authorIds: [],
   };
 
   status: string[] = ['Updating', 'Halt', 'Full'];
@@ -53,7 +58,10 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
   authorVisible = false;
   genreVisible = false;
 
-  constructor(private storyService: StoryService) { }
+  constructor(
+    private storyService: StoryService,
+    private message: NzMessageService,
+  ) { }
 
   ngOnInit(): void {
     if (this.id) {
@@ -65,6 +73,8 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
     this.storyService.getStoryById(id).subscribe(
       (response) => {
         this.story = response.data;
+        this.selectedAuthors = response.data.authors
+        this.selectedGenres = response.data.genres
       },
       (error) => {
         console.error('Error fetching author details:', error);
@@ -72,39 +82,43 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
     );
   }
 
-  receiveThumbnail(url: string) {
-    this.story.thumbnailUrl  = url;
+  receiveThumbnail(url: IResponseImage) {
+    this.story.thumbnailUrl = url.data.url;
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.createMessageloading();
     this.getGenreIds(this.selectedGenres)
     this.getAuthorIds(this.selectedAuthors)
+
     if (this.id) {
       this.storyService.updateStory(this.id, this.story).subscribe(
         (response) => {
-          this.complete.emit();     
+          this.createMessage('success')
+          this.complete.emit();
         },
         (error) => {
-          console.error('Error updating story:', error);
+          this.createMessage('error')
         }
       );
     }
   }
 
-  getGenreIds(genre? : IGenre[]){
-    if (genre ) { 
+  getGenreIds(genre?: IGenre[]) {
+    if (genre) {
       this.story.genreIds = genre.map(genre => genre.id || '');
     }
   }
 
-  getAuthorIds(author? : IAuthor[]){
-    if (author ) { 
+  getAuthorIds(author?: IAuthor[]) {
+    if (author) {
       this.story.authorIds = author.map(author => author.id || '');
     }
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 
   handleGenreVisible(value: boolean) {
@@ -120,8 +134,18 @@ export class EditStoryFormComponent implements OnInit , OnDestroy {
   }
 
   onauthorsSelected(author: IAuthor[]) {
-    this.selectedAuthors= author;
-    // this.story.authorIds = author;
+    this.selectedAuthors = author;
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

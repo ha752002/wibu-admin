@@ -25,6 +25,8 @@ import { ICreateUser, IUpdateUser } from './types/user.type';
 import { IAuthor } from './types/author.type';
 import { AuthorService } from './services/author/author.service';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { ConfirmationFormComponent } from '../confirmation-form/confirmation-form.component';
+import { EventService } from '@app/modules/admin/services/event/event.service';
 
 @Component({
   selector: 'app-open-form',
@@ -33,6 +35,7 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
     CommonModule,
     NzButtonModule,
     IconComponent,
+    ConfirmationFormComponent,
     AddUserFormComponent,
     EditUserFormComponent,
     AddStoryFormComponent,
@@ -48,7 +51,7 @@ import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.t
   templateUrl: './open-form.component.html',
   styleUrl: './open-form.component.scss'
 })
-export class OpenFormComponent implements OnDestroy{
+export class OpenFormComponent implements OnDestroy {
   @Input() formName: formNameTypes = 'add story';
   @Input() label: boolean = true;
   @Input() currentForm?: formNameTypes | null = null;
@@ -56,31 +59,54 @@ export class OpenFormComponent implements OnDestroy{
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
   @Input() id?: string;
   @Input() img?: string;
-  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser |IGenre | IAuthor |IStoryInformation | string[];
+  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser | IGenre | IAuthor | IStoryInformation | string[];
   @Input() genre?: IGenre[];
   @Input() storyData?: IStoryInformation;
   @Input() ChapterData?: IChapter;
-  @Input() delete:  'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
+  @Input() delete: 'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
   @Output() complete = new EventEmitter<void>();
-
+  change: boolean = false;
+  confirmationForm: boolean = false;
   private subscriptions: Subscription = new Subscription();
-  constructor(private authorService: AuthorService) { }
+  constructor(private eventService: EventService) { }
 
   openForm() {
     this.currentForm = this.formName
   }
 
   closeForm() {
-    this.currentForm = null
+    if (this.change === false) {
+      this.currentForm = null
+    } else {
+      this.confirmationForm = true
+    }
   }
 
-  done(){
-    this.complete.emit();        
+  closeConfirmationForm(confirm: boolean) {
+    if (confirm === true) {
+      this.currentForm = null
+      this.confirmationForm = false
+      this.change = false
+
+    } else {
+      this.confirmationForm = false
+    }
+  }
+
+  changeValue() {
+    if (this.change === false) {
+      this.change = true;
+    }
+  }
+
+  done() {
+    this.complete.emit();
     this.currentForm = null
+    this.eventService.emitEvent();    
   }
 
   blockFormClosing(event: MouseEvent) {
-    event.stopPropagation(); 
+    event.stopPropagation();
   }
 
   ngOnDestroy(): void {

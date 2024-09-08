@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EventService } from '@app/modules/admin/services/event/event.service';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 import { GenreService } from '@app/shared/services/genre/genre.service';
 import { Subscription } from 'rxjs';
@@ -10,8 +11,10 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './genre-list.component.html',
   styleUrl: './genre-list.component.scss'
 })
-export class GenreListComponent implements OnInit {
+export class GenreListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
+  private eventSubscription!: Subscription;
+
   genres: IGenre[] = [];
   dataGenres: IGenre[] = [
     { id: '1', title: 'Fantasy', description: 'A fantasy story' },
@@ -33,10 +36,14 @@ export class GenreListComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private eventService: EventService,
     private genreService: GenreService
   ) { }
 
   ngOnInit(): void {
+    this.eventSubscription = this.eventService.event$.subscribe(() => {
+      this.getAllGenres();
+    });
     this.getAllGenres()
   }
 
@@ -44,7 +51,6 @@ export class GenreListComponent implements OnInit {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
         finalize(() => {
-          console.log('Genres loaded');
         })
       ).subscribe(
         response => {
@@ -63,7 +69,7 @@ export class GenreListComponent implements OnInit {
       const index = this.selectedGenres.findIndex(g => g.id === genre.id);
       if (index === -1) {
         this.selectedGenres.push(genre);
-        if (genre.id) { 
+        if (genre.id) {
           this.selectedGenresId.push(genre.id);
         }
       } else {
@@ -90,11 +96,17 @@ export class GenreListComponent implements OnInit {
   }
 
   navigateToMangaWithId(genreId: string) {
-    if(!this.selectMode){this.router.navigate(['admin/manga/', genreId]);}
-    
+    if (!this.selectMode) { this.router.navigate(['admin/manga/', genreId]); }
+
   }
 
   navigateToStory() {
     this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(this.selectedGenresId) } });
+  }
+
+  ngOnDestroy() {
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
   }
 }

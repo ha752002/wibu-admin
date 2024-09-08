@@ -1,5 +1,4 @@
 @if (userList.length > 0) {
-  <nz-list-header class="title">List of users</nz-list-header>
   <div class="user-list-container">
     <nz-list>
       @for (user of userList; track user.id; let isLast = $last; let isEven = $even) {

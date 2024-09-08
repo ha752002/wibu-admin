@@ -14,6 +14,8 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { StoryService } from '../../services/story/story.service';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 
@@ -35,59 +37,69 @@ import { Subscription } from 'rxjs';
   templateUrl: './add-story-form.component.html',
   styleUrl: './add-story-form.component.scss'
 })
-export class AddStoryFormComponent implements OnInit , OnDestroy{
+export class AddStoryFormComponent implements OnInit, OnDestroy {
   @Input() genre?: IGenre[] = [];
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
 
   story: ICreateStory = {
     thumbnailUrl: 'https://i.pinimg.com/564x/db/2e/9b/db2e9b90318548e2cde3edd6b908c6f0.jpg',
-    genreIds:[],
-    authorIds:[],
+    genreIds: [],
+    authorIds: [],
   };
-  status: string[] = ['Updating','Halt','Full'];
+  status: string[] = ['Updating', 'Halt', 'Full'];
   selectedAuthors?: IAuthor[];
   selectedGenres?: IGenre[] = [];
   authorVisible = false;
   genreVisible = false;
   private subscriptions: Subscription = new Subscription();
+  private messageId: string | null = null;
 
-  constructor(private storyService: StoryService) { }
+  constructor(
+    private storyService: StoryService,
+    private message: NzMessageService,
+  ) { }
 
   ngOnInit(): void {
     this.selectedGenres = this.genre
   }
 
-  receiveThumbnail(url: string) {
-    this.story.thumbnailUrl  = url;
+  receiveThumbnail(url: IResponseImage) {
+    this.story.thumbnailUrl = url.data.url;
   }
 
   onSubmit(event: Event): void {
+    this.createMessageloading();
     this.getGenreIds(this.selectedGenres)
     this.getAuthorIds(this.selectedAuthors)
     event.preventDefault();
     this.storyService.createStory(this.story).subscribe(
       (response) => {
-        this.complete.emit();        
+        
+        this.createMessage('success')
+        this.complete.emit();
       },
       (error) => {
-        console.error('Error creating story:', error);
+        
+        this.createMessage('error')
       }
     );
   }
 
-  getGenreIds(genre? : IGenre[]){
-    if (genre ) { 
+  getGenreIds(genre?: IGenre[]) {
+    if (genre) {
       this.story.genreIds = genre.map(genre => genre.id || '');
     }
   }
 
-  getAuthorIds(author? : IAuthor[]){
-    if (author ) { 
+  getAuthorIds(author?: IAuthor[]) {
+    if (author) {
       this.story.authorIds = author.map(author => author.id || '');
     }
   }
 
   onFieldValueChange(field: keyof ICreateStory, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 
   handleGenreVisible(value: boolean) {
@@ -103,7 +115,18 @@ export class AddStoryFormComponent implements OnInit , OnDestroy{
   }
 
   onAuthorsSelected(author: IAuthor[]) {
-    this.selectedAuthors= author;
+    this.selectedAuthors = author;
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

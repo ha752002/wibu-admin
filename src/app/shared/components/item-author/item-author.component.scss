@@ -1,0 +1,12 @@
+.item {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    padding: 6px 16px;
+    border-radius: 4px;
+
+    &:hover{
+        background-color: #f38990;
+    }
+}

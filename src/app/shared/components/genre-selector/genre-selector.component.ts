@@ -19,7 +19,6 @@ import { OpenFormComponent } from '../open-form/open-form.component';
     OpenModalComponent,
     InputFieldComponent,
     IconComponent,
-    // OpenFormComponent,
     NzButtonModule
   ],
   templateUrl: './genre-selector.component.html',
@@ -61,7 +60,6 @@ getAllGenres(): void {
   this.subscriptions.add(
     this.genreService.getAllGenres().pipe(
       finalize(() => {
-        console.log('Genres loaded');
       })
     ).subscribe(
       response => {

@@ -1,16 +1,20 @@
-<div class="action">
-  <div>Lọc</div>
-  <div>
-    <nz-input-group [nzSuffix]="" class="search-input">
-      <input nz-input placeholder="Search user..." type="text"/>
-    </nz-input-group>
-    <ng-template #suffixIconSearch>
-      <span nz-icon nzType="search"></span>
-    </ng-template>
+<app-title-page titlePage="User"></app-title-page>
+
+<div class="user-management">
+  <div class="group-tool">
+      <app-open-form [formName]="'add user'" buttonType="danger"></app-open-form>
+      
+      <app-input-field [(value)]="filter.roles" type="text" (valueChange)="onFieldValueChange('roles', $event)"
+      placeholder="select User Type"  [optionValue]="userTypeList">
+      </app-input-field>
+      <app-input-field [(value)]="filter.search" type="text" (valueChange)="onFieldValueChange('search', $event)"
+          placeholder="search">
+      </app-input-field>
+  </div>
+  <div *rxLet="users | push; let userList">
+    @if (userList) {
+      <app-user-list [userList]="users"></app-user-list>
+    }
   </div>
 </div>
-<div *rxLet="userList$ | push; let userList">
-  @if (userList) {
-    <app-user-list [userList]="userList"></app-user-list>
-  }
-</div>
+

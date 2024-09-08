@@ -7,6 +7,8 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { AuthorService } from '../../services/author/author.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { IPage, IResponseImage } from '@app/shared/types/image.types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-edit-author-form',
@@ -24,7 +26,11 @@ import { FormsModule } from '@angular/forms';
 export class EditAuthorFormComponent implements OnInit, OnDestroy {
   @Input() id?: string;
   @Output() complete = new EventEmitter<void>();
+  @Output() change = new EventEmitter<void>();
+
+
   private subscriptions: Subscription = new Subscription();
+  private messageId: string | null = null;
 
   author: ISimpleAuthor = {
     name: '',
@@ -32,7 +38,10 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
     avatarUrl: '',
   };
 
-  constructor(private authorService: AuthorService) { }
+  constructor(
+    private authorService: AuthorService,
+    private message: NzMessageService,
+  ) { }
 
   ngOnInit(): void {
     if (this.id) {
@@ -53,23 +62,38 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.createMessageloading();
+
     if (this.id) {
       this.authorService.updateAuthor(this.id, this.author).subscribe(
         (response) => {
-          this.complete.emit();     
+          this.createMessage('success')
+          this.complete.emit();
         },
         (error) => {
-          console.error('Error updating author:', error);
+          this.createMessage('error')
         }
       );
     }
   }
 
   onFieldValueChange(field: keyof IAuthor, value: string | number | Date | undefined): void {
+    this.change.emit();
   }
 
-  onAvatarUrlChange(url: string) {
-    this.author.avatarUrl = url;
+  onAvatarUrlChange(url: IResponseImage) {
+    this.author.avatarUrl = url.data.url;
+  }
+
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

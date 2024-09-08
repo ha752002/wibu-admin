@@ -1,22 +1,27 @@
-export interface ICreateUser {
-    id?: string;
-    avatarUrl?: string;
-    name?: string;
-    phone?: string;
-    email?: string;
-    dateOfBirth?: Date;
-    teams?: string;
-    userType?: string;
-    password?: string;
-  }
+import { EUserRole } from "@app/core/enums/user.enums";
 
-  export interface IUpdateUser {
-    id?: string;
-    avatarUrl?: string;
-    name?: string;
-    phone?: string;
-    email?: string;
-    dateOfBirth?: Date;
-    teams?: string;
-    userType?: string;
-  }
+export interface ICreateUser {
+  username: string
+  avatarUrl: string,
+  birthday: Date,
+  email: string,
+  roles: EUserRole[],
+  password?: string;
+  confirmPassword?: string;
+}
+
+export interface IUpdateUser {
+  id?: string;
+  username: string
+  avatarUrl: string,
+  birthday: Date,
+  email: string,
+  roles: EUserRole[],
+}
+
+export interface IResponseUser {
+  data: IUpdateUser;
+  message: string;
+  status?: boolean;
+}
+

@@ -12,5 +12,17 @@ export class UserItemComponent {
   defaultAvatar: string = 'assets/img/user.png';
   @Input() isLast!: boolean;
   @Input() isEven!: boolean;
+  
   protected readonly size = size;
+  previewVisible = false;
+  selectedUser?: IUser ;
+
+  handleHiddenVisible(value: boolean) {
+    this.previewVisible = value;
+    
+  }
+
+  handleVisible() {
+    this.previewVisible = !this.previewVisible;
+  }
 }

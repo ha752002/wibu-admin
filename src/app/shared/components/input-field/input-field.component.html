@@ -16,12 +16,14 @@
     </textarea>
 
     <div *ngIf="optionValue != null && type !== 'textarea'" class="group-select">
-        <select [(ngModel)]="value" (ngModelChange)="valueChange.emit($event)" [required]="required">
-            <option value="" disabled selected *ngIf="placeholder != ''" class="placeholder">{{placeholder}}</option>
-            <option *ngFor="let role of optionValue" [value]="role">
-                <div class="item">{{ role }}</div>
-            </option>
-        </select>
+        <nz-select *ngIf="!multiple" nzShowSearch nzAllowClear [nzPlaceHolder]="placeholder" [(ngModel)]="value" class="select">
+            <nz-option *ngFor="let Value of optionValue" [nzLabel]="Value" [nzValue]="Value"></nz-option>
+        </nz-select>
+
+        <nz-select *ngIf="multiple" [(ngModel)]="value" [nzMode]="'multiple'" [nzPlaceHolder]="placeholder"
+            (ngModelChange)="valueChange.emit($event)" class="multiple-select">
+            <nz-option *ngFor="let Value of optionValue" [nzValue]="Value" [nzLabel]="Value"></nz-option>
+        </nz-select>
     </div>
 
 </div>
