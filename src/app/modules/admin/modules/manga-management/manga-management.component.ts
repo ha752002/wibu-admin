@@ -8,9 +8,9 @@ import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
 import { IStoryInformation } from './type/manga.type';
 import { EventService } from '../../services/event/event.service';
-import { Imeta } from '../story/type/story.type';
 import { IStoryFilter, IStoryParams, IValueFilter } from './type/manga-Filter.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { Imeta } from '../../types/meta.type';
 
 @Component({
   selector: 'app-manga-management',

@@ -11,7 +11,7 @@ export interface IStoryInformation {
     views?: number;
     chapter?: number;
     chapters?: IChapter[];
-    introduce?: string;
+    description?: string;
     status?: statusType;
     created?: Date;
     update?: Date;

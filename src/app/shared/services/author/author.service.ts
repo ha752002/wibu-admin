@@ -3,6 +3,7 @@ import { ApiCallerService } from '@app/core/services/api-caller.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IAuthor, IAuthors } from '@app/shared/components/open-form/types/author.type';
+import { IAuthorParams } from '@app/modules/admin/modules/library/types/author-filter.type';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthorService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  getAllAuthors(): Observable<IAuthors> {
-    return this.apiCallerService.get<null, IAuthors>(this.apiGetAllUrl);
+  getAllAuthors(params?: IAuthorParams): Observable<IAuthors> {
+    return this.apiCallerService.get<IAuthorParams, IAuthors>(this.apiGetAllUrl ,params);
   }
 }

@@ -5,6 +5,8 @@ import { AuthorService } from '@app/shared/services/author/author.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { EventService } from '@app/modules/admin/services/event/event.service';
+import { IAuthorParams } from '../../types/author-filter.type';
+import { Imeta } from '@app/modules/admin/types/meta.type';
 
 @Component({
   selector: 'app-author-list',
@@ -16,11 +18,17 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   private eventSubscription!: Subscription;
 
   searchQuery: string = '';
-  defaultavatarUrl: string = 'assets/img/eyes.png';
+  // defaultavatarUrl: string = 'assets/img/eyes.png';
   authors: IAuthor[] = [];
-  paginatedData: IAuthor[] = [];
-  pageSize = 12;
-  currentPage = 1;
+  meta?: Imeta;
+  ConfigurationParams: IAuthorParams = {
+    pageNumber: 1,
+    pageSize: 2,
+    filterRules: '',
+    sortType: '',
+    sortBy: ''
+  }
+
 
   constructor(
     private router: Router,
@@ -35,22 +43,19 @@ export class AuthorListComponent implements OnInit, OnDestroy {
     this.getAllAuthors()
   }
 
-
-
   getAllAuthors(): void {
     this.subscriptions.add(
-      this.authorService.getAllAuthors().pipe(
+      this.authorService.getAllAuthors(this.ConfigurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
         response => {
           this.authors = response.data;
-          this.updatePaginatedData()
+          this.meta = response.meta;
         },
 
         error => {
           console.error('Error loading Authors', error);
-          this.updatePaginatedData()
 
         }
       )
@@ -58,15 +63,9 @@ export class AuthorListComponent implements OnInit, OnDestroy {
 
   }
 
-  updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.authors.slice(startIndex, endIndex);
-  }
-
   onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updatePaginatedData();
+    this.ConfigurationParams.pageNumber = page;
+    this.getAllAuthors()
   }
 
   navigateToUserDetail(userId: string): void {

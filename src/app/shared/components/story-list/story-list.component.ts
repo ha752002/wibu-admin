@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
-import { Imeta, IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Imeta } from '@app/modules/admin/types/meta.type';
 
 export type viewType = 'grid' | 'table';
 

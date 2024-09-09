@@ -1,4 +1,5 @@
 import { EFilterOperation } from "@app/core/enums/operation.enums";
+import { Imeta } from "@app/modules/admin/types/meta.type";
 import { IAuthor } from "@app/shared/components/open-form/types/author.type";
 import { IChapter } from "@app/shared/components/open-form/types/chapter.type";
 import { IGenre } from "@app/shared/components/open-form/types/genre.type";
@@ -9,7 +10,7 @@ export interface IStoryInformation {
   title?: string;
   genres?: IGenre[];
   authors?: IAuthor[];
-  publisher?:IPublisher;
+  publisher?: IPublisher;
   views?: number;
   chapter?: number;
   chapters?: IChapter[];
@@ -19,26 +20,20 @@ export interface IStoryInformation {
   update?: Date;
 }
 
-export interface Imeta{
-  pageNumber: number;
-  pageSize: number;
-  numberOfRecords: number;
-}
-
-export interface IStorys{
+export interface IStorys {
   data: IStoryInformation[];
-  meta:Imeta;
+  meta: Imeta;
   message: string;
   status?: boolean;
 }
 
-export interface IStory{
+export interface IStory {
   data: IStoryInformation;
   message: string;
   status?: boolean;
 }
 
-export interface IPublisher{
+export interface IPublisher {
   avatarUrl?: string;
   createdDate: Date;
   email?: string;
@@ -48,4 +43,4 @@ export interface IPublisher{
 
 
 
-  export type statusType = 'Updating' | 'Halt' | 'Full';
+export type statusType = 'Updating' | 'Halt' | 'Full';

@@ -1,3 +1,4 @@
+import { Imeta } from "@app/modules/admin/types/meta.type";
 
 export interface IAuthor {
   id: string;
@@ -6,11 +7,11 @@ export interface IAuthor {
   description: string;
   createdDate: Date,
   lastUpdated: Date,
-
 }
 
 export interface IAuthors {
   data: IAuthor[];
+  meta:Imeta;
   message: string;
   status?: boolean;
 }

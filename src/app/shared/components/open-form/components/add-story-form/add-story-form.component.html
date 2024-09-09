@@ -25,8 +25,8 @@
                 </div>
             </div>
 
-            <app-input-field label="introduce" [(value)]="story.introduce" type="textarea"
-                (valueChange)="onFieldValueChange('introduce', $event)" [required]="true">
+            <app-input-field label="introduce" [(value)]="story.description" type="textarea"
+                (valueChange)="onFieldValueChange('description', $event)" [required]="true">
             </app-input-field>
 
             <div class="add-genre" (click)="handleGenreVisible(true)">

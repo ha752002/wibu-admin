@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Imeta, IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Imeta } from '@app/modules/admin/types/meta.type';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { PreviewTheStoryComponent } from '@app/shared/components/preview-the-story/preview-the-story.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -27,12 +28,6 @@ export class ListGridComponent {
   @Input() rowSize: 3 | 4 | 5 = 3;
   @Output() PageChange = new EventEmitter<number>();
 
-  // ConfigurationMeta: Imeta = {
-  //   numberOfRecords: 0,
-  //   pageNumber: 1,
-  //   pageSize: 20,
-  // }
-  // paginatedData: IStoryInformation[] = [];
   previewVisible = false;
   selectedStory: IStoryInformation = {};
   ngOnInit() {

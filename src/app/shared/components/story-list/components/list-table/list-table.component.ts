@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Imeta, IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Imeta } from '@app/modules/admin/types/meta.type';
 import { ItemAuthorComponent } from '@app/shared/components/item-author/item-author.component';
 import { OpenFormComponent } from '@app/shared/components/open-form/open-form.component';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';

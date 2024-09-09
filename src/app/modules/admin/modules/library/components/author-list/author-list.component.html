@@ -11,7 +11,7 @@
     </div>
     <div>
         <div class="group-author">
-            <div *ngFor="let author of paginatedData" class="item">
+            <div *ngFor="let author of authors" class="item">
                 <div class="content">
                     <div class="author" (click)="navigateToUserDetail(author.id)">
                         <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64" ></nz-avatar>
@@ -29,7 +29,7 @@
               </div>
         </div>
         <div class="pagination">
-            <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="authors.length" [nzPageSize]="pageSize"
+            <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
             (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
         </div>
     </div>
