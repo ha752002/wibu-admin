@@ -16,7 +16,8 @@
     </textarea>
 
     <div *ngIf="optionValue != null && type !== 'textarea'" class="group-select">
-        <nz-select *ngIf="!multiple" nzShowSearch nzAllowClear [nzPlaceHolder]="placeholder" [(ngModel)]="value" class="select">
+        <nz-select *ngIf="!multiple" nzShowSearch nzAllowClear [nzPlaceHolder]="placeholder" [(ngModel)]="value"
+            (ngModelChange)="valueChange.emit($event)" class="select">
             <nz-option *ngFor="let Value of optionValue" [nzLabel]="Value" [nzValue]="Value"></nz-option>
         </nz-select>
 

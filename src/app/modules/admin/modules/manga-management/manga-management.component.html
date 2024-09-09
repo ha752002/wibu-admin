@@ -4,15 +4,15 @@
     <div class="group-tool">
         <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
         
-        <!-- <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
+        <app-input-field [(value)]="valuefilters.genre" type="password" (valueChange)="onFieldValueChange('genre', $event)"
         placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">
         </app-input-field>
-        <app-input-field [(value)]="filter.chapterNumber" type="text" (valueChange)="onFieldValueChange('chapterNumber', $event)"
-        placeholder="select chapter number" [optionValue]="teamList" *ngIf="multiGenreMode != true">
+        <app-input-field [(value)]="valuefilters.status" type="text" (valueChange)="onFieldValueChange('Status', $event)"
+        placeholder="select Status" [optionValue]="teamList" *ngIf="multiGenreMode != true">
         </app-input-field>
-        <app-input-field [(value)]="filter.search" type="text" (valueChange)="onFieldValueChange('search', $event)"
+        <app-input-field [(value)]="valuefilters.title" type="text" (valueChange)="onFieldValueChange('title', $event)"
             placeholder="search" *ngIf="multiGenreMode != true">
-        </app-input-field> -->
+        </app-input-field>
         <div (click)="changeViewType(viewType)" class="icon">
             <ts-icon [name]="viewType === 'table' ? 'bars' : 'calendar'"></ts-icon>
         </div>

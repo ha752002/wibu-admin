@@ -59,7 +59,7 @@ export class OpenFormComponent implements OnDestroy {
   @Input() buttonType: 'success' | 'warning' | 'danger' | 'default' = 'default';
   @Input() id?: string;
   @Input() img?: string;
-  @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser | IGenre | IAuthor | IStoryInformation | string[];
+  // @Input() data?: ICreateStory | IChapter | IUpdateUser | ICreateUser | IGenre | IAuthor | IStoryInformation | string[];
   @Input() genre?: IGenre[];
   @Input() storyData?: IStoryInformation;
   @Input() ChapterData?: IChapter;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IGenre, IResponseGenre } from '../../types/genre.type';
+import { IGenre, IResponseGenre, ISimpleGenre } from '../../types/genre.type';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
 
 @Injectable({
@@ -17,11 +17,11 @@ export class GenreService {
     return this.apiCallerService.get<string , IResponseGenre>(this.apiUrl.getById , id);
   }
 
-  createGenre(genre: IGenre): Observable<IGenre> {
-    return this.apiCallerService.post<IGenre, IGenre>(this.apiUrl.push, genre);
+  createGenre(genre: ISimpleGenre): Observable<ISimpleGenre> {
+    return this.apiCallerService.post<ISimpleGenre, ISimpleGenre>(this.apiUrl.push, genre);
   }
 
-  updateGenre(id: string, genre: IGenre): Observable<IGenre> {    
+  updateGenre(id: string, genre: ISimpleGenre): Observable<IGenre> {    
     return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, genre);
   }
 
