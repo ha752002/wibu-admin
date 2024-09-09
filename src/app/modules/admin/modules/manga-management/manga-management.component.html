@@ -4,7 +4,7 @@
     <div class="group-tool">
         <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
         
-        <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
+        <!-- <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
         placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">
         </app-input-field>
         <app-input-field [(value)]="filter.chapterNumber" type="text" (valueChange)="onFieldValueChange('chapterNumber', $event)"
@@ -12,7 +12,7 @@
         </app-input-field>
         <app-input-field [(value)]="filter.search" type="text" (valueChange)="onFieldValueChange('search', $event)"
             placeholder="search" *ngIf="multiGenreMode != true">
-        </app-input-field>
+        </app-input-field> -->
         <div (click)="changeViewType(viewType)" class="icon">
             <ts-icon [name]="viewType === 'table' ? 'bars' : 'calendar'"></ts-icon>
         </div>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <app-story-list *ngIf="storys && storys.length > 0" [storyData]="storys" [viewType]="viewType"></app-story-list>
+    <app-story-list [storyData]="storys" [viewType]="viewType" [meta]="meta" (PageChange)="onPageChange($event)"></app-story-list>
 </div>
 
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">

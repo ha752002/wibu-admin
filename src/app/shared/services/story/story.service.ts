@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
+import { IStoryParams } from '@app/modules/admin/modules/manga-management/type/manga-Filter.type';
 import { IStory, IStoryInformation, IStorys } from '@app/modules/admin/modules/story/type/story.type';
 import { IResponseStory } from '@app/shared/components/open-form/types/story.type';
 import { Observable } from 'rxjs';
@@ -14,8 +15,8 @@ export class StoryService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  getAllStorys(): Observable<IStorys> {
-    return this.apiCallerService.get<null, IStorys>(this.apiUrl.getAll);
+  getAllStorys(params?: IStoryParams): Observable<IStorys> {
+    return this.apiCallerService.get<IStoryParams, IStorys>(this.apiUrl.getAll, params);
   }
 
   getStoryById(id: string): Observable<IStory> {

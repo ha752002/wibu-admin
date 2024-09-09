@@ -1,4 +1,4 @@
-<nz-table #basicTable [nzOuterBordered]="true" [nzSize]="'small'" [nzData]="storyData || []">
+<nz-table #basicTable [nzOuterBordered]="true" [nzSize]="'small'" [nzData]="storyData || []" [nzShowPagination]="false">
     <thead>
       <tr>
         <th>Thumbnail</th>
@@ -31,6 +31,9 @@
       </tr>
     </tbody>
   </nz-table>
+  <br>
+  <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
+    (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
   <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
     <app-preview-the-story [storyData]="selectedStory"></app-preview-the-story>
   </app-open-modal>

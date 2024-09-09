@@ -2,13 +2,14 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { viewType } from '@app/shared/components/story-list/story-list.component';
 import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
-import { ImangaFilter } from './type/manga-Filter.type';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
 import { IStoryInformation } from './type/manga.type';
 import { EventService } from '../../services/event/event.service';
+import { Imeta } from '../story/type/story.type';
+import { IStoryFilter, IStoryParams } from './type/manga-Filter.type';
 
 @Component({
   selector: 'app-manga-management',
@@ -19,12 +20,17 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
 
-  filter: ImangaFilter = {
-    search: '',
-    genre: '',
-    chapterNumber: '',
-  }
+  filter: IStoryFilter[] = []
 
+  ConfigurationParams: IStoryParams = {
+    pageNumber: 1,
+    pageSize: 8,
+    filterRules: '',
+    sortType:'',
+    sortBy:''
+  }
+  
+  meta?: Imeta;
   genreNames: string[] = [];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
   viewType: viewType = "grid"
@@ -33,18 +39,7 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
   storys: IStoryInformation[] = [];
 
   genres: IGenre[] = [];
-  dataGenres: IGenre[] = [
-    { id: '1', title: 'Fantasy', description: 'A fantasy story' },
-    { id: '2', title: 'Adventure', description: 'An adventurous journey' },
-    { id: '3', title: 'Mystery', description: 'A mysterious tale' },
-    { id: '4', title: 'Mythology', description: 'Mythological stories' },
-    { id: '5', title: 'Sci-Fi', description: 'Science fiction stories' },
-    { id: '6', title: 'Horror', description: 'Scary and horror stories' },
-    { id: '7', title: 'Romance', description: 'Love and romance stories' },
-    { id: '8', title: 'Thriller', description: 'Thrilling and suspenseful tales' },
-    { id: '9', title: 'Comedy', description: 'Humorous and funny stories' },
-    { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
-  ];
+  
   selectedGenres: IGenre[] = [];
 
   constructor(
@@ -80,7 +75,7 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
     this.route.params.subscribe(params => {
       const genreParam = params['genreId'];
       if (genreParam) {
-        this.filter.genre = genreParam;
+        // this.filter.genre = genreParam;
       }
     });
   }
@@ -99,7 +94,6 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
         },
         error => {
           console.error('Error loading genres', error);
-          this.genres = this.dataGenres
           this.genreNames = this.genres.map(g => g.title);
         }
       )
@@ -109,12 +103,14 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
   getAllStorys(): void {
     this.storys = []
     this.subscriptions.add(
-      this.storyService.getAllStorys().pipe(
+      this.storyService.getAllStorys(this.ConfigurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
         response => {
           this.storys = response.data;
+          this.meta = response.meta
+
         },
         error => {
           console.error('Error loading storys', error);
@@ -123,7 +119,12 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
     );
   }
 
-  onFieldValueChange(field: keyof ImangaFilter, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: keyof IStoryFilter, value: string | number | Date | undefined): void {
+  }
+
+  onPageChange(page: number): void {
+    this.ConfigurationParams.pageNumber = page;
+    this.getAllStorys()
   }
 
   changeViewType(view: viewType) {
@@ -159,3 +160,17 @@ export class MangaManagementComponent implements OnInit , OnDestroy {
     }
   }
 }
+
+
+// dataGenres: IGenre[] = [
+//   { id: '1', title: 'Fantasy', description: 'A fantasy story' },
+//   { id: '2', title: 'Adventure', description: 'An adventurous journey' },
+//   { id: '3', title: 'Mystery', description: 'A mysterious tale' },
+//   { id: '4', title: 'Mythology', description: 'Mythological stories' },
+//   { id: '5', title: 'Sci-Fi', description: 'Science fiction stories' },
+//   { id: '6', title: 'Horror', description: 'Scary and horror stories' },
+//   { id: '7', title: 'Romance', description: 'Love and romance stories' },
+//   { id: '8', title: 'Thriller', description: 'Thrilling and suspenseful tales' },
+//   { id: '9', title: 'Comedy', description: 'Humorous and funny stories' },
+//   { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
+// ];

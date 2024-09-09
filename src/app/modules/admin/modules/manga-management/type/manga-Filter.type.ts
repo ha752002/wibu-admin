@@ -1,6 +1,16 @@
-export interface ImangaFilter {
-    search?: string,
-    genre?: string,
-    chapterNumber?: string,
-  }
+import { EFilterOperation } from "@app/core/enums/operation.enums";
+
+export interface IStoryFilter {
+  target?: string;
+  value: string;
+  operation?: EFilterOperation;
+}
+
+export interface IStoryParams {
+  sortBy?: string;
+  sortType: string;
+  pageNumber?: number;
+  pageSize: number;
+  filterRules: string;
+}
   

@@ -1,5 +1,5 @@
 <div class="list-grid">
-  <nz-list [nzDataSource]="paginatedData" [nzRenderItem]="itemTemplate" [nzGrid]="{gutter: 16, span: rowSize}">
+  <nz-list [nzDataSource]="storyData" [nzRenderItem]="itemTemplate" [nzGrid]="{gutter: 16, span: rowSize}">
     <ng-template #itemTemplate let-item>
       <nz-list-item (click)="selectStory(item)">
         <div class="item">
@@ -12,7 +12,7 @@
       </nz-list-item>
     </ng-template>
   </nz-list>
-  <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="storyData.length" [nzPageSize]="pageSize"
+  <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
     (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
 </div>
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
