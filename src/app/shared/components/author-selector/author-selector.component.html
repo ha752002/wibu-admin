@@ -6,14 +6,14 @@
                 <ts-icon [name]="'clear'"></ts-icon>
                 <p>clean</p>
             </button>
-            <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
+            <app-input-field [(value)]="itemFilter.value" type="text" (valueChange)="onFieldValueChange('name', $event)"
                 placeholder="search">
             </app-input-field>
         </div>
 
     </div>
     <div class="group-author">
-        <div *ngFor="let author of paginatedData , trackBy:identify" class="item" (click)="toggleauthor(author)"
+        <div *ngFor="let author of authors , trackBy:identify" class="item" (click)="toggleauthor(author)"
             [class.selected]="isSelected(author)">
             <div class="content">
                 <div class="author">
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="pagination">
-        <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="authors.length" [nzPageSize]="pageSize"
+        <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
             (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
     </div>
 </div>

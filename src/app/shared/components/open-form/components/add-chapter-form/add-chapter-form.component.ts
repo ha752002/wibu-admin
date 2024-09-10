@@ -45,7 +45,7 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
     ],
   }
   img: File[] = []
-  @Input() storyData?: IStoryInformation = {}
+  @Input() storyData?: IStoryInformation;
   @Output() complete = new EventEmitter<void>();
   @Output() change = new EventEmitter<void>();
 

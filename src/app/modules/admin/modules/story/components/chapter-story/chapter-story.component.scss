@@ -3,7 +3,7 @@
     text-align: left;
 
     .title {
-        padding: 12px 24px;
+        padding: 8px 24px;
         border-bottom: 1px solid gray;
         display: flex;
         justify-content: space-between;
@@ -11,13 +11,29 @@
     }
 
     .item-chapter {
-        padding: 6px 24px;
+        padding: 12px 24px;
         transition: 0.2s;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .form-group {
+            display: none;
+            gap: 4px;
+        }
+
+        &:hover .form-group {
+            display: flex;
+        }
 
         &:hover {
             background-color: #f38990;
-            color: white;
+
+            .title-chapter {
+                color: white;
+            }
+
             transition: 0.2s;
         }
     }

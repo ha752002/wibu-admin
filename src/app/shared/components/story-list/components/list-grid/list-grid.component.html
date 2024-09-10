@@ -5,16 +5,19 @@
         <div class="item">
           <div class="image-wrapper">
             <img [src]="item.thumbnailUrl" alt="Thumbnail">
-        </div>
+          </div>
           <p class="name">{{ item.title }}</p>
           <p>{{ item.author }}</p>
+          <p *ngIf="item.authors.length > 0">{{ item.authors[0].name }}</p>
         </div>
       </nz-list-item>
     </ng-template>
   </nz-list>
+
   <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
     (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
 </div>
+
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
   <app-preview-the-story [storyData]="selectedStory"></app-preview-the-story>
 </app-open-modal>

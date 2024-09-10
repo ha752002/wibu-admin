@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { IStoryInformation } from '@app/modules/admin/modules/manga-management/type/manga.type';
 import { Imeta } from '@app/modules/admin/types/meta.type';
 import { ItemAuthorComponent } from '@app/shared/components/item-author/item-author.component';
 import { OpenFormComponent } from '@app/shared/components/open-form/open-form.component';
@@ -30,7 +30,7 @@ export class ListTableComponent {
   @Output() PageChange = new EventEmitter<number>();
 
   previewVisible = false;
-  selectedStory: IStoryInformation = {};
+  selectedStory?: IStoryInformation ;
 
   onPageChange(page: number): void {
     this.PageChange.emit(page);
@@ -43,6 +43,10 @@ export class ListTableComponent {
 
   handleVisible(value: boolean) {
     this.previewVisible = value;
+  }
+
+  identify(index: number, item: any): any {
+    return item.id;
   }
 
 }

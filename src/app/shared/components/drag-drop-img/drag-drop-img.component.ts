@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
 import { IImage } from '@app/shared/types/image.types';
@@ -30,6 +30,14 @@ export class DragDropImgComponent implements OnInit{
     this.imagePreviews.push({ url });
   });
  } 
+
+ ngOnChanges(changes: SimpleChanges) {
+  if (changes['imgData']) {
+    this.imgData.forEach((url) => {
+      this.imagePreviews.push({ url });
+    });
+  }
+}
 
   onDragOver(event: DragEvent) {
     event.preventDefault();

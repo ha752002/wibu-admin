@@ -104,6 +104,10 @@ export class GenreListComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(this.selectedGenresId) } });
   }
 
+  identify(index: number, item: any): any {
+    return item.id;
+  }
+
   ngOnDestroy() {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();

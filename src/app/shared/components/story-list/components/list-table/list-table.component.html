@@ -13,15 +13,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of basicTable.data">
+      <tr *ngFor="let data of basicTable.data , trackBy: identify">
         <td class="Thumbnail"><img [src]="data.thumbnailUrl" alt="Thumbnail" class="" (click)="selectStory(data)"></td>
         <td>{{ data.title }}</td>
-        <td class="author"><app-item-author *ngFor="let author of data.authors" [user]="author"></app-item-author></td>
+        <td class="author"><app-item-author *ngFor="let author of data.authors , trackBy: identify" [user]="author"></app-item-author></td>
         <td>{{ data.views }}</td>
         <td>{{ data.chapters?.length }}</td>
         <td>{{ data.status }}</td>
         <td>{{ data.createdDate | date: 'short' }}</td>
-        <td>{{ data.update | date: 'short' }}</td>
+        <td>{{ data.updateDate| date: 'short' }}</td>
         <td>
           <div class="flex">
             <app-open-form [formName]="'edit story'" buttonType="warning" [id]="data.id" [img]="data.thumbnailUrl"></app-open-form>

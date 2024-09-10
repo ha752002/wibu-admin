@@ -8,9 +8,9 @@ import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
 import { IStoryInformation } from './type/manga.type';
 import { EventService } from '../../services/event/event.service';
-import { IStoryFilter, IStoryParams, IValueFilter } from './type/manga-Filter.type';
+import { IStoryParams, IValueFilter } from './type/manga-Filter.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
-import { Imeta } from '../../types/meta.type';
+import { IFilter, Imeta } from '../../types/meta.type';
 
 @Component({
   selector: 'app-manga-management',
@@ -21,10 +21,10 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
 
-  filters: IStoryFilter[] = [];
-  itemFilter: IStoryFilter = {
+  filters: IFilter[] = [];
+  itemFilter: IFilter = {
     value: '',
-    operation: EFilterOperation.EQUAL,
+    operation: EFilterOperation.MATCH,
     target: ''
   };
 
@@ -117,7 +117,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
       ).subscribe(
         response => {
           this.storys = response.data;
-          this.meta = response.meta
+          this.meta = response.meta;
         },
         error => {
           console.error('Error loading storys', error);
@@ -146,7 +146,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
       this.filters.splice(index, 1);
     }
     this.onfiltersChange()
-    console.log(this.filters);
   }
 
   onfiltersChange(): void {

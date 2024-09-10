@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { IStoryInformation } from '@app/modules/admin/modules/manga-management/type/manga.type';
 import { Imeta } from '@app/modules/admin/types/meta.type';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { PreviewTheStoryComponent } from '@app/shared/components/preview-the-story/preview-the-story.component';
@@ -23,22 +23,13 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
   styleUrl: './list-grid.component.scss'
 })
 export class ListGridComponent {
-  @Input() storyData: IStoryInformation[] = [];
+  @Input() storyData?: IStoryInformation[] = [];
   @Input() meta?: Imeta;
   @Input() rowSize: 3 | 4 | 5 = 3;
   @Output() PageChange = new EventEmitter<number>();
 
   previewVisible = false;
-  selectedStory: IStoryInformation = {};
-  ngOnInit() {
-    console.log(this.meta);
-  }
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes['storyData']) {
-  //     this.storys = this.storyData
-  //   }
-  // }
+  selectedStory?: IStoryInformation ;
 
   onPageChange(page: number): void {
     this.PageChange.emit(page);

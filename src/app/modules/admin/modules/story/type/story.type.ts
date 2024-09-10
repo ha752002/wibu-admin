@@ -5,19 +5,19 @@ import { IChapter } from "@app/shared/components/open-form/types/chapter.type";
 import { IGenre } from "@app/shared/components/open-form/types/genre.type";
 
 export interface IStoryInformation {
-  id?: string;
-  thumbnailUrl?: string;
-  title?: string;
-  genres?: IGenre[];
-  authors?: IAuthor[];
-  publisher?: IPublisher;
-  views?: number;
+  id: string;
+  thumbnailUrl: string;
+  title: string;
+  genres: IGenre[];
+  authors: IAuthor[];
+  publisher: IPublisher;
+  views: number;
   chapter?: number;
   chapters?: IChapter[];
   description?: string;
   status?: statusType;
   createdDate?: Date;
-  update?: Date;
+  updateDate?: Date;
 }
 
 export interface IStorys {

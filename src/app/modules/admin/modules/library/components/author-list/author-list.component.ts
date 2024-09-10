@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { EventService } from '@app/modules/admin/services/event/event.service';
 import { IAuthorParams } from '../../types/author-filter.type';
-import { Imeta } from '@app/modules/admin/types/meta.type';
+import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
+import { EFilterOperation } from '@app/core/enums/operation.enums';
 
 @Component({
   selector: 'app-author-list',
@@ -29,7 +30,11 @@ export class AuthorListComponent implements OnInit, OnDestroy {
     sortBy: ''
   }
 
-
+  itemFilter: IFilter = {
+    value: '',
+    operation: EFilterOperation.MATCH,
+    target: ''
+  };
   constructor(
     private router: Router,
     private eventService: EventService,
@@ -72,7 +77,19 @@ export class AuthorListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/user-detail', userId]);
   }
 
-  onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: string, value: string | number | Date | undefined): void {
+    this.itemFilter.target = field
+    this.onfiltersChange()
+  }
+
+  onfiltersChange(): void {
+    const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
+    this.ConfigurationParams.filterRules = encodedData
+    this.getAllAuthors()
+  }
+
+  identify(index: number, item: any): any {
+    return item.id;
   }
 
   ngOnDestroy() {

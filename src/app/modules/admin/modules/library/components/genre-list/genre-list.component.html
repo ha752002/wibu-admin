@@ -23,7 +23,7 @@
     </div>
     <div>
         <div class="group-genre">
-            <div class="item" *ngFor="let genre of genres" (click)="toggleGenre(genre)"
+            <div class="item" *ngFor="let genre of genres , trackBy: identify " (click)="toggleGenre(genre)"
                 [class.selected]="isSelected(genre)" [class.selectMode]="selectMode">
                 <div class="form-group" (click)="blockFormClosing($event)" *ngIf="selectMode == false">
                     <app-open-form [formName]="'edit genre'" [label]="false" [icon]="'edit'"

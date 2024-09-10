@@ -1,9 +1,9 @@
 <div class="chapter">
   <div class="name-chapter">
-    <p>{{ chapter.title }}</p>
+    <p>{{ chapter?.title }}</p>
     <div class="next-chapter">
-      <app-open-form formName="delete" [id]="chapter.id" [buttonType]="'danger'" [delete]="'chapter'" [icon]="'delete'"></app-open-form>
-      <app-open-form formName="edit chapter" [id]="chapter.id" [icon]="'edit'"></app-open-form>
+      <app-open-form formName="delete" [id]="chapter?.id" [buttonType]="'danger'" [delete]="'chapter'" [icon]="'delete'"></app-open-form>
+      <app-open-form formName="edit chapter" [id]="chapter?.id" [icon]="'edit'"></app-open-form>
 
       <ts-icon [name]="'left'"></ts-icon>
       <ts-icon [name]="'right'"></ts-icon>

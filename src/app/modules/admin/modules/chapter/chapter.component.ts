@@ -4,7 +4,7 @@ import { ChapterService } from './services/chapter/chapter.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from 'express';
 import { EventService } from '../../services/event/event.service';
-import { IChapter } from './types/chapter.type';
+import { IChapterContent } from './types/chapter.type';
 
 @Component({
   selector: 'app-chapter',
@@ -12,7 +12,7 @@ import { IChapter } from './types/chapter.type';
   styleUrl: './chapter.component.scss'
 })
 export class ChapterComponent implements OnInit , OnDestroy {
-  chapter: IChapter = {}
+  chapter?: IChapterContent
 
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
