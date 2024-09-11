@@ -132,9 +132,9 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.itemFilter = {
       ...this.itemFilter,
       target: 'genre',
-      value: genre.title,
+      value: genre.id,
     };
-    const index = this.filters.findIndex(filter => filter.target === 'genre' && filter.value === genre.title);
+    const index = this.filters.findIndex(filter => filter.target === 'genre' && filter.value === genre.id);
     if (index === -1) {
       this.filters.push({ ...this.itemFilter });
     } else {
