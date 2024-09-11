@@ -5,9 +5,9 @@ import { AuthorService } from '@app/shared/services/author/author.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { EventService } from '@app/modules/admin/services/event/event.service';
-import { IAuthorParams } from '../../types/author-filter.type';
 import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
 
 @Component({
   selector: 'app-author-list',
@@ -22,7 +22,7 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   // defaultavatarUrl: string = 'assets/img/eyes.png';
   authors: IAuthor[] = [];
   meta?: Imeta;
-  ConfigurationParams: IAuthorParams = {
+  ConfigurationParams: IQueryParams = {
     pageNumber: 1,
     pageSize: 2,
     filterRules: '',

@@ -4,6 +4,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IUser } from './type/user.types';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { IStoryInformation } from '@app/modules/admin/modules/manga-management/type/manga.type';
+import { IFilter } from '@app/modules/admin/types/meta.type';
+import { IValueFilter } from '@app/modules/admin/modules/manga-management/type/manga-Filter.type';
+import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { finalize, Subscription } from 'rxjs';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
+import { StoryService } from '@app/shared/services/story/story.service';
+import { EventService } from '@app/modules/admin/services/event/event.service';
 
 @Component({
   standalone: true,
@@ -19,4 +27,12 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 })
 export class PreviewTheUserComponent {
   @Input() user?: IUser;
+  @Input() case?: 'user' | 'author';
+
+  // storyWriting: IStoryInformation[] = [];
+  // storyPosted: IStoryInformation[] = [];
+  // storyIsFollowing: IStoryInformation[] = [];
+  // storys: IStoryInformation[] = [];
+
+  
 }

@@ -1,4 +1,7 @@
 .list-grid {
+    .ant-list-item {
+        border-bottom: none !important;
+    }
 
     .item {
         cursor: pointer;

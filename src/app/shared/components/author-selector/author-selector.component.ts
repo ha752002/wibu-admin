@@ -10,8 +10,8 @@ import { IconComponent } from '../icon/icon.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { OpenFormComponent } from '../open-form/open-form.component';
 import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
-import { IAuthorParams } from '@app/modules/admin/modules/library/types/author-filter.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
 
 @Component({
   standalone: true,
@@ -36,7 +36,7 @@ export class AuthorSelectorComponent {
   authors: IAuthor[] = []
   selectedAuthors: IAuthor[] = [];
   meta?: Imeta;
-  ConfigurationParams: IAuthorParams = {
+  ConfigurationParams: IQueryParams = {
     pageNumber: 1,
     pageSize: 8,
     filterRules: '',

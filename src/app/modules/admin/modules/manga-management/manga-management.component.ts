@@ -8,9 +8,10 @@ import { GenreService } from '@app/shared/services/genre/genre.service';
 import { StoryService } from '@app/shared/services/story/story.service';
 import { IStoryInformation } from './type/manga.type';
 import { EventService } from '../../services/event/event.service';
-import { IStoryParams, IValueFilter } from './type/manga-Filter.type';
+import { IValueFilter } from './type/manga-Filter.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { IFilter, Imeta } from '../../types/meta.type';
+import { IQueryParams } from '../../types/query-params.type';
 
 @Component({
   selector: 'app-manga-management',
@@ -30,9 +31,9 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
   valuefilters: IValueFilter = {}
 
-  ConfigurationParams: IStoryParams = {
+  ConfigurationParams: IQueryParams = {
     pageNumber: 1,
-    pageSize: 8,
+    pageSize: 16,
     filterRules: '',
     sortType: '',
     sortBy: ''
