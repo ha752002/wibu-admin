@@ -31,5 +31,5 @@
 
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
     <app-genre-selector [inGenresSelected]="selectedGenres"
-        (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
+        (outGenresSelected)="multiGenreFilter($event)"></app-genre-selector>
 </app-open-modal>

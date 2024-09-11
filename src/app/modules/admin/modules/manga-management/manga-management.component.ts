@@ -65,34 +65,11 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.getAllGenres();
   }
 
-  getParams() {
-    this.route.queryParams.subscribe(params => {
-      const genreParam = params['genreId'];
-      if (genreParam) {
-        const parsedGenres = JSON.parse(genreParam);
-        this.multiGenreMode = true;
-        this.selectedGenres = this.genres.filter(genre => genre.id !== undefined && parsedGenres.includes(genre.id));
-      } else {
-        this.getGenreById()
-      }
-    });
-  }
-
-  getGenreById() {
-    this.route.params.subscribe(params => {      
-      const genreParam = params['genreId'];
-      if (genreParam) {
-        this.valuefilters.genre = genreParam;
-        this.onFieldValueChange('genre', genreParam)
-      }
-    });
-  }
-
   getAllGenres(): void {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
         finalize(() => {
-          this.getParams();
+          this.getParamsGenreId();
         })
       ).subscribe(
         response => {
@@ -126,6 +103,45 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     );
   }
 
+  getParamsGenreId() {
+    this.route.queryParams.subscribe(params => {
+      const genreParam = params['genreId'];
+      if (genreParam) {
+        const parsedGenres = JSON.parse(genreParam);
+        console.log(parsedGenres);
+        this.multiGenreFilter(
+          this.genres.filter(genre => genre.id !== undefined && parsedGenres.includes(genre.id))
+        )
+      } else {
+        this.getGenreById()
+      }
+    });
+  }
+
+  getGenreById() {
+    this.route.params.subscribe(params => {
+      const genreParam = params['genreId'];
+      if (genreParam) {
+        this.valuefilters.genre = genreParam;
+        this.onFieldValueChange('genre', genreParam)
+      }
+    });
+  }
+
+  getStorysByGenres(genre: IGenre) {
+    this.itemFilter = {
+      ...this.itemFilter,
+      target: 'genre',
+      value: genre.title,
+    };
+    const index = this.filters.findIndex(filter => filter.target === 'genre' && filter.value === genre.title);
+    if (index === -1) {
+      this.filters.push({ ...this.itemFilter });
+    } else {
+      this.filters[index] = { ...this.itemFilter };
+    }
+  }
+
   onFieldValueChange(target: string, value: string | number | Date | undefined): void {
     const stringValue = value ? value.toString() : '';
 
@@ -148,6 +164,22 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.onfiltersChange()
   }
 
+  handleVisible(value: boolean) {
+    this.previewVisible = value;
+  }
+
+  multiGenreFilter(genres: IGenre[]) {
+    this.selectedGenres = genres;
+    this.filters = []
+    if (this.selectedGenres.length == 0) {
+      this.multiGenreMode = false
+    } else {
+      this.multiGenreMode = true
+      this.selectedGenres.forEach(genre => this.getStorysByGenres(genre));
+      this.onfiltersChange()
+    }
+  }
+
   onfiltersChange(): void {
     const encodedData = encodeURIComponent(JSON.stringify(this.filters))
     this.ConfigurationParams.filterRules = encodedData
@@ -164,19 +196,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
       this.viewType = 'grid'
     } else {
       this.viewType = 'table'
-    }
-  }
-
-  handleVisible(value: boolean) {
-    this.previewVisible = value;
-  }
-
-  onGenresSelected(genres: IGenre[]) {
-    this.selectedGenres = genres;
-    if (this.selectedGenres.length == 0) {
-      this.multiGenreMode = false
-    } else {
-      this.multiGenreMode = true
     }
   }
 
