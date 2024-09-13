@@ -6,6 +6,7 @@ import { IImage } from '@app/shared/types/image.types';
 import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadService } from '@app/shared/services/upload/upload.service';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { UploadService } from '@app/shared/services/upload/upload.service';
   imports: [
     CommonModule,
     ImgComponent,
-    IconComponent
+    IconComponent,
+    NzButtonModule
   ],
   templateUrl: './drag-drop-img.component.html',
   styleUrl: './drag-drop-img.component.scss'
@@ -22,8 +24,6 @@ import { UploadService } from '@app/shared/services/upload/upload.service';
 export class DragDropImgComponent implements OnInit, OnDestroy {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() imgData: string[] = []
-
-  @Output() imagesSelected = new EventEmitter<File[]>();
   @Output() imagesUrl = new EventEmitter<string[]>();
 
   imageFiles: File[] = [];
@@ -119,10 +119,15 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
   }
 
   openFolder() {
-    if(this.imagePreviews.length === 0){
+    if (this.imagePreviews.length === 0) {
       const fileInput = document.getElementById('fileInput') as HTMLInputElement;
       fileInput.click();
     }
+  }
+
+  openFileDialog() {
+      const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+      fileInput.click();
   }
 
   onFileChange(event: Event) {
@@ -148,7 +153,6 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
       const bName = this.extractNumberFromName(b.name);
       return aName - bName;
     });
-    this.imagesSelected.emit(this.imageFiles);
     this.uploadImages()
   }
 
@@ -171,7 +175,6 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
 
         this.updateImagePreviews(newImageUrls);
 
-        this.imagesSelected.emit(this.imageFiles);
         this.imagesUrl.emit(this.imageUrls);
         this.createMessage('success')
 
@@ -183,7 +186,6 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
   }
 
   updateImagePreviews(urls: string[]): void {
-    // Cập nhật danh sách bản xem trước dựa trên URL từ server
     if (urls.length > 0) {
       urls.forEach((url, index) => {
         this.imagePreviews.push({
@@ -193,7 +195,13 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
       });
     }
   }
-  
+  clean() {
+    this.imageFiles = []
+    this.imagePreviews = [];
+    this.imageUrls = [];
+    this.imagesUrl.emit(this.imageUrls);
+  }
+
   createMessageloading(): void {
     this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
   }

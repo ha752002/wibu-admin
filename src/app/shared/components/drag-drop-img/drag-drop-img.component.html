@@ -1,6 +1,16 @@
-<div>
-  <div class="title">Story content : <p *ngIf="imagePreviews.length !== 0">(selected {{imagePreviews.length}} images)</div>
-
+<div class="group-title">
+  <div class="title">Story content : <p *ngIf="imagePreviews.length !== 0">(selected {{imagePreviews.length}} images)
+  </div>
+  <div class="group-tool">
+    <button nz-button nzType="primary" type="button" (click)="openFileDialog()">
+      <P>uploads</P>
+    </button>
+    <button nz-button nzType="primary" type="button" (click)="clean()" nzDanger>
+      <ts-icon [name]="'clear'"></ts-icon>
+      <P>clear</P>
+    </button>
+  </div>
+  
 </div>
 <div class="drag-drop-container" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
   (drop)="onDrop($event)" (click)="openFolder()">
@@ -13,6 +23,5 @@
       <ts-icon [name]="'close'"></ts-icon>
     </div>
   </div>
-  <!-- <button (click)="uploadImages()" nz-button nzType="primary">Upload Images</button> -->
 </div>
 <input type="file" id="fileInput" style="display: none" (change)="onFileChange($event)" multiple webkitdirectory>
