@@ -7,7 +7,7 @@
     shadow ? 'shadow' : ''
     ]">
         <div class="content">
-            <img [src]="url" alt="Image" />
+            <img [src]="url" alt="Image" draggable="false" />
         </div>
     </div>
 
@@ -16,6 +16,6 @@
 
 <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
     <div class="preview">
-        <img [src]="url" alt="">
+        <img [src]="url" alt="" draggable="false">
     </div>
 </app-open-modal>

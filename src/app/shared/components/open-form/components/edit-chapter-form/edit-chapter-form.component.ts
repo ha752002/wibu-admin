@@ -28,7 +28,7 @@ import { IChapterContent } from '@app/modules/admin/modules/chapter/types/chapte
 export class EditChapterFormComponent implements OnInit ,OnDestroy{
   chapter: ISimpleChapter = {}
   chapterdata?: IChapterContent 
-  img: File[] = []
+  img: string[] = []
   imageUrls: string[] = [];
   @Input() id?: string;
   @Input() storyData?: IStoryInformation
@@ -74,39 +74,13 @@ export class EditChapterFormComponent implements OnInit ,OnDestroy{
       .filter((url): url is string => url !== undefined);
   }
 
-  onImagesSelected(images: File[]) {
-    this.img = images;
+  onImagesSelected(images: string[]) {
+    this.chapter.pages = images;
+    this.change.emit();
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.img.length > 0) {
-      this.uploadImagesAndSubmitChapter();
-    } else {
-      this.submitChapter();
-    }
-  }
-
-  uploadImagesAndSubmitChapter(): void {
-    this.createMessageloading();
-    const formData = new FormData();
-    this.img.forEach(file => {
-      formData.append('files', file, file.name);
-    });
-
-    this.uploadService.uploadImages(formData).subscribe(
-      response => {
-        this.chapter.pages = response.data.map(item => item.url);
-        this.submitChapter();
-      },
-
-      error => {
-        this.createMessage('error')
-      }
-    );
-  }
-
-  submitChapter(): void {
     if (this.id) {
       this.chapterService.updateChapter(this.id, this.chapter).subscribe(
         response => {

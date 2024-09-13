@@ -44,7 +44,7 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
       'https://dtcdnyacd.com/nettruyen/trieu-hoi-den-the-gioi-fantasy/0/15.jpg',
     ],
   }
-  img: File[] = []
+  img: string[] = []
   @Input() storyData?: IStoryInformation;
   @Output() complete = new EventEmitter<void>();
   @Output() change = new EventEmitter<void>();
@@ -63,35 +63,8 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.img.length > 0) {
-      this.uploadImagesAndSubmitChapter();
-    } else {
-      console.error('Error creating chapter:');
-      this.submitChapter();
-    }
-  }
-
-  uploadImagesAndSubmitChapter(): void {
-    this.createMessageloading();
-    const formData = new FormData();
-    this.img.forEach(file => {
-      formData.append('files', file, file.name);
-    });
-
-    this.uploadService.uploadImages(formData).subscribe(
-      response => {
-        this.chapter.pages = response.data.map(item => item.url);
-        this.submitChapter();
-      },
-      error => {
-        this.createMessage('error')
-      }
-    );
-  }
-
-  submitChapter(): void {
     this.chapterService.createChapter(this.chapter).subscribe(
-      response => { 
+      response => {
         this.createMessage('success')
         this.complete.emit();
       },
@@ -108,8 +81,9 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
     return undefined;
   }
 
-  onImagesSelected(images: File[]) {
-    this.img = images;
+  onImagesSelected(images: string[]) {
+    this.chapter.pages = images;
+    this.change.emit();
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {

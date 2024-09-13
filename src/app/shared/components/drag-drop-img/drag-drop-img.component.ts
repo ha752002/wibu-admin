@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
 import { IImage } from '@app/shared/types/image.types';
+import { Subscription } from 'rxjs';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { UploadService } from '@app/shared/services/upload/upload.service';
 
 
 @Component({
@@ -16,28 +19,40 @@ import { IImage } from '@app/shared/types/image.types';
   templateUrl: './drag-drop-img.component.html',
   styleUrl: './drag-drop-img.component.scss'
 })
-export class DragDropImgComponent implements OnInit{
+export class DragDropImgComponent implements OnInit, OnDestroy {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() imgData: string[] = []
 
   @Output() imagesSelected = new EventEmitter<File[]>();
+  @Output() imagesUrl = new EventEmitter<string[]>();
 
   imageFiles: File[] = [];
   imagePreviews: IImage[] = [];
+  imageUrls: string[] = [];
 
- ngOnInit(): void {
-  this.imgData.forEach((url) => {
-    this.imagePreviews.push({ url });
-  });
- } 
+  private subscriptions: Subscription = new Subscription();
+  private messageId: string | null = null;
 
- ngOnChanges(changes: SimpleChanges) {
-  if (changes['imgData']) {
+  constructor(
+    private message: NzMessageService,
+    private uploadService: UploadService,
+  ) { }
+
+  ngOnInit(): void {
     this.imgData.forEach((url) => {
       this.imagePreviews.push({ url });
     });
+    this.imageUrls = this.imgData;
   }
-}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['imgData']) {
+      this.imgData.forEach((url) => {
+        this.imagePreviews.push({ url });
+      });
+      this.imageUrls = this.imgData;
+    }
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -74,7 +89,7 @@ export class DragDropImgComponent implements OnInit{
       }
     }
     Promise.all(promises).then(() => {
-      this.sortAndPreviewImages();
+      this.sortAndUploadImages();
     });
   }
 
@@ -84,6 +99,7 @@ export class DragDropImgComponent implements OnInit{
         item.file((file: File) => {
           if (file.type.startsWith('image/')) {
             this.imageFiles.push(file);
+
           }
           resolve();
         });
@@ -97,15 +113,16 @@ export class DragDropImgComponent implements OnInit{
     });
   }
 
-  removeImage(index: number) {    
+  removeImage(index: number) {
     this.imagePreviews.splice(index, 1);
     this.imageFiles.splice(index, 1);
-    this.sortAndPreviewImages();
   }
 
   openFolder() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    fileInput.click();
+    if(this.imagePreviews.length === 0){
+      const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+      fileInput.click();
+    }
   }
 
   onFileChange(event: Event) {
@@ -122,17 +139,17 @@ export class DragDropImgComponent implements OnInit{
         this.imageFiles.push(file);
       }
     }
-    this.sortAndPreviewImages();
+    this.sortAndUploadImages();
   }
 
-  sortAndPreviewImages() {
+  sortAndUploadImages() {
     this.imageFiles.sort((a, b) => {
       const aName = this.extractNumberFromName(a.name);
       const bName = this.extractNumberFromName(b.name);
       return aName - bName;
     });
-    this.updateImagePreviews();
     this.imagesSelected.emit(this.imageFiles);
+    this.uploadImages()
   }
 
   extractNumberFromName(name: string): number {
@@ -140,18 +157,56 @@ export class DragDropImgComponent implements OnInit{
     return match ? parseInt(match[0], 10) : 0;
   }
 
-  updateImagePreviews() {
-    if(this.imageFiles.length > 0){
-      this.imagePreviews = this.imageFiles.map(file => ({
-        name: file.name,
-        url: URL.createObjectURL(file)
-      }));
-    }
+  uploadImages(): void {
+    this.createMessageloading();
+    const formData = new FormData();
+    this.imageFiles.forEach(file => {
+      formData.append('files', file, file.name);
+    });
+
+    this.uploadService.uploadImages(formData).subscribe(
+      response => {
+        const newImageUrls: string[] = response.data.map(item => item.url);
+        this.imageUrls.push(...newImageUrls);
+
+        this.updateImagePreviews(newImageUrls);
+
+        this.imagesSelected.emit(this.imageFiles);
+        this.imagesUrl.emit(this.imageUrls);
+        this.createMessage('success')
+
+      },
+      error => {
+        this.createMessage('error')
+      }
+    );
   }
 
-  uploadImages() {
-    this.imagesSelected.emit(this.imageFiles);
-    this.imageFiles.forEach(file => {
-    });
+  updateImagePreviews(urls: string[]): void {
+    // Cập nhật danh sách bản xem trước dựa trên URL từ server
+    if (urls.length > 0) {
+      urls.forEach((url, index) => {
+        this.imagePreviews.push({
+          name: this.imgData.length > index ? this.imageFiles[index]?.name : `Image ${index + 1}`,
+          url: url
+        });
+      });
+    }
+  }
+  
+  createMessageloading(): void {
+    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+  }
+
+  createMessage(type: string): void {
+    if (this.messageId) {
+      this.message.remove(this.messageId);
+    }
+    this.message.create(type, `chapter added ${type}`);
+    this.imageFiles = []
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
