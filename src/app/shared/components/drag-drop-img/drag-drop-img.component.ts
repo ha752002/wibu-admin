@@ -88,7 +88,6 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     if (items) {
       this.handleItems(items);
     }
-
   }
 
   handleItems(items: DataTransferItemList) {
@@ -110,8 +109,8 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
         item.file((file: File) => {
           if (file.type.startsWith('image/')) {
             this.imageFiles.push(file);
-
           }
+          
           resolve();
         });
       } else if (item.isDirectory) {
@@ -122,11 +121,6 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  removeImage(index: number) {
-    this.imagePreviews.splice(index, 1);
-    this.imageFiles.splice(index, 1);
   }
 
   openFolder() {
@@ -203,13 +197,6 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     this.updateImageUrls();
   }
 
-  clean() {
-    this.imageFiles = []
-    this.imagePreviews = [];
-    this.imageUrls = [];
-    this.imagesUrl.emit(this.imageUrls);
-  }
-
   onDragStarted(event: any, index: number): void {
     this.draggedIndex = index;
 
@@ -247,6 +234,19 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     this.imageUrls = urls
     this.imagesUrl.emit(this.imageUrls);
 
+  }
+
+  removeImage(index: number) {
+    this.imagePreviews.splice(index, 1);
+    this.imageFiles.splice(index, 1);
+    this.imagesUrl.emit(this.imageUrls);
+  }
+
+  clean() {
+    this.imageFiles = []
+    this.imagePreviews = [];
+    this.imageUrls = [];
+    this.imagesUrl.emit(this.imageUrls);
   }
 
   createMessageloading(): void {
