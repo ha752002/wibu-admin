@@ -83,6 +83,8 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
   onImagesSelected(images: string[]) {
     this.chapter.pages = images;
+    console.log(images);
+    
     this.change.emit();
   }
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { ImgComponent } from '../img/img.component';
 import { IconComponent } from '../icon/icon.component';
 import { IImage } from '@app/shared/types/image.types';
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadService } from '@app/shared/services/upload/upload.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-drag-drop-img',
@@ -16,7 +16,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     CommonModule,
     ImgComponent,
     IconComponent,
-    NzButtonModule
+    NzButtonModule,
+    DragDropModule
   ],
   templateUrl: './drag-drop-img.component.html',
   styleUrl: './drag-drop-img.component.scss'
@@ -25,11 +26,14 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() imgData: string[] = []
   @Output() imagesUrl = new EventEmitter<string[]>();
+  @ViewChildren('itemImg') itemImgs!: QueryList<ElementRef>;
 
+  currentHoveredIndex: number | null = null;
+  draggedIndex: number | null = null;
   imageFiles: File[] = [];
   imagePreviews: IImage[] = [];
   imageUrls: string[] = [];
-
+  loading: boolean = false;
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
 
@@ -69,6 +73,12 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
   }
 
   onDrop(event: DragEvent) {
+    if (this.loading) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     event.preventDefault();
     event.stopPropagation();
     const element = event.target as HTMLElement;
@@ -78,6 +88,7 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     if (items) {
       this.handleItems(items);
     }
+
   }
 
   handleItems(items: DataTransferItemList) {
@@ -126,8 +137,8 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
   }
 
   openFileDialog() {
-      const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-      fileInput.click();
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click();
   }
 
   onFileChange(event: Event) {
@@ -171,13 +182,8 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     this.uploadService.uploadImages(formData).subscribe(
       response => {
         const newImageUrls: string[] = response.data.map(item => item.url);
-        this.imageUrls.push(...newImageUrls);
-
         this.updateImagePreviews(newImageUrls);
-
-        this.imagesUrl.emit(this.imageUrls);
         this.createMessage('success')
-
       },
       error => {
         this.createMessage('error')
@@ -194,7 +200,9 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
         });
       });
     }
+    this.updateImageUrls();
   }
+
   clean() {
     this.imageFiles = []
     this.imagePreviews = [];
@@ -202,14 +210,55 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     this.imagesUrl.emit(this.imageUrls);
   }
 
+  onDragStarted(event: any, index: number): void {
+    this.draggedIndex = index;
+
+  }
+
+  onDragMove(event: any, index: number): void {
+    this.currentHoveredIndex = index;
+  }
+
+  drop(event: CdkDragDrop<IImage[]>): void {
+
+    if (this.currentHoveredIndex !== null && this.draggedIndex !== null &&
+      this.itemImgs && this.itemImgs.length > Math.max(this.draggedIndex, this.currentHoveredIndex) && this.currentHoveredIndex !== this.draggedIndex) {
+
+      const hoveredImgElement = this.itemImgs.toArray()[this.currentHoveredIndex]?.nativeElement;
+
+      if (hoveredImgElement) {
+
+        moveItemInArray(
+          this.imagePreviews,
+          this.draggedIndex,
+          this.currentHoveredIndex);
+        this.imagePreviews = [...this.imagePreviews];
+      }
+    }
+
+    this.currentHoveredIndex = null;
+    this.draggedIndex = null;
+    this.updateImageUrls();
+  }
+
+
+  updateImageUrls(): void {
+    const urls: string[] = this.imagePreviews.map(image => image.url);
+    this.imageUrls = urls
+    this.imagesUrl.emit(this.imageUrls);
+
+  }
+
   createMessageloading(): void {
     this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+    this.loading = true
   }
 
   createMessage(type: string): void {
     if (this.messageId) {
       this.message.remove(this.messageId);
     }
+    this.loading = false
     this.message.create(type, `chapter added ${type}`);
     this.imageFiles = []
   }

@@ -25,8 +25,6 @@ export class StoryListComponent implements OnInit {
   @Input() storyData?: IStoryInformation[] = [];
   @Output() PageChange = new EventEmitter<number>();
 
-  // storys?: IStoryInformation[] = [];
-
   ngOnInit(): void {    
   }
 

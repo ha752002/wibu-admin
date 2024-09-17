@@ -24,9 +24,7 @@ import { ITitle } from '../../type/user.types';
 })
 export class UserProfileComponent {
   @Input() id?: string = '';
-  // storyWriting: IStoryInformation[] = [];
-  // storyPosted: IStoryInformation[] = [];
-  // storyIsFollowing: IStoryInformation[] = [];
+
   storys: IStoryInformation[] = [];
   meta?: Imeta
 
@@ -68,19 +66,6 @@ export class UserProfileComponent {
     this.getStorysByCategory(this.selectedTitle)
   }
 
-  // private updateTitle(): void {
-  //   this.titles = [];
-  //   if (this.storyWriting&& this.storyPosted.length > 0) {
-  //     this.titles.push('story writing');
-  //   }
-  //   if (this.storyPosted && this.storyPosted.length > 0) {
-  //     this.titles.push('Story Posted');
-  //   }
-  //   if (this.storyIsFollowing && this.storyIsFollowing.length > 0) {
-  //     this.titles.push('Story Is Following');
-  //   }
-  // }
-
   getStorysByCategory(target: string): void {
     this.itemFilter.target = target;
     this.itemFilter.value = this.id;
@@ -92,7 +77,6 @@ export class UserProfileComponent {
   }
 
   getStorys(): void {
-    // this.storys = []
     this.subscriptions.add(
       this.storyService.getAllStorys(this.ConfigurationParams).pipe(
         finalize(() => {

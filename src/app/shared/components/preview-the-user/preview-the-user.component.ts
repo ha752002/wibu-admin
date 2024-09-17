@@ -28,11 +28,4 @@ import { EventService } from '@app/modules/admin/services/event/event.service';
 export class PreviewTheUserComponent {
   @Input() user?: IUser;
   @Input() case?: 'user' | 'author';
-
-  // storyWriting: IStoryInformation[] = [];
-  // storyPosted: IStoryInformation[] = [];
-  // storyIsFollowing: IStoryInformation[] = [];
-  // storys: IStoryInformation[] = [];
-
-  
 }
