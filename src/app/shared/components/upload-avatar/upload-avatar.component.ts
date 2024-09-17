@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IPage, IResponseImage } from '@app/shared/types/image.types';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -37,6 +37,12 @@ export class UploadAvatarComponent implements OnInit {
   ngOnInit(): void {
     if (this.img) {
       this.avatarUrl.data.url = this.img;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['img'] && changes['img'].currentValue) {
+      this.avatarUrl.data.url = changes['img'].currentValue;
     }
   }
 

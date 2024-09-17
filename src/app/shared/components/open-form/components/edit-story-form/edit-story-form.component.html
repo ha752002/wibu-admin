@@ -3,7 +3,7 @@
 
 <form nz-form (ngSubmit)="onSubmit($event)">
     <div class="upload-img">
-        <app-upload-avatar (avatarUrlChange)="receiveThumbnail($event)" size="size-l" [img]="img"></app-upload-avatar>
+        <app-upload-avatar (avatarUrlChange)="receiveThumbnail($event)" size="size-l" [img]="story.thumbnailUrl"></app-upload-avatar>
 
         <div class="url-img">
             <p>Url image :</p>

@@ -7,12 +7,10 @@
     overflow-y: auto;
     height: 84vh;
 
-    .name-chapter {
+    .title {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: large;
-        font-weight: 500;
         background-color: white;
         padding: 6px 24px;
         border-radius: 4px;
@@ -21,12 +19,17 @@
         top: 0px;
         z-index: 10;
 
+        .name-chapter {
+            font-size: large;
+            font-weight: 500;
+        }
+
         .next-chapter {
             display: flex;
             gap: 24px;
-
         }
     }
+
 
     .image-container {
         padding: 0px 420px;

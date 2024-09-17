@@ -38,7 +38,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class EditStoryFormComponent implements OnInit, OnDestroy {
   @Input() id?: string;
-  @Input() img?: string;
   @Output() complete = new EventEmitter<void>();
   @Output() change = new EventEmitter<void>();
 
