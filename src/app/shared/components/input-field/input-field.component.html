@@ -15,16 +15,14 @@
         [required]="required">
     </textarea>
 
-    <div *ngIf="optionValue != null && type !== 'textarea'" class="group-select">
-        <nz-select *ngIf="!multiple" nzShowSearch nzAllowClear [nzPlaceHolder]="placeholder" [(ngModel)]="value"
-            (ngModelChange)="valueChange.emit($event)" class="select">
+    <div *ngIf="optionValue != null && type !== 'radio'" class="group-select">
+        <nz-select [(ngModel)]="value" [nzPlaceHolder]="placeholder" (ngModelChange)="valueChange.emit($event)"
+            [nzMode]="multiple ? 'multiple' : 'default'" class="select" nzAllowClear >
             <nz-option *ngFor="let Value of optionValue" [nzLabel]="Value" [nzValue]="Value"></nz-option>
-        </nz-select>
-
-        <nz-select *ngIf="multiple" [(ngModel)]="value" [nzMode]="'multiple'" [nzPlaceHolder]="placeholder"
-            (ngModelChange)="valueChange.emit($event)" class="multiple-select">
-            <nz-option *ngFor="let Value of optionValue" [nzValue]="Value" [nzLabel]="Value"></nz-option>
         </nz-select>
     </div>
 
+    <nz-radio-group class="radio" *ngIf="optionValue != null && type === 'radio'" [(ngModel)]="value" (ngModelChange)="valueChange.emit($event)">
+        <label *ngFor="let Value of optionValue" nz-radio [nzValue]="Value">{{Value}}</label>
+    </nz-radio-group>
 </div>

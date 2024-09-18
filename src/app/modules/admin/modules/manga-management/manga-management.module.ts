@@ -16,6 +16,7 @@ import { StoryListComponent } from '@app/shared/components/story-list/story-list
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { GenreSelectorComponent } from '@app/shared/components/genre-selector/genre-selector.component';
 import { TitlePageComponent } from '@app/shared/components/title-page/title-page.component';
+import { InstallationFormComponent } from '@app/shared/components/installation-form/installation-form.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { TitlePageComponent } from '@app/shared/components/title-page/title-page
     NzPaginationModule,
     OpenModalComponent,
     GenreSelectorComponent,
-    TitlePageComponent
+    TitlePageComponent,
+    InstallationFormComponent
   ]
 })
 export class MangaManagementModule {

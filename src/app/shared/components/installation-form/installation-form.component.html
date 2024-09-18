@@ -1,0 +1,29 @@
+<div class="installation">
+    <p class="title">setting</p>
+    <div class="basic">
+        <app-input-field label="Page Size" [value]="installation.pageSize" type="number"
+            (valueChange)="onFieldValueChange('pageSize', $event)" [required]="true">
+        </app-input-field>
+        <app-input-field [value]="installation.pageSize" type="radio" 
+            (valueChange)="onFieldValueChange('pageSize', $event)" [optionValue]="[24,48,72,96]">
+        </app-input-field>
+
+        <app-input-field label="Sort Type" [value]="installation.sortType" type="text" placeholder="select sort type"
+            (valueChange)="onFieldValueChange('sortType', $event)"
+            [optionValue]="['ascending', 'descending', 'alphabetical', 'date', 'popularity']">
+        </app-input-field>
+
+        <app-input-field label="Sort By" [value]="installation.sortBy" type="text" placeholder="select sort by"
+            (valueChange)="onFieldValueChange('sortBy', $event)"
+            [optionValue]="['name', 'date', 'rating', 'popularity']">
+        </app-input-field>
+
+        <app-input-field label="View Type" [value]="viewType" type="text"
+            (valueChange)="changeViewType($event)" [optionValue]="['grid', 'table']">
+        </app-input-field>
+
+        <app-input-field label="Row Size" [value]="rowSize" type="radio"
+            (valueChange)="changeRowSize($event)" [optionValue]="[1,2,3,4,5]">
+        </app-input-field>
+    </div>
+</div>

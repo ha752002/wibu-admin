@@ -19,11 +19,13 @@ export type viewType = 'grid' | 'table';
   styleUrl: './story-list.component.scss'
 })
 export class StoryListComponent implements OnInit {
-  @Input() rowSize: 3 | 4 | 5 = 3;
+  @Input() rowSize: number = 3;
   @Input() meta?: Imeta;
   @Input() viewType: viewType = 'grid';
   @Input() storyData?: IStoryInformation[] = [];
   @Output() PageChange = new EventEmitter<number>();
+
+  // storys?: IStoryInformation[] = [];
 
   ngOnInit(): void {    
   }

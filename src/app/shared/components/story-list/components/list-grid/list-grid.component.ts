@@ -25,7 +25,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 export class ListGridComponent {
   @Input() storyData?: IStoryInformation[] = [];
   @Input() meta?: Imeta;
-  @Input() rowSize: 3 | 4 | 5 = 3;
+  @Input() rowSize: number = 3;
   @Output() PageChange = new EventEmitter<number>();
 
   previewVisible = false;

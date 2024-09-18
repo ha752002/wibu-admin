@@ -42,9 +42,11 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   meta?: Imeta;
   genreNames: string[] = [];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
-  viewType: viewType = "grid"
+  viewType: viewType = 'grid';
+  rowSize: number = 3;
   multiGenreMode: boolean = false;
-  previewVisible = false;
+  genreSelector = false;
+  installation = false;
   storys: IStoryInformation[] = [];
 
   genres: IGenre[] = [];
@@ -62,8 +64,11 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.eventSubscription = this.eventService.event$.subscribe(() => {
       this.getAllGenres();
+      this.loadConfigParams();
     });
-    this.getAllGenres();
+    this.getAllGenres();    
+    this.loadConfigParams();
+
   }
 
   getAllGenres(): void {
@@ -88,6 +93,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
   getAllStorys(): void {
     this.storys = []
+
     this.subscriptions.add(
       this.storyService.getAllStorys(this.ConfigurationParams).pipe(
         finalize(() => {
@@ -96,6 +102,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
         response => {
           this.storys = response.data;
           this.meta = response.meta;
+
         },
         error => {
           console.error('Error loading storys', error);
@@ -143,6 +150,29 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     }
   }
 
+  loadConfigParams(): void {
+    const storedConfig = localStorage.getItem('configParams');
+    const storedViewType = localStorage.getItem('viewType');
+
+    this.rowSize = Number(localStorage.getItem('rowSize')) || 3;
+    if (storedViewType) {
+      this.viewType = JSON.parse(storedViewType) as viewType;
+    }
+    
+    if (storedConfig) {
+      const configQueryParams: IQueryParams = JSON.parse(storedConfig);
+      console.log(configQueryParams);
+      
+      this.applyConfig(configQueryParams);
+    }
+  }
+
+
+ applyConfig(config: IQueryParams): void {
+    this.ConfigurationParams.pageSize = config.pageSize;
+    this.ConfigurationParams.sortType = config.sortType;
+    this.ConfigurationParams.sortBy = config.sortBy;
+  }
   onFieldValueChange(target: string, value: string | number | Date | undefined): void {
     const stringValue = value ? value.toString() : '';
 
@@ -165,8 +195,12 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.onfiltersChange()
   }
 
-  handleVisible(value: boolean) {
-    this.previewVisible = value;
+  handleGenreSelector(value: boolean) {
+    this.genreSelector = value;
+  }
+
+  handleInstallation(value: boolean) {
+    this.installation = value;
   }
 
   multiGenreFilter(genres: IGenre[]) {
@@ -190,14 +224,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   onPageChange(page: number): void {
     this.ConfigurationParams.pageNumber = page;
     this.getAllStorys()
-  }
-
-  changeViewType(view: viewType) {
-    if (view === 'table') {
-      this.viewType = 'grid'
-    } else {
-      this.viewType = 'table'
-    }
   }
 
   ngOnDestroy() {
