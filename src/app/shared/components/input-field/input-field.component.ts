@@ -22,7 +22,8 @@ export class InputFieldComponent implements OnInit {
   @Input() value: string | number | Date | EUserRole[] | undefined;
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
-  @Input() optionValue?: any[];
+  @Input() optionValues?: any[];
+  @Input() labelValue?: any[];
   @Input() multiple?: boolean;
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 

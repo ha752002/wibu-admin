@@ -5,10 +5,10 @@
         <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
         
         <app-input-field [(value)]="valuefilters.genre" type="password" (valueChange)="onFieldValueChange('genre', $event)"
-        placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">
+        placeholder="select genre"  [optionValues]="genreNames" *ngIf="multiGenreMode != true">
         </app-input-field>
         <app-input-field [(value)]="valuefilters.status" type="text" (valueChange)="onFieldValueChange('Status', $event)"
-        placeholder="select Status" [optionValue]="teamList" *ngIf="multiGenreMode != true">
+        placeholder="select Status" [optionValues]="teamList" *ngIf="multiGenreMode != true">
         </app-input-field>
         <app-input-field [(value)]="valuefilters.title" type="text" (valueChange)="onFieldValueChange('title', $event)"
             placeholder="search" *ngIf="multiGenreMode != true">

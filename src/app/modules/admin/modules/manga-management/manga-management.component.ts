@@ -153,10 +153,14 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   loadConfigParams(): void {
     const storedConfig = localStorage.getItem('configParams');
     const storedViewType = localStorage.getItem('viewType');
+    const storedOperation = localStorage.getItem('operation');
 
     this.rowSize = Number(localStorage.getItem('rowSize')) || 3;
     if (storedViewType) {
       this.viewType = JSON.parse(storedViewType) as viewType;
+    }
+    if (storedOperation) {
+      this.itemFilter.operation = JSON.parse(storedOperation) as EFilterOperation;
     }
     
     if (storedConfig) {

@@ -1,7 +1,7 @@
 <div class="input-field">
     <label>{{label}} <p *ngIf="required === true">*</p></label>
     <nz-input-group [nzSuffix]="type === 'password' ? suffixTemplate : undefined"
-        *ngIf="optionValue == null && type !== 'textarea'">
+        *ngIf="optionValues == null && type !== 'textarea'">
         <input nz-input [type]="passwordVisible ? 'text' : type  " [(ngModel)]="value"
             (ngModelChange)="valueChange.emit($event)" [required]="required" [placeholder]="placeholder">
         <ng-template #suffixTemplate>
@@ -10,19 +10,21 @@
         </ng-template>
     </nz-input-group>
 
-    <textarea *ngIf="optionValue == null && type === 'textarea'" nz-input [placeholder]="placeholder"
+    <textarea *ngIf="optionValues == null && type === 'textarea'" nz-input [placeholder]="placeholder"
         [nzAutosize]="{ minRows: 6, maxRows: 6 }" [(ngModel)]="value" (ngModelChange)="valueChange.emit($event)"
         [required]="required">
     </textarea>
 
-    <div *ngIf="optionValue != null && type !== 'radio'" class="group-select">
+    <div *ngIf="optionValues != null && type !== 'radio'" class="group-select">
         <nz-select [(ngModel)]="value" [nzPlaceHolder]="placeholder" (ngModelChange)="valueChange.emit($event)"
-            [nzMode]="multiple ? 'multiple' : 'default'" class="select" nzAllowClear >
-            <nz-option *ngFor="let Value of optionValue" [nzLabel]="Value" [nzValue]="Value"></nz-option>
+            [nzMode]="multiple ? 'multiple' : 'default'" class="select" nzAllowClear>
+            <nz-option *ngFor="let optionValue of optionValues ,  let i = index" [nzLabel]="labelValue?.[i] || optionValue"
+                [nzValue]="optionValue"></nz-option>
         </nz-select>
     </div>
 
-    <nz-radio-group class="radio" *ngIf="optionValue != null && type === 'radio'" [(ngModel)]="value" (ngModelChange)="valueChange.emit($event)">
-        <label *ngFor="let Value of optionValue" nz-radio [nzValue]="Value">{{Value}}</label>
+    <nz-radio-group class="radio" *ngIf="optionValues != null && type === 'radio'" [(ngModel)]="value"
+        (ngModelChange)="valueChange.emit($event)">
+        <label *ngFor="let optionValue of optionValues,  let i = index" nz-radio  [nzValue]="optionValue">{{labelValue?.[i] || optionValue}}</label>
     </nz-radio-group>
 </div>

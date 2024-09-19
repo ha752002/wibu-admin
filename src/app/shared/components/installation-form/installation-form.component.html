@@ -5,25 +5,30 @@
             (valueChange)="onFieldValueChange('pageSize', $event)" [required]="true">
         </app-input-field>
         <app-input-field [value]="installation.pageSize" type="radio" 
-            (valueChange)="onFieldValueChange('pageSize', $event)" [optionValue]="[24,48,72,96]">
+            (valueChange)="onFieldValueChange('pageSize', $event)" [optionValues]="[24,48,72,96]">
         </app-input-field>
 
         <app-input-field label="Sort Type" [value]="installation.sortType" type="text" placeholder="select sort type"
             (valueChange)="onFieldValueChange('sortType', $event)"
-            [optionValue]="['ascending', 'descending', 'alphabetical', 'date', 'popularity']">
+            [optionValues]="sortTypeOptions">
         </app-input-field>
 
         <app-input-field label="Sort By" [value]="installation.sortBy" type="text" placeholder="select sort by"
             (valueChange)="onFieldValueChange('sortBy', $event)"
-            [optionValue]="['name', 'date', 'rating', 'popularity']">
+            [optionValues]="sortByOptions">
+        </app-input-field>
+
+        <app-input-field label="operation" [value]="operation" type="text" placeholder="select operation"
+            (valueChange)="changeOperation($event)"
+            [optionValues]="operations">
         </app-input-field>
 
         <app-input-field label="View Type" [value]="viewType" type="text"
-            (valueChange)="changeViewType($event)" [optionValue]="['grid', 'table']">
+            (valueChange)="changeViewType($event)" [optionValues]="viewTypeOptions">
         </app-input-field>
 
         <app-input-field label="Row Size" [value]="rowSize" type="radio"
-            (valueChange)="changeRowSize($event)" [optionValue]="[1,2,3,4,5]">
+            (valueChange)="changeRowSize($event)" [optionValues]="rowSizeOptions" [labelValue]="LabelRowSizeOptions">
         </app-input-field>
     </div>
 </div>

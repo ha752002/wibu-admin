@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { InputFieldComponent } from '../input-field/input-field.component';
-import { IInstallation } from '@app/shared/types/Installation.type';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { viewType } from '../story-list/story-list.component';
 import { EventService } from '@app/modules/admin/services/event/event.service';
+import { IInstallation } from '@app/shared/types/installation.type';
+import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { ERowSizeOptions, ESortByOptions, ESortTypeOptions, EViewTypeOptions } from '@app/core/enums/options.enums';
 
 @Component({
   standalone: true,
@@ -18,51 +20,44 @@ import { EventService } from '@app/modules/admin/services/event/event.service';
   templateUrl: './installation-form.component.html',
   styleUrl: './installation-form.component.scss'
 })
-export class InstallationFormComponent implements OnInit{
+export class InstallationFormComponent implements OnInit {
 
   installation: IInstallation = {
-    pageNumber: 24,
-    pageSize:24,
-    sortBy:'date',
-    sortType:'alphabetical',
+    pageSize: 24,
   };
   rowSize: number = 3;
-  viewType?: viewType;
+  operation: EFilterOperation = EFilterOperation.EQUAL
+  viewType?: EViewTypeOptions = EViewTypeOptions.Grid;
 
+  operations: string[] = Object.values(EFilterOperation);
+  sortTypeOptions: string[] = Object.values(ESortTypeOptions);
+  sortByOptions: string[] = Object.values(ESortByOptions);
+  viewTypeOptions: string[] = Object.values(EViewTypeOptions);
+  rowSizeOptions: number[] = Object.values(ERowSizeOptions).filter(value => typeof value === 'number') as number[];
+  LabelRowSizeOptions: number[] = [12, 8, 6, 4]
 
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
     this.loadConfigParams();
+    console.log(this.operations);
 
   }
 
   loadConfigParams(): void {
+    this.rowSize = this.getStoredValue('rowSize', Number, this.rowSize);
+    this.viewType = this.getStoredValue('viewType', JSON.parse, this.viewType) as EViewTypeOptions;
+    this.installation = this.getStoredValue('configParams', JSON.parse, this.installation);
+    this.operation = this.getStoredValue('operation', JSON.parse, this.operation) as EFilterOperation;
 
-    const storedConfig = localStorage.getItem('configParams');
-    const storedRowSize = localStorage.getItem('rowSize');
-    const storedViewType = localStorage.getItem('viewType');
-
-    if (storedRowSize) {
-      this.rowSize = Number(storedRowSize);
-    }
-
-    if (storedViewType) {
-      this.viewType = JSON.parse(storedViewType) as viewType;
-    }
-    
-    if (storedConfig) {
-      this.installation = JSON.parse(storedConfig);
-    }
-
-    if(!storedConfig && !storedViewType && !storedRowSize){
+    if (!localStorage.getItem('configParams') && !localStorage.getItem('viewType') && !localStorage.getItem('rowSize')) {
       localStorage.setItem('configParams', JSON.stringify(this.installation));
-
     }
-    // console.log(this.installation);
-    console.log(this.viewType);
-    console.log(this.rowSize);
-    
+  }
+
+  getStoredValue(key: string, parser: Function, defaultValue: any): any {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? parser(storedValue) : defaultValue;
   }
 
   onFieldValueChange(field: string, value: any): void {
@@ -71,16 +66,23 @@ export class InstallationFormComponent implements OnInit{
     this.eventService.emitEvent();
   }
 
-  changeViewType(value: any) {
-    this.viewType = value ?? '';
-    localStorage.setItem('viewType', JSON.stringify(this.viewType));
+  updateConfig(key: string, value: any): void {
+    const updatedValue = value ?? '';
+    localStorage.setItem(key, JSON.stringify(updatedValue));
     this.eventService.emitEvent();
   }
 
-  changeRowSize(value: any) {
-    this.rowSize = value ?? '';;
-    localStorage.setItem('rowSize', JSON.stringify(this.rowSize));
-    this.eventService.emitEvent();
+  changeViewType(value: any) {
+    this.updateConfig('viewType', value);
   }
+
+  changeRowSize(value: any) {
+    this.updateConfig('rowSize', value);
+  }
+
+  changeOperation(value: any) {
+    this.updateConfig('operation', value);
+  }
+
 
 }
