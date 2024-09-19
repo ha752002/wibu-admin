@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { viewType } from '@app/shared/components/story-list/story-list.component';
 import { ActivatedRoute } from '@angular/router';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 import { Subscription } from 'rxjs';
@@ -12,6 +11,7 @@ import { IValueFilter } from './type/manga-Filter.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { IFilter, Imeta } from '../../types/meta.type';
 import { IQueryParams } from '../../types/query-params.type';
+import { EViewTypeOptions } from '@app/core/enums/options.enums';
 
 @Component({
   selector: 'app-manga-management',
@@ -42,7 +42,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   meta?: Imeta;
   genreNames: string[] = [];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
-  viewType: viewType = 'grid';
+  viewType: EViewTypeOptions = EViewTypeOptions.Grid;
   rowSize: number = 3;
   multiGenreMode: boolean = false;
   genreSelector = false;
@@ -62,13 +62,13 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.eventSubscription = this.eventService.event$.subscribe(() => {
-      this.getAllGenres();
-      this.loadConfigParams();
-    });
-    this.getAllGenres();    
+    this.eventSubscription = this.eventService.event$.subscribe(() => this.initializeData());
+    this.initializeData();
+  }
+  
+  private initializeData(): void {
+    this.getAllGenres();
     this.loadConfigParams();
-
   }
 
   getAllGenres(): void {
@@ -157,7 +157,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
     this.rowSize = Number(localStorage.getItem('rowSize')) || 3;
     if (storedViewType) {
-      this.viewType = JSON.parse(storedViewType) as viewType;
+      this.viewType = JSON.parse(storedViewType) as EViewTypeOptions;
     }
     if (storedOperation) {
       this.itemFilter.operation = JSON.parse(storedOperation) as EFilterOperation;

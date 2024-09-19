@@ -10,6 +10,7 @@ import { StoryService } from '@app/shared/services/story/story.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { finalize, Subscription } from 'rxjs';
 import { ITitle } from '../../type/user.types';
+import { EViewTypeOptions } from '@app/core/enums/options.enums';
 
 @Component({
   standalone: true,
@@ -34,7 +35,7 @@ export class UserProfileComponent {
     { title: 'Story Is Following', titleValue: 'user', },
   ]
   selectedTitle: string = 'story writing';
-
+  viewType = EViewTypeOptions;
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
 

@@ -25,6 +25,6 @@
 
     <nz-radio-group class="radio" *ngIf="optionValues != null && type === 'radio'" [(ngModel)]="value"
         (ngModelChange)="valueChange.emit($event)">
-        <label *ngFor="let optionValue of optionValues,  let i = index" nz-radio  [nzValue]="optionValue">{{labelValue?.[i] || optionValue}}</label>
+        <label nz-radio-button *ngFor="let optionValue of optionValues,  let i = index" nz-radio  [nzValue]="optionValue">{{labelValue?.[i] || optionValue}}</label>
     </nz-radio-group>
 </div>

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { InputFieldComponent } from '../input-field/input-field.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { viewType } from '../story-list/story-list.component';
 import { EventService } from '@app/modules/admin/services/event/event.service';
 import { IInstallation } from '@app/shared/types/installation.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
@@ -24,6 +23,8 @@ export class InstallationFormComponent implements OnInit {
 
   installation: IInstallation = {
     pageSize: 24,
+    sortBy: ESortByOptions.Update,
+    sortType: ESortTypeOptions.ASC
   };
   rowSize: number = 3;
   operation: EFilterOperation = EFilterOperation.EQUAL
@@ -40,8 +41,6 @@ export class InstallationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadConfigParams();
-    console.log(this.operations);
-
   }
 
   loadConfigParams(): void {

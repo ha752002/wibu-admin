@@ -4,8 +4,8 @@ import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
 import { Imeta } from '@app/modules/admin/types/meta.type';
 import { IStoryInformation } from '@app/modules/admin/modules/manga-management/type/manga.type';
+import { EViewTypeOptions } from '@app/core/enums/options.enums';
 
-export type viewType = 'grid' | 'table';
 
 @Component({
   selector: 'app-story-list',
@@ -21,7 +21,7 @@ export type viewType = 'grid' | 'table';
 export class StoryListComponent implements OnInit {
   @Input() rowSize: number = 3;
   @Input() meta?: Imeta;
-  @Input() viewType: viewType = 'grid';
+  @Input() viewType: EViewTypeOptions = EViewTypeOptions.Grid;
   @Input() storyData?: IStoryInformation[] = [];
   @Output() PageChange = new EventEmitter<number>();
 

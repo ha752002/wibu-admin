@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="content">
-        <app-story-list [viewType]="'grid'" [storyData]="storys" [meta]="meta" (PageChange)="onPageChange($event)">
+        <app-story-list [viewType]="viewType.Grid" [storyData]="storys" [meta]="meta" (PageChange)="onPageChange($event)">
 
         </app-story-list>
     </div>
