@@ -23,7 +23,7 @@ export class InstallationFormComponent implements OnInit {
 
   installation: IInstallation = {
     pageSize: 24,
-    sortBy: ESortByOptions.Update,
+    sortBy: ESortByOptions.Views,
     sortType: ESortTypeOptions.ASC
   };
   rowSize: number = 3;

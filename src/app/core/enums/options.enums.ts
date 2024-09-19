@@ -12,11 +12,9 @@ export enum ESortTypeOptions {
 }
 
 export enum ESortByOptions {
-    Name = 'name',
-    Update = 'update',
-    Date = 'date',
-    Rating = 'rating',
-    Popularity = 'popularity'
+    Title = 'title',
+    Views = 'views',
+    CreatedDate = 'createdDate',
 }
 
 export enum EViewTypeOptions {

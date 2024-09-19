@@ -92,8 +92,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   }
 
   getAllStorys(): void {
-    this.storys = []
-
     this.subscriptions.add(
       this.storyService.getAllStorys(this.ConfigurationParams).pipe(
         finalize(() => {
@@ -116,7 +114,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
       const genreParam = params['genreId'];
       if (genreParam) {
         const parsedGenres = JSON.parse(genreParam);
-        console.log(parsedGenres);
         this.multiGenreFilter(
           this.genres.filter(genre => genre.id !== undefined && parsedGenres.includes(genre.id))
         )

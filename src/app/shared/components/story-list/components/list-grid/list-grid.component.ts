@@ -31,6 +31,10 @@ export class ListGridComponent {
   previewVisible = false;
   selectedStory?: IStoryInformation ;
 
+  trackByPageItem(index: number, item: IStoryInformation): string {
+    return item.id;
+  }
+  
   onPageChange(page: number): void {
     this.PageChange.emit(page);
   }
