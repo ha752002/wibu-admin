@@ -45,12 +45,10 @@ export class UserProfileComponent {
     target: ''
   };
 
-  ConfigurationParams: IQueryParams = {
+  configurationParams: IQueryParams = {
     pageNumber: 1,
     pageSize: 8,
     filterRules: '',
-    sortType: '',
-    sortBy: ''
   }
 
   constructor(
@@ -72,14 +70,14 @@ export class UserProfileComponent {
     this.itemFilter.value = this.id;
     const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
 
-    this.ConfigurationParams.filterRules = encodedData;
+    this.configurationParams.filterRules = encodedData;
 
     this.getStorys();
   }
 
   getStorys(): void {
     this.subscriptions.add(
-      this.storyService.getAllStorys(this.ConfigurationParams).pipe(
+      this.storyService.getAllStorys(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
@@ -95,7 +93,7 @@ export class UserProfileComponent {
   }
 
   onPageChange(page: number): void {
-    this.ConfigurationParams.pageNumber = page;
+    this.configurationParams.pageNumber = page;
     this.getStorys()
   }
 

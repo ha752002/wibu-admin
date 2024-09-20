@@ -15,7 +15,7 @@
                 <p *ngIf="selectMode == false">selection off</p>
             </button>
             <app-open-form [formName]="'add genre'"></app-open-form>
-            <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
+            <app-input-field [(value)]="itemFilter.value" type="text" (valueChange)="onFieldValueChange('title', $event)"
                 placeholder="search">
             </app-input-field>
         </div>
@@ -33,7 +33,7 @@
 
                 </div>
                 <div class="content">
-                    <strong (click)="navigateToMangaWithId(genre.title)">{{ genre.title }}</strong>
+                    <strong (click)="navigateToMangaWithId(genre.id)">{{ genre.title }}</strong>
                     <p>{{ genre.description }}</p>
                 </div>
             </div>

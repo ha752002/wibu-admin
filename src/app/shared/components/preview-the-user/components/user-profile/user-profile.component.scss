@@ -32,3 +32,14 @@
         }
     }
 }
+
+:host {
+    ::ng-deep {
+      nz-list.ant-list.ant-list-split {
+  
+        .ant-list-item {
+          padding: 0px 0px;
+        }
+      }
+    }
+  }

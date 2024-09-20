@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiCallerService } from '@app/core/services/api-caller.service';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
 import { IGenre, IGenres } from '@app/shared/components/open-form/types/genre.type';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,7 @@ export class GenreService {
 
   constructor(private apiCallerService: ApiCallerService) { }
 
-  getAllGenres(): Observable<IGenres> {
-    return this.apiCallerService.get<null, IGenres>(this.apiGetAllUrl);
+  getAllGenres(params?: IQueryParams): Observable<IGenres> {
+    return this.apiCallerService.get<IQueryParams, IGenres>(this.apiGetAllUrl,params);
   }
 }

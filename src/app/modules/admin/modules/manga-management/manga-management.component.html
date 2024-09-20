@@ -5,7 +5,7 @@
         <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
         
         <app-input-field [(value)]="valuefilters.genre" type="password" (valueChange)="onFieldValueChange('genre', $event)"
-        placeholder="select genre"  [optionValues]="genreNames" *ngIf="multiGenreMode != true">
+        placeholder="select genre"  [optionValues]="genreIds"  [labelValues]="genreNames"*ngIf="multiGenreMode != true">
         </app-input-field>
         <app-input-field [(value)]="valuefilters.status" type="text" (valueChange)="onFieldValueChange('Status', $event)"
         placeholder="select Status" [optionValues]="teamList" *ngIf="multiGenreMode != true">

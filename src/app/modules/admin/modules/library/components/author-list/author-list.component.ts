@@ -8,6 +8,7 @@ import { EventService } from '@app/modules/admin/services/event/event.service';
 import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { IQueryParams } from '@app/modules/admin/types/query-params.type';
+import { ConfigurationService } from '@app/modules/admin/services/configuration-params/configuration.service';
 
 @Component({
   selector: 'app-author-list',
@@ -22,13 +23,7 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   // defaultavatarUrl: string = 'assets/img/eyes.png';
   authors: IAuthor[] = [];
   meta?: Imeta;
-  ConfigurationParams: IQueryParams = {
-    pageNumber: 1,
-    pageSize: 2,
-    filterRules: '',
-    sortType: '',
-    sortBy: ''
-  }
+  configurationParams: IQueryParams = {}
 
   itemFilter: IFilter = {
     value: '',
@@ -38,7 +33,9 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private eventService: EventService,
-    private authorService: AuthorService
+    private authorService: AuthorService,
+    private configService: ConfigurationService,
+
   ) { }
 
   ngOnInit(): void {
@@ -46,11 +43,13 @@ export class AuthorListComponent implements OnInit, OnDestroy {
       this.getAllAuthors();
     });
     this.getAllAuthors()
+
   }
 
   getAllAuthors(): void {
+    this.configurationParams = this.configService.getConfigurationParams();
     this.subscriptions.add(
-      this.authorService.getAllAuthors(this.ConfigurationParams).pipe(
+      this.authorService.getAllAuthors(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
@@ -69,7 +68,7 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(page: number): void {
-    this.ConfigurationParams.pageNumber = page;
+    this.configurationParams.pageNumber = page;
     this.getAllAuthors()
   }
 
@@ -84,7 +83,7 @@ export class AuthorListComponent implements OnInit, OnDestroy {
 
   onfiltersChange(): void {
     const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
-    this.ConfigurationParams.filterRules = encodedData
+    this.configurationParams.filterRules = encodedData
     this.getAllAuthors()
   }
 

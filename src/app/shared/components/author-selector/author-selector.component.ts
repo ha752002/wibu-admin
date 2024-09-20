@@ -12,6 +12,7 @@ import { OpenFormComponent } from '../open-form/open-form.component';
 import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { IQueryParams } from '@app/modules/admin/types/query-params.type';
+import { ConfigurationService } from '@app/modules/admin/services/configuration-params/configuration.service';
 
 @Component({
   standalone: true,
@@ -36,23 +37,21 @@ export class AuthorSelectorComponent {
   authors: IAuthor[] = []
   selectedAuthors: IAuthor[] = [];
   meta?: Imeta;
-  ConfigurationParams: IQueryParams = {
-    pageNumber: 1,
-    pageSize: 8,
-    filterRules: '',
-    sortType: '',
-    sortBy: ''
-  }
+  configurationParams: IQueryParams = {}
 
   itemFilter: IFilter = {
     value: '',
     operation: EFilterOperation.MATCH,
     target: ''
   };
-  constructor(private authorService: AuthorService) { }
+  constructor(
+    private authorService: AuthorService,
+    private configService: ConfigurationService
+  ) { }
 
   ngOnInit(): void {
     this.getAllAuthors()
+    this.configurationParams = this.configService.getConfigurationParams();
 
     if (this.inAuthorsSelected) {
       this.selectedAuthors = this.inAuthorsSelected
@@ -61,7 +60,7 @@ export class AuthorSelectorComponent {
 
   getAllAuthors(): void {
     this.subscriptions.add(
-      this.authorService.getAllAuthors(this.ConfigurationParams).pipe(
+      this.authorService.getAllAuthors(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
@@ -100,7 +99,7 @@ export class AuthorSelectorComponent {
   }
 
   onPageChange(page: number): void {
-    this.ConfigurationParams.pageNumber = page;
+    this.configurationParams.pageNumber = page;
     this.getAllAuthors();
   }
 
@@ -113,7 +112,7 @@ export class AuthorSelectorComponent {
 
   onfiltersChange(): void {
     const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
-    this.ConfigurationParams.filterRules = encodedData
+    this.configurationParams.filterRules = encodedData
     this.getAllAuthors()
   }
 

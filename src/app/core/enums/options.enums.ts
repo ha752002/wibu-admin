@@ -23,8 +23,8 @@ export enum EViewTypeOptions {
 }
 
 export enum ERowSizeOptions {
-    Two = 2,
-    Three = 3,
-    Four = 4,
-    Five = 5
+    XL = 2,
+    L = 3,
+    M = 4,
+    S = 5
 }

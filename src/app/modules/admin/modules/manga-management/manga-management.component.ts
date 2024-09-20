@@ -12,6 +12,7 @@ import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { IFilter, Imeta } from '../../types/meta.type';
 import { IQueryParams } from '../../types/query-params.type';
 import { EViewTypeOptions } from '@app/core/enums/options.enums';
+import { ConfigurationService } from '../../services/configuration-params/configuration.service';
 
 @Component({
   selector: 'app-manga-management',
@@ -31,24 +32,20 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
   valuefilters: IValueFilter = {}
 
-  ConfigurationParams: IQueryParams = {
-    pageNumber: 1,
-    pageSize: 16,
-    filterRules: '',
-    sortType: '',
-    sortBy: ''
-  }
-
-  meta?: Imeta;
   genreNames: string[] = [];
+  genreIds: string[] = [];
   teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
+
+  configurationParams: IQueryParams = {}
   viewType: EViewTypeOptions = EViewTypeOptions.Grid;
   rowSize: number = 3;
+  meta?: Imeta;
+
   multiGenreMode: boolean = false;
   genreSelector = false;
   installation = false;
-  storys: IStoryInformation[] = [];
 
+  storys: IStoryInformation[] = [];
   genres: IGenre[] = [];
 
   selectedGenres: IGenre[] = [];
@@ -58,12 +55,14 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private eventService: EventService,
     private genreService: GenreService,
-    private storyService: StoryService
+    private storyService: StoryService,
+    private configService: ConfigurationService,
   ) { }
 
   ngOnInit(): void {
     this.eventSubscription = this.eventService.event$.subscribe(() => this.initializeData());
     this.initializeData();
+    this.getParamsGenreId();
   }
   
   private initializeData(): void {
@@ -75,25 +74,25 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
         finalize(() => {
-          this.getParamsGenreId();
         })
       ).subscribe(
         response => {
           this.genres = response.data;
           this.genreNames = this.genres.map(g => g.title);
+          this.genreIds = this.genres.map(g => g.id);
           this.getAllStorys();
         },
         error => {
           console.error('Error loading genres', error);
-          this.genreNames = this.genres.map(g => g.title);
         }
       )
     );
   }
 
   getAllStorys(): void {
+    this.storys = [];
     this.subscriptions.add(
-      this.storyService.getAllStorys(this.ConfigurationParams).pipe(
+      this.storyService.getAllStorys(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
@@ -166,13 +165,19 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
       
       this.applyConfig(configQueryParams);
     }
+
+    if(!storedConfig && !storedViewType && !storedOperation){
+      this.configurationParams = this.configService.getConfigurationParams();
+      console.log(1212);
+      
+    }
   }
 
 
  applyConfig(config: IQueryParams): void {
-    this.ConfigurationParams.pageSize = config.pageSize;
-    this.ConfigurationParams.sortType = config.sortType;
-    this.ConfigurationParams.sortBy = config.sortBy;
+    this.configurationParams.pageSize = config.pageSize;
+    this.configurationParams.sortType = config.sortType;
+    this.configurationParams.sortBy = config.sortBy;
   }
   onFieldValueChange(target: string, value: string | number | Date | undefined): void {
     const stringValue = value ? value.toString() : '';
@@ -218,12 +223,12 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
   onfiltersChange(): void {
     const encodedData = encodeURIComponent(JSON.stringify(this.filters))
-    this.ConfigurationParams.filterRules = encodedData
+    this.configurationParams.filterRules = encodedData
     this.getAllStorys()
   }
 
   onPageChange(page: number): void {
-    this.ConfigurationParams.pageNumber = page;
+    this.configurationParams.pageNumber = page;
     this.getAllStorys()
   }
 

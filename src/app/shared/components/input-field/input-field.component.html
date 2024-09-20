@@ -18,13 +18,13 @@
     <div *ngIf="optionValues != null && type !== 'radio'" class="group-select">
         <nz-select [(ngModel)]="value" [nzPlaceHolder]="placeholder" (ngModelChange)="valueChange.emit($event)"
             [nzMode]="multiple ? 'multiple' : 'default'" class="select" nzAllowClear>
-            <nz-option *ngFor="let optionValue of optionValues ,  let i = index" [nzLabel]="labelValue?.[i] || optionValue"
+            <nz-option *ngFor="let optionValue of optionValues ,  let i = index" [nzLabel]="labelValues?.[i] || optionValue"
                 [nzValue]="optionValue"></nz-option>
         </nz-select>
     </div>
 
     <nz-radio-group class="radio" *ngIf="optionValues != null && type === 'radio'" [(ngModel)]="value"
         (ngModelChange)="valueChange.emit($event)">
-        <label nz-radio-button *ngFor="let optionValue of optionValues,  let i = index" nz-radio  [nzValue]="optionValue">{{labelValue?.[i] || optionValue}}</label>
+        <label nz-radio-button *ngFor="let optionValue of optionValues,  let i = index" nz-radio  [nzValue]="optionValue">{{labelValues?.[i] || optionValue}}</label>
     </nz-radio-group>
 </div>

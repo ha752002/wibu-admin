@@ -23,14 +23,13 @@ export class InputFieldComponent implements OnInit {
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() optionValues?: any[];
-  @Input() labelValue?: any[];
+  @Input() labelValues?: any[];
   @Input() multiple?: boolean;
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 
   passwordVisible = false;
+  
   ngOnInit(): void {
-
-
   }
 
   onValueChange(event: Event): void {
