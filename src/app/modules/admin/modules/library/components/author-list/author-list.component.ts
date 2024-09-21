@@ -47,7 +47,7 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   }
 
   getAllAuthors(): void {
-    this.configurationParams = this.configService.getConfigurationParams();
+    this.configurationParams = this.configService.getDefaultParamsConfiguration();
     this.subscriptions.add(
       this.authorService.getAllAuthors(this.configurationParams).pipe(
         finalize(() => {

@@ -13,7 +13,7 @@ export interface IStoryInformation {
     chapters?: IChapter[];
     description?: string;
     status?: statusType;
-    createdDate?: Date;
+    createdDate: Date;
     updateDate?: Date;
   }
 

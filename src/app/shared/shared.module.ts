@@ -15,6 +15,7 @@ import { ConfirmationFormComponent } from './components/confirmation-form/confir
 import { ItemAuthorComponent } from './components/item-author/item-author.component';
 import { TitlePageComponent } from './components/title-page/title-page.component';
 import { InstallationFormComponent } from './components/installation-form/installation-form.component';
+import { TimeAgoPipe } from '@app/core/pipe/time-ago.pipe';
 
 const COMPONENTS = [
   IconComponent,
@@ -40,7 +41,12 @@ const COMPONENTS = [
     COMPONENTS,
   ],
   exports: [
-    COMPONENTS
+    COMPONENTS,
+    TimeAgoPipe 
+  ],
+
+  declarations: [
+    TimeAgoPipe
   ],
 
 })

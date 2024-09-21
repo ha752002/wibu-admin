@@ -7,6 +7,7 @@ import { EventService } from '@app/modules/admin/services/event/event.service';
 import { IInstallation } from '@app/shared/types/installation.type';
 import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { ERowSizeOptions, ESortByOptions, ESortTypeOptions, EViewTypeOptions } from '@app/core/enums/options.enums';
+import { ConfigurationService } from '@app/modules/admin/services/configuration-params/configuration.service';
 
 @Component({
   standalone: true,
@@ -37,26 +38,17 @@ export class InstallationFormComponent implements OnInit {
   rowSizeOptions: number[] = Object.values(ERowSizeOptions).filter(value => typeof value === 'number') as number[];
   LabelRowSizeOptions: number[] = [12, 8, 6, 4]
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService , private configService :ConfigurationService) { }
 
   ngOnInit(): void {
     this.loadConfigParams();
   }
 
   loadConfigParams(): void {
-    this.rowSize = this.getStoredValue('rowSize', Number, this.rowSize);
-    this.viewType = this.getStoredValue('viewType', JSON.parse, this.viewType) as EViewTypeOptions;
-    this.installation = this.getStoredValue('configParams', JSON.parse, this.installation);
-    this.operation = this.getStoredValue('operation', JSON.parse, this.operation) as EFilterOperation;
-
-    if (!localStorage.getItem('configParams') && !localStorage.getItem('viewType') && !localStorage.getItem('rowSize')) {
-      localStorage.setItem('configParams', JSON.stringify(this.installation));
-    }
-  }
-
-  getStoredValue(key: string, parser: Function, defaultValue: any): any {
-    const storedValue = localStorage.getItem(key);
-    return storedValue ? parser(storedValue) : defaultValue;
+    this.viewType = this.configService.getViewType();
+    this.rowSize = this.configService.getRowSize();
+    this.operation = this.configService.getOperation();
+    this.installation = this.configService.getParamsConfiguration();
   }
 
   onFieldValueChange(field: string, value: any): void {

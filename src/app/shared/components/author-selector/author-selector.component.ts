@@ -51,7 +51,7 @@ export class AuthorSelectorComponent {
 
   ngOnInit(): void {
     this.getAllAuthors()
-    this.configurationParams = this.configService.getConfigurationParams();
+    this.configurationParams = this.configService.getDefaultParamsConfiguration();
 
     if (this.inAuthorsSelected) {
       this.selectedAuthors = this.inAuthorsSelected

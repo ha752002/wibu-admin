@@ -63,11 +63,12 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.eventSubscription = this.eventService.event$.subscribe(() => this.initializeData());
     this.initializeData();
     this.getParamsGenreId();
-  }
-  
-  private initializeData(): void {
     this.getAllGenres();
+  }
+
+  private initializeData(): void {
     this.loadConfigParams();
+    this.getAllStorys()
   }
 
   getAllGenres(): void {
@@ -80,7 +81,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
           this.genres = response.data;
           this.genreNames = this.genres.map(g => g.title);
           this.genreIds = this.genres.map(g => g.id);
-          this.getAllStorys();
         },
         error => {
           console.error('Error loading genres', error);
@@ -147,38 +147,12 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   }
 
   loadConfigParams(): void {
-    const storedConfig = localStorage.getItem('configParams');
-    const storedViewType = localStorage.getItem('viewType');
-    const storedOperation = localStorage.getItem('operation');
-
-    this.rowSize = Number(localStorage.getItem('rowSize')) || 3;
-    if (storedViewType) {
-      this.viewType = JSON.parse(storedViewType) as EViewTypeOptions;
-    }
-    if (storedOperation) {
-      this.itemFilter.operation = JSON.parse(storedOperation) as EFilterOperation;
-    }
-    
-    if (storedConfig) {
-      const configQueryParams: IQueryParams = JSON.parse(storedConfig);
-      console.log(configQueryParams);
-      
-      this.applyConfig(configQueryParams);
-    }
-
-    if(!storedConfig && !storedViewType && !storedOperation){
-      this.configurationParams = this.configService.getConfigurationParams();
-      console.log(1212);
-      
-    }
+    this.viewType = this.configService.getViewType();
+    this.rowSize = this.configService.getRowSize();
+    this.itemFilter.operation = this.configService.getOperation();
+    this.configurationParams = this.configService.getParamsConfiguration(this.filters);
   }
 
-
- applyConfig(config: IQueryParams): void {
-    this.configurationParams.pageSize = config.pageSize;
-    this.configurationParams.sortType = config.sortType;
-    this.configurationParams.sortBy = config.sortBy;
-  }
   onFieldValueChange(target: string, value: string | number | Date | undefined): void {
     const stringValue = value ? value.toString() : '';
 
