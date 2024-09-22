@@ -4,6 +4,15 @@
         <app-open-form formName="add chapter" [storyData]="storyData"></app-open-form>
     </div>
     <div class="item-chapter" *ngFor="let chapter of storyData?.chapters" (click)="navigateToChapter(chapter?.id)">
-        {{chapter.title}}
+        <div  class="title-chapter">
+            {{chapter.title}}
+        </div>
+        
+        <!-- <div class="form-group" (click)="blockClick($event)">
+            <app-open-form [formName]="'edit chapter'" [label]="false" [icon]="'edit'"
+                [id]="chapter.id"></app-open-form>
+            <app-open-form [formName]="'delete'" [label]="false" [icon]="'delete'" [id]="chapter.id"
+                buttonType="danger" [delete]="'chapter'"></app-open-form>
+        </div> -->
     </div>
 </div>

@@ -6,7 +6,6 @@
 
     img {
         width: 280px;
-        height: 420px;
     }
 
     .content {
@@ -38,6 +37,11 @@
             align-items: end;
             flex: 1;
         }
+
+        pre {
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+          }
 
     }
 }

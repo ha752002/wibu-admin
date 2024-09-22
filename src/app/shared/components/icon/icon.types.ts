@@ -34,6 +34,8 @@ export type IconNameTypes =
   | 'check'
   | 'filter'
   | 'clear'
+  | 'loading'
+  | 'setting'
   ;
 
 export type IconThemeTypes = 'fill' | 'outline' | 'twotone';

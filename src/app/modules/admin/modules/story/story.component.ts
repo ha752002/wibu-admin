@@ -14,7 +14,7 @@ import { EventService } from '../../services/event/event.service';
   styleUrl: './story.component.scss'
 })
 export class StoryComponent implements OnInit, OnDestroy {
-  storyData?: IStoryInformation = {}
+  storyData?: IStoryInformation
   EStory = EStory;
   selectedTitle: string = EStory.Story;
   contents: EStory[] = [EStory.Story, EStory.Chapter];

@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EFilterOperation } from '@app/core/enums/operation.enums';
 import { EventService } from '@app/modules/admin/services/event/event.service';
+import { IFilter } from '@app/modules/admin/types/meta.type';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
 import { IGenre } from '@app/shared/components/open-form/types/genre.type';
 import { GenreService } from '@app/shared/services/genre/genre.service';
 import { Subscription } from 'rxjs';
@@ -14,6 +17,18 @@ import { finalize } from 'rxjs/operators';
 export class GenreListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;
+
+  configurationParams: IQueryParams = {
+    pageNumber: 1,
+    pageSize: 99999,
+    filterRules: '',
+  }
+
+  itemFilter: IFilter = {
+    value: '',
+    operation: EFilterOperation.MATCH,
+    target: ''
+  };
 
   genres: IGenre[] = [];
   dataGenres: IGenre[] = [
@@ -32,7 +47,6 @@ export class GenreListComponent implements OnInit, OnDestroy {
   selectedGenres: IGenre[] = [];
   selectedGenresId: string[] = [];
   selectMode: boolean = false;
-  searchQuery: string = '';
 
   constructor(
     private router: Router,
@@ -49,7 +63,7 @@ export class GenreListComponent implements OnInit, OnDestroy {
 
   getAllGenres(): void {
     this.subscriptions.add(
-      this.genreService.getAllGenres().pipe(
+      this.genreService.getAllGenres(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
@@ -83,7 +97,15 @@ export class GenreListComponent implements OnInit, OnDestroy {
     return this.selectedGenres.some(g => g.id === genre.id);
   }
 
-  onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: string, value: string | number | Date | undefined): void {
+    this.itemFilter.target = field
+    this.onfiltersChange()
+  }
+
+  onfiltersChange(): void {
+    const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
+    this.configurationParams.filterRules = encodedData
+    this.getAllGenres()
   }
 
   blockFormClosing(event: MouseEvent) {
@@ -102,6 +124,10 @@ export class GenreListComponent implements OnInit, OnDestroy {
 
   navigateToStory() {
     this.router.navigate(['admin/manga/'], { queryParams: { genreId: JSON.stringify(this.selectedGenresId) } });
+  }
+
+  identify(index: number, item: any): any {
+    return item.id;
   }
 
   ngOnDestroy() {

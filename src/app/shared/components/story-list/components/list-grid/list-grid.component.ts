@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { IStoryInformation } from '@app/modules/admin/modules/manga-management/type/manga.type';
+import { Imeta } from '@app/modules/admin/types/meta.type';
 import { OpenModalComponent } from '@app/shared/components/open-modal/open-modal.component';
 import { PreviewTheStoryComponent } from '@app/shared/components/preview-the-story/preview-the-story.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -22,28 +23,20 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
   styleUrl: './list-grid.component.scss'
 })
 export class ListGridComponent {
-  @Input() storyData: IStoryInformation[] = [];
-  @Input() rowSize: 3 | 4 | 5 = 3;
+  @Input() storyData?: IStoryInformation[] = [];
+  @Input() meta?: Imeta;
+  @Input() rowSize: number = 3;
+  @Output() PageChange = new EventEmitter<number>();
 
-
-  pageSize = 8;
-  currentPage = 1;
-  paginatedData: IStoryInformation[] = [];
   previewVisible = false;
-  selectedStory: IStoryInformation = {};
-  ngOnInit() {
-    this.updatePaginatedData();
-  }
+  selectedStory?: IStoryInformation ;
 
-  updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;    
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.storyData.slice(startIndex, endIndex);    
+  trackByPageItem(index: number, item: IStoryInformation): string {
+    return item.id;
   }
-
+  
   onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updatePaginatedData();
+    this.PageChange.emit(page);
   }
 
   selectStory(story: IStoryInformation): void {

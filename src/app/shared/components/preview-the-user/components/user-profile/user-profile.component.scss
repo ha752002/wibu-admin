@@ -27,10 +27,19 @@
 
     .content {
         padding: 24px;
-        height: 320px;
-
         .intro{
             text-align: left;
         }
     }
 }
+
+:host {
+    ::ng-deep {
+      nz-list.ant-list.ant-list-split {
+  
+        .ant-list-item {
+          padding: 0px 0px;
+        }
+      }
+    }
+  }

@@ -1,4 +1,4 @@
-<nz-table #basicTable [nzOuterBordered]="true" [nzSize]="'small'" [nzData]="storyData || []">
+<nz-table #basicTable [nzOuterBordered]="true" [nzSize]="'small'" [nzData]="storyData || []" [nzShowPagination]="false" [nzFrontPagination]="false">
     <thead>
       <tr>
         <th>Thumbnail</th>
@@ -13,24 +13,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of basicTable.data">
+      <tr *ngFor="let data of basicTable.data , trackBy: identify">
         <td class="Thumbnail"><img [src]="data.thumbnailUrl" alt="Thumbnail" class="" (click)="selectStory(data)"></td>
         <td>{{ data.title }}</td>
-        <td class="author"><app-item-author *ngFor="let author of data.authors" [user]="author"></app-item-author></td>
-        <td>{{ data.views }}</td>
-        <td>{{ data.chapters?.length }}</td>
-        <td>{{ data.status }}</td>
-        <td>{{ data.createdDate | date: 'short' }}</td>
-        <td>{{ data.update | date: 'short' }}</td>
+        <td class="author"><app-item-author *ngFor="let author of data.authors , trackBy: identify" [user]="author"></app-item-author></td>
+        <td>{{ data.views || 0}}</td>
+        <td>{{ data.chapters?.length || 0 }}</td>
+        <td>{{ data.status || 'Unknown'}}</td>
+        <td>{{ data.createdDate | timeAgo }}</td>
+        <td>{{ data.updateDate| date: 'short' }}</td>
         <td>
           <div class="flex">
-            <app-open-form [formName]="'edit story'" buttonType="warning" [id]="data.id" [img]="data.thumbnailUrl"></app-open-form>
+            <app-open-form [formName]="'edit story'" buttonType="warning" [id]="data.id"></app-open-form>
             <app-open-form [formName]="'delete'" buttonType="danger" [id]="data.id" delete="story"></app-open-form>
           </div>
         </td>
       </tr>
     </tbody>
   </nz-table>
+  <br>
+  <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
+    (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
   <app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
     <app-preview-the-story [storyData]="selectedStory"></app-preview-the-story>
   </app-open-modal>

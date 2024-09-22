@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { IGenre } from '../../types/genre.type';
+import { IGenre, ISimpleGenre } from '../../types/genre.type';
 import { GenreService } from '../../services/genre/genre.service';
 import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -30,7 +30,7 @@ export class EditGenreFormComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
 
-  genre: IGenre = {
+  genre: ISimpleGenre = {
     title: '',
     description: '',
     // AgeWarning: false,

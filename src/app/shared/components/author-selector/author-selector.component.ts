@@ -9,6 +9,10 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { IconComponent } from '../icon/icon.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { OpenFormComponent } from '../open-form/open-form.component';
+import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
+import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
+import { ConfigurationService } from '@app/modules/admin/services/configuration-params/configuration.service';
 
 @Component({
   standalone: true,
@@ -32,13 +36,22 @@ export class AuthorSelectorComponent {
   searchQuery: string = '';
   authors: IAuthor[] = []
   selectedAuthors: IAuthor[] = [];
-  paginatedData: IAuthor[] = [];
-  pageSize = 8;
-  currentPage = 1;
-  constructor(private authorService: AuthorService) { }
+  meta?: Imeta;
+  configurationParams: IQueryParams = {}
+
+  itemFilter: IFilter = {
+    value: '',
+    operation: EFilterOperation.MATCH,
+    target: ''
+  };
+  constructor(
+    private authorService: AuthorService,
+    private configService: ConfigurationService
+  ) { }
 
   ngOnInit(): void {
     this.getAllAuthors()
+    this.configurationParams = this.configService.getDefaultParamsConfiguration();
 
     if (this.inAuthorsSelected) {
       this.selectedAuthors = this.inAuthorsSelected
@@ -47,29 +60,27 @@ export class AuthorSelectorComponent {
 
   getAllAuthors(): void {
     this.subscriptions.add(
-      this.authorService.getAllAuthors().pipe(
+      this.authorService.getAllAuthors(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
         response => {
           this.authors = response.data;
-          this.updatePaginatedData()
+          this.meta = response.meta;
         },
-
         error => {
           console.error('Error loading Authors', error);
-          this.updatePaginatedData()
         }
       )
     );
   }
 
   identify(index: number, item: any): any {
-    return item.id; 
+    return item.id;
   }
 
   toggleauthor(author: IAuthor) {
-    const index = this.selectedAuthors.findIndex(a => a.id === author.id);    
+    const index = this.selectedAuthors.findIndex(a => a.id === author.id);
     if (index === -1) {
       this.selectedAuthors.push(author);
     } else {
@@ -82,24 +93,27 @@ export class AuthorSelectorComponent {
     return this.selectedAuthors.some(g => g.id === author.id);
   }
 
-  updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.authors.slice(startIndex, endIndex);
+  clean() {
+    this.selectedAuthors = []
+    this.outAuthorsSelected.emit(this.selectedAuthors);
   }
 
   onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updatePaginatedData();
+    this.configurationParams.pageNumber = page;
+    this.getAllAuthors();
   }
 
-  clean(){
-    this.selectedAuthors = []
-    this.outAuthorsSelected.emit(this.selectedAuthors);
 
+
+  onFieldValueChange(field: string, value: string | number | Date | undefined): void {
+    this.itemFilter.target = field
+    this.onfiltersChange()
   }
 
-  onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
+  onfiltersChange(): void {
+    const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
+    this.configurationParams.filterRules = encodedData
+    this.getAllAuthors()
   }
 
   ngOnDestroy(): void {

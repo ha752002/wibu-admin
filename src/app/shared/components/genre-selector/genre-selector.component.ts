@@ -10,6 +10,7 @@ import { InputFieldComponent } from '../input-field/input-field.component';
 import { IconComponent } from '../icon/icon.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { OpenFormComponent } from '../open-form/open-form.component';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
 
 @Component({
   selector: 'app-genre-selector',
@@ -31,18 +32,13 @@ export class GenreSelectorComponent implements OnInit, OnDestroy{
   @Input() inGenresSelectedId: string[] = [];
   private subscriptions: Subscription = new Subscription();
   genres: IGenre[] = []
-  dataGenres: IGenre[] = [
-    { id: '1', title: 'Fantasy', description: 'A fantasy story' },
-    { id: '2', title: 'Adventure', description: 'An adventurous journey' },
-    { id: '3', title: 'Mystery', description: 'A mysterious tale' },
-    { id: '4', title: 'Mythology', description: 'Mythological stories' },
-    { id: '5', title: 'Sci-Fi', description: 'Science fiction stories' },
-    { id: '6', title: 'Horror', description: 'Scary and horror stories' },
-    { id: '7', title: 'Romance', description: 'Love and romance stories' },
-    { id: '8', title: 'Thriller', description: 'Thrilling and suspenseful tales' },
-    { id: '9', title: 'Comedy', description: 'Humorous and funny stories' },
-    { id: '10', title: 'Drama', description: 'Serious and dramatic stories' }
-  ];
+
+  configurationParams: IQueryParams = {
+    pageNumber: 1,
+    pageSize: 99999,
+    filterRules: '',
+  }
+
   selectedGenres: IGenre[] = [];
   selectedGenresId: string[] = [];
 
@@ -58,7 +54,7 @@ ngOnInit(): void {
 
 getAllGenres(): void {
   this.subscriptions.add(
-    this.genreService.getAllGenres().pipe(
+    this.genreService.getAllGenres(this.configurationParams).pipe(
       finalize(() => {
       })
     ).subscribe(
@@ -67,7 +63,6 @@ getAllGenres(): void {
       },
       error => {
         console.error('Error loading genres', error);
-        this.genres = this.dataGenres
       }
     )
   );

@@ -1,5 +1,5 @@
 export interface IGenre {
-  id?: string;
+  id: string;
   title: string,
   // AgeWarning?: boolean,
   description?: string,

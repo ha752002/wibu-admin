@@ -5,6 +5,10 @@ import { AuthorService } from '@app/shared/services/author/author.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { EventService } from '@app/modules/admin/services/event/event.service';
+import { IFilter, Imeta } from '@app/modules/admin/types/meta.type';
+import { EFilterOperation } from '@app/core/enums/operation.enums';
+import { IQueryParams } from '@app/modules/admin/types/query-params.type';
+import { ConfigurationService } from '@app/modules/admin/services/configuration-params/configuration.service';
 
 @Component({
   selector: 'app-author-list',
@@ -16,16 +20,22 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   private eventSubscription!: Subscription;
 
   searchQuery: string = '';
-  defaultavatarUrl: string = 'assets/img/eyes.png';
+  // defaultavatarUrl: string = 'assets/img/eyes.png';
   authors: IAuthor[] = [];
-  paginatedData: IAuthor[] = [];
-  pageSize = 12;
-  currentPage = 1;
+  meta?: Imeta;
+  configurationParams: IQueryParams = {}
 
+  itemFilter: IFilter = {
+    value: '',
+    operation: EFilterOperation.MATCH,
+    target: ''
+  };
   constructor(
     private router: Router,
     private eventService: EventService,
-    private authorService: AuthorService
+    private authorService: AuthorService,
+    private configService: ConfigurationService,
+
   ) { }
 
   ngOnInit(): void {
@@ -33,24 +43,23 @@ export class AuthorListComponent implements OnInit, OnDestroy {
       this.getAllAuthors();
     });
     this.getAllAuthors()
+
   }
 
-
-
   getAllAuthors(): void {
+    this.configurationParams = this.configService.getDefaultParamsConfiguration();
     this.subscriptions.add(
-      this.authorService.getAllAuthors().pipe(
+      this.authorService.getAllAuthors(this.configurationParams).pipe(
         finalize(() => {
         })
       ).subscribe(
         response => {
           this.authors = response.data;
-          this.updatePaginatedData()
+          this.meta = response.meta;
         },
 
         error => {
           console.error('Error loading Authors', error);
-          this.updatePaginatedData()
 
         }
       )
@@ -58,22 +67,28 @@ export class AuthorListComponent implements OnInit, OnDestroy {
 
   }
 
-  updatePaginatedData(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.authors.slice(startIndex, endIndex);
-  }
-
   onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updatePaginatedData();
+    this.configurationParams.pageNumber = page;
+    this.getAllAuthors()
   }
 
   navigateToUserDetail(userId: string): void {
     this.router.navigate(['/admin/user-detail', userId]);
   }
 
-  onFieldValueChange(field: keyof string, value: string | number | Date | undefined): void {
+  onFieldValueChange(field: string, value: string | number | Date | undefined): void {
+    this.itemFilter.target = field
+    this.onfiltersChange()
+  }
+
+  onfiltersChange(): void {
+    const encodedData = encodeURIComponent(JSON.stringify(this.itemFilter))
+    this.configurationParams.filterRules = encodedData
+    this.getAllAuthors()
+  }
+
+  identify(index: number, item: any): any {
+    return item.id;
   }
 
   ngOnDestroy() {

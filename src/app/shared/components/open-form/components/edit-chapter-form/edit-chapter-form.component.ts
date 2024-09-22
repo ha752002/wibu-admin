@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DragDropImgComponent } from '@app/shared/components/drag-drop-img/drag-drop-img.component';
 import { InputFieldComponent } from '@app/shared/components/input-field/input-field.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { IChapter } from '../../types/chapter.type';
+import { IChapter, IResponseChapter, ISimpleChapter } from '../../types/chapter.type';
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { Subscription } from 'rxjs';
 import { ChapterService } from '../../services/chapter/chapter.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadService } from '@app/shared/services/upload/upload.service';
 import { FormsModule } from '@angular/forms';
+import { IChapterContent } from '@app/modules/admin/modules/chapter/types/chapter.type';
 
 @Component({
   selector: 'app-edit-chapter-form',
@@ -24,11 +25,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './edit-chapter-form.component.html',
   styleUrl: './edit-chapter-form.component.scss'
 })
-export class EditChapterFormComponent implements OnInit {
-  chapter: IChapter = {}
-  img: File[] = []
+export class EditChapterFormComponent implements OnInit ,OnDestroy{
+  chapter: ISimpleChapter = {}
+  chapterdata?: IChapterContent 
+  img: string[] = []
+  imageUrls: string[] = [];
   @Input() id?: string;
-  @Input() storyData?: IStoryInformation = {}
+  @Input() storyData?: IStoryInformation
   @Input() ChapterData?: IChapter = {}
   @Output() complete = new EventEmitter<void>();
   @Output() change = new EventEmitter<void>();
@@ -45,7 +48,6 @@ export class EditChapterFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.chapter = this.ChapterData ?? {}
     if (this.id) {
       this.getChapterDetails(this.id)
     }
@@ -54,7 +56,11 @@ export class EditChapterFormComponent implements OnInit {
   getChapterDetails(id: string): void {
     this.chapterService.getChapterById(id).subscribe(
       (response) => {
-        this.chapter = response.data;
+        this.chapterdata = response.data;
+        this.chapter.title= response.data.title;
+        this.imageUrls = this.getImageUrls(response);     
+        this.chapter.pages= this.imageUrls
+   
       },
       (error) => {
         console.error('Error fetching author details:', error);
@@ -62,39 +68,19 @@ export class EditChapterFormComponent implements OnInit {
     );
   }
 
-  onImagesSelected(images: File[]) {
-    this.img = images;
+  getImageUrls(response: IResponseChapter): string[] {
+    return response.data.pages
+      .map(page => page.imageUrl)
+      .filter((url): url is string => url !== undefined);
+  }
+
+  onImagesSelected(images: string[]) {
+    this.chapter.pages = images;
+    this.change.emit();
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.img.length > 0) {
-      this.uploadImagesAndSubmitChapter();
-    } else {
-      this.submitChapter();
-    }
-  }
-
-  uploadImagesAndSubmitChapter(): void {
-    this.createMessageloading();
-    const formData = new FormData();
-    this.img.forEach(file => {
-      formData.append('files', file, file.name);
-    });
-
-    this.uploadService.uploadImages(formData).subscribe(
-      response => {
-        this.chapter.pages = response.data.map(item => item.url);
-        this.submitChapter();
-      },
-
-      error => {
-        this.createMessage('error')
-      }
-    );
-  }
-
-  submitChapter(): void {
     if (this.id) {
       this.chapterService.updateChapter(this.id, this.chapter).subscribe(
         response => {
@@ -121,5 +107,9 @@ export class EditChapterFormComponent implements OnInit {
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
     this.change.emit();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

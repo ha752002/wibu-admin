@@ -20,5 +20,9 @@
         max-width: 70%;
         overflow-y: auto;
         max-height: 95vh;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }

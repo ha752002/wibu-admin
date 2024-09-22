@@ -1,6 +1,6 @@
 export interface IImage {
     name?: string;
-    url?: string
+    url: string
   }
 
   export interface IPage{

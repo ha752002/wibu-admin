@@ -1,6 +1,6 @@
-export interface ImangaFilter {
-    search?: string,
-    genre?: string,
-    chapterNumber?: string,
-  }
+export interface IValueFilter {
+  genre?: string;
+  status?: string;
+  title?: string;
+}
   

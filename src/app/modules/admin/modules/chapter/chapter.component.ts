@@ -1,10 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { IChapter } from '@app/shared/components/open-form/types/chapter.type';
 import { Subscription } from 'rxjs';
 import { ChapterService } from './services/chapter/chapter.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from 'express';
 import { EventService } from '../../services/event/event.service';
+import { IChapterContent } from './types/chapter.type';
 
 @Component({
   selector: 'app-chapter',
@@ -12,7 +12,7 @@ import { EventService } from '../../services/event/event.service';
   styleUrl: './chapter.component.scss'
 })
 export class ChapterComponent implements OnInit , OnDestroy {
-  chapter: IChapter = {}
+  chapter?: IChapterContent
 
   private subscriptions: Subscription = new Subscription();
   private eventSubscription!: Subscription;

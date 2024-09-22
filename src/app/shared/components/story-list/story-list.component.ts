@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ListGridComponent } from './components/list-grid/list-grid.component';
 import { ListTableComponent } from './components/list-table/list-table.component';
-import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
+import { Imeta } from '@app/modules/admin/types/meta.type';
+import { IStoryInformation } from '@app/modules/admin/modules/manga-management/type/manga.type';
+import { EViewTypeOptions } from '@app/core/enums/options.enums';
 
-export type viewType = 'grid' | 'table';
 
 @Component({
   selector: 'app-story-list',
@@ -18,19 +19,18 @@ export type viewType = 'grid' | 'table';
   styleUrl: './story-list.component.scss'
 })
 export class StoryListComponent implements OnInit {
-  @Input() rowSize: 3 | 4 | 5 = 3;
-  @Input() viewType: viewType = 'grid';
-  @Input() storyData: IStoryInformation[] = [];
+  @Input() rowSize: number = 3;
+  @Input() meta?: Imeta;
+  @Input() viewType: EViewTypeOptions = EViewTypeOptions.Grid;
+  @Input() storyData?: IStoryInformation[] = [];
+  @Output() PageChange = new EventEmitter<number>();
 
-  storys: IStoryInformation[] = [];
+  // storys?: IStoryInformation[] = [];
 
-  ngOnInit(): void {
-    this.storys = this.storyData
+  ngOnInit(): void {    
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['storyData']) {
-      this.storys = this.storyData
-    }
+  onPageChange(page: number): void {
+    this.PageChange.emit(page);
   }
 }

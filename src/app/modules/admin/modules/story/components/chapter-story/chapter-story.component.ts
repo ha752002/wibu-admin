@@ -18,4 +18,8 @@ export class ChapterStoryComponent {
       this.router.navigate([`admin/chapter/${chapterId}`]);
     }
   }
+
+  blockClick(event: MouseEvent) {
+    event.stopPropagation();
+  }
 }

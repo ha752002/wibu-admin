@@ -11,7 +11,7 @@ export interface ICreateStory {
   chapters?: IChapter[];
   genres?: IGenre[];
   authors?: IAuthor[];
-  introduce?: string;
+  description?: string;
   status?: statusType;
   created?: Date;
   update?: Date;

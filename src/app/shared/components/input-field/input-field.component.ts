@@ -7,10 +7,11 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { IconComponent } from '../icon/icon.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { EUserRole } from '@app/core/enums/user.enums';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, NzInputModule, FormsModule, NzSkeletonModule, IconComponent, NzSelectModule],
+  imports: [CommonModule, NzInputModule, FormsModule, NzSkeletonModule, IconComponent, NzSelectModule,NzRadioModule ],
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss'
@@ -21,14 +22,14 @@ export class InputFieldComponent implements OnInit {
   @Input() value: string | number | Date | EUserRole[] | undefined;
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
-  @Input() optionValue?: string[];
+  @Input() optionValues?: any[];
+  @Input() labelValues?: any[];
   @Input() multiple?: boolean;
   @Output() valueChange = new EventEmitter<string | number | Date | undefined>();
 
   passwordVisible = false;
+  
   ngOnInit(): void {
-
-
   }
 
   onValueChange(event: Event): void {

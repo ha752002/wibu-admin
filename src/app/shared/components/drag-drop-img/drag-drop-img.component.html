@@ -1,15 +1,57 @@
-<div class="title">Story content : <p *ngIf="imagePreviews.length !== 0">(selected {{imagePreviews.length}} images)</div>
-<div class="drag-drop-container" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
-  (drop)="onDrop($event)">
-  <div *ngIf="imagePreviews.length === 0" class="title">Drag and drop files or folders here</div>
+<div class="group-title">
+  <div class="title">Story content :
+    <p *ngIf="imagePreviews.length !== 0">(selected {{imagePreviews.length}} images)</p>
+  </div>
+  <div class="group-tool">
+    <button nz-button nzType="primary" type="button" (click)="openFileDialog()">
+      <P>uploads</P>
+    </button>
+    <button nz-button nzType="primary" type="button" (click)="clean()" nzDanger>
+      <ts-icon [name]="'clear'"></ts-icon>
+      <P>clear</P>
+    </button>
+  </div>
 
-      <div *ngFor="let image of imagePreviews; let i = index" class="item-img">
-        <app-img [url]="image.url" [imgType]="'square'" [padding]="true" [shadow]="true" [size]="size" [name]="image.name"></app-img>
-        <div class="close" (click)="removeImage(i)">
-          <ts-icon [name]="'close'"></ts-icon>
-        </div>
-      </div>
-  <!-- <button (click)="uploadImages()" nz-button nzType="primary">Upload Images</button> -->
 </div>
-<!-- <input type="file" id="fileInput" style="display: none" (change)="onFileChange($event)" multiple webkitdirectory> -->
 
+<div class="drag-drop-container" 
+     (dragover)="onDragOver($event)" 
+     (dragleave)="onDragLeave($event)"
+     (drop)="onDrop($event)" 
+     (click)="openFolder()" 
+     cdkDropList
+     (cdkDropListDropped)="drop($event)" 
+     [cdkDropListSortingDisabled]="true">
+
+  <div *ngIf="imagePreviews.length === 0 && !loading" class="title-drag-drop">Drag and drop files or folders here</div>
+
+  <div *ngFor="let image of imagePreviews; let i = index ; let j = index" 
+       class="item-img" 
+       cdkDrag 
+       (mouseenter)="onDragMove($event, j)" 
+       [cdkDragBoundary]="'.drag-drop-container'" 
+       (cdkDragStarted)="onDragStarted($event, i)" 
+       #itemImg>
+    <app-img [url]="image.url" 
+             [imgType]="'square'" 
+             [padding]="true" 
+             [size]="size"
+             [name]="image.name">
+    </app-img>
+    <div class="close" (click)="removeImage(i)">
+      <ts-icon [name]="'close'"></ts-icon>
+    </div>
+  </div>
+  <div *ngIf="loading" class="title-drag-drop loading"> 
+    <ts-icon [name]="'loading'"></ts-icon>
+    loading ....
+  </div>
+
+</div>
+<input 
+       type="file" 
+       id="fileInput" 
+       style="display: none" 
+       (change)="onFileChange($event)" 
+       multiple 
+       webkitdirectory>

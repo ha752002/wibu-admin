@@ -1,5 +1,5 @@
 .Thumbnail {
-    width: 120px;
+    width: 80px;
     height: auto;
     display: flex;
     align-items: center;
@@ -17,4 +17,8 @@
     width: 100%;
     gap: 12px;
     align-items: center;
+}
+
+td{
+    max-width: 200px;
 }

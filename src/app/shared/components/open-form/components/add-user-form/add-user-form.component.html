@@ -16,7 +16,7 @@
             </app-input-field>
 
             <app-input-field label="Roles" [(value)]="user.roles" type="date"
-                (valueChange)="onFieldValueChange('birthday', $event)" [optionValue]="roles" [multiple]="true">
+                (valueChange)="onFieldValueChange('birthday', $event)" [optionValues]="roles" [multiple]="true">
             </app-input-field>
 
             <app-input-field label="Password" [(value)]="user.password" type="password"

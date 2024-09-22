@@ -4,32 +4,37 @@
     <div class="group-tool">
         <app-open-form [formName]="'add story'" buttonType="danger"></app-open-form>
         
-        <app-input-field [(value)]="filter.genre" type="text" (valueChange)="onFieldValueChange('genre', $event)"
-        placeholder="select genre"  [optionValue]="genreNames" *ngIf="multiGenreMode != true">
+        <app-input-field [(value)]="valuefilters.genre" type="password" (valueChange)="onFieldValueChange('genre', $event)"
+        placeholder="select genre"  [optionValues]="genreIds"  [labelValues]="genreNames"*ngIf="multiGenreMode != true">
         </app-input-field>
-        <app-input-field [(value)]="filter.chapterNumber" type="text" (valueChange)="onFieldValueChange('chapterNumber', $event)"
-        placeholder="select chapter number" [optionValue]="teamList" *ngIf="multiGenreMode != true">
+        <app-input-field [(value)]="valuefilters.status" type="text" (valueChange)="onFieldValueChange('Status', $event)"
+        placeholder="select Status" [optionValues]="teamList" *ngIf="multiGenreMode != true">
         </app-input-field>
-        <app-input-field [(value)]="filter.search" type="text" (valueChange)="onFieldValueChange('search', $event)"
+        <app-input-field [(value)]="valuefilters.title" type="text" (valueChange)="onFieldValueChange('title', $event)"
             placeholder="search" *ngIf="multiGenreMode != true">
         </app-input-field>
-        <div (click)="changeViewType(viewType)" class="icon">
-            <ts-icon [name]="viewType === 'table' ? 'bars' : 'calendar'"></ts-icon>
-        </div>
-        <div (click)="handleVisible(true)" class="icon" [class.multi]="multiGenreMode">
+        <div (click)="handleGenreSelector(true)" class="icon" [class.multi]="multiGenreMode">
             <ts-icon [name]="'filter'"></ts-icon>
         </div>
-        <div class="selected-Genres" (click)="handleVisible(true)">
+        <div (click)="handleInstallation(true)" class="icon">
+            <ts-icon [name]="'setting'"></ts-icon>
+        </div>
+        
+        <div class="selected-Genres" (click)="handleGenreSelector(true)">
             <ul >
                 <li *ngFor="let genre of selectedGenres">{{ genre.title }}</li>
             </ul>
         </div>
     </div>
 
-    <app-story-list *ngIf="storys && storys.length > 0" [storyData]="storys" [viewType]="viewType"></app-story-list>
+    <app-story-list [storyData]="storys" [viewType]="viewType" [meta]="meta" [rowSize]="rowSize" (PageChange)="onPageChange($event)"></app-story-list>
 </div>
 
-<app-open-modal *ngIf="previewVisible" (previewVisible)="handleVisible($event)">
+<app-open-modal *ngIf="genreSelector" (previewVisible)="handleGenreSelector($event)">
     <app-genre-selector [inGenresSelected]="selectedGenres"
-        (outGenresSelected)="onGenresSelected($event)"></app-genre-selector>
+        (outGenresSelected)="multiGenreFilter($event)"></app-genre-selector>
+</app-open-modal>
+
+<app-open-modal *ngIf="installation" (previewVisible)="handleInstallation($event)">
+    <app-installation-form></app-installation-form>
 </app-open-modal>

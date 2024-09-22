@@ -14,6 +14,8 @@ import { PreviewTheUserComponent } from './components/preview-the-user/preview-t
 import { ConfirmationFormComponent } from './components/confirmation-form/confirmation-form.component';
 import { ItemAuthorComponent } from './components/item-author/item-author.component';
 import { TitlePageComponent } from './components/title-page/title-page.component';
+import { InstallationFormComponent } from './components/installation-form/installation-form.component';
+import { TimeAgoPipe } from '@app/core/pipe/time-ago.pipe';
 
 const COMPONENTS = [
   IconComponent,
@@ -31,7 +33,7 @@ const COMPONENTS = [
   ConfirmationFormComponent,
   ItemAuthorComponent,
   TitlePageComponent,
-
+  InstallationFormComponent,
 ];
 
 @NgModule({
@@ -39,7 +41,12 @@ const COMPONENTS = [
     COMPONENTS,
   ],
   exports: [
-    COMPONENTS
+    COMPONENTS,
+    TimeAgoPipe 
+  ],
+
+  declarations: [
+    TimeAgoPipe
   ],
 
 })

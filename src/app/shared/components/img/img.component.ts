@@ -15,7 +15,7 @@ import { OpenModalComponent } from '../open-modal/open-modal.component';
   styleUrl: './img.component.scss'
 })
 export class ImgComponent {
-  @Input() imgType: 'square' | 'portrait' | 'landscape' = 'square';
+  @Input() imgType: 'square' | 'portrait' | 'landscape' |'full-screen' = 'square';
   @Input() size: 'small' | 'medium' | 'large' | 'full-screen' = 'medium';
   @Input() padding: boolean = false;
   @Input() shadow: boolean = false;

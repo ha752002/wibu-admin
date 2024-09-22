@@ -3,7 +3,7 @@
         <h3> Author</h3>
         <div class="tool">
             <app-open-form [formName]="'add author'" ></app-open-form>
-            <app-input-field [(value)]="searchQuery" type="text" (valueChange)="onFieldValueChange('search', $event)"
+            <app-input-field [(value)]="itemFilter.value" type="text" (valueChange)="onFieldValueChange('name', $event)"
                 placeholder="search">
             </app-input-field>
         </div>
@@ -11,7 +11,7 @@
     </div>
     <div>
         <div class="group-author">
-            <div *ngFor="let author of paginatedData" class="item">
+            <div *ngFor="let author of authors , trackBy: identify" class="item">
                 <div class="content">
                     <div class="author" (click)="navigateToUserDetail(author.id)">
                         <nz-avatar [nzSrc]="author.avatarUrl" nzIcon="user" [nzSize]="64" ></nz-avatar>
@@ -29,7 +29,7 @@
               </div>
         </div>
         <div class="pagination">
-            <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="authors.length" [nzPageSize]="pageSize"
+            <nz-pagination [nzPageIndex]="meta?.pageNumber" [nzTotal]="meta?.numberOfRecords" [nzPageSize]="meta?.pageSize"
             (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
         </div>
     </div>
