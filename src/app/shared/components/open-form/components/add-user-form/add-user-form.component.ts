@@ -11,7 +11,8 @@ import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/uplo
 import { IResponseImage } from '@app/shared/types/image.types';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { UserService } from '../../services/user/user.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   standalone: true,
@@ -49,25 +50,23 @@ export class AddUserFormComponent implements OnDestroy {
   private messageId: string | null = null;
 
   constructor(
-    private message: NzMessageService,
+    private message: MessageService,
     private userService: UserService
   ) { }
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.createMessageloading();
+    this.message.createMessageloading();
 
     this.user.birthday = new Date(this.user.birthday)
     this.userService.createUser(this.user).subscribe(
       response => {
-        this.createMessage('success')
+        this.message.createMessage(EMessageType.SUCCESS , response.message)
         this.complete.emit();
       },
       error => {
-        this.createMessage('error')
+        this.message.createMessage(EMessageType.ERROR , error)
       }
     );
-
-
   }
 
   onFieldValueChange(field: keyof ICreateUser, value: string | number | Date | undefined): void {
@@ -79,17 +78,6 @@ export class AddUserFormComponent implements OnDestroy {
 
   onAvatarUrlChange(url: IResponseImage) {
     this.user.avatarUrl = url.data.url;
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

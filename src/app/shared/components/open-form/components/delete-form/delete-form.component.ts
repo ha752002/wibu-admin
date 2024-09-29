@@ -7,8 +7,8 @@ import { ChapterService } from '../../services/chapter/chapter.service';
 import { AuthorService } from '../../services/author/author.service';
 import { GenreService } from '../../services/genre/genre.service';
 import { Subscription } from 'rxjs';
-import { message } from '../../types/message.type';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
 
 @Component({
   standalone: true,
@@ -24,7 +24,7 @@ export class DeleteFormComponent implements OnDestroy {
   @Input() id?: string;
   @Input() delete: 'user' | 'story' | 'chapter' | 'author' | 'genre' = 'user';
   @Output() complete = new EventEmitter<void>();
-  message?: message;
+  Message=  EMessageType;
 
   private subscriptions: Subscription = new Subscription();
 
@@ -43,50 +43,50 @@ export class DeleteFormComponent implements OnDestroy {
         case 'user':
           this.userService.deleteUser(this.id).subscribe(
             () => {
-              this.done('success')
+              this.done(EMessageType.SUCCESS)
             },
             error => {
-              this.done('error')
+              this.done(EMessageType.ERROR)
             }
           );
           break;
         case 'story':
           this.storyService.deleteStory(this.id).subscribe(
             () => {
-              this.done('success')
+              this.done(EMessageType.SUCCESS)
             },
             error => {
-              this.done('error')
+              this.done(EMessageType.ERROR)
             }
           );
           break;
         case 'chapter':
           this.chapterService.deleteChapter(this.id).subscribe(
             () => {
-              this.done('success')
+              this.done(EMessageType.SUCCESS)
             },
             error => {
-              this.done('error')
+              this.done(EMessageType.ERROR)
             }
           );
           break;
         case 'author':
           this.authorService.deleteAuthor(this.id).subscribe(
             () => {
-              this.done('success')
+              this.done(EMessageType.SUCCESS)
             },
             error => {
-              this.done('error')
+              this.done(EMessageType.ERROR)
             }
           );
           break;
         case 'genre':
           this.genreService.deleteGenre(this.id).subscribe(
             () => {
-              this.done('success')
+              this.done(EMessageType.SUCCESS)
             },
             error => {
-              this.done('error')
+              this.done(EMessageType.ERROR)
             }
           );
           break;
@@ -94,8 +94,8 @@ export class DeleteFormComponent implements OnDestroy {
     }
   }
 
-  done(message: message) {
-    if (message != 'cancel') {
+  done(message: EMessageType) {
+    if (message != EMessageType.CANCEL) {
       this.createMessage(message)
     }
     this.complete.emit();

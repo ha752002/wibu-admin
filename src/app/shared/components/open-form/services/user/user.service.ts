@@ -16,12 +16,12 @@ export class UserService {
     return this.apiCallerService.get<string , IResponseUser>(this.apiUrl.getById , id);
   }
 
-  createUser(user: ICreateUser): Observable<ICreateUser> {
-    return this.apiCallerService.post<ICreateUser, ICreateUser>(this.apiUrl.register, user);
+  createUser(user: ICreateUser): Observable<IResponseUser> {
+    return this.apiCallerService.post<ICreateUser, IResponseUser>(this.apiUrl.register, user);
   }
 
-  updateUser(id: string, user: IUpdateUser): Observable<IUpdateUser> {
-    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, user);
+  updateUser(id: string, user: IUpdateUser): Observable<IResponseUser> {
+    return this.apiCallerService.put<ICreateUser, IResponseUser>(`${this.apiUrl.update}/${id}`, user);
   }
 
   deleteUser(id: string): Observable<void> {

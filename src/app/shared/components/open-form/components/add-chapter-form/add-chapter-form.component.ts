@@ -9,7 +9,8 @@ import { UploadService } from '@app/shared/services/upload/upload.service';
 import { ChapterService } from '../../services/chapter/chapter.service';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   standalone: true,
@@ -52,7 +53,7 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private messageId: string | null = null;
   constructor(
-    private message: NzMessageService,
+    private message: MessageService,
     private uploadService: UploadService,
     private chapterService: ChapterService
   ) { }
@@ -65,11 +66,11 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
     event.preventDefault();
     this.chapterService.createChapter(this.chapter).subscribe(
       response => {
-        this.createMessage('success')
+        this.message.createMessage(EMessageType.SUCCESS , response.message)
         this.complete.emit();
       },
       error => {
-        this.createMessage('error')
+        this.message.createMessage(EMessageType.ERROR , error)
       }
     );
   }
@@ -90,17 +91,6 @@ export class AddChapterFormComponent implements OnInit, OnDestroy {
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {
     this.change.emit();
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `chapter added ${type}`);
   }
 
   ngOnDestroy(): void {

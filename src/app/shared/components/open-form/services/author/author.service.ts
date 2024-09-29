@@ -16,12 +16,12 @@ export class AuthorService {
     return this.apiCallerService.get<string , IResponseAuthor>(this.apiUrl.getById , id);
   }
 
-  createAuthor(author: ISimpleAuthor): Observable<ISimpleAuthor> {
-    return this.apiCallerService.post<ISimpleAuthor, ISimpleAuthor>(this.apiUrl.push, author);
+  createAuthor(author: ISimpleAuthor): Observable<IResponseAuthor> {
+    return this.apiCallerService.post<ISimpleAuthor, IResponseAuthor>(this.apiUrl.push, author);
   }
 
-  updateAuthor(id: string, author: ISimpleAuthor): Observable<IAuthor> {
-    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, author);
+  updateAuthor(id: string, author: ISimpleAuthor): Observable<IResponseAuthor> {
+    return this.apiCallerService.put<ISimpleAuthor, IResponseAuthor>(`${this.apiUrl.update}/${id}`, author);
   }
 
   deleteAuthor(id: string): Observable<void> {

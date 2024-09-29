@@ -16,6 +16,7 @@ import { ItemAuthorComponent } from './components/item-author/item-author.compon
 import { TitlePageComponent } from './components/title-page/title-page.component';
 import { InstallationFormComponent } from './components/installation-form/installation-form.component';
 import { TimeAgoPipe } from '@app/core/pipe/time-ago.pipe';
+import { MiniMapComponent } from './components/mini-map/mini-map.component';
 
 const COMPONENTS = [
   IconComponent,
@@ -34,6 +35,7 @@ const COMPONENTS = [
   ItemAuthorComponent,
   TitlePageComponent,
   InstallationFormComponent,
+  MiniMapComponent,
 ];
 
 @NgModule({
@@ -46,7 +48,7 @@ const COMPONENTS = [
   ],
 
   declarations: [
-    TimeAgoPipe
+    TimeAgoPipe,
   ],
 
 })

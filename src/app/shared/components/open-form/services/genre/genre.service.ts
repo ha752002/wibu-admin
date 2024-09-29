@@ -17,12 +17,12 @@ export class GenreService {
     return this.apiCallerService.get<string , IResponseGenre>(this.apiUrl.getById , id);
   }
 
-  createGenre(genre: ISimpleGenre): Observable<ISimpleGenre> {
-    return this.apiCallerService.post<ISimpleGenre, ISimpleGenre>(this.apiUrl.push, genre);
+  createGenre(genre: ISimpleGenre): Observable<IResponseGenre> {
+    return this.apiCallerService.post<ISimpleGenre, IResponseGenre>(this.apiUrl.push, genre);
   }
 
-  updateGenre(id: string, genre: ISimpleGenre): Observable<IGenre> {    
-    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, genre);
+  updateGenre(id: string, genre: ISimpleGenre): Observable<IResponseGenre> {    
+    return this.apiCallerService.put<ISimpleGenre, IResponseGenre>(`${this.apiUrl.update}/${id}`, genre);
   }
 
   deleteGenre(id: string): Observable<void> {

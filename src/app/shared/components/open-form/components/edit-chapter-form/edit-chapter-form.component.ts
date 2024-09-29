@@ -7,10 +7,11 @@ import { IChapter, IResponseChapter, ISimpleChapter } from '../../types/chapter.
 import { IStoryInformation } from '@app/modules/admin/modules/story/type/story.type';
 import { Subscription } from 'rxjs';
 import { ChapterService } from '../../services/chapter/chapter.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadService } from '@app/shared/services/upload/upload.service';
 import { FormsModule } from '@angular/forms';
 import { IChapterContent } from '@app/modules/admin/modules/chapter/types/chapter.type';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'app-edit-chapter-form',
@@ -42,9 +43,7 @@ export class EditChapterFormComponent implements OnInit ,OnDestroy{
 
   constructor(
     private chapterService: ChapterService,
-    private message: NzMessageService,
-    private uploadService: UploadService,
-
+    private message: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -81,28 +80,18 @@ export class EditChapterFormComponent implements OnInit ,OnDestroy{
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.message.createMessageloading()
     if (this.id) {
       this.chapterService.updateChapter(this.id, this.chapter).subscribe(
         response => {
-          this.createMessage('success')
+          this.message.createMessage(EMessageType.SUCCESS , response.message)
           this.complete.emit();
         },
         error => {
-          this.createMessage('error')
+          this.message.createMessage(EMessageType.ERROR , error)
         }
       );
     }
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   onFieldValueChange(field: keyof IChapter, value: string | number | Date | undefined): void {

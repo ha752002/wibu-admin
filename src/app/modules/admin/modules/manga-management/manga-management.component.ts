@@ -71,6 +71,13 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     this.getAllStorys()
   }
 
+  loadConfigParams(): void {
+    this.viewType = this.configService.getViewType();
+    this.rowSize = this.configService.getRowSize();
+    this.itemFilter.operation = this.configService.getOperation();
+    this.configurationParams = this.configService.getParamsConfiguration(this.filters);
+  }
+
   getAllGenres(): void {
     this.subscriptions.add(
       this.genreService.getAllGenres().pipe(
@@ -146,13 +153,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadConfigParams(): void {
-    this.viewType = this.configService.getViewType();
-    this.rowSize = this.configService.getRowSize();
-    this.itemFilter.operation = this.configService.getOperation();
-    this.configurationParams = this.configService.getParamsConfiguration(this.filters);
-  }
-
   onFieldValueChange(target: string, value: string | number | Date | undefined): void {
     const stringValue = value ? value.toString() : '';
 
@@ -184,15 +184,17 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   }
 
   multiGenreFilter(genres: IGenre[]) {
+    console.log(genres);
+
     this.selectedGenres = genres;
     this.filters = []
-    if (this.selectedGenres.length == 0) {
-      this.multiGenreMode = false
-    } else {
+    if (this.selectedGenres.length > 0) {
       this.multiGenreMode = true
       this.selectedGenres.forEach(genre => this.getStorysByGenres(genre));
-      this.onfiltersChange()
+    } else {
+      this.multiGenreMode = false
     }
+    this.onfiltersChange()
   }
 
   onfiltersChange(): void {

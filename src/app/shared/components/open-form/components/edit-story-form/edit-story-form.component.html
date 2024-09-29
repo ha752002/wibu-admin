@@ -13,7 +13,7 @@
     </div>
     <div class="story">
         <div class="basic">
-            <app-input-field label="Name" [(value)]="story.title" type="text"
+            <app-input-field label="Title story" [(value)]="story.title" type="text"
                 (valueChange)="onFieldValueChange('title', $event)" [required]="true">
             </app-input-field>
 
@@ -26,7 +26,7 @@
             </div>
 
             <app-input-field label="introduce" [(value)]="story.description" type="textarea"
-                (valueChange)="onFieldValueChange('description', $event)" [required]="true">
+                (valueChange)="onFieldValueChange('description', $event)">
             </app-input-field>
 
             <div class="add-genre" (click)="handleGenreVisible(true)">

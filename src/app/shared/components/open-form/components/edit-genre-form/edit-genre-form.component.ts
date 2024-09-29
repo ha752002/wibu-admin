@@ -8,6 +8,8 @@ import { IGenre, ISimpleGenre } from '../../types/genre.type';
 import { GenreService } from '../../services/genre/genre.service';
 import { Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'app-edit-genre-form',
@@ -33,12 +35,12 @@ export class EditGenreFormComponent implements OnInit, OnDestroy {
   genre: ISimpleGenre = {
     title: '',
     description: '',
-    // AgeWarning: false,
+    AgeWarning: false,
   };
 
   constructor(
     private genreService: GenreService,
-    private message: NzMessageService,
+    private message: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -60,16 +62,16 @@ export class EditGenreFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.createMessageloading();
+    this.message.createMessageloading();
 
     if (this.id) {
       this.genreService.updateGenre(this.id, this.genre).subscribe(
         (response) => {
-          this.createMessage('success')
+          this.message.createMessage(EMessageType.SUCCESS , response.message)
           this.complete.emit();
         },
         (error) => {
-          this.createMessage('error')
+          this.message.createMessage(EMessageType.ERROR,error)
         }
       );
     }
@@ -77,17 +79,6 @@ export class EditGenreFormComponent implements OnInit, OnDestroy {
 
   onFieldValueChange(field: keyof IGenre, value: string | number | Date | undefined): void {
     this.change.emit();
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

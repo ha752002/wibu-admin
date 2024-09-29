@@ -16,12 +16,12 @@ export class ChapterService {
     return this.apiCallerService.get<string , IResponseChapter>(this.apiUrl.getById , id);
   }
 
-  createChapter(chapter: ISimpleChapter): Observable<ISimpleChapter> {
-    return this.apiCallerService.post<ISimpleChapter, ISimpleChapter>(this.apiUrl.push, chapter);
+  createChapter(chapter: ISimpleChapter): Observable<IResponseChapter> {
+    return this.apiCallerService.post<ISimpleChapter, IResponseChapter>(this.apiUrl.push, chapter);
   }
 
-  updateChapter(id: string, chapter: ISimpleChapter): Observable<ISimpleChapter> {
-    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, chapter);
+  updateChapter(id: string, chapter: ISimpleChapter): Observable<IResponseChapter> {
+    return this.apiCallerService.put<ISimpleChapter, IResponseChapter>(`${this.apiUrl.update}/${id}`, chapter);
   }
 
   deleteChapter(id: string): Observable<void> {
