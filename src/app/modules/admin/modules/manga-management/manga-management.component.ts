@@ -34,7 +34,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
   genreNames: string[] = [];
   genreIds: string[] = [];
-  teamList: string[] = ['All', 'Team A', 'Team B', 'Team C'];
+  teamList: string[] = ['full', 'continued', 'drop'];
 
   configurationParams: IQueryParams = {}
   viewType: EViewTypeOptions = EViewTypeOptions.Grid;
@@ -74,7 +74,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   loadConfigParams(): void {
     this.viewType = this.configService.getViewType();
     this.rowSize = this.configService.getRowSize();
-    this.itemFilter.operation = this.configService.getOperation();
+    this.itemFilter.operation = this.configService.getOperation();    
     this.configurationParams = this.configService.getParamsConfiguration(this.filters);
   }
 
@@ -184,8 +184,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   }
 
   multiGenreFilter(genres: IGenre[]) {
-    console.log(genres);
-
     this.selectedGenres = genres;
     this.filters = []
     if (this.selectedGenres.length > 0) {

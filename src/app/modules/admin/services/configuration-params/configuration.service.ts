@@ -44,19 +44,25 @@ export class ConfigurationService {
   getDefaultParamsConfiguration(): IQueryParams {
     return this.defaultParamsConfiguration;
   }
-  
-  getParamsConfiguration( filters? : IFilter[] ): IQueryParams {
-    this.loadparamsConfiguration();
-    const encodedData = encodeURIComponent(JSON.stringify(filters))
 
-    if(encodedData){
-      this.paramsConfiguration.filterRules = encodedData
+  getParamsConfiguration(filters?: IFilter[]): IQueryParams {
+    this.loadparamsConfiguration();
+    if (filters) {
+      filters = filters.map(filter => ({
+        ...filter,
+        operation: this.getOperation()
+      }));
+      const encodedData = encodeURIComponent(JSON.stringify(filters))
+
+      if (encodedData) {
+        this.paramsConfiguration.filterRules = encodedData
+      }
     }
     return this.paramsConfiguration;
   }
 
   getRowSize(): number {
-   this.loadRowSize();
+    this.loadRowSize();
     return this.rowSize;
   }
 

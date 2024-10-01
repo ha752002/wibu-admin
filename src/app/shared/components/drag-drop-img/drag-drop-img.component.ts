@@ -262,7 +262,7 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
       this.message.remove(this.messageId);
     }
     this.loading = false
-    this.message.create(type, `chapter added ${type}`);
+    this.message.create(type, `image added ${type}`);
     this.imageFiles = []
   }
 

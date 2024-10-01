@@ -9,9 +9,9 @@
         </div>
 
         <div>
-            <p>Chapter : {{storyData?.chapter}}</p>
-            <p>Views : {{storyData?.views}}</p>
-            <p>Status : {{storyData?.status}}</p>
+            <p>Chapter : {{storyData?.chapter|| 0}}</p>
+            <p>Views : {{storyData?.views || 0}}</p>
+            <p>Status : {{storyData?.status || "Unknown"}}</p>
         </div>
         
         <div class="genne">
@@ -26,7 +26,7 @@
 
         </div>
         <div class="group-button">
-            <button nz-button nzType="link" (click)="viewStory()">xem</button>
+            <button nz-button nzType="link" (click)="viewStory()">View</button>
         </div>
     </div>
 </div>
