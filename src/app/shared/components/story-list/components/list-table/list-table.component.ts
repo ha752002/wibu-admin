@@ -42,14 +42,10 @@ export class ListTableComponent {
   selectStory(user: IStoryInformation): void {
     this.previewVisible = !this.previewVisible;
     this.selectedStory = user
-    console.log(this.storyData);
-    
   }
 
   handleVisible(value: boolean) {
     this.previewVisible = value;
-    console.log(this.storyData);
-
   }
 
   identify(index: number, item: any): any {

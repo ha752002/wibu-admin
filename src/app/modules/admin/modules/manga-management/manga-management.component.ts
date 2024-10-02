@@ -61,9 +61,8 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.eventSubscription = this.eventService.event$.subscribe(() => this.initializeData());
-    this.initializeData();
-    this.getParamsGenreId();
     this.getAllGenres();
+    this.initializeData();
   }
 
   private initializeData(): void {
@@ -88,6 +87,7 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
           this.genres = response.data;
           this.genreNames = this.genres.map(g => g.title);
           this.genreIds = this.genres.map(g => g.id);
+          this.getParamsGenreId();
         },
         error => {
           console.error('Error loading genres', error);
@@ -106,7 +106,6 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
         response => {
           this.storys = response.data;
           this.meta = response.meta;
-
         },
         error => {
           console.error('Error loading storys', error);
@@ -184,8 +183,9 @@ export class MangaManagementComponent implements OnInit, OnDestroy {
   }
 
   multiGenreFilter(genres: IGenre[]) {
-    this.selectedGenres = genres;
+    this.selectedGenres = genres;    
     this.filters = []
+    
     if (this.selectedGenres.length > 0) {
       this.multiGenreMode = true
       this.selectedGenres.forEach(genre => this.getStorysByGenres(genre));

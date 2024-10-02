@@ -2,10 +2,10 @@
   position: fixed;
   top: 10px;
   right: 10px;
-  width: 64px; /* Chiều rộng của mini map */
-  height: 84vh; /* Chiều cao của mini map */
+  width: 64px; 
+  height: 84vh; 
   border: 1px solid #ccc;
-  overflow: hidden; /* Đảm bảo nội dung mini map không vượt quá khung */
+  overflow: hidden;
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 1000;
 }
@@ -18,16 +18,15 @@
 .mini-map-copy {
   position: relative;
   transform-origin: top left;
-//   transform: scale(0.1); /* Tỷ lệ thu nhỏ của nội dung */
   transform-origin: top left;
-  pointer-events: none; /* Ngăn người dùng tương tác với mini map */
+  pointer-events: none; 
 }
 
 .mini-map-highlight {
   position: absolute;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 255, 0.3); /* Màu sắc và độ trong suốt của highlight */
-  z-index: 1; /* Đảm bảo highlight luôn nằm trên nội dung */
+  background-color: rgba(0, 0, 255, 0.3); 
+  z-index: 1; 
   pointer-events: none;
 }

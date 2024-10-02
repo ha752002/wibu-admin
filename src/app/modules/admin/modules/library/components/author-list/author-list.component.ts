@@ -20,7 +20,6 @@ export class AuthorListComponent implements OnInit, OnDestroy {
   private eventSubscription!: Subscription;
 
   searchQuery: string = '';
-  // defaultavatarUrl: string = 'assets/img/eyes.png';
   authors: IAuthor[] = [];
   meta?: Imeta;
   configurationParams: IQueryParams = {}

@@ -1,4 +1,3 @@
-// options.ts
 export enum EPageSizeOptions {
     Small = 24,
     Medium = 48,

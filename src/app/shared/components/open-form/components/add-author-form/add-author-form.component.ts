@@ -28,7 +28,6 @@ export class AddAuthorFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
   @Output() change = new EventEmitter<void>();
   private messageId: string | null = null;
-  // Message = EMessageType
   author: ISimpleAuthor = {
     name: '',
     description: '',

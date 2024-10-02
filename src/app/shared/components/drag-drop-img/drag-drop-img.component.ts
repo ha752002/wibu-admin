@@ -131,9 +131,7 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     }
   }
 
-  openFileDialog() {
-    console.log(1111);
-    
+  openFileDialog() {    
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     fileInput.click();
   }

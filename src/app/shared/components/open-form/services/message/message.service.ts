@@ -12,7 +12,6 @@ export class MessageService {
   constructor(private message: NzMessageService) { }
 
   createMessage(type: string, content: string | IValidationResponse): void {
-    // Xóa thông báo cũ nếu đã có
     if (this.messageId) {
       this.message.remove(this.messageId);
     }
