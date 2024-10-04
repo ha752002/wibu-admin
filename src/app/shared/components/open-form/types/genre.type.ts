@@ -1,7 +1,7 @@
 export interface IGenre {
   id: string;
   title: string,
-  // AgeWarning?: boolean,
+  AgeWarning?: boolean,
   description?: string,
 }
 
@@ -19,6 +19,6 @@ export interface IResponseGenre {
 
 export interface ISimpleGenre{
   title: string;
-  // AgeWarning?: boolean,
+  AgeWarning?: boolean,
   description: string;
 }

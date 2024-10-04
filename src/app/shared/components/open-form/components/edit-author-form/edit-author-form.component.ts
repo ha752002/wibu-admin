@@ -8,7 +8,8 @@ import { AuthorService } from '../../services/author/author.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { IPage, IResponseImage } from '@app/shared/types/image.types';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'app-edit-author-form',
@@ -40,7 +41,7 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private authorService: AuthorService,
-    private message: NzMessageService,
+    private message: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -62,16 +63,16 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.createMessageloading();
+    this.message.createMessageloading();
 
     if (this.id) {
       this.authorService.updateAuthor(this.id, this.author).subscribe(
         (response) => {
-          this.createMessage('success')
+          this.message.createMessage(EMessageType.SUCCESS , response.message)
           this.complete.emit();
         },
         (error) => {
-          this.createMessage('error')
+          this.message.createMessage(EMessageType.ERROR , error)
         }
       );
     }
@@ -83,17 +84,6 @@ export class EditAuthorFormComponent implements OnInit, OnDestroy {
 
   onAvatarUrlChange(url: IResponseImage) {
     this.author.avatarUrl = url.data.url;
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

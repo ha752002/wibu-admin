@@ -1,0 +1,32 @@
+.mini-map-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 64px; 
+  height: 84vh; 
+  border: 1px solid #ccc;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+.mini-map-content {
+  position: relative;
+  width: 100%;
+}
+
+.mini-map-copy {
+  position: relative;
+  transform-origin: top left;
+  transform-origin: top left;
+  pointer-events: none; 
+}
+
+.mini-map-highlight {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 255, 0.3); 
+  z-index: 1; 
+  pointer-events: none;
+}

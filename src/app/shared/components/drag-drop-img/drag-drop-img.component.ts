@@ -8,6 +8,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadService } from '@app/shared/services/upload/upload.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { EMessageType } from '@app/core/enums/message.enums';
 
 @Component({
   selector: 'app-drag-drop-img',
@@ -130,9 +131,7 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
     }
   }
 
-  openFileDialog() {
-    console.log(1111);
-    
+  openFileDialog() {    
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     fileInput.click();
   }
@@ -179,10 +178,10 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
       response => {
         const newImageUrls: string[] = response.data.map(item => item.url);
         this.updateImagePreviews(newImageUrls);
-        this.createMessage('success')
+        this.createMessage(EMessageType.SUCCESS)
       },
       error => {
-        this.createMessage('error')
+        this.createMessage(EMessageType.ERROR)
       }
     );
   }
@@ -252,7 +251,7 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
   }
 
   createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+    this.messageId = this.message.loading(EMessageType.LOADING, { nzDuration: 0 }).messageId;
     this.loading = true
   }
 
@@ -261,7 +260,7 @@ export class DragDropImgComponent implements OnInit, OnDestroy {
       this.message.remove(this.messageId);
     }
     this.loading = false
-    this.message.create(type, `chapter added ${type}`);
+    this.message.create(type, `image added ${type}`);
     this.imageFiles = []
   }
 

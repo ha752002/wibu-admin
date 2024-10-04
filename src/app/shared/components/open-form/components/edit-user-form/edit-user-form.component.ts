@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { EUserRole } from '@app/core/enums/user.enums';
 import { IResponseImage } from '@app/shared/types/image.types';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { MessageService } from '../../services/message/message.service';
+import { EMessageType } from '@app/core/enums/message.enums';
 
 
 @Component({
@@ -41,7 +43,7 @@ export class EditUserFormComponent implements OnInit {
   private messageId: string | null = null;
 
   constructor(
-    private message: NzMessageService,
+    private message: MessageService,
     private userService: UserService
   ) { }
 
@@ -52,18 +54,22 @@ export class EditUserFormComponent implements OnInit {
   }
 
   getUserDetails(id: string): void {
+    this.message.createMessageloading()
     this.userService.getUserById(id).subscribe(
       (response) => {
         this.user = response.data;
+        this.message.createMessage(EMessageType.SUCCESS , response.message)
+
       },
       (error) => {
-        console.error('Error fetching author details:', error);
+        this.message.createMessage(EMessageType.ERROR , error)
       }
     );
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
+
     if (this.id) {
       this.userService.updateUser(this.id, this.user).subscribe(
         (response) => {
@@ -77,17 +83,6 @@ export class EditUserFormComponent implements OnInit {
 
   onAvatarUrlChange(url: IResponseImage) {
     this.user.avatarUrl = url.data.url;
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   onFieldValueChange(field: keyof IUpdateUser, value: string | number | Date | undefined): void {

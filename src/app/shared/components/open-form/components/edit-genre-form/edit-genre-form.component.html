@@ -7,13 +7,13 @@
             </app-input-field>
 
             <app-input-field label="Phone" [(value)]="genre.description" type="textarea"
-                (valueChange)="onFieldValueChange('description', $event)" [required]="true">
+                (valueChange)="onFieldValueChange('description', $event)">
             </app-input-field>
 
-            <!-- <label nz-checkbox [(ngModel)]="genre.AgeWarning"
+            <label nz-checkbox [(ngModel)]="genre.AgeWarning"
                 (ngModelChange)="onFieldValueChange('AgeWarning', $event)" name="ageWarning">
                 Age Warning
-            </label> -->
+            </label>
             
         </div>
         <div class="group-button">

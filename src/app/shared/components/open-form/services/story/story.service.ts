@@ -16,12 +16,12 @@ export class StoryService {
     return this.apiCallerService.get<string , IResponseStory>(this.apiUrl.getById , id);
   }
 
-  createStory(storyData: ICreateStory): Observable<ICreateStory> {
-    return this.apiCallerService.post<ICreateStory, ICreateStory>(this.apiUrl.push, storyData);
+  createStory(storyData: ICreateStory): Observable<IResponseStory> {
+    return this.apiCallerService.post<ICreateStory, IResponseStory>(this.apiUrl.push, storyData);
   }
 
-  updateStory(id: string, storyData: ICreateStory): Observable<ICreateStory> {
-    return this.apiCallerService.put(`${this.apiUrl.update}/${id}`, storyData);
+  updateStory(id: string, storyData: ICreateStory): Observable<IResponseStory> {
+    return this.apiCallerService.put<ICreateStory, IResponseStory>(`${this.apiUrl.update}/${id}`, storyData);
   }
 
   deleteStory(id: string): Observable<void> {

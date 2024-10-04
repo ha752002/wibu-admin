@@ -13,12 +13,12 @@
     </div>
     <div class="story">
         <div class="basic">
-            <app-input-field label="Name" [(value)]="story.title" type="text"
+            <app-input-field label="Title story" [(value)]="story.title" type="text"
                 (valueChange)="onFieldValueChange('title', $event)" [required]="true">
             </app-input-field>
 
             <div class="add-author" (click)="handleAuthorVisible(true)">
-                <button *ngIf="!selectedAuthors" nz-button nzType="primary" type="button" nzDanger>add author</button>
+                <button *ngIf="!selectedAuthors || selectedAuthors.length === 0" nz-button nzType="primary" type="button" nzDanger>add author</button>
                 <div class="author" *ngFor="let selectedAuthor of selectedAuthors">
                     <nz-avatar [nzSrc]="selectedAuthor.avatarUrl" nzIcon="user" [nzSize]="42"></nz-avatar>
                     <strong >{{ selectedAuthor.name }}</strong>
@@ -26,7 +26,7 @@
             </div>
 
             <app-input-field label="introduce" [(value)]="story.description" type="textarea"
-                (valueChange)="onFieldValueChange('description', $event)" [required]="true">
+                (valueChange)="onFieldValueChange('description', $event)">
             </app-input-field>
 
             <div class="add-genre" (click)="handleGenreVisible(true)">

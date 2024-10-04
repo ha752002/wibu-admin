@@ -15,7 +15,8 @@ import { StoryService } from '../../services/story/story.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { IPage, IResponseImage } from '@app/shared/types/image.types';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   standalone: true,
@@ -59,7 +60,7 @@ export class EditStoryFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private storyService: StoryService,
-    private message: NzMessageService,
+    private message: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -87,18 +88,18 @@ export class EditStoryFormComponent implements OnInit, OnDestroy {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.createMessageloading();
+    this.message.createMessageloading();
     this.getGenreIds(this.selectedGenres)
     this.getAuthorIds(this.selectedAuthors)
 
     if (this.id) {
       this.storyService.updateStory(this.id, this.story).subscribe(
         (response) => {
-          this.createMessage('success')
+          this.message.createMessage(EMessageType.SUCCESS , response.message)
           this.complete.emit();
         },
         (error) => {
-          this.createMessage('error')
+          this.message.createMessage(EMessageType.ERROR , error)
         }
       );
     }
@@ -134,17 +135,6 @@ export class EditStoryFormComponent implements OnInit, OnDestroy {
 
   onauthorsSelected(author: IAuthor[]) {
     this.selectedAuthors = author;
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

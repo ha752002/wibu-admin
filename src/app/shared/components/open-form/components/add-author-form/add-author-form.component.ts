@@ -8,7 +8,8 @@ import { AuthorService } from '../../services/author/author.service';
 import { UploadAvatarComponent } from '@app/shared/components/upload-avatar/upload-avatar.component';
 import { FormsModule } from '@angular/forms';
 import { IPage, IResponseImage } from '@app/shared/types/image.types';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { EMessageType } from '@app/core/enums/message.enums';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'app-add-author-form',
@@ -27,7 +28,6 @@ export class AddAuthorFormComponent implements OnDestroy {
   @Output() complete = new EventEmitter<void>();
   @Output() change = new EventEmitter<void>();
   private messageId: string | null = null;
-
   author: ISimpleAuthor = {
     name: '',
     description: '',
@@ -35,21 +35,21 @@ export class AddAuthorFormComponent implements OnDestroy {
   };
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private authorService: AuthorService, private message: NzMessageService) { }
+  constructor(private authorService: AuthorService, private message: MessageService) { }
 
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.createMessageloading();
+    this.message.createMessageloading();
     this.authorService.createAuthor(this.author).subscribe(
       response => {
         
-        this.createMessage('success')
+        this.message.createMessage(EMessageType.SUCCESS , response.message)
         this.complete.emit();
       },
       error => {
         
-        this.createMessage('error')
+        this.message.createMessage(EMessageType.ERROR , error)
       }
     );
   }
@@ -60,17 +60,6 @@ export class AddAuthorFormComponent implements OnDestroy {
 
   onAvatarUrlChange(url: IResponseImage) {
     this.author.avatarUrl = url.data.url;
-  }
-
-  createMessageloading(): void {
-    this.messageId = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-  }
-
-  createMessage(type: string): void {
-    if (this.messageId) {
-      this.message.remove(this.messageId);
-    }
-    this.message.create(type, `This is a message of ${type}`);
   }
 
   ngOnDestroy(): void {

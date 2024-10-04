@@ -9,13 +9,13 @@
         align-items: center;
         justify-content: space-between;
 
-        .tool{
+        .tool {
             display: flex;
             gap: 12px;
         }
     }
 
-    .pagination{
+    .pagination {
         margin-top: 24px;
     }
 
@@ -55,7 +55,8 @@
 
                 strong {
                     cursor: pointer;
-                    &:hover{
+
+                    &:hover {
                         color: #007bff;
                     }
                 }
@@ -67,5 +68,17 @@
             }
 
         }
+    }
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
     }
 }
